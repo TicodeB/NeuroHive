@@ -98,3 +98,25 @@ Vertical → Business type → Department → Workflow → Digital asset → Tie
 Tag every asset with the **BUYER** dimension: `operator` · `auditor` ·
 `consultant` (stored in `asset_map.buyer`). Tag every trades asset with work
 context: solo/team · on-site/off-site/on-the-road.
+
+## Bilingual rule (EN + SK) — non-negotiable
+Every asset and product ships in **English AND Slovak**. Slovak must be
+native-quality: correct grammar, diacritics, punctuation and marketing tone —
+never machine-literal. Canonical EN↔SK names + microcopy live in
+`deliverables/asset_glossary_EN_SK.md`. Phase 9 flagship spreadsheets ship with
+parallel EN/SK headers, instructions and listing copy. Route public-facing SK
+copy through a native editor / the Slovak chief-editor skill before launch.
+
+## Market & channel facts (Phase 1 add-on)
+Demand is evidenced (`research/market_validation.md`): spreadsheet/template
+products demonstrably sell (Etsy/Gumroad/Lemon Squeezy). Preliminary platform
+pick (most-pros-wins benchmark, EU-VAT heavily weighted): **Lemon Squeezy**
+primary, **Gumroad** fallback, **Etsy** as discovery channel — final lock in
+Phase 8 with fees re-verified live.
+
+## Secrets handling — non-negotiable
+API keys (e.g. `OPENROUTER_API_KEY`) are **never** committed or printed in chat.
+Provide them as environment variables / Claude Code environment secrets
+(preferred), or via `scripts/set_secret.sh` (hidden input → git-ignored
+`asset-forge/.env`). `.gitignore` excludes `.env`; only `.env.example` (no
+values) is committed. Phase 5 `classify.py` reads env first, then `.env`.

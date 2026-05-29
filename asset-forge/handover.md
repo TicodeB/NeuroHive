@@ -17,10 +17,15 @@ Checkpoint score: 90 asset-map rows mapped this session (20 assets, 17 pain poin
 - Produce `research/manufacturing_food.md` answering the 5 questions in [7] for: Bakery, Butchery/meat, Dairy, Beverage, Ready meals/catering production (business_type ids 6–10).
 - Mirror the Phase 1 pattern: write a `scripts/seed_manufacturing_food.py`, insert `digital_assets` + scored `asset_map` rows (+ buyer tag + evidence_url) + `pain_points`. Reuse existing universal-core assets where they apply (HACCP/temp/traceability) rather than duplicating.
 
+### ➕ POST-PHASE-1 ADD-ONS (per Samuel's directives)
+- **Bilingual EN+SK** is now a binding rule (AGENTS.md). `deliverables/asset_glossary_EN_SK.md` holds native-quality SK names + microcopy for all 20 hospitality assets. NOTE: `/slovak` chief-editor skill is NOT installed here — SK authored directly; route through native editor before launch.
+- **Market validation** done: `research/market_validation.md` — evidence these assets sell ($280k Etsy spreadsheet case; 1,000+ restaurant + 5,000+ general templates on Etsy) + channel landscape + most-pros-wins platform benchmark. Preliminary winner: **Lemon Squeezy** primary / **Gumroad** fallback / **Etsy** discovery (EU-VAT weighted; final lock Phase 8).
+- **Secrets plumbing** ready: root `.gitignore` (excludes `.env`), `asset-forge/.env.example`, `scripts/set_secret.sh` (hidden input → git-ignored `.env`). Preferred: set `OPENROUTER_API_KEY` as a Claude Code environment secret.
+
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
-- `scripts/classify.py` needs an OpenRouter API key + chosen free model name (Phase 5). Provide before Phase 5.
-- Phase 1 scored rows INLINE (defensible per-row scores) rather than deferring all scoring to Phase 5. Confirm OK — Phase 5 can then become a spot-check/normalisation pass rather than a from-scratch scoring run.
-- `guest register` legal weight set to 2 (expected) not 3 — clean statutory source for a mandatory guest register wasn't confirmed live; revisit in Phase 10 (compliance track) if needed.
+- `OPENROUTER_API_KEY` + free model name still needed before Phase 5 — provide via env secret or `scripts/set_secret.sh` (NOT in chat).
+- [RESOLVED] Inline per-row scoring OK → Phase 5 becomes spot-check/normalisation. (Samuel: "use your best judgment".)
+- [RESOLVED] `guest register` legal=2 → revisit in Phase 10 compliance track. (Samuel: "ok as soon as you revisit in phase 10".)
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended.
 
 ### ⚠️ RISKS / WATCHOUTS
