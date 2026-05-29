@@ -1,13 +1,17 @@
 ---
 description: Run one ASSET-FORGE phase with a locked end state and scored checkpoint
-argument-hint: [phase number, default 0]
+argument-hint: [phase number; empty = next phase from handover.md]
 ---
 
 # /goal — ASSET-FORGE phase runner
 
-Read `ASSET-FORGE_claude_code_brief.md` in full. It is the project charter — obey it.
+## WORKING DIRECTORY (do this first, before anything else)
+1. Read `ASSET-FORGE_claude_code_brief.md` (repo root) in full — it is the project charter, obey it.
+2. The project lives in **`asset-forge/`**. All phase work (`scripts/`, `research/`, `deliverables/`, `products/`, `intelligence.db`, `handover.md`, `AGENTS.md`) happens **inside that folder** — treat `asset-forge/` as your working root for every path below. (Phase 0 creates it; Phase 1+ assumes it exists.)
+3. Read `asset-forge/handover.md` next — it is the single source of truth for state between sessions. Honour its ▶️ NEXT action and ❓ open questions.
+4. Read `asset-forge/AGENTS.md` for the condensed operating rules.
 
-**Target phase:** $ARGUMENTS (if empty, default to **Phase 0 — Scaffold**).
+**Target phase:** $ARGUMENTS (if empty, default to the ▶️ NEXT phase in `handover.md`; if `handover.md` is absent, **Phase 0 — Scaffold**).
 
 ## RULES (non-negotiable)
 - Execute **ONLY** the target phase. Do not start the next one.
