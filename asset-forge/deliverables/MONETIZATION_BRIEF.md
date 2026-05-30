@@ -345,5 +345,41 @@ The genuine sum-of-parts saving at Rungs 2–3 is what makes the discount **Omni
 
 ---
 
-*End of Monetization Brief — Phase 8 (+ §7 funnel/marketing extension, 30/05/2026). Next:
-Phase 12 — build the P13 Gap-Analysis + Mock-Audit flagship (the Rung-0/Rung-1 engine).*
+## 8. Defensibility / moat (added 30/05/2026)
+
+> **Blunt truth:** the spreadsheets themselves are **not** a moat. A formula-driven workbook is
+> copyable in an afternoon; licences and watermarks slow cloning slightly but won't stop it. If
+> the *product* is the moat, there is no moat. Defensibility here comes from everything **around**
+> the file. Ranked by durability:
+
+1. **Owned distribution (the strongest, and the whole point of §7).** A trusted email list of
+   Irish/EU food-and-trade owners is the one asset a competitor cannot copy — they'd rebuild the
+   relationship from zero. **The files are bait; the list is the moat.** This is why the lead
+   magnet + nurture sequence matter more than any single product.
+2. **Niche + localization.** "HACCP readiness for Irish cafés, **EN + SK**, mapped to Reg.
+   852/2004 + FSAI" is too small for a generic US template shop to chase and too localized for a
+   random Etsy seller to fake credibly. The narrowness that limits TAM is the same narrowness
+   that protects it. The bilingual rule and Ireland-specificity are genuine differentiators.
+3. **Freshness / maintenance trust.** Compliance buyers pay for *currency* — a 2-year-old
+   template is worthless and risky. Being the provably up-to-date source (FSSC 22000 V7, BRCGS
+   Issue 10 incoming, ISO 9001:2026 at FDIS) and shipping **transition packs** when standards
+   change is a treadmill most sellers won't run. `intelligence.db` makes that re-verification
+   cheap for us and expensive for them.
+4. **Catalogue / ecosystem (compounding).** One pack is copyable; a **coherent, cross-sold
+   catalogue** (bundles → everything-kit, consistent quality across 20+ products) is months to
+   clone. Each product raises consolidation value — the HACCP buyer returns for fire, H&S,
+   training. Lock-in by convenience.
+5. **Dual-use service flywheel (the unfair advantage).** These artefacts are the same ones a
+   HACCP/ISO consultant bills €300–800 to deliver. Run them as **both** productised IP **and**
+   advisory delivery tooling: client work sharpens the templates, templates win clients. A pure
+   template-flipper structurally can't match this loop.
+
+**Strategic read:** the moat = **owned distribution × a niche too specific to bother copying ×
+provable freshness × a consolidated catalogue × a consultancy that feeds it.** The single
+spreadsheet at the bottom is deliberately disposable. Defend the **list, the niche, and the
+freshness** — those compound; don't burn energy trying to "protect" the files.
+
+---
+
+*End of Monetization Brief — Phase 8 (+ §7 funnel/marketing & §8 moat extensions, 30/05/2026).
+Next: Phase 12 — build the P13 Gap-Analysis + Mock-Audit flagship (the Rung-0/Rung-1 engine).*
