@@ -1,0 +1,26 @@
+# --- Secrets: NEVER commit real credentials ---------------------------------
+# API keys live in env vars / your Claude Code environment secrets, or in a
+# local git-ignored .env written by asset-forge/scripts/set_secret.sh.
+asset-forge/.env
+asset-forge/.env.*
+!asset-forge/.env.example
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+.secrets/
+secrets.*
+
+# --- OS / editor cruft -------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
