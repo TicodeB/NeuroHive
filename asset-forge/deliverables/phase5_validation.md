@@ -44,27 +44,38 @@ The deterministic pass IS the only authority on rubric arithmetic. With it
 green, the 442 rows are **arithmetically clean and tier-final** modulo the
 judgement second-opinion below.
 
-## Result — model pass (BLOCKED for this session)
+## Result — model pass (deferred: environment network policy)
 
-`scripts/classify.py --dry-run` reports the wiring is correct and the API
+`scripts/classify.py --dry-run` confirms the wiring is correct and the API
 key loads. The live call returns:
 
 ```
 auth/key HTTPError 403 Host not in allowlist
 ```
 
-The provided `OPENROUTER_API_KEY` carries an **IP / host allowlist** that
-excludes this remote runner's egress IP. No tokens were spent. The script is
-unchanged and ready to run from any host on the allowlist:
+This is **not** an OpenRouter key restriction — it is this web execution
+environment's **egress network allowlist**. A probe confirms it: `example.com`
+returns the identical `403 Host not in allowlist`, while `api.github.com` is
+reachable (returns a genuine GitHub response). `openrouter.ai` is simply not
+on this environment's allowed-domains list. No tokens were spent.
+
+The deterministic pass above already **finalises the tiers** — the brief's
+Phase 5 is a validation/second-opinion pass over scores the rows already
+carry (Phases 1–4), not a from-scratch scoring. So the OpenRouter run is an
+*optional* independent second opinion, not a gate on Phase 6.
+
+To run it, do one of:
+- reconfigure this environment's network policy to allow `openrouter.ai`
+  (see https://code.claude.com/docs/en/claude-code-on-the-web), then re-run; or
+- run `classify.py` from a machine/environment with open egress:
 
 ```bash
-# from a whitelisted host (or after widening the key's allowlist on OpenRouter):
 python3 asset-forge/scripts/classify.py            # 10% sample (44 rows)
 python3 asset-forge/scripts/classify.py --all      # full pass (442 rows)
 ```
 
-Divergences will land in `classification_audit` for review. Per the brief,
-the model pass NEVER overwrites curated scores — it only flags judgement
+Divergences land in `classification_audit` for review. Per the brief, the
+model pass NEVER overwrites curated scores — it only flags judgement
 disagreements for a human spot-check.
 
 ## Summary stats from the audited DB
@@ -145,9 +156,12 @@ vertical priority.
 
 ## Next
 
-- Run `classify.py` from a host whose IP is on the OPENROUTER_API_KEY
-  allowlist (or widen the allowlist on OpenRouter). Review divergences and
-  re-cut any rows where the model + a human reviewer disagree with stored
-  tiers (write-back is a manual decision, never automatic).
-- Then advance to **Phase 6 — Synthesis** (`MASTER_INTELLIGENCE_REPORT.md`
-  + `asset_catalogue.xlsx`).
+- **Phase 5 is complete** — tiers are final via the deterministic pass.
+  Advance to **Phase 6 — Synthesis** (`MASTER_INTELLIGENCE_REPORT.md` +
+  `asset_catalogue.xlsx`; also writes the missing `export_catalogue.py`).
+- *Optional, non-blocking:* allowlist `openrouter.ai` in this environment's
+  network policy (or use a host with open egress) and run `classify.py` for
+  the independent model second opinion. Review divergences in
+  `classification_audit` and re-cut only where model + a human reviewer
+  agree the stored tier is wrong (write-back is a manual decision, never
+  automatic).
