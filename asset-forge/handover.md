@@ -17,6 +17,7 @@ Checkpoint score: 100 asset-map rows mapped this session (8 new assets, 17 pain 
 
 ### ▶️ NEXT SMALLEST ACTION
 - **Research phase is COMPLETE (all 4 verticals, 21 business types mapped).** Open a FRESH session for **Phase 5 — Classification pass** (cheap model + 10% spot-check).
+- ⚠️ BRANCH: start the session ON `claude/beautiful-knuth-cHRjU` (the canonical Phase 0→4 chain). `git fetch origin claude/beautiful-knuth-cHRjU && git checkout claude/beautiful-knuth-cHRjU`. If you landed on `claude/bold-noether-TutEY` you will see "last completed = 3" and NO trades files — that is branch isolation, NOT missing work; switch branches, do NOT re-run Phase 4.
 - Provide `OPENROUTER_API_KEY` + a free model name FIRST (env secret or `scripts/set_secret.sh`, NOT in chat) — `scripts/classify.py` already exists and reads env then `.env`.
 - Phase 5 task: route the full `asset_map` (442 rows) scoring pass through the free OpenRouter model via `classify.py`, premium-spot-check ~10% (44 rows) for quality, finalise tiers, re-run the [12] quality-gate queries. NOTE: rows already carry deterministic rubric scores+tiers from Phases 1–4 — Phase 5 is a *validation/second-opinion* pass to catch mis-scores, not a from-scratch scoring.
 
@@ -30,7 +31,7 @@ Checkpoint score: 100 asset-map rows mapped this session (8 new assets, 17 pain 
 - `OPENROUTER_API_KEY` + free model name needed before Phase 5 — provide via env secret or `scripts/set_secret.sh` (NOT in chat).
 - **Excise/duty (alcoholic beverage)** folded into Cashflow/P&L in Phase 2 — confirm dedicated excise tracker (Phase 8/10) vs keep in cashflow.
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended.
-- Phase 4 work is on branch `claude/beautiful-knuth-cHRjU` → new draft PR (Phase 4). Phases 2+3 were on `claude/bold-noether-TutEY` (draft PR #3). Confirm whether to keep one branch/PR per phase or consolidate.
+- ✅ RESOLVED (Samuel, 30/05/2026): **single rolling branch** policy. `claude/beautiful-knuth-cHRjU` (draft PR #4) is the **canonical chain — Phases 0→4** and supersedes the older Phase 2+3 branch `claude/bold-noether-TutEY` (PR #3). **Every future phase continues on `claude/beautiful-knuth-cHRjU`** (branch from its tip; do not start from the older branch or a fresh main). Do NOT merge to a mainline per phase — keep growing this one branch/PR.
 
 ### ⚠️ RISKS / WATCHOUTS
 - Do NOT state platform fees / VAT / SaaS prices / licensing-body rules from memory — verify live (Phases 8, 11).
