@@ -1,7 +1,15 @@
-## STATE — 30/05/2026 20:10
+## STATE — 30/05/2026 20:45
 Project: ASSET-FORGE
-Phase last completed: 9 - Build flagships ✅ COMPLETE — **TWO** hospitality flagships built in `products/` (Samuel asked for A=P2 in addition to P1). P1 Café/Restaurant Compliance Pack (8 sheets) + P2 Hospitality Operations & GP Bundle (7 sheets), each bilingual EN/SK with watermarked DEMO + README.
-Checkpoint score: 2 flagship products shipped (P1 7 assets/8 sheets · P2 6 assets/7 sheets) + 2 demos + 2 READMEs | ~78% complete (10 of 13 sessions). ▶️ NEXT = Phase 10 (B, bonus research) — Samuel asked to run A then B.
+Phase last completed: 10 - 🎁 Standards & audit research ✅ COMPLETE (B). Did A+B this session at Samuel's request. A = built 2nd flagship P2; B = compliance/audit research → `research/compliance.md` + DB extension (`standards` 21, `compliance_assets` 19, `v_audit_packs` view 115 rows, `products` extended with audience+standard_ids). All 21 standard versions VERIFIED LIVE via Tavily.
+Checkpoint score: A) 2 flagships shipped (P1 8 sheets · P2 7 sheets) + B) 21 standards + 19 compliance assets mapped, live-verified | ~85% complete (11 of 13 sessions). ▶️ NEXT = Phase 11 — Audit & compliance productisation.
+
+### 🔎 PHASE 10 (B) — KEY LIVE FINDINGS (versions move — verified 30/05/2026 Tavily)
+- **FSSC 22000 → V7** published **May 2026** (v6 valid to 30/04/2027, upgrade by Apr 2028) — was v6 in my memory. Timely "v7 transition pack" upsell.
+- **BRCGS Food Safety → Issue 9** still current; **Issue 10 in development** (TWG Apr 2026).
+- **IFS Food → Version 8** (Doctrine v5, Apr 2026).
+- **ISO 9001:2015 + Amd 1:2024** (climate); same climate amendment on 14001/45001/22000/27001; **ISO 9001:2026 at FDIS** (coming).
+- TÜV (SÜD/Rheinland/NORD) = certification *body*, NOT a standard → list packs as "audit-ready for a TÜV-style certifier auditing you to ISO/BRCGS", never "TÜV templates" (brief §15 framing rule honoured).
+- **Two-buyer leverage** captured: 11 operator assets + 8 auditor/consultant assets; several reuse existing catalogue ids (1,5,10,28,30) → build once, sell twice. Flagship for Phase 12 = Gap-Analysis Tool + Mock-Audit Self-Assessment.
 
 ### 🔧 OWNER NOTE RESOLVED (manual-handling / training)
 - Samuel flagged: nobody on the floor without manual-handling + induction training, and an inspector wants *proof*. P1's H&S sheet lists manual handling as a **hazard + control** but holds no training *record*. Fix: folded asset **10 (Staff Training & Induction Matrix)** into **P2 as sheet 06** (Induction · Manual handling · Food hygiene · Allergen · Fire · H&S/first-aid, dated + refresher-due). DB `products` P2 `bundled_asset_ids` updated 8,7,6,9,11 → **8,7,6,9,11,10**. P1 (risk) + P2 (training record) now cover both halves.
@@ -17,9 +25,9 @@ Checkpoint score: 2 flagship products shipped (P1 7 assets/8 sheets · P2 6 asse
 - Wrote `products/P1_README.md` — product sheet, sheet→asset→legal-basis map, built-in-logic list, **bilingual EN/SK listing copy draft**, and launch-checklist status. Price/platform carried from Phase 8: **€34 / Lemon Squeezy**.
 
 ### ▶️ NEXT SMALLEST ACTION
-- **BRANCH:** this phase ran on **`claude/modest-cori-cZ7cI`** (carries Phases 0–9). Continue the next session from this branch (or the consolidated tip).
-- Open a FRESH session and run **/goal 10 — 🎁 Standards & audit research** (BONUS track). Per brief §15: write `research/compliance.md`; add `standards` + `compliance_assets` tables (data-model additions §15.4); map ISO 9001/14001/45001/22000, HACCP/BRCGS/IFS/FSSC, EU legal floor (852/2004, 1169/2011), trades & hospitality schemes → business types → assets; **verify current standard versions live**. Mid tier. Legal-mandated standards auto-promote assets to MUST (Legal=3).
-- *(Optional before P10–12: build a second flagship — P2 Hospitality Operations & GP Bundle — if Samuel wants two proofs in `/products/` before moving to the bonus track. Brief §9 allows 1–2 flagships; one is shipped.)*
+- **BRANCH:** Phases 0–10 now run on **`claude/modest-cori-cZ7cI`** (PR #9). Continue from this branch.
+- Open a FRESH session and run **/goal 11 — 🎁 Audit & compliance productisation** (BONUS). Per brief §15.5: add auditor toolkits + auditee compliance packs to `PRODUCT_ROADMAP.md`. Use `v_audit_packs` for per-standard bundle definitions ("HACCP Readiness Pack for Cafés", "ISO 22000 Internal Audit Kit", "BRCGS Document-Control Suite", "FSSC 22000 v7 Transition Pack", "Auditor Edition"). Tier: free gap-analysis-lite (lead magnet) → paid standard kit (€49–€99) → full audit suite (auditor edition, €149+). Add new product rows (audience auditor/consultant + standard_ids). Planning tier.
+- Then **Phase 12 — Build a flagship compliance pack**: the **Gap-Analysis Tool + Mock-Audit / Readiness Self-Assessment** (compliance_assets ids 1 + 2) — cheapest to build, clearest pain-killer, seeds every per-standard bundle. Code tier (openpyxl).
 
 ### ➕ STANDING ADD-ONS (carry forward)
 - **openpyxl required** for any .xlsx build/inspection — not vendored; `pip install openpyxl` in each fresh session. P1 builder + `export_catalogue.py` both need it.
@@ -28,7 +36,8 @@ Checkpoint score: 2 flagship products shipped (P1 7 assets/8 sheets · P2 6 asse
 - **Prices LOCKED (Phase 8):** P1 €34. `products.platform` = "Lemon Squeezy" on all 12 rows. `existing_solutions` populated (8 rows).
 - **Listing-time TODO for P1:** export preview screenshots (no headless renderer here — open in Excel/Sheets to capture), licence text + EU 14-day-withdrawal waiver checkbox (LS provides), re-verify fees live.
 - **Research tooling:** Tavily MCP, Semantic Scholar, Consensus.
-- **Script set:** init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products/existing_solutions), **build_p1_compliance_pack** (new), set_secret.
+- **Script set:** init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products/existing_solutions/**compliance** new), **build_p1_compliance_pack**, **build_p2_operations_bundle** (new), set_secret.
+- **DB now has:** `standards` (21), `compliance_assets` (19), view `v_audit_packs` (115 rows), `products` extended (audience + standard_ids). Re-seed: `python3 scripts/seed_compliance.py`.
 - No `sqlite3` CLI — use Python `sqlite3` module for DB inspection.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
