@@ -1,7 +1,10 @@
-## STATE — 30/05/2026 19:30
+## STATE — 30/05/2026 20:10
 Project: ASSET-FORGE
-Phase last completed: 9 - Build flagships ✅ COMPLETE (P1 Café / Restaurant Compliance Pack built in `products/` — 8-sheet bilingual EN/SK .xlsx bundling the 7 MUST hospitality assets, plus a watermarked sheet-protected DEMO and a product README with bilingual listing copy)
-Checkpoint score: 1 flagship product shipped (P1, 7 assets, 8 sheets) + watermarked demo + listing copy | ~77% complete (10 of 13 sessions)
+Phase last completed: 9 - Build flagships ✅ COMPLETE — **TWO** hospitality flagships built in `products/` (Samuel asked for A=P2 in addition to P1). P1 Café/Restaurant Compliance Pack (8 sheets) + P2 Hospitality Operations & GP Bundle (7 sheets), each bilingual EN/SK with watermarked DEMO + README.
+Checkpoint score: 2 flagship products shipped (P1 7 assets/8 sheets · P2 6 assets/7 sheets) + 2 demos + 2 READMEs | ~78% complete (10 of 13 sessions). ▶️ NEXT = Phase 10 (B, bonus research) — Samuel asked to run A then B.
+
+### 🔧 OWNER NOTE RESOLVED (manual-handling / training)
+- Samuel flagged: nobody on the floor without manual-handling + induction training, and an inspector wants *proof*. P1's H&S sheet lists manual handling as a **hazard + control** but holds no training *record*. Fix: folded asset **10 (Staff Training & Induction Matrix)** into **P2 as sheet 06** (Induction · Manual handling · Food hygiene · Allergen · Fire · H&S/first-aid, dated + refresher-due). DB `products` P2 `bundled_asset_ids` updated 8,7,6,9,11 → **8,7,6,9,11,10**. P1 (risk) + P2 (training record) now cover both halves.
 
 ### ✅ DONE THIS SESSION
 - Built **P1 — Café / Restaurant Compliance Pack** (deliverable #6 of the project DoD: `/products/` flagship proof-of-concept). Hospitality-first mandate satisfied — the first shippable product is a café/restaurant asset.
