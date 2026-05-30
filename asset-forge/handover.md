@@ -1,7 +1,14 @@
-## STATE — 30/05/2026 19:05
+## STATE — 30/05/2026 21:30
 Project: ASSET-FORGE
-Phase last completed: 11 — 🎁 Audit & compliance productisation (BONUS) ✅ COMPLETE
-Checkpoint score: 8 new compliance products mapped (P13–P20: 1 free lead magnet · 5 operator standard kits · 2 auditor/consultant pro suites) | ~90% complete (12 of 13 sessions). ▶️ NEXT = Phase 12 — Build a flagship compliance pack (P13 Gap-Analysis + Mock-Audit).
+Phase last completed: 12 — 🎁 Build a flagship compliance pack (BONUS) ✅ COMPLETE — **PROJECT COMPLETE (13/13 sessions)**
+Checkpoint score: 1 flagship compliance pack built (P13 Gap-Analysis + Mock-Audit, full + DEMO) | **100% complete (13 of 13 sessions)**. All Phase 9 + Phase 12 flagships shipped (P1, P2, P13). ▶️ NEXT = optional pre-launch hardening (Slovak native edit · preview images · live fee re-verify) — see §below.
+
+### ✅ DONE THIS SESSION (Phase 12 — code tier)
+- **Built P13 — Compliance Gap-Analysis & Mock-Audit (Lite)**, the bonus-track flagship, via `scripts/build_p13_gap_analysis_pack.py` (re-runnable; full + watermarked DEMO, P1/P2 builder pattern). Bundles `CA:1` (Gap-Analysis) + `CA:2` (Mock-Audit).
+- **5 sheets, bilingual EN/SK:** 00 Start Here · 01 Gap Analysis (26 clauses × 8 sections, generic Annex SL + food spine) · 02 Mock Audit (20 "could you show…?" questions) · 03 Readiness dashboard · 04 Next Steps (upsell routing to P14–P18).
+- **Real logic (not blank tables):** Status dropdown → auto Conf.% (Conform 100 / Partial 50 / Not in place 0 / N/A excluded) + auto Priority (HIGH/MEDIUM); `AVERAGEIFS` per-section roll-up; overall conformance + mock readiness averaged into an **overall readiness % with RAG "will I pass?" verdict** (🟢 ≥85 · 🟠 60–84 · 🔴 <60); live `COUNTIF` HIGH/MEDIUM gap counters. RAG conditional formatting throughout. Scoring design emulated & verified.
+- **Outputs:** `products/P13_Compliance_Gap_Analysis_Mock_Audit.xlsx` (full, free, editable) + `products/P13_DEMO_…xlsx` (sheet-protected, "enter email to download" watermark) + `products/P13_README.md` (product sheet + EN/SK listing copy + launch-checklist + funnel/bundle path).
+- **EU conventions:** DD/MM/YYYY, percentages, metric framing, 852/2004 · 1169/2011 · Amd 1:2024 refs. **Framing rule honoured:** "audit-ready for a TÜV-style certifier" — never "TÜV template". **Price = €0** free lead magnet (Lemon Squeezy email capture) → upsells to P14–P18. DB P13 row already matched (id 13, `CA:1,2`, pricing_tier=free) — no DB change needed.
 
 ### ✅ DONE THIS SESSION (Phase 11 productisation + Funnel/Monetization extension)
 
@@ -22,8 +29,9 @@ Checkpoint score: 8 new compliance products mapped (P13–P20: 1 free lead magne
 - **Framing rule honoured (brief §15):** packs positioned "audit-ready for a TÜV-style certifier auditing you to ISO/BRCGS/IFS", NEVER "TÜV templates."
 
 ### ▶️ NEXT SMALLEST ACTION
-- **BRANCH:** continue on **`claude/modest-hopper-CeONK`** (this branch already carries Phases 0–11; a PR is open for it). Run the next `/goal` on this branch.
-- Open a FRESH session and run **/goal 12 — 🎁 Build a flagship compliance pack** (BONUS, final phase). Build **P13 — Gap-Analysis Tool + Mock-Audit / Readiness Self-Assessment** (`compliance_assets` ids 1 + 2). Cheapest to build, clearest pain-killer, the engine reused inside every paid standard kit (P14–P18). Code tier (openpyxl). Write `scripts/build_p13_gap_analysis_pack.py` (re-runnable, full + DEMO outputs) following the P1/P2 builder pattern. Real logic: clause-by-clause % conformance roll-up + prioritised action list + mock-audit Pass/Fail readiness score with RAG bands. Bilingual EN/SK headers + instructions (use `deliverables/asset_glossary_EN_SK.md`; backfill SK terms where missing). EU formatting (DD/MM/YYYY, metric, comma thousands). Write `products/P13_README.md` (product sheet + listing copy + launch-checklist status). Price = €0 free lead magnet (Lemon Squeezy email capture) → upsell to P14–P18.
+- **BRANCH:** all Phase-12 work is on **`claude/cool-planck-rYR4I`** (this branch carries Phases 0–12). A PR will be opened for it. Run any follow-up `/goal` on this branch.
+- **PROJECT COMPLETE — all 13 sessions done.** Every brief §1 deliverable exists: `intelligence.db`, MASTER_INTELLIGENCE_REPORT, asset_catalogue.xlsx, PRODUCT_ROADMAP, MONETIZATION_BRIEF, and 3 built flagships (P1, P2 hospitality + P13 compliance). No further phase to run.
+- **Optional pre-launch hardening (NOT a phase — do before publishing any listing):** (1) Slovak native-editor pass on all listing copy + the 34 food/non-food/trades assets (ids 21–54) + 19 compliance_assets still needing SK microcopy; (2) export preview-image screenshots from Excel/Google Sheets (no headless renderer in this env); (3) re-verify Lemon Squeezy fees + EU VAT/MoR + marketplace comparables live at listing time; (4) wire the P13 email-capture funnel + GDPR consent; (5) confirm standard-version triggers (BRCGS Issue 10, ISO 9001:2026) for transition-pack upsells when they publish.
 
 ### ➕ STANDING ADD-ONS (carry forward)
 - **openpyxl required** for any .xlsx build/inspection — not vendored; `pip install openpyxl` in each fresh session (3.1.5 used). P1/P2 builders + `export_catalogue.py` need it. **Phase 12 P13 builder will need it.**
@@ -34,7 +42,7 @@ Checkpoint score: 8 new compliance products mapped (P13–P20: 1 free lead magne
 - **Value-ladder columns:** `pricing_tier` ∈ {free,module,pack,kit}; `parent_product` = name of the pack/kit a module/pack rolls into (NULL for top-level). Invariant to keep (Omnibus-safe): every child price < its parent price. MONETIZATION_BRIEF §7 is the funnel source of truth.
 - **CA-prefix convention:** audit/compliance products store `bundled_asset_ids` as `CA:<ids>` referencing `compliance_assets`; Phase-7 products store plain ids referencing `digital_assets`. Phase-12 build + any export must respect this split.
 - **Research tooling:** Tavily MCP, Semantic Scholar, Consensus.
-- **Script set:** init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products/existing_solutions/compliance), build_p1_compliance_pack, build_p2_operations_bundle, set_secret. (Phase 12 adds build_p13_gap_analysis_pack.)
+- **Script set:** init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products/existing_solutions/compliance), build_p1_compliance_pack, build_p2_operations_bundle, **build_p13_gap_analysis_pack** (Phase 12), set_secret.
 - No `sqlite3` CLI — use Python `sqlite3` module for DB inspection.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
