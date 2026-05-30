@@ -1,40 +1,39 @@
-## STATE — 30/05/2026 14:40
+## STATE — 30/05/2026 16:40
 Project: ASSET-FORGE
-Phase last completed: 5 - Classification / validation pass ✅ COMPLETE (deterministic pass finalises tiers; OpenRouter model second-opinion deferred — blocked by ENVIRONMENT network allowlist, not a Phase 6 gate)
-Checkpoint score: 442 asset_map rows audited · 0 anomalies · 100% Section [12] gates pass · tiers FINAL | ~46% complete (6 of 13 sessions)
+Phase last completed: 6 - Synthesis ✅ COMPLETE (MASTER_INTELLIGENCE_REPORT.md + asset_catalogue.xlsx written; export_catalogue.py built; universal-core vs niche split locked for the Phase 7 roadmap)
+Checkpoint score: 442 rows synthesised → 7-sheet xlsx + master report; 0 new DB writes (synthesis only) | ~54% complete (7 of 13 sessions)
 
 ### ✅ DONE THIS SESSION
-- Wrote `scripts/validate.py` — the **deterministic half** of Phase 5: re-derives every row's weighted score `3L+2R+2P+F` from raw axes, re-derives tier per rubric [6], and runs every Section [12] quality gate (legal=3→MUST, MUST/SHOULD evidence required, buyer ∈ {operator/auditor/consultant}, trades work-context tag present, no duplicate asset-by-function, no null tiers, axes ∈ 0–3). Persists anomalies to a new `validation_audit` table; never overwrites curated scores.
-- Ran it across all **442** `asset_map` rows: **0 issues, all gates PASS**. Catalogue is arithmetically clean and tier-final.
-- Confirmed the structural shape: tier mix MUST 129 (29%) · SHOULD 218 (49%) · COULD 95 (22%) · WON'T 0. Hospitality is densest MUST-fraction at 41% (priority-vertical pick stands). Universal-core leader: H&S Safety Statement = MUST across all 21 business types (single broadest build-once/sell-many product).
-- Wrote `deliverables/phase5_validation.md` — full validation report (deterministic + summary stats + universal-core shortlist + OpenRouter blocker note + "what's locked" section).
-- Attempted the **model half** (`classify.py` → OpenRouter free model `deepseek/deepseek-chat-v3-0324:free`). Dry-run passed; live call returned **HTTP 403 "Host not in allowlist"**. **Root cause confirmed = this WEB ENVIRONMENT'S egress network allowlist, NOT the OpenRouter key**: a probe shows `example.com` returns the identical 403 while `api.github.com` is reachable, so `openrouter.ai` is just not on the environment's allowed-domains list. No tokens spent. (Earlier note mis-attributed this to the key's IP allowlist — corrected.)
-- **Decision (30/05 session): Phase 5 is COMPLETE.** The deterministic pass finalises the tiers — Phase 5 is a *validation* of scores the rows already carry (Phases 1–4), not from-scratch scoring. The OpenRouter run is an optional independent second opinion, explicitly NOT a Phase 6 gate. Cleared to proceed to Phase 6.
+- Wrote `scripts/export_catalogue.py` — the missing Section [4] runner. Flat-exports `intelligence.db` to `deliverables/asset_catalogue.xlsx` (openpyxl) as a 7-sheet workbook: Overview · Asset_Map (full 442-row matrix w/ raw axes, score, tier, buyer, evidence) · Digital_Assets (54) · Universal_Core · MUST_Haves · Pain_Points · Tier_Summary. Tier-coloured, auto-filtered, frozen headers, EU date stamp. Re-runnable any time.
+- Ran it → `deliverables/asset_catalogue.xlsx` generated and verified (Asset_Map 442+header rows × 15 cols; all 7 sheets populated; tier mix MUST 129 / SHOULD 218 / COULD 95 matches DB).
+- Wrote `deliverables/MASTER_INTELLIGENCE_REPORT.md` — the human-readable synthesis (deliverable #2 of project DoD). Sections: exec summary · catalogue at a glance · **universal-core vs niche split** (the Phase 6 core output) · hospitality priority deep-dive · department/buyer shape · existing-solutions carry-forward · what Phase 6 locks for Phase 7 · provenance/integrity.
+- **Key synthesis finding (feeds Phase 7 ranking):** highest-leverage products are horizontal, not vertical. `H&S Risk Assessment & Safety Statement` = MUST in **21/21** business types (broadest build-once/sell-many product). `Cashflow & P&L Tracker` = wanted (MUST/SHOULD) in **21/21** but legally mandated in none → top pure-WTP product. Food-cluster core (HACCP/allergen/temperature/traceability/cleaning) = MUST across all 10 hospitality+food-mfg types.
+- **Hospitality flagship shape identified:** 7 assets are MUST across all 5 hospitality business types (HACCP, Allergen, Temperature, Cleaning, Traceability, Fire, H&S) → the "Café/Restaurant Compliance Pack" = Phase 9 flagship; 6 of 7 are universal-core so the build seeds the food line.
+- No DB rows changed — Phase 6 is read-only synthesis over the tier-final catalogue. No premium tokens spent on bulk work.
 
 ### ▶️ NEXT SMALLEST ACTION
-- Open a FRESH session for **Phase 6 — Synthesis** on `claude/beautiful-knuth-cHRjU` (or the rolling successor — see ⚠️ branch note below). Phase 6 produces `deliverables/MASTER_INTELLIGENCE_REPORT.md` + `deliverables/asset_catalogue.xlsx` and identifies the universal-core-vs-niche split for the Phase 7 roadmap. Phase 6 ALSO writes `scripts/export_catalogue.py` (still missing).
-- ✅ BRANCH RESOLVED (Samuel, 30/05/2026): Phase 5 was consolidated onto the canonical **`claude/beautiful-knuth-cHRjU`** by clean fast-forward (`7f83f26..e7290cf`; eloquent-turing was a strict superset = beautiful-knuth + 2 Phase 5 commits, no divergence). PR #4 now carries Phases 0→5; PR #5 / `claude/eloquent-turing-zX5eA` retired. **Phase 6 continues on `claude/beautiful-knuth-cHRjU`.**
-- **Optional side-quest (only from a host/env with open egress, OR after allowlisting `openrouter.ai` in this environment's network policy):** run `python3 scripts/classify.py` (10% sample) then `--all` for the full 442-row second opinion. Divergences land in `classification_audit`; review by hand and re-cut only with human decision. NOT required for Phase 6 — tiers are already final.
+- Open a FRESH session and run **/goal 7 — Productisation** on `claude/keen-ramanujan-21OJr` (current task branch; see ⚠️ branch note). Phase 7 writes `deliverables/PRODUCT_ROADMAP.md`: rank products by (demand × price × build-ease), one-page build spec each (Section [10] shape). Anchor each product on a universal-core asset; **rank hospitality products to the top** (priority vertical). Start the ranking from §3 + §7 of MASTER_INTELLIGENCE_REPORT.md (universal core = H&S + Cashflow; hospitality pack = the 7-asset MUST set).
+- Carry into Phase 7: the universal-core list (`v_universal_core`, 12 assets) and the commercial-core MUST+SHOULD breadth table (§3.2) are the demand axis; niche-specific list (§3.3) supplies the per-vertical upsells.
 
 ### ➕ STANDING ADD-ONS (carry forward)
-- **Bilingual EN+SK** binding rule (AGENTS.md). `deliverables/asset_glossary_EN_SK.md` covers the 20 hospitality assets; the **34 new food + non-food + trades assets (ids 21–54) still need SK names/microcopy** — backfill in Phase 6 synthesis or before launch; route through a native editor. `/slovak` chief-editor skill NOT installed here.
-- **Market validation**: `research/market_validation.md`. Preliminary platform pick: **Lemon Squeezy** primary / **Gumroad** fallback / **Etsy** discovery (EU-VAT weighted; final lock Phase 8 with fees re-verified live).
-- **Secrets plumbing** ready: root `.gitignore` excludes `.env`; `asset-forge/.env.example`; `scripts/set_secret.sh`. Preferred: set `OPENROUTER_API_KEY` as a Claude Code environment secret with this runner's egress IP on the allowlist (or remove the host restriction on OpenRouter).
-- **Research tooling available**: Tavily MCP (search/extract/research), Semantic Scholar paper search, Consensus (auth handshake). Used Tavily for Phase 4 live verification; available for Phase 8/11.
+- **Bilingual EN+SK** binding rule (AGENTS.md). `deliverables/asset_glossary_EN_SK.md` covers the 20 hospitality assets; the **34 new food + non-food + trades assets (ids 21–54) still need SK names/microcopy** — backfill before launch (Phase 8/9), route through a native editor. `/slovak` chief-editor skill NOT installed here.
+- **Market validation**: `research/market_validation.md`. Preliminary platform pick: **Lemon Squeezy** primary / **Gumroad** fallback / **Etsy** discovery (EU-VAT weighted; final lock Phase 8 with fees re-verified live). `existing_solutions` table intentionally still empty — populate in Phase 8 with LIVE-verified fees/features, never from memory.
+- **Secrets plumbing** ready: root `.gitignore` excludes `.env`; `asset-forge/.env.example`; `scripts/set_secret.sh`. Set `OPENROUTER_API_KEY` as a Claude Code environment secret if running the optional model pass.
+- **Research tooling available**: Tavily MCP (search/extract/research), Semantic Scholar, Consensus. Available for Phase 8/11 live verification.
+- **xlsx tooling note**: `export_catalogue.py` needs `openpyxl` (`pip install openpyxl`). Installed in this session's env; not vendored — re-install in a fresh session if regenerating the xlsx.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
-- **Environment egress allowlist blocks `openrouter.ai`** — to run the optional model second-opinion, either add `openrouter.ai` to this web environment's network policy (https://code.claude.com/docs/en/claude-code-on-the-web) or run `classify.py` from a machine with open egress. NOT a Phase 6 blocker — tiers are already final via the deterministic pass.
-- ✅ RESOLVED (Samuel, 30/05/2026): branch reconciliation — consolidated onto canonical `claude/beautiful-knuth-cHRjU` (PR #4) by fast-forward; PR #5 / eloquent-turing retired. Phase 6+ continues on beautiful-knuth.
+- **Branch:** this session ran on **`claude/keen-ramanujan-21OJr`** per the remote-runner task instruction (overrides the older handover note that pointed at `claude/beautiful-knuth-cHRjU`). Phase 6 deliverables (export script, master report, xlsx) are committed here. ❓ Confirm the canonical branch going forward — keen-ramanujan (this PR) or reconcile back onto beautiful-knuth (PR #4)? Until told otherwise, Phase 7 continues on `claude/keen-ramanujan-21OJr`.
+- **Environment egress allowlist blocks `openrouter.ai`** — optional model second-opinion (`classify.py`) still deferred. NOT a gate on any downstream phase; tiers are final.
 - **Excise/duty (alcoholic beverage)** folded into Cashflow/P&L in Phase 2 — confirm dedicated excise tracker (Phase 8/10) vs keep in cashflow.
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended.
-- ✅ RESOLVED (Samuel, 30/05/2026): single rolling branch policy → `claude/beautiful-knuth-cHRjU` (draft PR #4) is canonical for Phases 0→4. (Phase 5 forked onto `claude/eloquent-turing-zX5eA` per remote-runner instructions — see branch reconciliation above.)
 
 ### ⚠️ RISKS / WATCHOUTS
 - Do NOT state platform fees / VAT / SaaS prices / licensing-body rules from memory — verify live (Phases 8, 11).
-- Dedupe assets by FUNCTION, not label — Phase 6+ must reuse the 54 existing assets where they recur.
-- Legal-mandatory (Legal=3) auto-promotes to MUST — sanity-check each session (Phases 1–5: passed; 115/115 legal=3 rows are MUST).
+- Dedupe assets by FUNCTION, not label — Phase 7 must reuse the 54 existing assets where they recur; do not invent near-duplicates.
+- Legal-mandatory (Legal=3) auto-promotes to MUST — held through Phase 5 (115/115). Synthesis did not alter tiers.
 - One phase per session; if a phase looks like >~15 tool calls, propose splitting.
-- `scripts/classify.py` and `scripts/validate.py` exist (Phase 5 runners); `scripts/export_catalogue.py` still NOT written (built in Phase 6).
 - No `sqlite3` CLI in this environment — use Python (`sqlite3` module) for DB inspection.
-- 34 new food + non-food + trades assets are EN-only — Slovak glossary backfill outstanding.
-- Optional Phase 5 model second-opinion is not run (env egress blocks openrouter.ai) — if/when it lands, review `classification_audit` divergences manually before any tier write-back. The script intentionally does NOT auto-overwrite. Tiers are already final without it.
+- `export_catalogue.py` (Phase 6) now exists alongside `classify.py` + `validate.py` (Phase 5). Full script set per Section [4] is complete: init_db, classify, export_catalogue (+ seeds, validate, set_secret).
+- 34 new food + non-food + trades assets are EN-only — Slovak glossary backfill outstanding before launch.
+- Optional Phase 5 model second-opinion not run (env egress blocks openrouter.ai) — review `classification_audit` divergences manually if/when it lands. Tiers already final without it.
