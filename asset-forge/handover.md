@@ -12,7 +12,7 @@ Checkpoint score: 442 rows synthesised → 7-sheet xlsx + master report; 0 new D
 - No DB rows changed — Phase 6 is read-only synthesis over the tier-final catalogue. No premium tokens spent on bulk work.
 
 ### ▶️ NEXT SMALLEST ACTION
-- Open a FRESH session and run **/goal 7 — Productisation** on `claude/keen-ramanujan-21OJr` (current task branch; see ⚠️ branch note). Phase 7 writes `deliverables/PRODUCT_ROADMAP.md`: rank products by (demand × price × build-ease), one-page build spec each (Section [10] shape). Anchor each product on a universal-core asset; **rank hospitality products to the top** (priority vertical). Start the ranking from §3 + §7 of MASTER_INTELLIGENCE_REPORT.md (universal core = H&S + Cashflow; hospitality pack = the 7-asset MUST set).
+- Open a FRESH session and run **/goal 7 — Productisation** on canonical `claude/beautiful-knuth-cHRjU` (PR #4; see ✅ branch resolution below). Phase 7 writes `deliverables/PRODUCT_ROADMAP.md`: rank products by (demand × price × build-ease), one-page build spec each (Section [10] shape). Anchor each product on a universal-core asset; **rank hospitality products to the top** (priority vertical). Start the ranking from §3 + §7 of MASTER_INTELLIGENCE_REPORT.md (universal core = H&S + Cashflow; hospitality pack = the 7-asset MUST set).
 - Carry into Phase 7: the universal-core list (`v_universal_core`, 12 assets) and the commercial-core MUST+SHOULD breadth table (§3.2) are the demand axis; niche-specific list (§3.3) supplies the per-vertical upsells.
 
 ### ➕ STANDING ADD-ONS (carry forward)
@@ -23,7 +23,7 @@ Checkpoint score: 442 rows synthesised → 7-sheet xlsx + master report; 0 new D
 - **xlsx tooling note**: `export_catalogue.py` needs `openpyxl` (`pip install openpyxl`). Installed in this session's env; not vendored — re-install in a fresh session if regenerating the xlsx.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
-- **Branch:** this session ran on **`claude/keen-ramanujan-21OJr`** per the remote-runner task instruction (overrides the older handover note that pointed at `claude/beautiful-knuth-cHRjU`). Phase 6 deliverables (export script, master report, xlsx) are committed here. ❓ Confirm the canonical branch going forward — keen-ramanujan (this PR) or reconcile back onto beautiful-knuth (PR #4)? Until told otherwise, Phase 7 continues on `claude/keen-ramanujan-21OJr`.
+- ✅ RESOLVED (Samuel, 30/05/2026): **use the canonical branch.** Phase 6 work was authored on `claude/keen-ramanujan-21OJr` (per the remote-runner task instruction) then **consolidated onto canonical `claude/beautiful-knuth-cHRjU` (PR #4) by a clean fast-forward** (`b1ce16f..7250ff2`; keen-ramanujan was a strict superset = beautiful-knuth + 1 Phase 6 commit, zero divergence — same pattern as the Phase 5 consolidation). **Phase 7+ continues on `claude/beautiful-knuth-cHRjU`.** keen-ramanujan kept in sync (identical tip); PR #6 retired in favour of PR #4.
 - **Environment egress allowlist blocks `openrouter.ai`** — optional model second-opinion (`classify.py`) still deferred. NOT a gate on any downstream phase; tiers are final.
 - **Excise/duty (alcoholic beverage)** folded into Cashflow/P&L in Phase 2 — confirm dedicated excise tracker (Phase 8/10) vs keep in cashflow.
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended.
