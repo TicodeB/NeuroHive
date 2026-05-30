@@ -1,7 +1,12 @@
-## STATE — 30/05/2026 21:30
+## STATE — 30/05/2026 23:40
 Project: ASSET-FORGE
-Phase last completed: 12 — 🎁 Build a flagship compliance pack (BONUS) ✅ COMPLETE — **PROJECT COMPLETE (13/13 sessions)**
-Checkpoint score: 1 flagship compliance pack built (P13 Gap-Analysis + Mock-Audit, full + DEMO) | **100% complete (13 of 13 sessions)**. All Phase 9 + Phase 12 flagships shipped (P1, P2, P13). ▶️ NEXT = optional pre-launch hardening (Slovak native edit · preview images · live fee re-verify) — see §below.
+Phase last completed: **13a — 🎨 Premium-Pack track: Beautification & Competitor Intelligence ✅ COMPLETE** (new track opened beyond the original 13-session plan)
+Checkpoint score: 1 research deliverable (`research/beautification_and_competitors.md`) | core project 100% (P1/P2/P13 shipped); **Premium-Pack track ~10% (1 of ~6 sub-phases)**. ▶️ NEXT = decisions from Samuel (format · pilot · AI), then Phase 13b `scripts/design_system.py` + re-skin one existing flagship as the visual proof. See §"PREMIUM-PACK TRACK" below.
+
+### ✅ DONE THIS SESSION (Phase 13a — research/planning tier, new "Premium Pack" track)
+- **New track opened.** Samuel's request: find GitHub repos that are sources of beautiful, grouped, automated, per-industry spreadsheet packs; find the winners; make ours better; kill the "looks like the 90s" problem; premium feel + formulas + automations + insights + maybe embedded AI; **no SaaS hassle**; per-industry packs (butcher/retailer/fruit&veg/abattoir/car-seller/airline/band/theatre…) with their jargon; **each pack in ONE language only** (clean SK/CS/DE/HU/PL/EN); built-in method + daily planner. **Auditor/consultant packs explicitly parked for LATER** (Samuel, 30/05).
+- **Wrote `research/beautification_and_competitors.md`.** Key findings: (1) **the commercial winners are NOT on GitHub** — GitHub = a *technique mine* (VBA/Apps-Script automations, finance formula spines, dashboard patterns: `louiewee/Excel-BizFin-Templates-Projects`, `asmaklad/Excel_Tools`, `NiveditaSureshK/HR-Analysis-DB-MSExcel`, topics excel-dashboard/spreadsheet-automation); the real premium niche packs sell on **Etsy/Notion/Gumroad**. (2) **Niche converts ~40% better than generic** → validates the per-industry split. Pricing (live 30/05, re-verify): Etsy single €11–20; Notion business €45–185 / finance €28–140. (3) **"Premium look" is a codifiable recipe** (2–3 colour palette · gridlines OFF · zebra · clean sans-serif · big bold headings · dedicated dashboard/report tab · minimalist charts · theme-first) — all reproducible in our openpyxl pipeline → build `scripts/design_system.py` once, every pack inherits it. (4) **AI verdict (honest):** you CANNOT embed a live AI in an offline `.xlsx`; the real options are built-in *insight formulas* (zero-dependency, ship now) + an optional **Google Sheets + free Apps Script + Gemini sidebar** bonus; avoid third-party add-ons (against the no-SaaS ethos). NotebookLM = a content tool for generating per-industry Method handbooks, not a feature.
+- **Strategic forks surfaced** (see DECISIONS): single-language reverses the locked Bilingual EN+SK rule (deliberate pivot for this track); format (Excel vs Sheets vs both) gates automation/AI; pilot ONE matrix cell first (recommend: re-skin existing hospitality flagship in one language).
 
 ### ✅ DONE THIS SESSION (Phase 12 — code tier)
 - **Built P13 — Compliance Gap-Analysis & Mock-Audit (Lite)**, the bonus-track flagship, via `scripts/build_p13_gap_analysis_pack.py` (re-runnable; full + watermarked DEMO, P1/P2 builder pattern). Bundles `CA:1` (Gap-Analysis) + `CA:2` (Mock-Audit).
@@ -30,8 +35,19 @@ Checkpoint score: 1 flagship compliance pack built (P13 Gap-Analysis + Mock-Audi
 - **Pricing grounded live (Tavily, 30/05/2026):** single templates €10–60 (Etsy/Gumroad) vs consultant ISO toolkits €300–800+ (Advisera) → our €49–99 kits + €149+ auditor editions sit in the defensible middle. Prices INDICATIVE — re-verify at listing.
 - **Framing rule honoured (brief §15):** packs positioned "audit-ready for a TÜV-style certifier auditing you to ISO/BRCGS/IFS", NEVER "TÜV templates."
 
+### 🎨 PREMIUM-PACK TRACK (Phase 13+) — proposed sub-phase split
+This new track far exceeds one `/goal` phase. Proposed split (one per session, cheapest tier that fits):
+- **13a ✅ DONE** — Beautification & competitor intelligence (`research/beautification_and_competitors.md`).
+- **13b** — Build `scripts/design_system.py` (reusable openpyxl styling layer: palette, fonts, header styles, gridlines-off, zebra, KPI tiles, dashboard-tab scaffold) **+ re-skin ONE existing flagship** (P1 or P2) with it, in ONE language, as the visible proof that we've beaten the "90s" look. *(code tier)*
+- **13c** — Lock the standard **pack skeleton** (`00 Method/Start Here` · `Daily Planner` · `Dashboard+Insights` · jargon'd operational tabs · `Settings`) + build the per-vertical **jargon glossary** mechanism. *(planning)*
+- **13d** — First NEW vertical pilot pack (e.g. butcher OR retailer) in ONE chosen language, built on the skeleton + design system. *(code)*
+- **13e** — Optional **Google Sheets "Pro" edition** of the pilot: Apps Script automations + optional Gemini insight sidebar. *(code)*
+- **13f** — Localisation pipeline: clone the locked pilot into the other languages (native-quality pass per language). *(code + native edit)*
+- *(LATER, parked by Samuel)* auditor/consultant editions of the premium packs.
+
 ### ▶️ NEXT SMALLEST ACTION
-- **BRANCH:** all Phase-12 work is on **`claude/cool-planck-rYR4I`** (this branch carries Phases 0–12). A PR will be opened for it. Run any follow-up `/goal` on this branch.
+- **AWAITING 3 DECISIONS from Samuel** (asked this session — see ❓): (1) format = Excel / Sheets / **both**; (2) pilot = **re-skin existing hospitality flagship** vs new vertical; (3) AI = built-in insights + optional Sheets Gemini sidebar (recommended) vs hold AI. Once answered → run **Phase 13b**.
+- **BRANCH:** all work (Phases 0–12 + 13a) is on **`claude/cool-planck-rYR4I`**. A PR will be opened/updated for it. Run the next `/goal 13b` on this branch.
 - **PROJECT COMPLETE — all 13 sessions done.** Every brief §1 deliverable exists: `intelligence.db`, MASTER_INTELLIGENCE_REPORT, asset_catalogue.xlsx, PRODUCT_ROADMAP, MONETIZATION_BRIEF, and 3 built flagships (P1, P2 hospitality + P13 compliance). No further phase to run.
 - **Optional pre-launch hardening (NOT a phase — do before publishing any listing):** (1) Slovak native-editor pass on all listing copy + the 34 food/non-food/trades assets (ids 21–54) + 19 compliance_assets still needing SK microcopy; (2) export preview-image screenshots from Excel/Google Sheets (no headless renderer in this env); (3) re-verify Lemon Squeezy fees + EU VAT/MoR + marketplace comparables live at listing time; (4) wire the P13 email-capture funnel + GDPR consent; (5) confirm standard-version triggers (BRCGS Issue 10, ISO 9001:2026) for transition-pack upsells when they publish.
 
@@ -48,6 +64,7 @@ Checkpoint score: 1 flagship compliance pack built (P13 Gap-Analysis + Mock-Audi
 - No `sqlite3` CLI — use Python `sqlite3` module for DB inspection.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
+- ⏳ **PREMIUM-PACK TRACK (asked 30/05, Phase 13a):** (1) **Format** — Excel-only (offline, no account, purest "no SaaS") / Google Sheets (enables automations + AI sidebar) / **BOTH** (recommended: xlsx core + optional Sheets Pro)? (2) **Pilot first** — re-skin the already-built hospitality flagship in one language (recommended, fastest proof) vs start a brand-new vertical (e.g. butcher)? (3) **AI** — built-in insight formulas + optional free Sheets Gemini sidebar (recommended honest option) vs hold AI for later? (4) **CONFIRMED pivot (Samuel explicit):** single-language editions — one language per file — overrides the locked Bilingual EN+SK rule **for this track**; native-quality translation still required.
 - ✅ RESOLVED (Samuel, 30/05/2026): **P13 is PAID, not free.** "Sell as much as you can, see what market can take." → DB P13 = **€29 launch test**, tier `pack`. Run the price experiment €19 → €29 → €39 and hold at the conversion-maximising ceiling. Free-tier products now 0; top-of-funnel discovery falls to module P21 (€19) or a future cut-down teaser.
 - ✅ RESOLVED (Samuel, 30/05/2026): VAT — stay non-registered + rely on MoR (Lemon Squeezy is legal seller, handles per-sale EU VAT). Confirm specifics with accountant before launch.
 - ✅ RESOLVED (Samuel, 30/05/2026): Excise/duty (alcohol) — KEEP FOLDED into Cashflow/P&L (P2/P4). No dedicated excise tracker.
