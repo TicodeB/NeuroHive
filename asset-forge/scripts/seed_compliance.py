@@ -204,6 +204,38 @@ AUDIT_PRODUCTS = [
      "CA:15,19,16,12", 149.0, "Lemon Squeezy", "consultant", "1,4,7,8,9,10"),
 ]
 
+# Value-ladder tier for the audit/compliance products (MONETIZATION_BRIEF §7).
+# name: (pricing_tier, parent_product). Free lite = Rung 0; per-standard kits =
+# Rung 2 packs rolling into the everything kit; pro suites = Rung 3 kits.
+AUDIT_LADDER = {
+    "Compliance Gap-Analysis & Mock-Audit (Lite)": ("free", None),
+    "HACCP Readiness Pack for Cafés & Restaurants": ("pack", "Compliance Everything"),
+    "ISO 22000 / FSSC 22000 Food Safety Management Kit": ("pack", "Compliance Everything"),
+    "BRCGS / IFS Document-Control & Audit-Readiness Suite": ("pack", "Compliance Everything"),
+    "ISO 9001 Quality-Management Audit-Readiness Pack": ("pack", "Compliance Everything"),
+    "FSSC 22000 V7 Transition Pack": ("pack", "ISO 22000 / FSSC 22000 Food Safety Management Kit"),
+    "Auditor Edition — Audit Protocol, Scoring & Reporting Toolkit": ("kit", None),
+    "Consultant Multi-Client Compliance Console": ("kit", None),
+}
+
+# Representative à-la-carte compliance MODULES (Rung 1) — single-compliance_asset SKUs
+# that also sell standalone. Plan: prove the structure on the compliance line only; the
+# rest is a documented roll-out, not hand-authored now. (name, target, CA bundle, price,
+# platform, audience, standard_ids, parent_product)
+AUDIT_MODULES = [
+    ("Module — Clause-by-Clause Gap-Analysis Tool", "À-la-carte compliance module",
+     "CA:1", 19.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10", None),
+    ("Module — Corrective-Action (CAPA) Log", "À-la-carte compliance module",
+     "CA:6", 12.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10",
+     "ISO 9001 Quality-Management Audit-Readiness Pack"),
+    ("Module — Internal-Audit Programme & Log", "À-la-carte compliance module",
+     "CA:4", 12.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10",
+     "ISO 9001 Quality-Management Audit-Readiness Pack"),
+    ("Module — Training Matrix / Competency Records", "À-la-carte compliance module",
+     "CA:7", 12.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10",
+     "HACCP Readiness Pack for Cafés & Restaurants"),
+]
+
 
 def main():
     con = sqlite3.connect(DB)
@@ -249,13 +281,32 @@ def main():
     for pid, (aud, stds) in PRODUCT_STANDARD_MAP.items():
         cur.execute("UPDATE products SET audience=?, standard_ids=? WHERE id=?", (aud, stds, pid))
 
-    # Phase 11: add audit/compliance products (P13–P20). Idempotent — the "CA:"
-    # prefix uniquely marks these rows, so clear-then-insert is safe to re-run.
+    # Value-ladder columns (guarded — seed_products.py normally adds these first,
+    # but guard so seed_compliance.py is safe to run standalone too).
+    cols = [d[1] for d in cur.execute("PRAGMA table_info(products)")]
+    if "pricing_tier" not in cols:
+        cur.execute("ALTER TABLE products ADD COLUMN pricing_tier TEXT")
+    if "parent_product" not in cols:
+        cur.execute("ALTER TABLE products ADD COLUMN parent_product TEXT")
+
+    # Phase 11: add audit/compliance products (P13–P20) + à-la-carte modules.
+    # Idempotent — the "CA:" prefix uniquely marks these rows, so clear-then-insert
+    # is safe to re-run.
     cur.execute("DELETE FROM products WHERE bundled_asset_ids LIKE 'CA:%'")
     cur.executemany(
         "INSERT INTO products (name, target_business_type, bundled_asset_ids, "
         "price_eur, platform, audience, standard_ids) VALUES (?,?,?,?,?,?,?)",
         AUDIT_PRODUCTS,
+    )
+    for name, (tier, parent) in AUDIT_LADDER.items():
+        cur.execute("UPDATE products SET pricing_tier=?, parent_product=? WHERE name=?",
+                    (tier, parent, name))
+    # à-la-carte compliance modules (Rung 1)
+    cur.executemany(
+        "INSERT INTO products (name, target_business_type, bundled_asset_ids, "
+        "price_eur, platform, audience, standard_ids, pricing_tier, parent_product) "
+        "VALUES (?,?,?,?,?,?,?,'module',?)",
+        AUDIT_MODULES,
     )
 
     # view: compliance_assets grouped by standard → instant bundle definitions
@@ -285,12 +336,14 @@ def main():
     npacks = cur.execute("SELECT COUNT(*) FROM v_audit_packs").fetchone()[0]
     nprod = cur.execute("SELECT COUNT(*) FROM products WHERE standard_ids IS NOT NULL").fetchone()[0]
     ntot = cur.execute("SELECT COUNT(*) FROM products").fetchone()[0]
-    naud = cur.execute("SELECT COUNT(*) FROM products WHERE bundled_asset_ids LIKE 'CA:%'").fetchone()[0]
-    nfree = cur.execute("SELECT COUNT(*) FROM products WHERE price_eur=0").fetchone()[0]
+    tiers = {r[0]: r[1] for r in cur.execute(
+        "SELECT pricing_tier, COUNT(*) FROM products GROUP BY pricing_tier")}
     print(f"✓ standards: {ns} rows")
     print(f"✓ compliance_assets: {nca} rows ({n_op} operator / {n_aud} auditor+consultant)")
-    print(f"✓ products: {ntot} total ({ntot - naud} Phase-7 + {naud} Phase-11 audit/compliance; "
-          f"{nfree} free lead magnet); {nprod} mapped to standards")
+    print(f"✓ products: {ntot} total — value-ladder tiers: "
+          f"{tiers.get('free',0)} free / {tiers.get('module',0)} module / "
+          f"{tiers.get('pack',0)} pack / {tiers.get('kit',0)} kit "
+          f"({nprod} mapped to standards)")
     print(f"✓ v_audit_packs: {npacks} standard×asset rows")
     # Integrity: every CA: bundled id resolves to a compliance_asset
     ca_ids = {r[0] for r in cur.execute("SELECT id FROM compliance_assets")}

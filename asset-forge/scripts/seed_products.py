@@ -58,6 +58,28 @@ PRODUCTS = [
 ]
 
 
+# Value-ladder tier per base product (MONETIZATION_BRIEF §7).
+# pricing_tier: free | module | pack | kit. parent_product = the pack/kit a row rolls
+# up into (NULL for top-level). Single-asset utilities are the standalone "modules"
+# that also sell à-la-carte; multi-asset products are "packs"; broad bundles are "kits".
+# Keyed by product name so it survives id changes.
+LADDER = {
+    # name: (pricing_tier, parent_product or None)
+    "Café / Restaurant Compliance Pack": ("pack", "Compliance Everything"),
+    "Hospitality Operations & GP Bundle": ("pack", "Hospitality Pro Bundle"),
+    "H&S Risk Assessment & Safety Statement Builder": ("module", "Safety Starter"),
+    "Cashflow & P&L Tracker": ("module", "Money Toolkit"),
+    "Fire Safety Register & Checks Log": ("module", "Safety Starter"),
+    "Trades Quote → Job → Invoice Suite": ("pack", "Money Toolkit"),
+    "Recipe / BOM & Batch Costing Calculator": ("module", "Money Toolkit"),
+    "Food-Manufacturing Compliance Core": ("pack", "Compliance Everything"),
+    "Staff Training & Induction Matrix": ("module", None),  # high-attach à-la-carte / order-bump
+    "Manufacturing ISO 9001 / Quality Pack": ("pack", "Compliance Everything"),
+    "Electrician / Gas Compliance Cert Pack": ("pack", "Compliance Everything"),
+    "Product Label & Nutrition Declaration Generator": ("module", None),
+}
+
+
 def main():
     con = sqlite3.connect(DB)
     cur = con.cursor()
@@ -67,6 +89,16 @@ def main():
         "VALUES (?,?,?,?,?)",
         PRODUCTS,
     )
+
+    # Value-ladder columns (guarded — same idempotent pattern seed_compliance.py uses).
+    cols = [d[1] for d in cur.execute("PRAGMA table_info(products)")]
+    if "pricing_tier" not in cols:
+        cur.execute("ALTER TABLE products ADD COLUMN pricing_tier TEXT")
+    if "parent_product" not in cols:
+        cur.execute("ALTER TABLE products ADD COLUMN parent_product TEXT")
+    for name, (tier, parent) in LADDER.items():
+        cur.execute("UPDATE products SET pricing_tier=?, parent_product=? WHERE name=?",
+                    (tier, parent, name))
     con.commit()
 
     n = cur.execute("SELECT COUNT(*) FROM products").fetchone()[0]

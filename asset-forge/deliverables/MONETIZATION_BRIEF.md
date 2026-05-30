@@ -128,9 +128,11 @@ so it does not reduce the seller's net. Net is indicative; exact FX/surcharge va
 - **Anchor + ladder.** Cheap universal leaders (P3 €19, P5 €15, P12 €15) act as low-friction
   entry points and bundle attach; mid-tier hospitality/trades (€29–€49) are the volume core;
   P8 €59 is the premium (failure = lost approval → high willingness-to-pay).
-- **Lead magnet.** Ship a **free "gap-analysis lite / readiness self-check"** (one-sheet
-  cut-down of P1/P3) as a list-builder funnelling to the paid packs — consistent with the
-  bonus-track tiering (free lite → paid kit → full suite).
+- **Lead magnet.** Ship a **free "gap-analysis lite / readiness self-check"** as the funnel's
+  Rung 0 — launched as a **no-code interactive quiz** (Tally/Typeform) that emails the result
+  + the downloadable Lite, funnelling to the paid packs. **See §7 for the full value-ladder,
+  conversion stack (order bump / post-purchase upsell / abandoned-cart / nurture) and the EU
+  legal guardrails that replace the original "exit timer" idea.**
 - **Charm vs round.** Launch at the round € figures above for a clean compliance/"tool"
   positioning; A/B test €X.99 charm pricing on the discovery channel (Etsy) only.
 - **Hospitality-first.** P1 is the first listing; P2 the immediate cross-sell.
@@ -238,7 +240,110 @@ comparables** (the price points our products are benchmarked against). Regenerat
 
 ---
 
-*End of Monetization Brief — Phase 8. Next: Phase 9 — build the P1 Café / Restaurant
-Compliance Pack flagship in `products/` (hospitality-first), bilingual EN/SK.*
-</content>
-</invoke>
+## 7. Sales funnel & conversion architecture (added 30/05/2026)
+
+> **Operating frame (Samuel):** *"I am only starting up. Selling digital products to the
+> right audience could be good passive income."* Every choice below is filtered by three
+> rules that frame demands: **(1) automation-first** — nothing that needs ongoing manual
+> work; **(2) zero/low upfront cost** — free tiers until something proves it earns;
+> **(3) right audience > big audience** — win by being *specific*, not by reaching everyone.
+> The product is not where the money is made — **the funnel is.** A great spreadsheet listed
+> flat sells a handful of copies; the same asset inside an automated value-ladder compounds.
+
+### 7.1 The value ladder (Samuel's idea, expressed 1:1)
+
+```
+RUNG 0 — FREE TEASER (the hook)          interactive "Will I pass?" quiz → emails the result
+   │                                     + the downloadable "Lite" (deliberately incomplete)
+   ▼
+RUNG 1 — À-LA-CARTE MODULE (bite price)  any single tool/sheet on its own  ≈ €9–19
+   │                                     (e.g. just the CAPA Log, just the Allergen Matrix)
+   ▼
+RUNG 2 — FULL PACK (the discount)        pack price < sum of its modules → genuine saving
+   │                                     (P1 €34, HACCP Readiness €49, ISO 22000 Kit €99…)
+   ▼
+RUNG 3 — EVERYTHING KIT (biggest disc.)  pack-of-packs < sum of packs (Compliance Everything €149)
+```
+
+- **"Module" = both levels** (Samuel): individual sheets are buyable *and* packs are buyable
+  inside a bigger kit; the genuine saving applies at each step up.
+- Free DEMO/Lite files already exist for P1, P2 and P13 (Rung 0 is mostly built).
+
+### 7.2 The conversion stack that replaces the "exit timer" (all Lemon-Squeezy-native, all legal)
+
+Samuel's original "stop them as they leave with a 1-minute timer" is **redesigned** — a
+resetting/fake countdown is a **banned EU dark pattern** (see §7.4). These deliver the same
+"rescue the sale / raise order value" goal, legally and with higher conversion:
+
+1. **Order bump at checkout** — one-click "+€9 add the Training Matrix." Typical take-rate
+   10–30%, pure margin, zero extra traffic.
+2. **Post-purchase one-time upsell (OTO)** — straight after purchase: *"complete your pack —
+   upgrade to the full kit for €X off, this once."* A **genuine** one-time offer (not a
+   resetting timer); routinely lifts average order value 10–20%.
+3. **Abandoned-cart recovery email** — auto-sent to buyers who leave before paying, carrying
+   a **single-use code with a real, fixed deadline** (e.g. 48–72h). The legal stand-in for
+   the exit timer.
+4. **Email nurture sequence (3–5 emails)** to everyone who took the free quiz — deliver
+   value, then soft-pitch the pack. **This is where most revenue actually comes from;** the
+   free hook is worthless without the follow-up.
+
+### 7.3 Marketing playbook (what works for a solo EU template seller)
+
+- **Niche positioning beats generic** — "HACCP Readiness for Irish Cafés" out-converts
+  "compliance templates." The per-vertical packs already built are the unfair advantage.
+- **Price anchoring / decoy** — always show the everything-kit beside the pack with a real
+  "save €X vs buying separately"; makes the mid-tier the obvious choice.
+- **Social proof / trust** — reviews, "satisfies an EHO inspection / Reg. 852/2004", units
+  sold. Compliance buyers buy on *risk reduction* — trust signals are the conversion lever.
+- **Etsy = top-of-funnel discovery** (proven buyer intent for "restaurant/spreadsheet
+  templates") → redirect to Lemon Squeezy for the ladder (lower fees, cleaner MoR VAT).
+- **Interactive lead magnet > static download** — a scored self-assessment roughly doubles
+  opt-in vs a file. Hence Rung 0 is a quiz, not just a download.
+
+### 7.4 Legal guardrails (EU Omnibus Directive 2019/2161 — Ireland seller)
+
+- ❌ **No fake or resetting countdown timers** and ❌ **no fake "was/now" prices** — blacklisted
+  dark patterns. Amazon was fined **€7.48M** for resetting timers; ~30% of Black-Friday
+  sellers were found in breach in EU sweeps.
+- ✅ **Order bumps, post-purchase OTOs, and real single-use/real-deadline codes are fine** —
+  they are genuine offers, not deception.
+- 📐 **Reference-price rule:** if a struck-through "before" price is ever shown, it must be the
+  lowest price charged in the **prior 30 days**.
+- 🔐 **GDPR:** email capture is personal data → privacy policy + lawful-basis consent on the
+  quiz (the no-code tools below provide this).
+- 🧾 MoR (Lemon Squeezy) still collects/remits EU VAT on the **discounted** price — discounts
+  don't change the seller's zero-filing position.
+
+### 7.5 Lead-magnet format decision (Samuel: no-code quiz now, web app later)
+
+A custom interactive lead-magnet **web app** is the highest-converting format, but for a
+starter with no audience it front-loads build + hosting + maintenance + GDPR with payoff that
+only scales with traffic — and there is **no front-end in this repo today**. Decision:
+
+- **Now:** launch the identical "Will I pass?" assessment as a **no-code interactive quiz**
+  (Tally / Typeform — free tier, GDPR-friendly, native email capture + "email me my result",
+  embeds anywhere, live in an afternoon). It delivers the existing **"Lite"** file as the
+  result. ~80% of the web-app's conversion lift at ~€0 cost and ~0 maintenance (passive).
+- **Later (deferred phase):** graduate to a **dedicated lead-magnet web app + funnel page**
+  (interactive scored assessment, exit-intent capture) **only once the quiz proves volume +
+  click-through to paid.** Prerequisites to flag at that point: a hosted front-end (none
+  exists yet) and a GDPR setup. Documented as future, not built now.
+
+### 7.6 Worked example — compliance line ladder (illustrative; verify at listing)
+
+```
+Rung 0  Gap-Analysis "Lite" quiz                              FREE   (email capture)
+Rung 1  single module (e.g. CAPA Log / Training Matrix)       €12    (à-la-carte)
+Rung 2  HACCP Readiness Pack for Cafés (bundles ~7 modules)   €49    (< sum of modules)
+Rung 3  Compliance Everything kit (bundles multiple packs)    €149   (< sum of packs)
+        + order bump (+€9 Training Matrix), post-purchase OTO (kit −€20 once),
+          abandoned-cart code (48h, single-use)
+```
+The genuine sum-of-parts saving at Rungs 2–3 is what makes the discount **Omnibus-safe**.
+
+*(See `PRODUCT_ROADMAP.md` for product-by-product mapping; this §7 is the funnel source of truth.)*
+
+---
+
+*End of Monetization Brief — Phase 8 (+ §7 funnel/marketing extension, 30/05/2026). Next:
+Phase 12 — build the P13 Gap-Analysis + Mock-Audit flagship (the Rung-0/Rung-1 engine).*

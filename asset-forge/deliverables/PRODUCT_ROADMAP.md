@@ -372,6 +372,16 @@ Multi-Client *(consultant)*.
 
 ## 7. Compliance bundle architecture & roadmap order
 
+> **Funnel tiering (see `MONETIZATION_BRIEF.md` §7 — source of truth).** Products sit on a
+> 4-rung value ladder, not a flat list: **Rung 0** free teaser (no-code "Will I pass?" quiz →
+> emails the result + downloadable Lite) → **Rung 1** à-la-carte modules (single sheets/tools,
+> ≈ €9–19) → **Rung 2** packs (price < sum of modules) → **Rung 3** everything-kits (price <
+> sum of packs). Conversion is driven by Lemon-Squeezy-native, EU-legal mechanics — **order
+> bump, post-purchase one-time upsell, abandoned-cart recovery code, email nurture** — which
+> replace the (illegal under EU Omnibus) "exit countdown timer." In the DB, `products.pricing_tier`
+> tags each row free/module/pack/kit and `products.parent_product` records what a module/pack
+> rolls up into.
+
 ```
 LEAD MAGNET            STANDARD KITS (operator, €49–99)            AUDIT SUITE (pro, €149+)
 P13 Gap-Analysis ──► P14 HACCP Readiness (café/restaurant) ─┐
