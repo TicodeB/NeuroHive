@@ -13,7 +13,7 @@ Checkpoint score: 442 asset_map rows audited · 0 anomalies · 100% Section [12]
 
 ### ▶️ NEXT SMALLEST ACTION
 - Open a FRESH session for **Phase 6 — Synthesis** on `claude/beautiful-knuth-cHRjU` (or the rolling successor — see ⚠️ branch note below). Phase 6 produces `deliverables/MASTER_INTELLIGENCE_REPORT.md` + `deliverables/asset_catalogue.xlsx` and identifies the universal-core-vs-niche split for the Phase 7 roadmap. Phase 6 ALSO writes `scripts/export_catalogue.py` (still missing).
-- ⚠️ BRANCH NOTE: this session's commits landed on `claude/eloquent-turing-zX5eA` (the rolling-branch successor per session-specific instructions). Before starting Phase 6, decide rolling-branch policy: continue on this branch, or rebase/merge it onto `claude/beautiful-knuth-cHRjU`. Both branches share the Phase 0→4 history; only the Phase 5 commits diverge.
+- ✅ BRANCH RESOLVED (Samuel, 30/05/2026): Phase 5 was consolidated onto the canonical **`claude/beautiful-knuth-cHRjU`** by clean fast-forward (`7f83f26..e7290cf`; eloquent-turing was a strict superset = beautiful-knuth + 2 Phase 5 commits, no divergence). PR #4 now carries Phases 0→5; PR #5 / `claude/eloquent-turing-zX5eA` retired. **Phase 6 continues on `claude/beautiful-knuth-cHRjU`.**
 - **Optional side-quest (only from a host/env with open egress, OR after allowlisting `openrouter.ai` in this environment's network policy):** run `python3 scripts/classify.py` (10% sample) then `--all` for the full 442-row second opinion. Divergences land in `classification_audit`; review by hand and re-cut only with human decision. NOT required for Phase 6 — tiers are already final.
 
 ### ➕ STANDING ADD-ONS (carry forward)
@@ -24,7 +24,7 @@ Checkpoint score: 442 asset_map rows audited · 0 anomalies · 100% Section [12]
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
 - **Environment egress allowlist blocks `openrouter.ai`** — to run the optional model second-opinion, either add `openrouter.ai` to this web environment's network policy (https://code.claude.com/docs/en/claude-code-on-the-web) or run `classify.py` from a machine with open egress. NOT a Phase 6 blocker — tiers are already final via the deterministic pass.
-- **Branch policy reconciliation** — session-specific instructions for this remote runner mandated `claude/eloquent-turing-zX5eA`; handover policy mandates the rolling `claude/beautiful-knuth-cHRjU`. Pick one canonical branch for Phase 6+ and either merge/rebase the Phase 5 commits across, or accept the split.
+- ✅ RESOLVED (Samuel, 30/05/2026): branch reconciliation — consolidated onto canonical `claude/beautiful-knuth-cHRjU` (PR #4) by fast-forward; PR #5 / eloquent-turing retired. Phase 6+ continues on beautiful-knuth.
 - **Excise/duty (alcoholic beverage)** folded into Cashflow/P&L in Phase 2 — confirm dedicated excise tracker (Phase 8/10) vs keep in cashflow.
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended.
 - ✅ RESOLVED (Samuel, 30/05/2026): single rolling branch policy → `claude/beautiful-knuth-cHRjU` (draft PR #4) is canonical for Phases 0→4. (Phase 5 forked onto `claude/eloquent-turing-zX5eA` per remote-runner instructions — see branch reconciliation above.)
