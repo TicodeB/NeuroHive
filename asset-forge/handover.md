@@ -1,39 +1,40 @@
-## STATE — 30/05/2026 16:40
+## STATE — 30/05/2026 17:10
 Project: ASSET-FORGE
-Phase last completed: 6 - Synthesis ✅ COMPLETE (MASTER_INTELLIGENCE_REPORT.md + asset_catalogue.xlsx written; export_catalogue.py built; universal-core vs niche split locked for the Phase 7 roadmap)
-Checkpoint score: 442 rows synthesised → 7-sheet xlsx + master report; 0 new DB writes (synthesis only) | ~54% complete (7 of 13 sessions)
+Phase last completed: 7 - Productisation ✅ COMPLETE (PRODUCT_ROADMAP.md written — 12 products ranked by demand×price×build-ease, one-page build spec each; `products` DB table seeded + integrity-checked)
+Checkpoint score: 12 products defined from the 54-asset catalogue (0 new assets invented — all reuse existing IDs); `products` table 0→12 rows | ~62% complete (8 of 13 sessions)
 
 ### ✅ DONE THIS SESSION
-- Wrote `scripts/export_catalogue.py` — the missing Section [4] runner. Flat-exports `intelligence.db` to `deliverables/asset_catalogue.xlsx` (openpyxl) as a 7-sheet workbook: Overview · Asset_Map (full 442-row matrix w/ raw axes, score, tier, buyer, evidence) · Digital_Assets (54) · Universal_Core · MUST_Haves · Pain_Points · Tier_Summary. Tier-coloured, auto-filtered, frozen headers, EU date stamp. Re-runnable any time.
-- Ran it → `deliverables/asset_catalogue.xlsx` generated and verified (Asset_Map 442+header rows × 15 cols; all 7 sheets populated; tier mix MUST 129 / SHOULD 218 / COULD 95 matches DB).
-- Wrote `deliverables/MASTER_INTELLIGENCE_REPORT.md` — the human-readable synthesis (deliverable #2 of project DoD). Sections: exec summary · catalogue at a glance · **universal-core vs niche split** (the Phase 6 core output) · hospitality priority deep-dive · department/buyer shape · existing-solutions carry-forward · what Phase 6 locks for Phase 7 · provenance/integrity.
-- **Key synthesis finding (feeds Phase 7 ranking):** highest-leverage products are horizontal, not vertical. `H&S Risk Assessment & Safety Statement` = MUST in **21/21** business types (broadest build-once/sell-many product). `Cashflow & P&L Tracker` = wanted (MUST/SHOULD) in **21/21** but legally mandated in none → top pure-WTP product. Food-cluster core (HACCP/allergen/temperature/traceability/cleaning) = MUST across all 10 hospitality+food-mfg types.
-- **Hospitality flagship shape identified:** 7 assets are MUST across all 5 hospitality business types (HACCP, Allergen, Temperature, Cleaning, Traceability, Fire, H&S) → the "Café/Restaurant Compliance Pack" = Phase 9 flagship; 6 of 7 are universal-core so the build seeds the food line.
-- No DB rows changed — Phase 6 is read-only synthesis over the tier-final catalogue. No premium tokens spent on bulk work.
+- Wrote `deliverables/PRODUCT_ROADMAP.md` (deliverable #4 of the project DoD). Ranked **12 products** by **demand × price × build-ease** (transparent D/P/B scoring table) and applied the **hospitality-first override** → roadmap order: P1 Café/Restaurant Compliance Pack ⭐ → P2 Hospitality Ops & GP → P3 H&S Builder → P4 Cashflow → P5 Fire → P6 Trades Quote→Job→Invoice → P9 Recipe/BOM Costing → P8 Food-Mfg Compliance Core → P12 Training Matrix → P11 Mfg ISO 9001 → P7 Elec/Gas Cert → P10 Label/Nutrition.
+- Each product = a §10 one-pager: name+target · bundled asset IDs · tier mix (MUST anchor + SHOULD/COULD upsells) · pain-it-kills (owner-voice quote from `pain_points`) · build complexity S/M/L + est. days · indicative € (vs marketplace comparables) · bundle path (standalone → vertical bundle → everything kit).
+- **Anchored every product on universal-core** (brief §10): P3 H&S (MUST 21/21) + P4 Cashflow (wanted 21/21) are the horizontal anchors; P1 hospitality flagship is 6/7 universal-core so its build seeds the food line (P8). Bundle architecture (Hospitality Pro / Safety Starter / Money Toolkit / Compliance Everything) defined in §1.
+- **Flagship locked for Phase 9:** P1 Café/Restaurant Compliance Pack = assets 1,2,3,4,5,16,17 (the 7-asset hospitality MUST set; satisfies EHO inspection — Reg 852/2004 + 1169/2011 + fire + Safety Statement).
+- Wrote `scripts/seed_products.py` and ran it → **`products` table seeded with 12 rows** (name, target, bundled_asset_ids, indicative price_eur, preliminary platform). Integrity check PASS — all `bundled_asset_ids` resolve to existing `digital_assets`. Idempotent + re-runnable.
+- **No new assets invented** (brief §12 dedupe rule) — every product reuses the existing 54 asset IDs. No DB tiers changed; Phase 7 is planning over the tier-final catalogue.
 
 ### ▶️ NEXT SMALLEST ACTION
-- Open a FRESH session and run **/goal 7 — Productisation** on canonical `claude/beautiful-knuth-cHRjU` (PR #4; see ✅ branch resolution below). Phase 7 writes `deliverables/PRODUCT_ROADMAP.md`: rank products by (demand × price × build-ease), one-page build spec each (Section [10] shape). Anchor each product on a universal-core asset; **rank hospitality products to the top** (priority vertical). Start the ranking from §3 + §7 of MASTER_INTELLIGENCE_REPORT.md (universal core = H&S + Cashflow; hospitality pack = the 7-asset MUST set).
-- Carry into Phase 7: the universal-core list (`v_universal_core`, 12 assets) and the commercial-core MUST+SHOULD breadth table (§3.2) are the demand axis; niche-specific list (§3.3) supplies the per-vertical upsells.
+- Open a FRESH session and run **/goal 8 — Monetization**. Phase 8 writes `deliverables/MONETIZATION_BRIEF.md`: pick ONE primary platform + one fallback (brief §11 weighted table — **Merchant-of-Record / EU-VAT handling heavily weighted; seller is in Ireland**). **Re-verify ALL platform fees + VAT handling LIVE** (Tavily MCP available) — never from memory. Then: lock pricing (the PRODUCT_ROADMAP §2 prices are currently *indicative* — finalise EU-VAT-inclusive), bundle architecture (already drafted in roadmap §1), and a launch checklist. Populate the empty `existing_solutions` table with LIVE-verified competitor fees/features during this pass.
+- Carry into Phase 8: roadmap §1 bundle architecture + the 12 indicative prices to confirm; `products.platform` currently set to "Lemon Squeezy (TBD Phase 8)" placeholder — overwrite with the verified decision.
 
 ### ➕ STANDING ADD-ONS (carry forward)
 - **Bilingual EN+SK** binding rule (AGENTS.md). `deliverables/asset_glossary_EN_SK.md` covers the 20 hospitality assets; the **34 new food + non-food + trades assets (ids 21–54) still need SK names/microcopy** — backfill before launch (Phase 8/9), route through a native editor. `/slovak` chief-editor skill NOT installed here.
-- **Market validation**: `research/market_validation.md`. Preliminary platform pick: **Lemon Squeezy** primary / **Gumroad** fallback / **Etsy** discovery (EU-VAT weighted; final lock Phase 8 with fees re-verified live). `existing_solutions` table intentionally still empty — populate in Phase 8 with LIVE-verified fees/features, never from memory.
+- **Market validation**: `research/market_validation.md`. Preliminary platform pick: **Lemon Squeezy** primary / **Gumroad** fallback / **Etsy** discovery (EU-VAT weighted; final lock Phase 8 with fees re-verified live). `existing_solutions` table still empty — populate in Phase 8 with LIVE-verified fees/features.
 - **Secrets plumbing** ready: root `.gitignore` excludes `.env`; `asset-forge/.env.example`; `scripts/set_secret.sh`. Set `OPENROUTER_API_KEY` as a Claude Code environment secret if running the optional model pass.
-- **Research tooling available**: Tavily MCP (search/extract/research), Semantic Scholar, Consensus. Available for Phase 8/11 live verification.
-- **xlsx tooling note**: `export_catalogue.py` needs `openpyxl` (`pip install openpyxl`). Installed in this session's env; not vendored — re-install in a fresh session if regenerating the xlsx.
+- **Research tooling available**: Tavily MCP (search/extract/research), Semantic Scholar, Consensus. Use for Phase 8 live fee/VAT verification.
+- **xlsx tooling note**: `export_catalogue.py` needs `openpyxl` (`pip install openpyxl`). Not vendored — re-install in a fresh session if regenerating the xlsx.
+- **Script set now complete for Phase 7**: init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades), **seed_products** (new), set_secret.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
-- ✅ RESOLVED (Samuel, 30/05/2026): **use the canonical branch.** Phase 6 work was authored on `claude/keen-ramanujan-21OJr` (per the remote-runner task instruction) then **consolidated onto canonical `claude/beautiful-knuth-cHRjU` (PR #4) by a clean fast-forward** (`b1ce16f..7250ff2`; keen-ramanujan was a strict superset = beautiful-knuth + 1 Phase 6 commit, zero divergence — same pattern as the Phase 5 consolidation). **Phase 7+ continues on `claude/beautiful-knuth-cHRjU`.** keen-ramanujan kept in sync (identical tip); PR #6 retired in favour of PR #4.
-- **Environment egress allowlist blocks `openrouter.ai`** — optional model second-opinion (`classify.py`) still deferred. NOT a gate on any downstream phase; tiers are final.
-- **Excise/duty (alcoholic beverage)** folded into Cashflow/P&L in Phase 2 — confirm dedicated excise tracker (Phase 8/10) vs keep in cashflow.
+- ⚠️ **BRANCH:** This Phase-7 session was instructed (remote-runner task) to develop on **`claude/admiring-curie-T6Ept`**, but the Phase-6 handover named canonical **`claude/beautiful-knuth-cHRjU` (PR #4)** as the line to continue. I followed the explicit task instruction and committed Phase 7 to `claude/admiring-curie-T6Ept` (draft PR opened). **Decide: consolidate admiring-curie → beautiful-knuth (fast-forward, same pattern as Phases 5/6) to keep one canonical line, or adopt admiring-curie going forward.** Flagging before Phase 8 so the line doesn't fork.
+- **Pricing is indicative** in PRODUCT_ROADMAP §2 — must be confirmed in Phase 8 against LIVE marketplace comparables + EU-VAT-inclusive maths. Do not treat the € figures as final.
+- **Environment egress allowlist blocks `openrouter.ai`** — optional `classify.py` model second-opinion still deferred. NOT a gate; tiers final.
+- **Excise/duty (alcoholic beverage)** folded into Cashflow/P&L (P2/P4) — confirm a dedicated excise tracker product (Phase 8/10) vs keep folded.
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended.
 
 ### ⚠️ RISKS / WATCHOUTS
-- Do NOT state platform fees / VAT / SaaS prices / licensing-body rules from memory — verify live (Phases 8, 11).
-- Dedupe assets by FUNCTION, not label — Phase 7 must reuse the 54 existing assets where they recur; do not invent near-duplicates.
-- Legal-mandatory (Legal=3) auto-promotes to MUST — held through Phase 5 (115/115). Synthesis did not alter tiers.
+- **Phase 8: do NOT state platform fees / VAT / SaaS prices from memory — verify live.** This is the single biggest accuracy risk in the next session.
+- Dedupe by FUNCTION, not label — Phase 7 reused all 54 existing assets; do not invent near-duplicates downstream.
+- Legal-mandatory (Legal=3) auto-promotes to MUST — held since Phase 5 (115/115). Phase 7 did not alter tiers.
 - One phase per session; if a phase looks like >~15 tool calls, propose splitting.
 - No `sqlite3` CLI in this environment — use Python (`sqlite3` module) for DB inspection.
-- `export_catalogue.py` (Phase 6) now exists alongside `classify.py` + `validate.py` (Phase 5). Full script set per Section [4] is complete: init_db, classify, export_catalogue (+ seeds, validate, set_secret).
 - 34 new food + non-food + trades assets are EN-only — Slovak glossary backfill outstanding before launch.
-- Optional Phase 5 model second-opinion not run (env egress blocks openrouter.ai) — review `classification_audit` divergences manually if/when it lands. Tiers already final without it.
+- `products.price_eur` + `products.platform` hold PLACEHOLDER values — Phase 8 must overwrite both with verified data.
