@@ -14,6 +14,7 @@ Checkpoint score: platform decision locked + 8 existing_solutions rows seeded (5
 - Wrote + ran `scripts/seed_existing_solutions.py` → `existing_solutions` 0→8 rows (5 platforms live-verified + 3 marketplace comparables w/ fees, gaps, source_url) and **overwrote `products.platform`** "Lemon Squeezy (TBD Phase 8)" → **"Lemon Squeezy"** on all 12. Idempotent + re-runnable. Verified.
 
 ### ▶️ NEXT SMALLEST ACTION
+- **BRANCH:** run the next phase on **`claude/charming-carson-tVntE`** (= PR #8, the current tip carrying Phases 0–8). Start the fresh session from this branch.
 - Open a FRESH session and run **/goal 9 — Build flagships**. Phase 9 builds the **P1 Café / Restaurant Compliance Pack** flagship in `products/` (hospitality-first mandate). Bundled assets = ids **1,2,3,4,5,16,17** (HACCP FSMS · Allergen Matrix · Temperature Log · Cleaning Schedule · Supplier/Delivery Traceability · H&S Risk Assessment/Safety Statement · Fire Safety Register) — all 7 MUST across the 5 hospitality types (satisfies EHO: Reg. 852/2004 + 1169/2011 + Fire Services Act + Safety Health & Welfare at Work Act 2005). Build complexity M, ~2–3 days. Ship **bilingual EN/SK** (parallel headers, instructions, listing copy) with EU formatting (metric, DD/MM/YYYY, comma thousands). Code tier.
 - Carry into Phase 9: prices/platform are now LOCKED (P1 = €34, Lemon Squeezy). Build a read-only demo + watermarked previews per launch checklist §4.
 
@@ -27,10 +28,10 @@ Checkpoint score: platform decision locked + 8 existing_solutions rows seeded (5
 - **Script set**: init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products), **seed_existing_solutions** (new), set_secret.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
-- **Accountant confirmation** (§1.4 / §6): how MoR (Lemon Squeezy) digital-goods sales interact with Samuel's *overall* Irish VAT-registration position. The MoR handles per-sale VAT; the seller's wider business registration is out of scope here — confirm before launch.
-- **Excise/duty (alcoholic beverage)** still folded into Cashflow/P&L (P2/P4) — confirm a dedicated excise tracker product (Phase 10) vs keep folded. (Unchanged from Phase 7.)
-- Confirm `asset-forge/` living inside the `NeuroHive` repo is intended. (Unchanged.)
+- ✅ RESOLVED (Samuel, 30/05/2026): **VAT status — Samuel is NOT VAT-registered but can register if better.** Decision: **stay non-registered for now + rely on the MoR.** With a full MoR (Lemon Squeezy) the platform is the legal seller and handles all per-sale EU VAT, so registration is NOT required to sell EU-wide compliantly, and would not improve these B2C template sales (only adds filing + lets you reclaim input VAT on purchases). Still confirm the specifics with an accountant before launch (general mechanism, not tax advice).
+- ✅ RESOLVED (Samuel, 30/05/2026): **Excise/duty (alcohol) — KEEP FOLDED** into Cashflow/P&L (P2/P4). No dedicated excise tracker product.
 - ✅ RESOLVED earlier (Samuel): pricing researched live in Phase 8 and finalised (done this session).
+- Confirm `asset-forge/` living inside the `NeuroHive` repo is intended. (Unchanged.)
 
 ### ⚠️ RISKS / WATCHOUTS
 - **Lemon Squeezy post-Stripe-acquisition uncertainty** is the main platform risk — Gumroad fallback pre-vetted; both host same files so migration = re-upload, not rebuild.

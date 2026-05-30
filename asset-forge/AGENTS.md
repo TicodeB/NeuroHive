@@ -62,6 +62,9 @@ evidenced *why*. Prefer free/open tooling and lowest running cost.
   `handover.md`; then STOP and tell Samuel to open a fresh session.
 - If a session looks like it will exceed ~15 tool calls, say so up front and
   propose splitting further.
+- **ALWAYS state the exact git branch Samuel should run the next `/goal` on** —
+  both in the chat report AND in the `handover.md` ▶️ NEXT action. Never leave the
+  branch implicit (Samuel's standing instruction, 30/05/2026).
 
 ## Classification rubric (Section [6] — make it defensible)
 
