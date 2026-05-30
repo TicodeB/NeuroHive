@@ -39,7 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PRODUCTS = os.path.normpath(os.path.join(HERE, "..", "products"))
 os.makedirs(PRODUCTS, exist_ok=True)
 
-VERSION = "v1.0"
+VERSION = "v1.1"  # v1.1: fixed Excel corruption (31-char tab limit + demo insert_rows)
 BUILD_DATE = "30/05/2026"  # DD/MM/YYYY (EU)
 
 # ---- palette (matches P1/P2 flagships) ---------------------------------------
@@ -57,9 +57,13 @@ thin = Side(style="thin", color="BFBFBF")
 BORDER = Border(left=thin, right=thin, top=thin, bottom=thin)
 
 # ---- sheet titles (referenced in cross-sheet formulas) -----------------------
+# NOTE: Excel hard-limits sheet (tab) names to 31 characters. Exceeding it
+# silently corrupts the workbook ("we found a problem with content"). Keep every
+# title <= 31 chars — build_workbook() asserts this. Bilingual titles live in
+# row 1 of each sheet, so short tab names lose nothing.
 S_COVER = "00 · Start Here · Začnite tu"
 S_GAP = "01 · Gap Analysis · Analýza"
-S_MOCK = "02 · Mock Audit · Skúšobný audit"
+S_MOCK = "02 · Mock Audit · Skúška"
 S_SCORE = "03 · Readiness · Pripravenosť"
 S_NEXT = "04 · Next Steps · Ďalšie kroky"
 
@@ -716,6 +720,9 @@ def build_workbook():
     build_mock(wb)
     build_score(wb)
     build_next(wb)
+    # Excel corrupts on tab names > 31 chars — fail loudly if we ever regress.
+    for ws in wb.worksheets:
+        assert len(ws.title) <= 31, f"Sheet name too long ({len(ws.title)}): {ws.title!r}"
     wb.properties.title = "Compliance Gap-Analysis & Mock-Audit (Lite) — EN/SK"
     wb.properties.creator = "ASSET-FORGE"
     wb.properties.subject = ("Free compliance readiness check — generic ISO/HACCP/BRCGS/IFS/FSSC spine; "
@@ -724,19 +731,48 @@ def build_workbook():
 
 
 def add_demo_watermark(wb):
-    """Watermarked, locked preview for the listing image / pre-email-capture."""
-    for ws in wb.worksheets:
-        span = max(ws.max_column, 4)
-        ws.insert_rows(1)
-        ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=span)
-        c = ws.cell(1, 1, "DEMO — PREVIEW ONLY · enter your email to download the free editable file · "
-                          "ukážka — zadajte e-mail a stiahnite si bezplatný upraviteľný súbor")
-        c.font = f(10, True, "FFFFFF"); c.fill = fill("C00000")
+    """Watermarked, locked preview for the listing image.
+
+    IMPORTANT: do NOT use insert_rows() here. openpyxl's insert_rows shifts cell
+    values but not merged-cell ranges, conditional formatting or data-validation
+    ranges — on sheets full of merges that produces overlapping ranges and Excel
+    reports "we found a problem with content". Instead we prepend a dedicated,
+    non-destructive DEMO notice sheet and lock every sheet read-only.
+    """
+    notice = wb.create_sheet("DEMO Preview · Ukážka", 0)
+    notice.sheet_view.showGridLines = False
+    set_widths(notice, [4, 28, 28, 28, 28])
+    notice.merge_cells("A1:E1")
+    b = notice.cell(1, 1, "DEMO — PREVIEW ONLY · NOT FOR RESALE")
+    b.font = f(16, True, "FFFFFF"); b.fill = fill("C00000")
+    b.alignment = Alignment(horizontal="center", vertical="center")
+    notice.row_dimensions[1].height = 36
+    notice.merge_cells("A2:E2")
+    b2 = notice.cell(2, 1, "Ukážka — len na náhľad · nie na ďalší predaj")
+    b2.font = f(12, True, "C00000"); b2.fill = fill(SAND)
+    b2.alignment = Alignment(horizontal="center", vertical="center")
+    notice.row_dimensions[2].height = 24
+    lines = [
+        "",
+        "This is a locked, read-only preview of the workbook.",
+        "Toto je uzamknutý náhľad zošita len na čítanie.",
+        "",
+        "Browse the tabs to see the Gap Analysis, Mock Audit, Readiness",
+        "verdict and Next Steps. Buy the full pack to unlock editing.",
+        "Prehliadnite si hárky. Kúpou plnej verzie odomknete úpravy.",
+    ]
+    r = 4
+    for ln in lines:
+        notice.merge_cells(start_row=r, start_column=1, end_row=r, end_column=5)
+        c = notice.cell(r, 1, ln)
+        c.font = f(11, False, NAVY, italic=(ln.startswith("Toto") or ln.startswith("Prehliad")))
         c.alignment = Alignment(horizontal="center", vertical="center")
-        ws.row_dimensions[1].height = 22
+        r += 1
+    notice.sheet_properties.tabColor = "C00000"
+
+    for ws in wb.worksheets:
         ws.protection.sheet = True
         ws.protection.password = "demo"
-        ws.protection.enable()
     wb.properties.title = "Compliance Gap-Analysis & Mock-Audit (Lite) — DEMO (EN/SK)"
     return wb
 

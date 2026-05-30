@@ -665,19 +665,36 @@ def build_workbook():
 
 
 def add_demo_watermark(wb):
-    """Convert a full workbook into a watermarked, protected DEMO."""
+    """Watermarked, locked preview for the listing image.
+
+    Non-destructive: prepend a dedicated DEMO notice sheet and lock every sheet
+    read-only. Do NOT use insert_rows() — openpyxl shifts cell values but not
+    merged-cell / conditional-format / data-validation ranges, which corrupts
+    merge-heavy sheets (Excel: "we found a problem with content").
+    """
+    notice = wb.create_sheet("DEMO Preview · Ukážka", 0)
+    notice.sheet_view.showGridLines = False
+    set_widths(notice, [4, 28, 28, 28, 28])
+    notice.merge_cells("A1:E1")
+    b = notice.cell(1, 1, "DEMO — PREVIEW ONLY · NOT FOR RESALE")
+    b.font = f(16, True, "FFFFFF"); b.fill = fill("C00000")
+    b.alignment = Alignment(horizontal="center", vertical="center")
+    notice.row_dimensions[1].height = 36
+    notice.merge_cells("A2:E2")
+    b2 = notice.cell(2, 1, "Ukážka — len na náhľad · nie na ďalší predaj")
+    b2.font = f(12, True, "C00000"); b2.fill = fill(SAND)
+    b2.alignment = Alignment(horizontal="center", vertical="center")
+    notice.row_dimensions[2].height = 24
+    notice.merge_cells("A4:E4")
+    m = notice.cell(4, 1, "Browse the tabs to preview the pack. Buy the full version to unlock editing.")
+    m.font = f(11, False, NAVY); m.alignment = Alignment(horizontal="center", vertical="center")
+    notice.merge_cells("A5:E5")
+    m2 = notice.cell(5, 1, "Prehliadnite si hárky. Kúpou plnej verzie odomknete úpravy.")
+    m2.font = f(11, False, NAVY, italic=True); m2.alignment = Alignment(horizontal="center", vertical="center")
+    notice.sheet_properties.tabColor = "C00000"
     for ws in wb.worksheets:
-        # banner row inserted at very top
-        ws.insert_rows(1)
-        ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
-        c = ws.cell(1, 1, "DEMO — PREVIEW ONLY · NOT FOR RESALE · ukážka — buy the full pack to unlock editing")
-        c.font = f(10, True, "FFFFFF"); c.fill = fill("C00000")
-        c.alignment = Alignment(horizontal="center", vertical="center")
-        ws.row_dimensions[1].height = 22
-        # lock the sheet (read-only preview)
         ws.protection.sheet = True
         ws.protection.password = "demo"
-        ws.protection.enable()
     wb.properties.title = "Café / Restaurant Compliance Pack — DEMO (EN/SK)"
     return wb
 
