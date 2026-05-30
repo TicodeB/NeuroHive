@@ -400,8 +400,11 @@ costs almost nothing to build and feeds buyers into every paid line.)*
    (`compliance_assets` 1 + 2): cheapest to build, clearest pain-killer, the engine reused inside
    every paid standard kit. Code tier (openpyxl), bilingual EN/SK, EU formatting.
 2. **8 new product rows** seeded into `products` (P13–P20) with `audience`
-   (operator/auditor/consultant) + `standard_ids` populated — regenerate with
-   `python3 scripts/seed_products.py` (now 20 products total).
+   (operator/auditor/consultant) + `standard_ids` populated, via
+   `scripts/seed_compliance.py` (they bundle `compliance_assets`). Regenerate in
+   order: `python3 scripts/seed_products.py` (12 base — this wipes `products`)
+   **then** `python3 scripts/seed_compliance.py` (re-enriches the 12 + adds the 8
+   audit rows = **20 products total**).
 3. **Per-standard bundle contents** are query-grounded in `v_audit_packs`; **prices indicative**
    (re-verify live at listing); **platform Lemon Squeezy** (MoR EU-VAT, Phase 8 lock).
 4. **Listing framing locked:** "audit-ready for a TÜV-style certifier" — never "TÜV templates."

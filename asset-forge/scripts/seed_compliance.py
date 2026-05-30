@@ -166,6 +166,44 @@ PRODUCT_STANDARD_MAP = {
     7:  ("operator", "18,19"),           # P7 Electrician/Gas Cert Pack (Safe Electric/RGI)
 }
 
+# ---- Phase 11: Audit & compliance productisation (BONUS track, brief §15.5) --
+# Auditor toolkits + auditee compliance packs. These bundle COMPLIANCE assets
+# (compliance_assets, above), NOT digital_assets — so their bundled_asset_ids
+# carry a "CA:" prefix to disambiguate from the Phase-7 product rows seeded by
+# seed_products.py. Tier ladder: free gap-analysis-lite lead magnet -> paid
+# standard-specific kit (€49–99) -> full audit suite (auditor edition, €149+).
+# Per-standard bundle contents are grounded in view v_audit_packs. Prices
+# INDICATIVE vs marketplace comparables (single ISO/HACCP templates €3–35 on
+# Etsy; consultant documentation toolkits €300–800+ e.g. Advisera) — re-verify
+# live at listing. Platform = Lemon Squeezy (MoR EU-VAT, Phase 8 lock).
+# (name, target_business_type, CA bundle, price_eur, platform, audience, standard_ids)
+AUDIT_PRODUCTS = [
+    ("Compliance Gap-Analysis & Mock-Audit (Lite)",
+     "All audited SME types — FREE lead magnet",
+     "CA:1,2", 0.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10"),
+    ("HACCP Readiness Pack for Cafés & Restaurants",
+     "Hospitality: café·restaurant·bar·B&B·hotel",
+     "CA:11,1,2,3,6,7,10", 49.0, "Lemon Squeezy", "operator", "7,13,14"),
+    ("ISO 22000 / FSSC 22000 Food Safety Management Kit",
+     "Food mfg: bakery·butchery·dairy·beverage·ready-meals",
+     "CA:1,2,3,4,5,6,7,8,9,10,11", 99.0, "Lemon Squeezy", "operator", "4,10"),
+    ("BRCGS / IFS Document-Control & Audit-Readiness Suite",
+     "Food mfg (GFSI-certified or seeking)",
+     "CA:3,4,5,6,8,1,2", 89.0, "Lemon Squeezy", "operator", "8,9"),
+    ("ISO 9001 Quality-Management Audit-Readiness Pack",
+     "Non-food mfg: metal·plastics·packaging·joinery·electronics",
+     "CA:1,2,3,4,5,6,7,8,9", 79.0, "Lemon Squeezy", "operator", "1"),
+    ("FSSC 22000 V7 Transition Pack",
+     "Food mfg already certified to FSSC v6 (upgrade by Apr 2028)",
+     "CA:1,2,4,5", 49.0, "Lemon Squeezy", "operator", "10"),
+    ("Auditor Edition — Audit Protocol, Scoring & Reporting Toolkit",
+     "Auditors / certification-body assessors (all standards)",
+     "CA:12,13,14,16,17,18", 149.0, "Lemon Squeezy", "auditor", "1,4,8,9,10"),
+    ("Consultant Multi-Client Compliance Console",
+     "ISO/HACCP consultants managing a client portfolio",
+     "CA:15,19,16,12", 149.0, "Lemon Squeezy", "consultant", "1,4,7,8,9,10"),
+]
+
 
 def main():
     con = sqlite3.connect(DB)
@@ -211,6 +249,15 @@ def main():
     for pid, (aud, stds) in PRODUCT_STANDARD_MAP.items():
         cur.execute("UPDATE products SET audience=?, standard_ids=? WHERE id=?", (aud, stds, pid))
 
+    # Phase 11: add audit/compliance products (P13–P20). Idempotent — the "CA:"
+    # prefix uniquely marks these rows, so clear-then-insert is safe to re-run.
+    cur.execute("DELETE FROM products WHERE bundled_asset_ids LIKE 'CA:%'")
+    cur.executemany(
+        "INSERT INTO products (name, target_business_type, bundled_asset_ids, "
+        "price_eur, platform, audience, standard_ids) VALUES (?,?,?,?,?,?,?)",
+        AUDIT_PRODUCTS,
+    )
+
     # view: compliance_assets grouped by standard → instant bundle definitions
     cur.execute("""
         CREATE VIEW v_audit_packs AS
@@ -237,10 +284,22 @@ def main():
     n_aud = cur.execute("SELECT COUNT(*) FROM compliance_assets WHERE buyer_role IN ('auditor','consultant')").fetchone()[0]
     npacks = cur.execute("SELECT COUNT(*) FROM v_audit_packs").fetchone()[0]
     nprod = cur.execute("SELECT COUNT(*) FROM products WHERE standard_ids IS NOT NULL").fetchone()[0]
+    ntot = cur.execute("SELECT COUNT(*) FROM products").fetchone()[0]
+    naud = cur.execute("SELECT COUNT(*) FROM products WHERE bundled_asset_ids LIKE 'CA:%'").fetchone()[0]
+    nfree = cur.execute("SELECT COUNT(*) FROM products WHERE price_eur=0").fetchone()[0]
     print(f"✓ standards: {ns} rows")
     print(f"✓ compliance_assets: {nca} rows ({n_op} operator / {n_aud} auditor+consultant)")
-    print(f"✓ products extended: {nprod} mapped to standards (audience set on all 12)")
+    print(f"✓ products: {ntot} total ({ntot - naud} Phase-7 + {naud} Phase-11 audit/compliance; "
+          f"{nfree} free lead magnet); {nprod} mapped to standards")
     print(f"✓ v_audit_packs: {npacks} standard×asset rows")
+    # Integrity: every CA: bundled id resolves to a compliance_asset
+    ca_ids = {r[0] for r in cur.execute("SELECT id FROM compliance_assets")}
+    bad = []
+    for pid, name, b in cur.execute("SELECT id, name, bundled_asset_ids FROM products WHERE bundled_asset_ids LIKE 'CA:%'"):
+        for x in b[3:].split(","):
+            if int(x) not in ca_ids:
+                bad.append((name, x))
+    print("✓ CA-bundle integrity OK" if not bad else f"WARNING — dangling CA refs: {bad}")
     print("  Sample — ISO 22000 pack:")
     for r in cur.execute("SELECT asset, buyer_role, tier FROM v_audit_packs WHERE standard='ISO 22000' LIMIT 6"):
         print("   ·", r[0], f"[{r[1]}/{r[2]}]")
