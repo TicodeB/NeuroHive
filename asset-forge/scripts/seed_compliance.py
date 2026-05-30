@@ -178,9 +178,10 @@ PRODUCT_STANDARD_MAP = {
 # live at listing. Platform = Lemon Squeezy (MoR EU-VAT, Phase 8 lock).
 # (name, target_business_type, CA bundle, price_eur, platform, audience, standard_ids)
 AUDIT_PRODUCTS = [
+    # §41 (Samuel, 30/05/2026): sell it — launch test €29, A/B up to market ceiling.
     ("Compliance Gap-Analysis & Mock-Audit (Lite)",
-     "All audited SME types — FREE lead magnet",
-     "CA:1,2", 0.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10"),
+     "All audited SME types — readiness flagship (paid)",
+     "CA:1,2", 29.0, "Lemon Squeezy", "operator", "1,4,7,8,9,10"),
     ("HACCP Readiness Pack for Cafés & Restaurants",
      "Hospitality: café·restaurant·bar·B&B·hotel",
      "CA:11,1,2,3,6,7,10", 49.0, "Lemon Squeezy", "operator", "7,13,14"),
@@ -208,7 +209,7 @@ AUDIT_PRODUCTS = [
 # name: (pricing_tier, parent_product). Free lite = Rung 0; per-standard kits =
 # Rung 2 packs rolling into the everything kit; pro suites = Rung 3 kits.
 AUDIT_LADDER = {
-    "Compliance Gap-Analysis & Mock-Audit (Lite)": ("free", None),
+    "Compliance Gap-Analysis & Mock-Audit (Lite)": ("pack", None),  # §41: paid €29
     "HACCP Readiness Pack for Cafés & Restaurants": ("pack", "Compliance Everything"),
     "ISO 22000 / FSSC 22000 Food Safety Management Kit": ("pack", "Compliance Everything"),
     "BRCGS / IFS Document-Control & Audit-Readiness Suite": ("pack", "Compliance Everything"),
