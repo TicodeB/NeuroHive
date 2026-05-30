@@ -231,4 +231,184 @@ duplicates); every MUST claim traces to a Legal=3 row in `asset_map`; every pain
 traces to a `pain_points` row with an `evidence_url`. Prices are indicative pending the
 Phase 8 live pricing pass.
 
-*End of Product Roadmap — Phase 7. Next: Phase 8 — Monetization (`MONETIZATION_BRIEF.md`).*
+*End of Phase-7 Product Roadmap. Next: Phase 8 — Monetization (`MONETIZATION_BRIEF.md`).*
+
+---
+---
+
+# PART B — AUDIT & COMPLIANCE PRODUCTISATION (Phase 11 · BONUS track)
+
+**Phase:** 11 — Audit & compliance productisation · **Date:** 30/05/2026 · Model tier: planning
+**Source of truth:** `intelligence.db` → `standards` (21, versions VERIFIED LIVE 30/05/2026),
+`compliance_assets` (19; operator + auditor + consultant buyer roles), view `v_audit_packs`
+(115 standard×asset rows = instant per-standard bundle definitions), `research/compliance.md`.
+
+> The core hospitality product (P1) has shipped, so the bonus track opens (brief §15). This
+> turns the compliance catalogue into a **second revenue line serving compliance buyers, who
+> pay more because failure = lost certification or licence**. It adds **auditor toolkits**
+> (buyer = auditor/consultant) and **auditee compliance packs** (buyer = operator) to the
+> roadmap — **no new spreadsheet builds are invented here**; every product bundles existing
+> `compliance_assets` by ID (the same artefacts an ISO/HACCP consultancy bills for → build
+> once, sell twice). Phase 12 builds the flagship (P13's full version).
+
+**Framing rule (brief §15, do not get wrong in listings):** TÜV (SÜD / Rheinland / NORD) is a
+*certification body*, **not a standard** — it audits you *against* ISO/BRCGS/IFS. Every pack is
+positioned as **"audit-ready for a TÜV-style certifier auditing you to ISO 9001 / 22000 /
+BRCGS / IFS"**, never as a "TÜV template."
+
+---
+
+## 4. The tiered offer (brief §15.5) — free → standard kit → audit suite
+
+The compliance line is a deliberate price ladder, not a flat catalogue. Each rung qualifies the
+buyer for the next:
+
+| Rung | Role | Price band | Products | Job it does |
+|---|---|---|---|---|
+| **① Lead magnet** | operator | **FREE (€0)** | P13 Gap-Analysis & Mock-Audit *(Lite)* | Answers *"will I pass?"* in 5 minutes → email capture → upsell. The cheapest thing to build, the clearest pain-killer. |
+| **② Standard kit** | operator | **€49–99** | P14–P18 (per standard / per vertical) | The audit-ready document set for one scheme. Undercuts a €300–800 consultant toolkit; dwarfs a €10–60 single template. |
+| **③ Audit suite** | auditor / consultant | **€149+** | P19 Auditor Edition · P20 Consultant Console | The other side of the audit — protocol, scoring, NC register, report generator, multi-client tracking. Pro buyer, pro price. |
+
+**Two-sided demand (brief §15 leverage):** the *same premise* (an ISO 22000 audit) sells a
+**readiness pack to the operator** *and* an **audit protocol to the auditor inspecting them*.
+The catalogue already carries both buyer roles (`compliance_assets.buyer_role`), so this is
+incremental revenue with zero extra research.
+
+### Pricing evidence (indicative — re-verify live at listing, brief §3)
+- **Single compliance templates** (one HACCP plan, one ISO checklist) on Etsy/Gumroad: **€10–60**.
+- **Consultant-grade documentation toolkits** (e.g. Advisera 9001/27001 academies): **€300–800+**.
+- → Our **€49–99 standard kits** sit in the empty middle (a *set*, not a single sheet, but a
+  fraction of a consultancy toolkit); the **€149+ auditor editions** still massively undercut a
+  €500+ pro toolkit. Margin is defensible at both rungs. *Prices indicative pending the
+  listing-time live pass; platform = Lemon Squeezy (MoR handles EU VAT — Phase 8 lock).*
+
+---
+
+## 5. Per-standard bundle definitions (from `v_audit_packs`)
+
+`v_audit_packs` groups every `compliance_asset` under each standard it satisfies → instant,
+data-grounded bundle contents. The flagship per-standard kits below each map to one such group.
+Compliance-asset IDs (CA#) reference `compliance_assets`, **not** `digital_assets` (the
+`products.bundled_asset_ids` for these rows carry a `CA:` prefix to keep the two ID spaces apart).
+
+**compliance_assets index (CA#):** 1 Gap-Analysis · 2 Mock-Audit Self-Assessment · 3 Document-Control
+Register · 4 Internal-Audit Programme & Log · 5 Management-Review + Minutes · 6 CAPA Log · 7 Training
+Matrix · 8 Supplier-Approval Register · 9 Calibration Log · 10 Traceability Log (food) · 11 HACCP Plan
++ CCP + PRP · 12 Audit Checklist/Protocol *(auditor)* · 13 Audit Scoring & Grading *(auditor)* · 14 NC
+Register *(auditor)* · 15 CAPA Tracker *(consultant)* · 16 Audit-Schedule Planner *(auditor)* · 17
+Objective-Evidence Register *(auditor)* · 18 Audit-Report Generator *(auditor)* · 19 Mock-Audit
+Multi-Client *(consultant)*.
+
+---
+
+## 6. Compliance product build specs (one-pager each)
+
+### 🎁 P13 — Compliance Gap-Analysis & Mock-Audit *(Lite)*  *(FREE lead magnet · Phase 12 flagship)*
+
+- **Target / buyer:** any operator facing a certification or EHO audit (hospitality + food/non-food mfg). **FREE.**
+- **Bundled assets:** CA 1 (Clause-by-Clause Gap-Analysis Tool) · CA 2 (Mock-Audit / Readiness Self-Assessment) — *lite* (one generic clause set, no per-standard depth).
+- **Standards touched:** ISO 9001 · ISO 22000 · HACCP · BRCGS · IFS · FSSC 22000 (generic clause map).
+- **Pain it kills:** *"Will I pass?"* — the single highest-WTP question in compliance. The lite tool scores readiness and flags the worst gaps, then routes the buyer to the matching paid kit (P14–P18).
+- **Build complexity:** **S** · the cheapest to build and the easiest to demo → **this is the Phase 12 flagship** (full per-standard version becomes the engine inside every paid kit).
+- **Price:** **€0** (email-capture lead magnet on Lemon Squeezy) → converts to ② standard kit.
+
+### 🎁 P14 — HACCP Readiness Pack for Cafés & Restaurants  *(hospitality operator)*
+
+- **Target / buyer:** café·restaurant·bar·B&B·hotel operator (bt 1–5). Reuses the audience that already bought P1.
+- **Bundled assets:** CA 11 (HACCP Plan + CCP + PRP) · 1 (Gap-Analysis) · 2 (Mock-Audit) · 3 (Document-Control) · 6 (CAPA) · 7 (Training Matrix) · 10 (Traceability).
+- **Standards:** HACCP (Codex) · Reg. 852/2004 · Reg. 1169/2011 — **legal floor → MUST**.
+- **Pain it kills:** EHO/FSAI inspection dread on a small kitchen with no formal HACCP study; turns "we wing it" into an evidenced, audit-ready folder.
+- **Price:** **€49** (② standard kit). Natural cross-sell to P1 buyers.
+
+### 🎁 P15 — ISO 22000 / FSSC 22000 Food Safety Management Kit  *(food-mfg operator)*
+
+- **Target / buyer:** bakery·butchery·dairy·beverage·ready-meals (bt 6–10) certifying to a GFSI scheme.
+- **Bundled assets:** CA 1–11 (the full management-system spine: gap-analysis, mock-audit, doc-control, internal-audit, management-review, CAPA, training, supplier-approval, calibration, traceability, HACCP).
+- **Standards:** ISO 22000:2018 (+Amd 1:2024 climate) · **FSSC 22000 V7 (published May 2026)**.
+- **Pain it kills:** the document load of a full FSMS certification — the densest, highest-value operator pack.
+- **Price:** **€99** (top of ② band — failure = lost approval). Bundles the **P18 v7 transition** content for already-certified buyers.
+
+### 🎁 P16 — BRCGS / IFS Document-Control & Audit-Readiness Suite  *(food-mfg operator)*
+
+- **Target / buyer:** food manufacturers certified to (or seeking) BRCGS / IFS.
+- **Bundled assets:** CA 3 (Document-Control — the BRCGS clause-3 backbone) · 4 · 5 · 6 · 8 · 1 · 2.
+- **Standards:** BRCGS Food Safety **Issue 9** (Issue 10 in development) · IFS Food **Version 8**.
+- **Pain it kills:** document-control non-conformances are the #1 finding in BRCGS/IFS audits; this suite is the "master document list done right."
+- **Price:** **€89** (②). *(Watch: BRCGS Issue 10 lands → "Issue 10 transition" upsell, mirroring P18.)*
+
+### 🎁 P17 — ISO 9001 Quality-Management Audit-Readiness Pack  *(non-food-mfg operator)*
+
+- **Target / buyer:** metal/engineering·plastics·packaging·joinery·electronics (bt 11–15). Reuses the P11 audience.
+- **Bundled assets:** CA 1·2·3·4·5·6·7·8·9 (the ISO 9001 clause-4–10 spine, minus food-only traceability/HACCP).
+- **Standards:** ISO 9001:2015 (+Amd 1:2024 climate; **ISO 9001:2026 at FDIS** — flag the coming revision).
+- **Pain it kills:** ISO 9001 is customer-*required* in B2B manufacturing; the audit document load is the blocker. This is the readiness companion to the P11 quality pack.
+- **Price:** **€79** (②).
+
+### 🎁 P18 — FSSC 22000 V7 Transition Pack  *(food-mfg operator · timely upsell)*
+
+- **Target / buyer:** food manufacturers **already certified to FSSC v6** (valid to 30/04/2027; upgrade by Apr 2028).
+- **Bundled assets:** CA 1 (Gap-Analysis, scoped to v6→v7 deltas) · 2 (Mock-Audit) · 4 (Internal-Audit) · 5 (Management-Review).
+- **Standards:** **FSSC 22000 V7** (published May 2026).
+- **Pain it kills:** every v6-certified site must transition; a focused delta gap-analysis beats re-reading the whole scheme. **Time-boxed demand** (sunsets ~2028) = urgency-priced.
+- **Price:** **€49** (②). Standalone or folded into P15.
+
+### 🎁 P19 — Auditor Edition: Audit Protocol, Scoring & Reporting Toolkit  *(auditor)*
+
+- **Target / buyer:** **auditors / certification-body assessors** — the *other side* of every operator pack above.
+- **Bundled assets:** CA 12 (Audit Checklist/Protocol per standard) · 13 (Scoring & Grading) · 14 (NC Register) · 16 (Audit-Schedule Planner) · 17 (Objective-Evidence Register) · 18 (Audit-Report Generator).
+- **Standards:** ISO 9001 · ISO 22000 · BRCGS · IFS · FSSC 22000.
+- **Pain it kills:** the auditor's own admin — protocol → evidence → scoring → NCs → formatted report → surveillance/recert schedule, in one toolkit instead of six ad-hoc spreadsheets.
+- **Price:** **€149** (③ — pro buyer, pro price; still far under a €500+ consultancy toolkit).
+
+### 🎁 P20 — Consultant Multi-Client Compliance Console  *(consultant)*
+
+- **Target / buyer:** **ISO/HACCP consultants** running readiness across a portfolio of clients.
+- **Bundled assets:** CA 15 (CAPA Tracker — multi-client) · 19 (Mock-Audit — multi-client) · 16 (Audit-Schedule Planner) · 12 (Audit Protocol).
+- **Standards:** ISO 9001 · ISO 22000 · HACCP · BRCGS · IFS · FSSC 22000.
+- **Pain it kills:** tracking corrective actions, readiness scores and audit cycles across many clients at once — the consultant's delivery tooling *is* the product.
+- **Price:** **€149+** (③). Doubles as Samuel's own advisory delivery kit (build once, two uses — brief §15 reuse note).
+
+---
+
+## 7. Compliance bundle architecture & roadmap order
+
+```
+LEAD MAGNET            STANDARD KITS (operator, €49–99)            AUDIT SUITE (pro, €149+)
+P13 Gap-Analysis ──► P14 HACCP Readiness (café/restaurant) ─┐
+   Lite (FREE)        P15 ISO 22000 / FSSC 22000 Kit ────────┤
+       │              P16 BRCGS / IFS Doc-Control Suite ──────┼─► Compliance Everything
+       │              P17 ISO 9001 Audit-Readiness Pack ──────┤      (operator: P14/15/16 + P1/P8/P11)
+       └─ upsells ──► P18 FSSC 22000 V7 Transition ───────────┘
+                                                              P19 Auditor Edition ──┐
+                                                              P20 Consultant Console ┴─► Pro Audit Suite
+```
+
+**Build order (Phase 12+):** **P13 first** (free, flagship, seeds every paid kit's engine) →
+P14 (reuses shipped P1 hospitality audience) → P15 (highest operator value) → P19 (opens the
+auditor revenue line) → P16/P17/P18/P20 as the catalogue fills out.
+
+**Roadmap-wide order with bonus track folded in:**
+P1 → P2 *(shipped)* → **P13 (free) → P14 → P15 → P19** → P3 → P4 → P5 → P16 → P17 → P18 → P20 → P6 → P9 → P8 → P12 → P11 → P7 → P10.
+*(Hospitality-first still holds; the free compliance lead magnet jumps the queue because it
+costs almost nothing to build and feeds buyers into every paid line.)*
+
+---
+
+## 8. What Phase 11 hands to Phase 12
+
+1. **Phase 12 builds P13** — the **Gap-Analysis Tool + Mock-Audit / Readiness Self-Assessment**
+   (`compliance_assets` 1 + 2): cheapest to build, clearest pain-killer, the engine reused inside
+   every paid standard kit. Code tier (openpyxl), bilingual EN/SK, EU formatting.
+2. **8 new product rows** seeded into `products` (P13–P20) with `audience`
+   (operator/auditor/consultant) + `standard_ids` populated — regenerate with
+   `python3 scripts/seed_products.py` (now 20 products total).
+3. **Per-standard bundle contents** are query-grounded in `v_audit_packs`; **prices indicative**
+   (re-verify live at listing); **platform Lemon Squeezy** (MoR EU-VAT, Phase 8 lock).
+4. **Listing framing locked:** "audit-ready for a TÜV-style certifier" — never "TÜV templates."
+
+**Integrity:** every compliance product bundles existing `compliance_assets` by ID (no invented
+duplicates — brief §12); every legal-floor standard (Reg. 852/2004, 1169/2011, HACCP) keeps its
+assets at MUST (Legal=3); SK listing copy still needs a native-editor pass before public launch
+(carry-forward from AGENTS.md bilingual rule).
+
+*End of Product Roadmap — Part B / Phase 11. Next: Phase 12 — Build a flagship compliance pack (P13 Gap-Analysis + Mock-Audit).*
