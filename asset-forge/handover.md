@@ -1,45 +1,45 @@
-## STATE — 30/05/2026 18:05
+## STATE — 30/05/2026 19:30
 Project: ASSET-FORGE
-Phase last completed: 8 - Monetization ✅ COMPLETE (`MONETIZATION_BRIEF.md` written — platform locked w/ LIVE-verified fees+VAT, pricing finalised, bundle architecture confirmed, launch checklist; `existing_solutions` table 0→8 rows; `products.platform` placeholder → "Lemon Squeezy" on all 12 rows)
-Checkpoint score: platform decision locked + 8 existing_solutions rows seeded (5 platforms live-verified + 3 marketplace comparables) | ~69% complete (9 of 13 sessions)
+Phase last completed: 9 - Build flagships ✅ COMPLETE (P1 Café / Restaurant Compliance Pack built in `products/` — 8-sheet bilingual EN/SK .xlsx bundling the 7 MUST hospitality assets, plus a watermarked sheet-protected DEMO and a product README with bilingual listing copy)
+Checkpoint score: 1 flagship product shipped (P1, 7 assets, 8 sheets) + watermarked demo + listing copy | ~77% complete (10 of 13 sessions)
 
 ### ✅ DONE THIS SESSION
-- Wrote `deliverables/MONETIZATION_BRIEF.md` (deliverable #5 of the project DoD). All platform fees + VAT handling **re-verified LIVE 30/05/2026 via Tavily** (brief §3 — never from memory). Sources cited inline + stored in `existing_solutions.source_url`.
-- **Platform decision LOCKED:** 🥇 **Lemon Squeezy** (primary) / 🥈 **Gumroad** (fallback) / 📣 **Etsy** (discovery). EU-VAT/full-MoR is the decisive heavily-weighted criterion (Ireland seller → zero tax-filing admin).
-- **Live findings that refined the Phase 1 lean:** (1) Lemon Squeezy acquired by **Stripe (Jul-2024)** — still full MoR but fee 5%+$0.50 **+1.5% intl card** → **~6.5%+$0.50 effective** for EU sales; roadmap uncertainty. (2) **Gumroad is full MoR since 01/01/2025** (flat 10%+$0.50 all-in, no surcharges, weekly payout, built-in Discover but 30% on Discover sales). (3) **Payhip only PARTIAL MoR** (EU/UK VAT, seller stays SoR) → **dropped** on the decisive bar.
-- **Pricing finalised** (§2): the 12 Phase-7 indicative prices confirmed as launch list prices (gross to buyer; MoR handles VAT on top, fee deducted). Net-after-fee table included. Strategy: anchor+ladder, free gap-analysis-lite lead magnet, hospitality-first (P1 → P2).
-- **Bundle architecture confirmed** (§3): Hospitality Pro €69 / Safety Starter €29 / Money Toolkit €79 / Compliance Everything €149 — each with visible vs-parts discount.
-- **Launch checklist** (§4): account+tax, per-listing (bilingual EN/SK copy, previews, demo link, licence, refund/EU-withdrawal-waiver, delivery), QA, post-launch.
-- **EU VAT mechanics** documented (§1.4): MoR is legal seller → collects+remits per-country VAT → seller does NOT register OSS/file on these sales. Flagged: confirm overall Irish VAT position w/ accountant.
-- Wrote + ran `scripts/seed_existing_solutions.py` → `existing_solutions` 0→8 rows (5 platforms live-verified + 3 marketplace comparables w/ fees, gaps, source_url) and **overwrote `products.platform`** "Lemon Squeezy (TBD Phase 8)" → **"Lemon Squeezy"** on all 12. Idempotent + re-runnable. Verified.
+- Built **P1 — Café / Restaurant Compliance Pack** (deliverable #6 of the project DoD: `/products/` flagship proof-of-concept). Hospitality-first mandate satisfied — the first shippable product is a café/restaurant asset.
+- Wrote `scripts/build_p1_compliance_pack.py` (re-runnable; needs `openpyxl` — `pip install openpyxl`, 3.1.5 used). Generates both the full product and the demo from one builder.
+- Output `products/P1_Cafe_Restaurant_Compliance_Pack.xlsx` — **8 sheets**: 00 Start-Here/Návod · 01 HACCP FSMS (id 1) · 02 Allergen Matrix 14×menu (id 2) · 03 Temperature Log (id 3) · 04 Cleaning Schedule (id 4) · 05 Supplier/Delivery Traceability (id 5) · 06 H&S Risk Assessment & Safety Statement + accident log (id 16) · 07 Fire Safety Register + drill log (id 17).
+- **All 7 = MUST across all 5 hospitality types** (Reg. 852/2004 + 1169/2011 + Fire Services Acts 1981/2003 + SHWWA 2005). Legal floor = the whole pack.
+- **Real logic, not blank tables:** allergen Y/T conditional formatting + dropdowns; temperature auto Pass?/CHECK (direction-aware cold≤ / hot≥ target); cleaning COUNTA done/7; H&S risk = L×S with Low/Med/High bands; fire Status OVERDUE/DUE SOON/OK from next-due date; traceability reject-row flag + EU comma-thousands.
+- **EU conventions:** metric (°C/kg/min), DD/MM/YYYY date cells, comma thousands. **Bilingual EN/SK** parallel headers + instructions on every sheet (sourced from `deliverables/asset_glossary_EN_SK.md`).
+- Built `products/P1_DEMO_Cafe_Restaurant_Compliance_Pack.xlsx` — red "DEMO — not for resale" banner on every sheet + sheet protection (read-only preview for the listing per launch-checklist §4).
+- Wrote `products/P1_README.md` — product sheet, sheet→asset→legal-basis map, built-in-logic list, **bilingual EN/SK listing copy draft**, and launch-checklist status. Price/platform carried from Phase 8: **€34 / Lemon Squeezy**.
 
 ### ▶️ NEXT SMALLEST ACTION
-- **BRANCH:** run the next phase on **`claude/charming-carson-tVntE`** (= PR #8, the current tip carrying Phases 0–8). Start the fresh session from this branch.
-- Open a FRESH session and run **/goal 9 — Build flagships**. Phase 9 builds the **P1 Café / Restaurant Compliance Pack** flagship in `products/` (hospitality-first mandate). Bundled assets = ids **1,2,3,4,5,16,17** (HACCP FSMS · Allergen Matrix · Temperature Log · Cleaning Schedule · Supplier/Delivery Traceability · H&S Risk Assessment/Safety Statement · Fire Safety Register) — all 7 MUST across the 5 hospitality types (satisfies EHO: Reg. 852/2004 + 1169/2011 + Fire Services Act + Safety Health & Welfare at Work Act 2005). Build complexity M, ~2–3 days. Ship **bilingual EN/SK** (parallel headers, instructions, listing copy) with EU formatting (metric, DD/MM/YYYY, comma thousands). Code tier.
-- Carry into Phase 9: prices/platform are now LOCKED (P1 = €34, Lemon Squeezy). Build a read-only demo + watermarked previews per launch checklist §4.
+- **BRANCH:** this phase ran on **`claude/modest-cori-cZ7cI`** (carries Phases 0–9). Continue the next session from this branch (or the consolidated tip).
+- Open a FRESH session and run **/goal 10 — 🎁 Standards & audit research** (BONUS track). Per brief §15: write `research/compliance.md`; add `standards` + `compliance_assets` tables (data-model additions §15.4); map ISO 9001/14001/45001/22000, HACCP/BRCGS/IFS/FSSC, EU legal floor (852/2004, 1169/2011), trades & hospitality schemes → business types → assets; **verify current standard versions live**. Mid tier. Legal-mandated standards auto-promote assets to MUST (Legal=3).
+- *(Optional before P10–12: build a second flagship — P2 Hospitality Operations & GP Bundle — if Samuel wants two proofs in `/products/` before moving to the bonus track. Brief §9 allows 1–2 flagships; one is shipped.)*
 
 ### ➕ STANDING ADD-ONS (carry forward)
-- **Bilingual EN+SK** binding rule (AGENTS.md). `deliverables/asset_glossary_EN_SK.md` covers the 20 hospitality assets — **P1 build can use it directly.** The **34 food/non-food/trades assets (ids 21–54) still need SK names/microcopy** — backfill before listing P6–P12 (route through native editor; `/slovak` skill NOT installed here).
-- **Platform LOCKED (Phase 8):** Lemon Squeezy primary / Gumroad fallback / Etsy discovery. Switch trigger to Gumroad: LS drops MoR VAT, fee >~8% effective, or payout/onboarding breakage. Gumroad store name should be reserved as fallback prep.
-- **`existing_solutions` now populated** (8 rows). `products.platform` = "Lemon Squeezy", prices final.
-- **Research tooling**: Tavily MCP (used this session for live fee/VAT verification), Semantic Scholar, Consensus.
-- **Secrets plumbing** ready: root `.gitignore` excludes `.env`; `asset-forge/.env.example`; `scripts/set_secret.sh`.
-- **xlsx tooling note**: `export_catalogue.py` needs `openpyxl` (`pip install openpyxl`). Phase 9 flagship .xlsx build will need openpyxl (or build in Google Sheets). Not vendored — re-install in a fresh session.
-- **Script set**: init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products), **seed_existing_solutions** (new), set_secret.
+- **openpyxl required** for any .xlsx build/inspection — not vendored; `pip install openpyxl` in each fresh session. P1 builder + `export_catalogue.py` both need it.
+- **Bilingual EN+SK** binding rule (AGENTS.md). P1 used `asset_glossary_EN_SK.md` directly. **34 food/non-food/trades assets (ids 21–54) still need SK names/microcopy** — backfill before listing P6–P12. Slovak in P1 listing copy still needs a **native-editor pass before public launch** (`/slovak` skill NOT installed here).
+- **Platform LOCKED (Phase 8):** Lemon Squeezy primary / Gumroad fallback / Etsy discovery. Switch trigger: LS drops MoR VAT, fee >~8% effective, or payout breakage. Don't quote LS "5%" — effective ~6.5%+$0.50.
+- **Prices LOCKED (Phase 8):** P1 €34. `products.platform` = "Lemon Squeezy" on all 12 rows. `existing_solutions` populated (8 rows).
+- **Listing-time TODO for P1:** export preview screenshots (no headless renderer here — open in Excel/Sheets to capture), licence text + EU 14-day-withdrawal waiver checkbox (LS provides), re-verify fees live.
+- **Research tooling:** Tavily MCP, Semantic Scholar, Consensus.
+- **Script set:** init_db, classify, validate, export_catalogue, seed_* (hospitality/food/nonfood/trades/products/existing_solutions), **build_p1_compliance_pack** (new), set_secret.
+- No `sqlite3` CLI — use Python `sqlite3` module for DB inspection.
 
 ### ❓ OPEN QUESTIONS / DECISIONS NEEDED FROM SAMUEL
-- ✅ RESOLVED (Samuel, 30/05/2026): **VAT status — Samuel is NOT VAT-registered but can register if better.** Decision: **stay non-registered for now + rely on the MoR.** With a full MoR (Lemon Squeezy) the platform is the legal seller and handles all per-sale EU VAT, so registration is NOT required to sell EU-wide compliantly, and would not improve these B2C template sales (only adds filing + lets you reclaim input VAT on purchases). Still confirm the specifics with an accountant before launch (general mechanism, not tax advice).
-- ✅ RESOLVED (Samuel, 30/05/2026): **Excise/duty (alcohol) — KEEP FOLDED** into Cashflow/P&L (P2/P4). No dedicated excise tracker product.
-- ✅ RESOLVED earlier (Samuel): pricing researched live in Phase 8 and finalised (done this session).
+- **One flagship or two before the bonus track?** P1 is shipped (hospitality-first mandate met). Brief §9 allows 1–2. Build P2 (Hospitality Operations & GP Bundle) next as a second proof, or proceed to Phase 10 bonus research? (Default if silent: proceed to Phase 10.)
+- ✅ RESOLVED (Samuel, 30/05/2026): VAT — stay non-registered + rely on MoR (Lemon Squeezy is legal seller, handles per-sale EU VAT). Confirm specifics with accountant before launch.
+- ✅ RESOLVED (Samuel, 30/05/2026): Excise/duty (alcohol) — KEEP FOLDED into Cashflow/P&L (P2/P4). No dedicated excise tracker.
 - Confirm `asset-forge/` living inside the `NeuroHive` repo is intended. (Unchanged.)
 
 ### ⚠️ RISKS / WATCHOUTS
-- **Lemon Squeezy post-Stripe-acquisition uncertainty** is the main platform risk — Gumroad fallback pre-vetted; both host same files so migration = re-upload, not rebuild.
-- **Don't quote LS "5%"** in projections — real effective fee ~6.5%+$0.50 (intl-card surcharge). Modelled in brief §2.
-- **Etsy = static files only** → Google-Sheets products need PDF + "make a copy" link; never raw .xlsx where licence forbids redistribution.
-- **EU digital-goods withdrawal right** — listings must include the "consent to immediate delivery / waive 14-day withdrawal" checkbox (LS provides it).
-- **Re-verify fees at listing time** — all figures dated 30/05/2026; platforms change pricing frequently.
-- 34 food/non-food/trades assets are EN-only — SK glossary backfill outstanding before listing P6–P12.
+- **Slovak copy not yet native-edited** — do NOT publish P1 listing SK text before a native pass.
+- **P1 preview images not generated** (no headless spreadsheet renderer in this env) — capture screenshots at listing time from Excel/Google Sheets.
+- **Lemon Squeezy post-Stripe-acquisition uncertainty** — Gumroad fallback pre-vetted; both host the same files, migration = re-upload not rebuild.
+- **Etsy = static files only** → if listed there, ship PDF + "make a copy" Sheets link, never raw editable .xlsx where the licence forbids redistribution.
+- **EU digital-goods withdrawal right** — listings must include the immediate-delivery / 14-day-waiver checkbox (LS provides).
+- **Re-verify all platform fees at listing time** — figures dated 30/05/2026.
 - One phase per session; if a phase looks like >~15 tool calls, propose splitting.
-- No `sqlite3` CLI in this environment — use Python (`sqlite3` module) for DB inspection.
-- Legal-mandatory (Legal=3) auto-promotes to MUST — held since Phase 5 (115/115). Phases 7–8 did not alter tiers.
+- Legal-mandatory (Legal=3) auto-promotes to MUST — held since Phase 5 (115/115). Phases 7–9 did not alter tiers.
