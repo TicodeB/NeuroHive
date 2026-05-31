@@ -61,7 +61,8 @@ page. One good source per fact, cross-checked.
 - Added nuance to fold into pricing: the **+1.5% international-card** surcharge is
   the usual real-world add-on for EU buyers, and the **fixed 50¢ hurts the €19
   teaser most** — keep the cheapest tier ≥ €19 so the fixed fee stays < ~3%.
-- Lowered the LS-discontinuity risk (signups open, standalone post-Stripe).
+- LS-discontinuity risk CONFIRMED live (Stripe Managed Payments migration is
+  LS's stated direction) — keep the §6 watch-out and the Gumroad fallback.
 
 ## Sources (re-verify live at listing)
 - lemonsqueezy.com/pricing · lemonsqueezy.com/help/billing/fees
