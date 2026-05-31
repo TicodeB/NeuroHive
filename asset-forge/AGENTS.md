@@ -102,13 +102,18 @@ Tag every asset with the **BUYER** dimension: `operator` · `auditor` ·
 `consultant` (stored in `asset_map.buyer`). Tag every trades asset with work
 context: solo/team · on-site/off-site/on-the-road.
 
-## Bilingual rule (EN + SK) — non-negotiable
-Every asset and product ships in **English AND Slovak**. Slovak must be
-native-quality: correct grammar, diacritics, punctuation and marketing tone —
-never machine-literal. Canonical EN↔SK names + microcopy live in
-`deliverables/asset_glossary_EN_SK.md`. Phase 9 flagship spreadsheets ship with
-parallel EN/SK headers, instructions and listing copy. Route public-facing SK
-copy through a native editor / the Slovak chief-editor skill before launch.
+## Bilingual rule (EN + SK) — non-negotiable for the CORE catalogue
+Every **core-catalogue** asset/product (Phases 0–12: P1, P2, P13…) ships in
+**English AND Slovak**. Slovak must be native-quality: correct grammar,
+diacritics, punctuation and marketing tone — never machine-literal. Canonical
+EN↔SK names + microcopy live in `deliverables/asset_glossary_EN_SK.md`.
+
+> **⚠️ CARVE-OUT — Premium-Pack track (Phase 13+):** Samuel's explicit decision
+> (30/05/2026) is **one language per file** (clean SK / CS / DE / HU / PL / EN
+> editions), NOT bilingual. The bilingual rule does **not** apply to Premium-Pack
+> deliverables — do not re-add EN to a Slovak premium pack. Native-quality
+> translation per language still required; route public SK copy through a native
+> editor before launch. See `research/beautification_and_competitors.md` §7.
 
 ## Market & channel facts (Phase 1 add-on)
 Demand is evidenced (`research/market_validation.md`): spreadsheet/template

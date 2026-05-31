@@ -1,7 +1,14 @@
-## STATE — 30/05/2026 23:40
+## STATE — 31/05/2026 00:20
 Project: ASSET-FORGE
-Phase last completed: **13a — 🎨 Premium-Pack track: Beautification & Competitor Intelligence ✅ COMPLETE** (new track opened beyond the original 13-session plan)
-Checkpoint score: 1 research deliverable (`research/beautification_and_competitors.md`) | core project 100% (P1/P2/P13 shipped); **Premium-Pack track ~10% (1 of ~6 sub-phases)**. ▶️ NEXT = decisions from Samuel (format · pilot · AI), then Phase 13b `scripts/design_system.py` + re-skin one existing flagship as the visual proof. See §"PREMIUM-PACK TRACK" below.
+Phase last completed: **13b — 🎨 Premium-Pack track: design system + SK re-skin pilot ✅ COMPLETE**
+Checkpoint score: `scripts/design_system.py` + `scripts/build_p2_sk_premium.py` + `products/P2_SK_Hospitality_Premium.xlsx` (9 sheets, validated) | core project 100%; **Premium-Pack track ~30% (2 of ~6 sub-phases)**. ▶️ NEXT = Phase 13c — lock the standard pack skeleton + per-vertical jargon glossary mechanism. See §"PREMIUM-PACK TRACK" below.
+
+### ✅ DONE THIS SESSION (Phase 13b — code tier)
+- **Built `scripts/design_system.py`** — the reusable openpyxl styling layer (the one-time investment so every pack looks premium by default). `Theme` dataclass (3-colour palette + EU number formats, overridable per vertical) + `DS` helpers: `canvas` (gridlines OFF + margin column), `title` (big light title + accent underline), `section`, `note`, `thead`/`trow` (hairline tables + zebra), `input_cell`/`calc_cell`, **`kpi`** (dashboard tile), `footer`.
+- **Built `scripts/build_p2_sk_premium.py`** → `products/P2_SK_Hospitality_Premium.xlsx` — the **SLOVAK-ONLY premium re-skin of P2** as the "beaten the 90s look" proof. 9 sheets: `00 Metóda` · **`01 Denný plán` (NEW daily planner)** · **`02 Prehľad` (NEW dashboard — KPI tiles + formula-driven Postrehy/insights pulling live from 03–07)** · `03 Cash flow` · `04 Marža` · `05 Zásoby` · `06 Zmeny` · `07 Tržby` · `08 Školenia`. Single-language (no EN|SK cramming), insight sentences in plain Slovak, RAG CF on net profit + labour %.
+- **Validated** (soffice broken → openpyxl + zip/XML method): 17 XML parts well-formed · reload OK · 0 merged-range overlaps · all tabs ≤31 · every dashboard anchor (`O13/O18/O26/N29`, `H30/H31`, `I27`, `I31`, `H40`) resolves to the correct source cell. README: `products/P2_SK_Premium_README.md`.
+- **AGENTS.md updated:** bilingual EN+SK rule now scoped to the **core catalogue only**; explicit **carve-out** added so future sessions don't re-add EN to single-language Premium-Pack files.
+- ⚠️ Slovak is **draft-grade** for the build proof → native-editor pass before any listing. Preview screenshots still need capturing from Excel (no headless renderer here).
 
 ### ✅ DONE THIS SESSION (Phase 13a — research/planning tier, new "Premium Pack" track)
 - **New track opened.** Samuel's request: find GitHub repos that are sources of beautiful, grouped, automated, per-industry spreadsheet packs; find the winners; make ours better; kill the "looks like the 90s" problem; premium feel + formulas + automations + insights + maybe embedded AI; **no SaaS hassle**; per-industry packs (butcher/retailer/fruit&veg/abattoir/car-seller/airline/band/theatre…) with their jargon; **each pack in ONE language only** (clean SK/CS/DE/HU/PL/EN); built-in method + daily planner. **Auditor/consultant packs explicitly parked for LATER** (Samuel, 30/05).
@@ -38,15 +45,17 @@ Checkpoint score: 1 research deliverable (`research/beautification_and_competito
 ### 🎨 PREMIUM-PACK TRACK (Phase 13+) — proposed sub-phase split
 This new track far exceeds one `/goal` phase. Proposed split (one per session, cheapest tier that fits):
 - **13a ✅ DONE** — Beautification & competitor intelligence (`research/beautification_and_competitors.md`).
-- **13b** — Build `scripts/design_system.py` (reusable openpyxl styling layer: palette, fonts, header styles, gridlines-off, zebra, KPI tiles, dashboard-tab scaffold) **+ re-skin ONE existing flagship** (P1 or P2) with it, in ONE language, as the visible proof that we've beaten the "90s" look. *(code tier)*
-- **13c** — Lock the standard **pack skeleton** (`00 Method/Start Here` · `Daily Planner` · `Dashboard+Insights` · jargon'd operational tabs · `Settings`) + build the per-vertical **jargon glossary** mechanism. *(planning)*
+- **13b ✅ DONE** — `scripts/design_system.py` + SK re-skin pilot `products/P2_SK_Hospitality_Premium.xlsx` (via `scripts/build_p2_sk_premium.py`). Validated. The "beaten the 90s look" proof.
+- **13c** — Lock the standard **pack skeleton** (`00 Method/Start Here` · `Daily Planner` · `Dashboard+Insights` · jargon'd operational tabs · `Settings`) + build the per-vertical **jargon glossary** mechanism (so verticals = swap content + palette, reuse skeleton + design system). *(planning)*
 - **13d** — First NEW vertical pilot pack (e.g. butcher OR retailer) in ONE chosen language, built on the skeleton + design system. *(code)*
 - **13e** — Optional **Google Sheets "Pro" edition** of the pilot: Apps Script automations + optional Gemini insight sidebar. *(code)*
 - **13f** — Localisation pipeline: clone the locked pilot into the other languages (native-quality pass per language). *(code + native edit)*
 - *(LATER, parked by Samuel)* auditor/consultant editions of the premium packs.
 
 ### ▶️ NEXT SMALLEST ACTION
-- **ALL DECISIONS RESOLVED (Samuel, 30/05).** ▶️ **Phase 13b is ready to build:** (a) write `scripts/design_system.py` (reusable openpyxl styling: palette, fonts, header styles, gridlines-off, zebra, KPI tiles, dashboard scaffold); (b) **re-skin the hospitality flagship (P1 or P2) in SLOVAK** (Samuel's chosen pilot language, 30/05) as the visible "beaten the 90s look" proof; (c) add a built-in **insight-formula** block to the dashboard. ⚠️ Slovak text in the pilot must get a **native-editor pass before any public listing** (standing rule) — fine for the build proof, gate before launch.
+- ▶️ **Phase 13c (planning):** factor the pilot into a reusable **pack skeleton** + a per-vertical **jargon glossary** mechanism, so spinning up butcher/retailer/etc. = swap content strings + `Theme` palette, reuse `design_system.py`. Deliverable: `deliverables/PACK_SKELETON.md` (+ optional `scripts/pack_skeleton.py` scaffold). THEN 13d = first new vertical pack.
+- **Also pending (not blocking 13c):** capture preview screenshots of `P2_SK_Hospitality_Premium.xlsx` from Excel/Sheets so Samuel can SEE the new look (no headless renderer in this env).
+- **BRANCH:** all work on **`claude/cool-planck-rYR4I`** (PR #14, draft). Run the next `/goal 13c` on this branch.
 - **BRANCH:** all work (Phases 0–12 + 13a) is on **`claude/cool-planck-rYR4I`**. A PR will be opened/updated for it. Run the next `/goal 13b` on this branch.
 - **PROJECT COMPLETE — all 13 sessions done.** Every brief §1 deliverable exists: `intelligence.db`, MASTER_INTELLIGENCE_REPORT, asset_catalogue.xlsx, PRODUCT_ROADMAP, MONETIZATION_BRIEF, and 3 built flagships (P1, P2 hospitality + P13 compliance). No further phase to run.
 - **Optional pre-launch hardening (NOT a phase — do before publishing any listing):** (1) Slovak native-editor pass on all listing copy + the 34 food/non-food/trades assets (ids 21–54) + 19 compliance_assets still needing SK microcopy; (2) export preview-image screenshots from Excel/Google Sheets (no headless renderer in this env); (3) re-verify Lemon Squeezy fees + EU VAT/MoR + marketplace comparables live at listing time; (4) wire the P13 email-capture funnel + GDPR consent; (5) confirm standard-version triggers (BRCGS Issue 10, ISO 9001:2026) for transition-pack upsells when they publish.
