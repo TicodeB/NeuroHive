@@ -474,9 +474,167 @@ HOSPITALITY_EN = PackSpec(
     ],
 )
 
+# ============================================================================
+# Phase 13f · BATCH 2 — personal services (NACE 96.02). These trades are
+# LABOUR-led and carry almost no stock, so the spec deliberately OMITS the
+# STOCK module → the generic builder yields a 6-KPI dashboard (no loss tile)
+# and skips the stock insight. Margin is materials-cost-per-service.
+# ============================================================================
+
+# EXAMPLE 8 — hairdresser_sk  (Kaderníctvo · NACE 96.02 · service-led, no stock)
+HAIRDRESSER_SK = PackSpec(
+    key="hairdresser_sk", vertical="Kaderníctvo", language="sk",
+    palette={"primary": "8E3B6B", "accent": "40B5A6", "ink": "2A1622"},   # rose-plum + teal
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži obsadenosť kresla, maržu služieb a mzdy",
+            "steps": ["RÁNO: 3 priority + príprava kresiel a rezervácie",
+                      "POČAS DŇA: služby + predaj vlasovej kozmetiky",
+                      "VEČER: uzávierka pokladne + obsadenosť kresla",
+                      "TÝŽDENNE: zmeny + marža služieb",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: čistota a dezinfekcia nástrojov",
+                          "Otvorenie: rezervácie na dnes skontrolované",
+                          "Zatvorenie: tržby zapísané (uzávierka Z)",
+                          "Zatvorenie: spotreba farieb a kozmetiky zapísaná",
+                          "Zatvorenie: prevádzka a hygiena zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža služieb", "MARGIN.avg"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Tržby vs plán …", "Čistá marža …", "Podiel miezd …",
+                         "Služby pod cieľovou maržou …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby strihanie a úprava", "Tržby farbenie a melír",
+                              "Tržby predaj vlasovej kozmetiky"],
+            "cos_lines": ["Nákup farieb a vlasovej kozmetiky", "Spotrebný materiál (fólie, rukavice)"],
+            "overhead_lines": ["Mzdy a provízie", "Nájom a poplatky", "Energie a voda",
+                               "Marketing", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža služieb", "subtitle": "Materiálový náklad na službu a marža",
+            "unit_label": "Služba",
+            "seed_items": ["Dámsky strih", "Pánsky strih", "Farbenie", "Melír / balayage",
+                           "Spoločenský účes", "Predaj šampónu (ks)"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov (vrátane provízií)",
+            "role_label": "Pozícia (kaderník / asistent)", "target_pct": 0.45}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Denné tržby a uzávierka pokladne",
+            "source_label": "Uzávierka (Z) · hotovosť · karty · prepitné"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Hygiena a dezinfekcia nástrojov",
+                       "Práca s chemikáliami (farby, peroxid)", "Test citlivosti / alergie",
+                       "Manipulácia s bremenami", "BOZP / prvá pomoc"]}),
+    ],
+)
+
+# EXAMPLE 9 — beauty_salon_sk  (Kozmetický salón · NACE 96.02 · treatment-led, no stock)
+BEAUTY_SALON_SK = PackSpec(
+    key="beauty_salon_sk", vertical="Kozmetický salón", language="sk",
+    palette={"primary": "7C5CBF", "accent": "C77FA8", "ink": "241B33"},   # lavender + rose
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži obsadenosť kabín, maržu ošetrení a mzdy",
+            "steps": ["RÁNO: 3 priority + príprava kabín a rezervácie",
+                      "POČAS DŇA: ošetrenia + predaj kozmetiky",
+                      "VEČER: uzávierka pokladne + obsadenosť kabín",
+                      "TÝŽDENNE: zmeny + marža ošetrení",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: čistota a sterilizácia nástrojov",
+                          "Otvorenie: rezervácie a kabíny pripravené",
+                          "Zatvorenie: tržby zapísané (uzávierka Z)",
+                          "Zatvorenie: spotreba prípravkov zapísaná",
+                          "Zatvorenie: prevádzka a hygiena zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža ošetrení", "MARGIN.avg"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Tržby vs plán …", "Čistá marža …", "Podiel miezd …",
+                         "Ošetrenia pod cieľovou maržou …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby ošetrenia tváre a tela", "Tržby manikúra/pedikúra a nechty",
+                              "Tržby predaj kozmetiky"],
+            "cos_lines": ["Nákup kozmetiky a prípravkov", "Spotrebný materiál (jednorazový)"],
+            "overhead_lines": ["Mzdy a provízie", "Nájom a poplatky", "Energie a voda",
+                               "Marketing", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža ošetrení", "subtitle": "Náklad prípravkov na ošetrenie a marža",
+            "unit_label": "Ošetrenie",
+            "seed_items": ["Kozmetické ošetrenie tváre", "Manikúra", "Gélové nechty",
+                           "Depilácia voskom", "Masáž tváre", "Predaj krému (ks)"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov (vrátane provízií)",
+            "role_label": "Pozícia (kozmetička / nechtárka)", "target_pct": 0.45}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Denné tržby a uzávierka pokladne",
+            "source_label": "Uzávierka (Z) · hotovosť · karty · poukazy"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Hygiena a sterilizácia nástrojov",
+                       "Práca s prístrojmi a prípravkami", "Test citlivosti / alergie",
+                       "Manipulácia s chemikáliami", "BOZP / prvá pomoc"]}),
+    ],
+)
+
+# EXAMPLE 10 — barber_sk  (Holičstvo / barbershop · NACE 96.02 · service-led, no stock)
+BARBER_SK = PackSpec(
+    key="barber_sk", vertical="Holičstvo / barbershop", language="sk",
+    palette={"primary": "2B3A55", "accent": "B5894E", "ink": "161D2B"},   # navy + bronze (classic barber)
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži obsadenosť kresla, maržu služieb a mzdy",
+            "steps": ["RÁNO: 3 priority + príprava kresiel a rezervácie",
+                      "POČAS DŇA: strihy, úprava brady + predaj kozmetiky",
+                      "VEČER: uzávierka pokladne + obsadenosť kresla",
+                      "TÝŽDENNE: zmeny + marža služieb",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: čistota a dezinfekcia strojčekov a britiev",
+                          "Otvorenie: rezervácie na dnes skontrolované",
+                          "Zatvorenie: tržby zapísané (uzávierka Z)",
+                          "Zatvorenie: spotreba pánskej kozmetiky zapísaná",
+                          "Zatvorenie: prevádzka a hygiena zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža služieb", "MARGIN.avg"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Tržby vs plán …", "Čistá marža …", "Podiel miezd …",
+                         "Služby pod cieľovou maržou …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby strih vlasov", "Tržby úprava brady (holenie)",
+                              "Tržby predaj pánskej kozmetiky"],
+            "cos_lines": ["Nákup pánskej kozmetiky (oleje, pomády)", "Spotrebný materiál (žiletky, uteráky)"],
+            "overhead_lines": ["Mzdy a provízie", "Nájom a poplatky", "Energie a voda",
+                               "Marketing", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža služieb", "subtitle": "Materiálový náklad na službu a marža",
+            "unit_label": "Služba",
+            "seed_items": ["Pánsky strih", "Strih strojčekom (fade)", "Úprava brady",
+                           "Klasické holenie britvou", "Strih + brada", "Predaj pomády (ks)"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov (vrátane provízií)",
+            "role_label": "Pozícia (barber / holič)", "target_pct": 0.40}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Denné tržby a uzávierka pokladne",
+            "source_label": "Uzávierka (Z) · hotovosť · karty · prepitné"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Hygiena a dezinfekcia nástrojov",
+                       "Práca s britvou a strojčekmi", "Krížová kontaminácia / kožné ochorenia",
+                       "Manipulácia s bremenami", "BOZP / prvá pomoc"]}),
+    ],
+)
+
 REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK, BAKER_SK,
                                BAR_SK, GREENGROCER_SK, PATISSERIE_SK,
-                               HOSPITALITY_EN)}
+                               HOSPITALITY_EN,
+                               HAIRDRESSER_SK, BEAUTY_SALON_SK, BARBER_SK)}
 
 
 if __name__ == "__main__":
