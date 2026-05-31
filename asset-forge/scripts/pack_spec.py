@@ -421,8 +421,62 @@ PATISSERIE_SK = PackSpec(
     ],
 )
 
+# ============================================================================
+# EXAMPLE 7 — hospitality_en  (Phase 13h · localisation proof: the SK pilot
+#             cloned into ENGLISH. Same skeleton, modules, palette + FP&A spine;
+#             only the trade terminology is translated. UI chrome comes from
+#             i18n.EN. English is authored natively here — SK/CS/DE/HU/PL still
+#             need a native-editor pass before listing per the standing rule.)
+# ============================================================================
+HOSPITALITY_EN = PackSpec(
+    key="hospitality_en", vertical="Hospitality / Food service", language="en",
+    palette={"primary": "2D6CDF", "accent": "15A38C", "ink": "1A2B45"},
+    modules=[
+        Module("METHOD", {"title": "Method",
+            "subtitle": "The pack that shows margin, wages and cash before they hurt",
+            "steps": ["MORNING: 3 priorities + opening", "DURING THE DAY: takings + losses",
+                      "EVENING: cash-up (till close)", "WEEKLY: rota + margin",
+                      "MONTHLY: cash flow + overview"]}),
+        Module("PLANNER", {"title": "Day plan",
+            "subtitle": "Three priorities and a clear schedule for the day",
+            "checklist": ["Opening: fridge temperatures", "Opening: float counted",
+                          "Closing: takings recorded", "Closing: losses recorded",
+                          "Closing: premises secured"]}),
+        Module("DASHBOARD", {"title": "Overview",
+            "subtitle": "Automatic dashboard — pulls live figures from the other sheets",
+            "kpis": [("Annual revenue", "LEDGER_12M.revenue_total"),
+                     ("Gross margin", "LEDGER_12M.gross"),
+                     ("Net profit", "LEDGER_12M.net"),
+                     ("Revenue vs plan", "LEDGER_12M.rev_var"),
+                     ("Closing cash", "LEDGER_12M.cash_close"),
+                     ("Average margin", "MARGIN.avg"),
+                     ("Labour share", "LABOUR.pct")],
+            "insights": ["Revenue vs plan …", "Net margin …", "Labour share …", "Loss value …",
+                         "Items below target margin …", "Till difference …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-month cash flow, plan and variance",
+            "plan_label": "Plan (year)",
+            "revenue_lines": ["Food sales", "Drink sales", "Other income"],
+            "cos_lines": ["Food cost", "Drink cost"],
+            "overhead_lines": ["Wages and staff", "Rent and rates", "Utilities", "Marketing", "Other overheads"]}),
+        Module("MARGIN", {"title": "Margin", "subtitle": "Cost per portion and gross margin",
+            "unit_label": "Dish / drink",
+            "seed_items": ["Basket of house bread", "Fish soup", "Beef burger", "Cappuccino", "Draught beer"]}),
+        Module("STOCK", {"title": "Stock", "subtitle": "Usage and loss value",
+            "item_label": "Item", "loss_label": "Losses",
+            "seed_items": ["Draught beer", "House red wine", "Fresh fish", "Rib-eye steak", "Milk"]}),
+        Module("LABOUR", {"title": "Rota", "subtitle": "Shifts and labour cost share",
+            "role_label": "Role", "target_pct": 0.35}),
+        Module("TAKINGS", {"title": "Takings", "subtitle": "Daily takings and cash-up",
+            "source_label": "Z-reading · cash · cards"}),
+        Module("TRAINING", {"title": "Training", "subtitle": "Training matrix — proof before a shift",
+            "topics": ["Induction", "Manual handling", "Food hygiene",
+                       "Allergens", "Fire safety", "H&S / first aid"]}),
+    ],
+)
+
 REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK, BAKER_SK,
-                               BAR_SK, GREENGROCER_SK, PATISSERIE_SK)}
+                               BAR_SK, GREENGROCER_SK, PATISSERIE_SK,
+                               HOSPITALITY_EN)}
 
 
 if __name__ == "__main__":
