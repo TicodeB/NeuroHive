@@ -206,7 +206,55 @@ BUTCHER_SK = PackSpec(
     ],
 )
 
-REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK)}
+# ============================================================================
+# EXAMPLE 3 — baker_sk  (first net-new PRODUCTION vertical, Samuel's choice 31/05)
+# ============================================================================
+BAKER_SK = PackSpec(
+    key="baker_sk", vertical="Pekáreň / cukráreň", language="sk",
+    palette={"primary": "9C5B2E", "accent": "E0A458", "ink": "3A2A1A"},   # warm crust/gold
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži navažovanie, odpis a maržu výrobkov",
+            "steps": ["RÁNO: nábeh pecí + 3 priority", "VÝROBA: navažovanie podľa receptúr (baker's %)",
+                      "POČAS DŇA: predaj + odpis nepredaného", "VEČER: uzávierka + objednávka surovín",
+                      "MESAČNE: cash flow + prehľad marže"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a rozvrh výroby a predaja",
+            "checklist": ["Otvorenie: teploty pecí, chladení a mrazení", "Otvorenie: cesto a kysnutie pripravené",
+                          "Zatvorenie: nepredané odpísané a zapísané", "Zatvorenie: objednávka múky a surovín",
+                          "Zatvorenie: pece vypnuté, čistota a hygiena"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — marža výrobkov, odpis a mzdy",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža výrobkov", "MARGIN.avg"),
+                     ("Hodnota odpisu", "STOCK.loss_value"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Čistá marža …", "Hodnota odpisu (nepredané) …", "Výrobky pod cieľovou maržou …",
+                         "Podiel miezd …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby predajňa (maloobchod)", "Tržby veľkoodber (kaviarne/obchody)", "Tržby objednávky (torty/akcie)"],
+            "cos_lines": ["Nákup surovín (múka, tuky, cukor)", "Obaly a dekorácie"],
+            "overhead_lines": ["Mzdy a personál", "Nájom a poplatky", "Energie (pece)", "Marketing", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža výrobkov", "subtitle": "Náklad na kus, baker's % a marža výrobku",
+            "unit_label": "Výrobok",
+            "seed_items": ["Rožok", "Chlieb kváskový", "Croissant", "Torta Sacher (rez)", "Buchta tvarohová"]}),
+        Module("STOCK", {"title": "Suroviny a odpis", "subtitle": "Spotreba surovín a hodnota odpisu nepredaného",
+            "item_label": "Surovina / výrobok", "loss_label": "Odpis a strata",
+            "seed_items": ["Múka hladká", "Maslo", "Kvások", "Rožky (nepredané)", "Chlieb (nepredaný)"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov",
+            "role_label": "Pozícia (pekár / predavač)", "target_pct": 0.30}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Denné tržby predajne a uzávierka pokladne",
+            "source_label": "Uzávierka (Z) · hotovosť · karty · objednávky"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Manipulácia s bremenami", "Hygiena potravín (HACCP)",
+                       "Alergény (lepok, orechy…)", "Práca s pecou / horúce povrchy", "BOZP / prvá pomoc"]}),
+    ],
+)
+
+REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK, BAKER_SK)}
 
 
 if __name__ == "__main__":
