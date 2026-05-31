@@ -1289,6 +1289,119 @@ CARPENTER_SK = PackSpec(
     ],
 )
 
+# ============================================================================
+# Phase 13f BATCH 7 — Car dealer · Dental practice (pack_queue ids 18/23) — FINAL drain
+# ============================================================================
+
+# EXAMPLE 23 — car_dealer_sk  (Predaj automobilov / autobazár · NACE 45.11)
+#              retail with vehicle inventory, KEEPS STOCK → 7-KPI dashboard
+CAR_DEALER_SK = PackSpec(
+    key="car_dealer_sk", vertical="Predaj automobilov / autobazár", language="sk",
+    palette={"primary": "1C3D5A", "accent": "C0392B", "ink": "0F1A26"},   # showroom blue + signal red
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži maržu na vozidlo, obrátku skladu a starnutie zásob",
+            "steps": ["RÁNO: 3 priority + obhliadky a skúšobné jazdy",
+                      "POČAS DŇA: predaj, protiúčty, financovanie a poistenie",
+                      "VEČER: uzávierka + stav skladu vozidiel",
+                      "TÝŽDENNE: marža na vozidlo + obrátka a starnutie skladu",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: vozidlá pripravené (čistota, palivo, EČV)",
+                          "Otvorenie: obhliadky a skúšobné jazdy na dnes potvrdené",
+                          "Zatvorenie: tržby a zálohy zapísané",
+                          "Zatvorenie: stav skladu a starnutie vozidiel skontrolované",
+                          "Zatvorenie: kľúče a areál zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža na vozidlo", "MARGIN.avg"),
+                     ("Hodnota odpisu (starnutie)", "STOCK.loss_value"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Čistá marža …", "Hodnota odpisu (starnutie skladu) …", "Vozidlá pod cieľovou maržou …",
+                         "Podiel miezd …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby predaj vozidiel (jazdené)", "Tržby predaj vozidiel (nové)",
+                              "Tržby financovanie a poistenie (provízie)", "Tržby servis a doplnky"],
+            "cos_lines": ["Nákup vozidiel a protiúčty", "Príprava a kondícia (servis, detailing, STK/EK)"],
+            "overhead_lines": ["Mzdy a personál (predajcovia)", "Areál a poplatky",
+                               "Inzercia a marketing", "Poistenie a financovanie skladu", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža na vozidlo", "subtitle": "Náklad obstarania a prípravy na vozidlo a marža",
+            "unit_label": "Vozidlo / model",
+            "seed_items": ["Malé mestské auto (jazdené)", "Rodinný kombi (jazdené)", "SUV (jazdené)",
+                           "Dodávka / úžitkové", "Nové vozidlo (objednávka)", "Luxusný segment"]}),
+        Module("STOCK", {"title": "Sklad vozidiel", "subtitle": "Obrátka skladu a hodnota odpisu (starnutie / zľavy)",
+            "item_label": "Vozidlo / kategória", "loss_label": "Odpis / zľava (starnutie)",
+            "seed_items": ["Vozidlá do 90 dní", "Vozidlá 90–180 dní", "Vozidlá nad 180 dní",
+                           "Protiúčty (na predaj)", "Komisný predaj"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov",
+            "role_label": "Pozícia (predajca / mechanik prípravy)", "target_pct": 0.15}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Predaj vozidiel a úhrady",
+            "source_label": "Kúpne zmluvy · zálohy · financovanie · hotovosť · prevody"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "DPH — osobitná úprava (marža) pri jazdených vozidlách",
+                       "Limit platby v hotovosti (zákon 394/2012 Z. z.)",
+                       "Spotrebiteľské práva a záruka (jazdené vozidlá)",
+                       "Ochrana osobných údajov (GDPR)", "AML pri vysokých platbách", "BOZP / prvá pomoc"]}),
+    ],
+)
+
+# EXAMPLE 24 — dental_sk  (Zubná ambulancia / stomatológia · NACE 86.23)
+#              health service, NO STOCK → 6-KPI dashboard
+DENTAL_SK = PackSpec(
+    key="dental_sk", vertical="Zubná ambulancia / stomatológia", language="sk",
+    palette={"primary": "2E8B8B", "accent": "E8A0BF", "ink": "10262A"},   # clinical teal + gum-rose
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži maržu na úkon, vyťaženosť kresla a objednávky",
+            "steps": ["RÁNO: 3 priority + príprava ambulancie a sterilizácia",
+                      "POČAS DŇA: ošetrenia podľa objednávok",
+                      "VEČER: uzávierka + evidencia výkonov (poisťovne / priame platby)",
+                      "TÝŽDENNE: vyťaženosť kresla + marža na úkon",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: sterilizácia nástrojov a kontrola autoklávu",
+                          "Otvorenie: objednávky a recall na dnes potvrdené",
+                          "Zatvorenie: výkony a platby zapísané (poisťovňa / priame)",
+                          "Zatvorenie: dekontaminácia a biologický odpad zlikvidovaný",
+                          "Zatvorenie: zdravotná dokumentácia a zálohovanie zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža na úkon", "MARGIN.avg"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Tržby vs plán …", "Čistá marža …", "Podiel miezd …",
+                         "Úkony pod cieľovou maržou …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby úhrady poisťovní (zmluvné výkony)", "Tržby priame platby pacientov (nadštandard)",
+                              "Tržby protetika a implantológia", "Tržby dentálna hygiena"],
+            "cos_lines": ["Stomatologický materiál (výplne, anestetiká)", "Zubná technika / laboratórium (protetika)"],
+            "overhead_lines": ["Mzdy a personál (sestra, hygienička)", "Nájom a poplatky", "Energie",
+                               "Prístroje a servis (RTG, kreslo, autokláv)", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža na úkon", "subtitle": "Materiálový náklad na úkon a marža výkonu",
+            "unit_label": "Úkon / výkon",
+            "seed_items": ["Preventívna prehliadka", "Záchovná výplň (fotokompozit)", "Endodoncia (ošetrenie koreňa)",
+                           "Extrakcia zuba", "Dentálna hygiena", "Korunka / protetika"]}),
+        Module("LABOUR", {"title": "Kapacita", "subtitle": "Vyťaženosť kresla a podiel mzdových nákladov",
+            "role_label": "Pozícia (lekár / sestra / hygienička)", "target_pct": 0.30}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Úhrady poisťovní a priame platby",
+            "source_label": "Úhrady poisťovní · priame platby · hotovosť · karty"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Ochrana osobných údajov a zdravotná dokumentácia (GDPR)",
+                       "Sterilizácia, hygiena a dekontaminácia", "Prevádzkový poriadok a infekčná kontrola (RÚVZ)",
+                       "Radiačná ochrana (RTG zariadenia)", "Nakladanie s nebezpečným / biologickým odpadom",
+                       "BOZP / prvá pomoc / KPR"]}),
+    ],
+)
+
 REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK, BAKER_SK,
                                BAR_SK, GREENGROCER_SK, PATISSERIE_SK,
                                HOSPITALITY_EN,
@@ -1296,7 +1409,8 @@ REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK, BAKER_SK,
                                BNB_SK, CONVENIENCE_SK, AIRBNB_SK,
                                CATERER_SK, FLORIST_SK, BOOKKEEPER_SK,
                                BREWERY_SK, GYM_SK, PHOTOGRAPHER_SK,
-                               ELECTRICIAN_SK, PLUMBER_SK, CARPENTER_SK)}
+                               ELECTRICIAN_SK, PLUMBER_SK, CARPENTER_SK,
+                               CAR_DEALER_SK, DENTAL_SK)}
 
 
 if __name__ == "__main__":
