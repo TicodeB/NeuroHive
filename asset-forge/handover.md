@@ -1,7 +1,13 @@
-## STATE — 31/05/2026 00:20
+## STATE — 31/05/2026 01:10
 Project: ASSET-FORGE
-Phase last completed: **13b — 🎨 Premium-Pack track: design system + SK re-skin pilot ✅ COMPLETE**
-Checkpoint score: `scripts/design_system.py` + `scripts/build_p2_sk_premium.py` + `products/P2_SK_Hospitality_Premium.xlsx` (9 sheets, validated) | core project 100%; **Premium-Pack track ~30% (2 of ~6 sub-phases)**. ▶️ NEXT = Phase 13c — lock the standard pack skeleton + per-vertical jargon glossary mechanism. See §"PREMIUM-PACK TRACK" below.
+Phase last completed: **13c — 🎨 Premium-Pack track: pack skeleton + industry-terminology mechanism ✅ COMPLETE**
+Checkpoint score: `deliverables/PACK_SKELETON.md` + `scripts/pack_spec.py` (validated, 2 specs) | core project 100%; **Premium-Pack track ~45% (3 of ~6 sub-phases)**. ▶️ NEXT = Phase 13d — refactor the builder to consume a `PackSpec` and ship the first net-new vertical (butcher_sk). See §"PREMIUM-PACK TRACK".
+
+### ✅ DONE THIS SESSION (Phase 13c — planning + light scaffold)
+- **`deliverables/PACK_SKELETON.md`** — locks the reusable spine: two axes kept separate (vertical = terminology+modules+palette; language = one per file); fixed spine `00 METHOD · 01 PLANNER · 02 DASHBOARD`; operational module catalogue (`LEDGER_12M · MARGIN · STOCK · LABOUR · TAKINGS · TRAINING`, extensible) with the metrics each exposes to the dashboard; the build flow 13d will wire.
+- **`scripts/pack_spec.py`** — the mechanism: `Module` + `PackSpec` dataclasses, `MODULE_SLOTS`/`MODULE_METRICS` catalogue, `validate()` (fixed-spine present · ≥1 operational · 2-letter lang · palette keys · required term keys non-empty · **dashboard KPIs must cite a real module.metric**), `sheet_plan()`, and a `REGISTRY` with **2 worked Slovak specs**: `hospitality_sk` (mirrors the built pilot) + `butcher_sk` (proves the terminology swap — Diel/Orez a strata vs Položka/Straty, meat-red palette, extra `Hodnota orezu a strát` KPI). Dry-run prints both sheet plans + a terminology diff; **both specs validate green.**
+- **Terminology framing locked** (Samuel 31/05): correct professional trade vocabulary, NOT slang — encoded as per-module term dicts; structure + formulas stay constant.
+- No new workbooks built (that's 13d). No core-catalogue files touched.
 
 ### ✅ DONE THIS SESSION (Phase 13b — code tier)
 - **Built `scripts/design_system.py`** — the reusable openpyxl styling layer (the one-time investment so every pack looks premium by default). `Theme` dataclass (3-colour palette + EU number formats, overridable per vertical) + `DS` helpers: `canvas` (gridlines OFF + margin column), `title` (big light title + accent underline), `section`, `note`, `thead`/`trow` (hairline tables + zebra), `input_cell`/`calc_cell`, **`kpi`** (dashboard tile), `footer`.
@@ -46,16 +52,15 @@ Checkpoint score: `scripts/design_system.py` + `scripts/build_p2_sk_premium.py` 
 This new track far exceeds one `/goal` phase. Proposed split (one per session, cheapest tier that fits):
 - **13a ✅ DONE** — Beautification & competitor intelligence (`research/beautification_and_competitors.md`).
 - **13b ✅ DONE** — `scripts/design_system.py` + SK re-skin pilot `products/P2_SK_Hospitality_Premium.xlsx` (via `scripts/build_p2_sk_premium.py`). Validated. The "beaten the 90s look" proof.
-- **13c** — Lock the standard **pack skeleton** (`00 Method/Start Here` · `Daily Planner` · `Dashboard+Insights` · operational tabs · `Settings`) + build the per-vertical **industry-terminology layer** (Samuel's clarification 31/05: NOT slang/jargon — the *correct professional vocabulary* of each trade: labels, line items, categories, metrics a butcher/baker/dealer actually uses — e.g. butcher = carcass/primal cut/trim loss/bone-out yield %; structure + formulas stay constant, only the terms swap). So verticals = swap terminology + `Theme` palette, reuse skeleton + design system. *(planning)*
-- **13d** — First NEW vertical pilot pack (e.g. butcher OR retailer) in ONE chosen language, built on the skeleton + design system. *(code)*
+- **13c ✅ DONE** — `deliverables/PACK_SKELETON.md` + `scripts/pack_spec.py` (skeleton spine + module catalogue + `PackSpec` validator + 2 worked Slovak specs `hospitality_sk`/`butcher_sk`). Terminology = correct trade vocabulary, not slang.
+- **13d** — Refactor `build_p2_sk_premium.py` into a **generic `PackSpec`-driven builder** (per `module_type`, formulas fixed): first feed it `hospitality_sk` and reproduce the pilot, then build **`butcher_sk`** → `products/<…>.xlsx` (+ PNG preview) as the first net-new vertical with zero new layout code. *(code)*
 - **13e** — Optional **Google Sheets "Pro" edition** of the pilot: Apps Script automations + optional Gemini insight sidebar. *(code)*
 - **13f** — Localisation pipeline: clone the locked pilot into the other languages (native-quality pass per language). *(code + native edit)*
 - *(LATER, parked by Samuel)* auditor/consultant editions of the premium packs.
 
 ### ▶️ NEXT SMALLEST ACTION
-- ▶️ **Phase 13c (planning):** factor the pilot into a reusable **pack skeleton** + a per-vertical **jargon glossary** mechanism, so spinning up butcher/retailer/etc. = swap content strings + `Theme` palette, reuse `design_system.py`. Deliverable: `deliverables/PACK_SKELETON.md` (+ optional `scripts/pack_skeleton.py` scaffold). THEN 13d = first new vertical pack.
-- **Also pending (not blocking 13c):** capture preview screenshots of `P2_SK_Hospitality_Premium.xlsx` from Excel/Sheets so Samuel can SEE the new look (no headless renderer in this env).
-- **BRANCH:** all work on **`claude/cool-planck-rYR4I`** (PR #14, draft). Run the next `/goal 13c` on this branch.
+- ▶️ **Phase 13d (code):** make a generic builder that consumes a `PackSpec` from `scripts/pack_spec.py`. Step 1: drive `hospitality_sk` through it and reproduce `P2_SK_Hospitality_Premium.xlsx`. Step 2: build `butcher_sk` → new `.xlsx` (+ render a preview PNG) — first net-new vertical, no new layout code. Validate via the xlsx integrity check + `python3 scripts/pack_spec.py`.
+- **BRANCH:** all work on **`claude/cool-planck-rYR4I`** (PR #14, draft). Run the next `/goal 13d` on this branch.
 - **BRANCH:** all work (Phases 0–12 + 13a) is on **`claude/cool-planck-rYR4I`**. A PR will be opened/updated for it. Run the next `/goal 13b` on this branch.
 - **PROJECT COMPLETE — all 13 sessions done.** Every brief §1 deliverable exists: `intelligence.db`, MASTER_INTELLIGENCE_REPORT, asset_catalogue.xlsx, PRODUCT_ROADMAP, MONETIZATION_BRIEF, and 3 built flagships (P1, P2 hospitality + P13 compliance). No further phase to run.
 - **Optional pre-launch hardening (NOT a phase — do before publishing any listing):** (1) Slovak native-editor pass on all listing copy + the 34 food/non-food/trades assets (ids 21–54) + 19 compliance_assets still needing SK microcopy; (2) export preview-image screenshots from Excel/Google Sheets (no headless renderer in this env); (3) re-verify Lemon Squeezy fees + EU VAT/MoR + marketplace comparables live at listing time; (4) wire the P13 email-capture funnel + GDPR consent; (5) confirm standard-version triggers (BRCGS Issue 10, ISO 9001:2026) for transition-pack upsells when they publish.
