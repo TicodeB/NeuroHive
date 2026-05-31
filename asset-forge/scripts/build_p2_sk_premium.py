@@ -78,7 +78,7 @@ def label_input(ws, row, label, col_label=2, col_in=3, in_span=2, fmt=None):
 # ----------------------------------------------------------------- 00 Metóda
 def build_method(wb):
     ws = wb.create_sheet(S_METHOD)
-    ds.canvas(ws, [3, 52, 30, 14, 14, 14, 14], tab=ds.t.ink)
+    ds.canvas(ws, [40, 30, 14, 14, 14, 14], tab=ds.t.ink)
     ds.title(ws, "Prevádzka a marža pre gastro",
              "Balík nástrojov, ktorý vám ukáže maržu, mzdy a hotovosť skôr, než zabolia")
     r = 5
@@ -125,8 +125,8 @@ def build_method(wb):
 # ----------------------------------------------------------------- 01 Denný plán
 def build_planner(wb):
     ws = wb.create_sheet(S_PLAN)
-    ds.canvas(ws, [3, 12, 44, 16, 12], tab=ds.t.accent)
-    ds.title(ws, "Denný plán", "Začnite deň s tromi prioritami a jasným rozvrhom")
+    ds.canvas(ws, [12, 44, 16, 12], tab=ds.t.accent)
+    ds.title(ws, "Denný plán", "Začnite deň s tromi prioritami a jasným rozvrhom", span=4)
     label_input(ws, 5, "Dátum", col_in=3, in_span=1, fmt=ds.t.DATE)
     label_input(ws, 6, "Deň", col_in=3, in_span=2)
     r = 8
@@ -169,8 +169,8 @@ def build_planner(wb):
 # ----------------------------------------------------------------- 02 Prehľad
 def build_dashboard(wb):
     ws = wb.create_sheet(S_DASH)
-    ds.canvas(ws, [3] + [13] * 11, tab=ds.t.primary)
-    ds.title(ws, "Prehľad", "Automatický dashboard — ťahá živé čísla z ostatných hárkov")
+    ds.canvas(ws, [13] * 11, tab=ds.t.primary)
+    ds.title(ws, "Prehľad", "Automatický dashboard — ťahá živé čísla z ostatných hárkov", span=11)
     # KPI tiles: 3 per row, each 3 cols wide (B-D, F-H, J-L), gap cols E,I
     tiles = [
         ("Ročné tržby", A_REV, ds.t.EUR0, ds.t.primary),
