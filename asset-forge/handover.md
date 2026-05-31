@@ -1,7 +1,7 @@
 ## STATE — 31/05/2026 01:10
 Project: ASSET-FORGE
 Phase last completed: **13c — 🎨 Premium-Pack track: pack skeleton + industry-terminology mechanism ✅ COMPLETE**
-Checkpoint score: `deliverables/PACK_SKELETON.md` + `scripts/pack_spec.py` (validated, 2 specs) | core project 100%; **Premium-Pack track ~45% (3 of ~6 sub-phases)**. ▶️ NEXT = Phase 13d — refactor the builder to consume a `PackSpec` and ship the first net-new vertical (butcher_sk). See §"PREMIUM-PACK TRACK".
+Checkpoint score: `deliverables/PACK_SKELETON.md` + `scripts/pack_spec.py` (validated, 2 specs) | core project 100%; **Premium-Pack track ~40% (3 of ~8 sub-phases)**. ▶️ NEXT = Phase 13d — refactor the builder to consume a `PackSpec` and ship the first net-new vertical (**baker_sk**, Samuel's choice). THEN 13e = Industry Atlas + pack_queue (NACE-based classifier / subagent dispatch board). See §"PREMIUM-PACK TRACK".
 
 ### ✅ DONE THIS SESSION (Phase 13c — planning + light scaffold)
 - **`deliverables/PACK_SKELETON.md`** — locks the reusable spine: two axes kept separate (vertical = terminology+modules+palette; language = one per file); fixed spine `00 METHOD · 01 PLANNER · 02 DASHBOARD`; operational module catalogue (`LEDGER_12M · MARGIN · STOCK · LABOUR · TAKINGS · TRAINING`, extensible) with the metrics each exposes to the dashboard; the build flow 13d will wire.
@@ -53,13 +53,16 @@ This new track far exceeds one `/goal` phase. Proposed split (one per session, c
 - **13a ✅ DONE** — Beautification & competitor intelligence (`research/beautification_and_competitors.md`).
 - **13b ✅ DONE** — `scripts/design_system.py` + SK re-skin pilot `products/P2_SK_Hospitality_Premium.xlsx` (via `scripts/build_p2_sk_premium.py`). Validated. The "beaten the 90s look" proof.
 - **13c ✅ DONE** — `deliverables/PACK_SKELETON.md` + `scripts/pack_spec.py` (skeleton spine + module catalogue + `PackSpec` validator + 2 worked Slovak specs `hospitality_sk`/`butcher_sk`). Terminology = correct trade vocabulary, not slang.
-- **13d** — Refactor `build_p2_sk_premium.py` into a **generic `PackSpec`-driven builder** (per `module_type`, formulas fixed): first feed it `hospitality_sk` and reproduce the pilot, then build **`butcher_sk`** → `products/<…>.xlsx` (+ PNG preview) as the first net-new vertical with zero new layout code. *(code)*
-- **13e** — Optional **Google Sheets "Pro" edition** of the pilot: Apps Script automations + optional Gemini insight sidebar. *(code)*
-- **13f** — Localisation pipeline: clone the locked pilot into the other languages (native-quality pass per language). *(code + native edit)*
+- **13d** — Refactor `build_p2_sk_premium.py` into a **generic `PackSpec`-driven builder** (per `module_type`, formulas fixed): first feed it `hospitality_sk` and reproduce the pilot, then build **`baker_sk`** (Samuel 31/05: Baker first, NOT butcher) → `products/<…>.xlsx` (+ PNG preview) as the first net-new vertical with zero new layout code. *(code)*
+- **13e** — **🗂️ Industry Atlas + pack_queue (the subagent dispatch board).** New DB tables in `intelligence.db`: `industries` (base on **NACE** — EU official classification) → `business_types_atlas` (specific sub-businesses: baker, greengrocer, Airbnb host, car dealer, theatre, band…) → **`pack_queue`** (`business_type, language, spec_key, status[planned/in-progress/built/listed], assignee, module_set, notes`) so subagents can **claim a row, build/improve the pack from the skeleton, mark done** — many in parallel. View `v_pack_candidates` ranks by market × module-reuse × build-ease. *(data + planning)*
+- **13f** — **Spin up subagents to drain `pack_queue`** — each takes a ranked business_type, builds via the generic builder + design system, improves terminology for its trade, validates, marks done. Batch many verticals fast. *(orchestration + code)*
+- **13g** — Optional **Google Sheets "Pro" edition**: Apps Script automations + optional Gemini insight sidebar. *(code)*
+- **13h** — Localisation pipeline: clone locked packs into the other languages (native-quality pass per language). *(code + native edit)*
 - *(LATER, parked by Samuel)* auditor/consultant editions of the premium packs.
 
 ### ▶️ NEXT SMALLEST ACTION
-- ▶️ **Phase 13d (code):** make a generic builder that consumes a `PackSpec` from `scripts/pack_spec.py`. Step 1: drive `hospitality_sk` through it and reproduce `P2_SK_Hospitality_Premium.xlsx`. Step 2: build `butcher_sk` → new `.xlsx` (+ render a preview PNG) — first net-new vertical, no new layout code. Validate via the xlsx integrity check + `python3 scripts/pack_spec.py`.
+- ▶️ **Phase 13d (code):** make a generic builder that consumes a `PackSpec` from `scripts/pack_spec.py`. Step 1: drive `hospitality_sk` through it and reproduce `P2_SK_Hospitality_Premium.xlsx`. Step 2: author + build **`baker_sk`** (Samuel's choice — baker reuses MARGIN/STOCK/LEDGER/TRAINING with bakery terms: scaling, baker's %, proving, dough scrap vs unsold) → new `.xlsx` (+ preview PNG), no new layout code. Validate via the xlsx integrity check + `python3 scripts/pack_spec.py`. (butcher_sk stays in the registry as a second worked example.)
+- **THEN Phase 13e** = Industry Atlas + `pack_queue` (NACE tables + subagent dispatch board) — Samuel's classifier, sequenced AFTER the builder is proven so subagents have a working template to drain against.
 - **BRANCH:** all work on **`claude/cool-planck-rYR4I`** (PR #14, draft). Run the next `/goal 13d` on this branch.
 - **BRANCH:** all work (Phases 0–12 + 13a) is on **`claude/cool-planck-rYR4I`**. A PR will be opened/updated for it. Run the next `/goal 13b` on this branch.
 - **PROJECT COMPLETE — all 13 sessions done.** Every brief §1 deliverable exists: `intelligence.db`, MASTER_INTELLIGENCE_REPORT, asset_catalogue.xlsx, PRODUCT_ROADMAP, MONETIZATION_BRIEF, and 3 built flagships (P1, P2 hospitality + P13 compliance). No further phase to run.
