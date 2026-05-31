@@ -366,6 +366,9 @@ def build(spec_key):
         anchors[mtype] = {metric: refc(names[mtype], cell) for metric, cell in cells.items()}
     dws = wb.create_sheet(names["DASHBOARD"])
     build_dashboard(dws, ds, mod["DASHBOARD"].terms, anchors)
+    # legibility guarantee: every label/title/header fully readable, no manual fiddling
+    for ws in wb.worksheets:
+        ds.fit(ws)
     order = [names["METHOD"], names["PLANNER"], names["DASHBOARD"]] + \
             [names[mt] for _, mt, _ in plan if mt not in FIXED]
     wb._sheets = [wb[n] for n in order]

@@ -23,9 +23,37 @@ No external deps beyond openpyxl. Cross-platform-safe fonts only (Excel
 substitutes gracefully if a face is missing).
 """
 from __future__ import annotations
+import math
 from dataclasses import dataclass, field
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
+from openpyxl.utils.cell import range_boundaries
+
+
+def _char_w(size):
+    """Approx Excel column-width units per character at a given font size."""
+    return (size / 11.0) * 1.06
+
+
+def _text_w(text, size):
+    return len(text) * _char_w(size) + 2.6      # +breathing room so nothing sits on the edge
+
+
+def _wrap_lines(text, col_width, size):
+    """How many lines `text` needs when wrapped into a column of `col_width`."""
+    per = max(1, int((col_width - 1) / _char_w(size)))
+    total = 0
+    for part in str(text).split("\n"):
+        words, line = part.split(" "), ""
+        n = 1
+        for w in words:
+            cand = (line + " " + w).strip()
+            if len(cand) <= per or not line:
+                line = cand
+            else:
+                n += 1; line = w
+        total += n
+    return total
 
 
 @dataclass
@@ -237,3 +265,83 @@ class DS:
         c.font = self.font(8, italic=True, color="9AA3B0")
         c.alignment = Alignment("left", "center")
         ws.row_dimensions[row].height = 22
+
+    # ---- legibility guarantee (run last on every sheet) ------------------
+    def fit(self, ws, min_w=8.5, max_w=46, line_h=15.0, max_lines=4):
+        """Auto-fit so EVERY label/title/header is fully readable with no manual
+        column-width or wrap fiddling: widen columns to their content, and grow
+        row heights so wrapped text shows in full. Only ever increases sizes."""
+        merged_tl, covered = {}, set()
+        for m in ws.merged_cells.ranges:
+            c1, r1, c2, r2 = range_boundaries(str(m))
+            merged_tl[(r1, c1)] = (r2, c2)
+            for rr in range(r1, r2 + 1):
+                for cc in range(c1, c2 + 1):
+                    if (rr, cc) != (r1, c1):
+                        covered.add((rr, cc))
+
+        def is_formula(v):
+            return isinstance(v, str) and v.startswith("=")
+
+        # ---- pass 1: column widths ----
+        colw = {}
+        for row in ws.iter_rows():
+            for cell in row:
+                v = cell.value
+                if v is None or is_formula(v):
+                    continue
+                coord = (cell.row, cell.column)
+                if coord in covered:
+                    continue
+                text, size = str(v), (cell.font.size or 11)
+                wrapped = bool(cell.alignment and cell.alignment.wrap_text)
+                indent = (cell.alignment.indent or 0) if cell.alignment else 0
+                if coord in merged_tl:                      # spans columns — usually fits
+                    if not wrapped:
+                        r2, c2 = merged_tl[coord]
+                        span_w = sum((ws.column_dimensions[get_column_letter(cc)].width or min_w)
+                                     for cc in range(cell.column, c2 + 1))
+                        need = _text_w(text, size) + indent
+                        if need > span_w:                   # widen last col to absorb overflow
+                            colw[c2] = max(colw.get(c2, 0),
+                                           (ws.column_dimensions[get_column_letter(c2)].width or min_w)
+                                           + (need - span_w))
+                    continue
+                if wrapped:                                  # ensure longest WORD never clips
+                    longest = max((len(w) for w in text.replace("\n", " ").split(" ")), default=1)
+                    colw[cell.column] = max(colw.get(cell.column, 0), _text_w("x" * longest, size))
+                else:                                        # fit the whole label
+                    colw[cell.column] = max(colw.get(cell.column, 0), _text_w(text, size) + indent)
+        for c, w in colw.items():
+            col = get_column_letter(c)
+            cur = ws.column_dimensions[col].width or min_w
+            ws.column_dimensions[col].width = round(min(max_w, max(cur, min_w, w)), 1)
+
+        # ---- pass 2: row heights for wrapped cells (using final widths) ----
+        rowh = {}
+        for row in ws.iter_rows():
+            for cell in row:
+                v = cell.value
+                if v is None or is_formula(v):
+                    continue
+                if not (cell.alignment and cell.alignment.wrap_text):
+                    continue
+                coord = (cell.row, cell.column)
+                if coord in covered:
+                    continue
+                size = cell.font.size or 11
+                if coord in merged_tl:
+                    r2, c2 = merged_tl[coord]
+                    width = sum((ws.column_dimensions[get_column_letter(cc)].width or min_w)
+                                for cc in range(cell.column, c2 + 1))
+                    span = r2 - cell.row + 1
+                else:
+                    width = ws.column_dimensions[get_column_letter(cell.column)].width or min_w
+                    span = 1
+                lines = min(max_lines, _wrap_lines(str(v), width, size))
+                need = (lines * line_h) / span
+                for rr in range(cell.row, cell.row + span):
+                    rowh[rr] = max(rowh.get(rr, 0), need)
+        for r, h in rowh.items():
+            cur = ws.row_dimensions[r].height or 15
+            ws.row_dimensions[r].height = round(max(cur, h), 1)

@@ -87,14 +87,33 @@ def render(path, sheet, max_row, max_col, outfile):
             fnt = font(cell.font.size or 11, bold=bool(cell.font.bold))
             col = hexcol(cell.font.color, "#1A2B45")
             ha = (cell.alignment.horizontal or "general")
+            indent = (cell.alignment.indent or 0)
             pad = 5 * SCALE
-            bbox = d.textbbox((0, 0), txt, font=fnt)
-            tw, th = bbox[2]-bbox[0], bbox[3]-bbox[1]
-            if ha == "center": tx = x0 + ((x1-x0)-tw)//2
-            elif ha == "right": tx = x1 - tw - pad
-            else: tx = x0 + pad + (cell.alignment.indent or 0)*4*SCALE
-            ty = y0 + ((y1-y0)-th)//2 - bbox[1]
-            d.text((tx, ty), txt, font=fnt, fill=col)
+            avail = (x1 - x0) - 2*pad
+            wrap = bool(cell.alignment and cell.alignment.wrap_text)
+            # build the lines (word-wrap when the cell wraps; honour explicit \n)
+            lines = []
+            for seg in txt.split("\n"):
+                if not wrap:
+                    lines.append(seg); continue
+                cur = ""
+                for w in seg.split(" "):
+                    cand = (cur + " " + w).strip()
+                    if d.textlength(cand, font=fnt) <= avail or not cur:
+                        cur = cand
+                    else:
+                        lines.append(cur); cur = w
+                lines.append(cur)
+            lh = (cell.font.size or 11) * 1.3 * SCALE
+            block = lh * len(lines)
+            ty0 = y0 + max(0, ((y1 - y0) - block) // 2)
+            for i, ln in enumerate(lines):
+                bbox = d.textbbox((0, 0), ln, font=fnt)
+                tw = bbox[2]-bbox[0]
+                if ha == "center": tx = x0 + ((x1-x0)-tw)//2
+                elif ha == "right": tx = x1 - tw - pad
+                else: tx = x0 + pad + indent*4*SCALE
+                d.text((tx, ty0 + int(i*lh) - bbox[1]), ln, font=fnt, fill=col)
 
     if SCALE != 1:
         img = img.resize((W // SCALE, H // SCALE), Image.LANCZOS)

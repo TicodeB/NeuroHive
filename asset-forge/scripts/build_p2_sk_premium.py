@@ -460,6 +460,8 @@ def build_workbook():
     wb.properties.title = "Prevádzka a marža pre gastro (SK)"
     wb.properties.creator = "ASSET-FORGE"
     wb.properties.subject = "Gastro prevádzka — cash flow, marža, zásoby, zmeny, tržby, školenia"
+    for ws in wb.worksheets:          # legibility guarantee (no manual width/wrap fiddling)
+        ds.fit(ws)
     return wb
 
 
