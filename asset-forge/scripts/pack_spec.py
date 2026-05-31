@@ -801,11 +801,177 @@ AIRBNB_SK = PackSpec(
     ],
 )
 
+# ============================================================================
+# Phase 13f · BATCH 4 — event catering · fresh-flower retail · professional
+# services. Caterer + Florist KEEP the STOCK module (perishable inputs →
+# 7-KPI dashboards, loss tile present); Bookkeeper is a pure service practice
+# with no stock → STOCK omitted → 6-KPI dashboard (like batch 2).
+# ============================================================================
+
+# EXAMPLE 14 — caterer_sk  (Catering / hromadné stravovanie · NACE 56.21 · event catering)
+CATERER_SK = PackSpec(
+    key="caterer_sk", vertical="Catering / hromadné stravovanie", language="sk",
+    palette={"primary": "6E2639", "accent": "C8A15A", "ink": "241019"},   # burgundy + warm sand
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži kalkuláciu na osobu, plytvanie a maržu podujatí",
+            "steps": ["RÁNO: 3 priority + potvrdenie objednávok na podujatia",
+                      "VÝROBA: príprava podľa menu a počtu osôb",
+                      "POČAS PODUJATIA: výdaj + kontrola kvality a teplôt",
+                      "PO PODUJATÍ: vyúčtovanie + odpis nespotrebovaných surovín",
+                      "MESAČNE: cash flow + prehľad marže podujatí"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh prípravy a podujatí",
+            "checklist": ["Otvorenie: teploty chladenia a prepravných boxov",
+                          "Otvorenie: objednávky a počty osôb potvrdené",
+                          "Zatvorenie: tržby podujatí zapísané",
+                          "Zatvorenie: odpis a plytvanie zapísané",
+                          "Zatvorenie: vozidlá a vybavenie vyčistené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža na osobu", "MARGIN.avg"),
+                     ("Hodnota odpisu (plytvanie)", "STOCK.loss_value"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Čistá marža …", "Hodnota odpisu (plytvanie) …", "Menu pod cieľovou maržou …",
+                         "Podiel miezd …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby firemné podujatia (catering)", "Tržby svadby a oslavy",
+                              "Tržby rozvoz / denné menu (krabičky)"],
+            "cos_lines": ["Nákup surovín (potraviny, nápoje)", "Obaly, jednorazový riad a prenájmy"],
+            "overhead_lines": ["Mzdy a personál (vrátane brigádnikov)", "Nájom kuchyne a poplatky",
+                               "Energie a chladenie", "Doprava a vozidlá", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža na osobu", "subtitle": "Náklad na osobu (cover) a marža menu/položky",
+            "unit_label": "Menu / položka (na osobu)",
+            "seed_items": ["Trojchodové menu (osoba)", "Rautové kanapky (10 ks)", "Grilovaný špíz (porcia)",
+                           "Polievka (porcia)", "Svadobné menu (osoba)", "Nealko balíček (osoba)"]}),
+        Module("STOCK", {"title": "Sklad a plytvanie", "subtitle": "Spotreba surovín a hodnota odpisu (plytvanie)",
+            "item_label": "Surovina / položka", "loss_label": "Odpis / plytvanie",
+            "seed_items": ["Mäso a hydina", "Zelenina a šaláty", "Pečivo", "Mliečne výrobky", "Hotové jedlá (nespotrebované)"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov",
+            "role_label": "Pozícia (kuchár / čašník / brigádnik)", "target_pct": 0.30}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Tržby podujatí a vyúčtovanie",
+            "source_label": "Faktúry podujatí · zálohy · hotovosť · karty"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Manipulácia s bremenami", "Hygiena potravín (HACCP)",
+                       "Alergény", "Chladiaci reťazec a preprava jedál", "Požiarna ochrana", "BOZP / prvá pomoc"]}),
+    ],
+)
+
+# EXAMPLE 15 — florist_sk  (Kvetinárstvo · NACE 47.76 · fresh-flower retail)
+FLORIST_SK = PackSpec(
+    key="florist_sk", vertical="Kvetinárstvo", language="sk",
+    palette={"primary": "B43C72", "accent": "6FA88C", "ink": "2A1320"},   # rose-magenta + sage
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži kazivosť kvetov, maržu kytíc a obrátku",
+            "steps": ["RÁNO: 3 priority + príjem dodávky a rezanie stoniek",
+                      "POČAS DŇA: viazanie kytíc, predaj a objednávky",
+                      "VEČER: uzávierka + odpis zvädnutých kvetov",
+                      "TÝŽDENNE: marža kytíc + obrátka a straty",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: kontrola sviežosti a výmena vody vo vázach",
+                          "Otvorenie: objednávky a rozvozy na dnes pripravené",
+                          "Zatvorenie: tržby zapísané (uzávierka Z)",
+                          "Zatvorenie: zvädnuté kvety odpísané a zapísané",
+                          "Zatvorenie: chladenie a sklad zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža kytíc", "MARGIN.avg"),
+                     ("Hodnota odpisu (zvädnuté)", "STOCK.loss_value"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Čistá marža …", "Hodnota odpisu (zvädnuté) …", "Kytice pod cieľovou maržou …",
+                         "Podiel miezd …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby kytice a rezané kvety", "Tržby črepníkové rastliny",
+                              "Tržby objednávky a rozvoz (svadby, pohreby)", "Tržby doplnky (vázy, darčeky)"],
+            "cos_lines": ["Nákup kvetov a rastlín", "Aranžérsky materiál (stuhy, obaly, oázis)"],
+            "overhead_lines": ["Mzdy a personál", "Nájom a poplatky", "Energie a chladenie",
+                               "Doprava a rozvoz", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža kytíc", "subtitle": "Materiálový náklad na výrobok a marža",
+            "unit_label": "Kytica / výrobok",
+            "seed_items": ["Kytica zmiešaná", "Ruže (zväzok)", "Svadobná kytica", "Smútočný veniec",
+                           "Črepníková rastlina", "Aranžmán v boxe"]}),
+        Module("STOCK", {"title": "Sklad a kazivosť", "subtitle": "Spotreba a hodnota odpisu zvädnutých kvetov",
+            "item_label": "Kvet / tovar", "loss_label": "Odpis (zvädnuté)",
+            "seed_items": ["Ruže", "Tulipány", "Chryzantémy", "Zeleň a listy", "Črepníkové rastliny"]}),
+        Module("LABOUR", {"title": "Zmeny", "subtitle": "Zmeny a podiel mzdových nákladov",
+            "role_label": "Pozícia (florista / predavač)", "target_pct": 0.25}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Denné tržby a uzávierka pokladne",
+            "source_label": "Uzávierka (Z) · hotovosť · karty · objednávky"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "Manipulácia s bremenami", "Bezpečná práca s nožom a náradím",
+                       "Skladovanie a chladenie kvetov", "Práca s chemikáliami (hnojivá, konzervanty)",
+                       "BOZP / prvá pomoc"]}),
+    ],
+)
+
+# EXAMPLE 16 — bookkeeper_sk  (Účtovníctvo / účtovná kancelária · NACE 69.20 ·
+#              professional service, NO STOCK → 6-KPI dashboard)
+BOOKKEEPER_SK = PackSpec(
+    key="bookkeeper_sk", vertical="Účtovníctvo / účtovná kancelária", language="sk",
+    palette={"primary": "34406B", "accent": "2E9E78", "ink": "161A2B"},   # indigo + emerald (trust)
+    modules=[
+        Module("METHOD", {"title": "Metóda",
+            "subtitle": "Balík, ktorý ustráži vyťaženosť, maržu na klienta a cash flow",
+            "steps": ["RÁNO: 3 priority + termíny a podania (DPH, dane, mzdy)",
+                      "POČAS DŇA: spracovanie dokladov a evidencia hodín",
+                      "VEČER: fakturácia a stav rozpracovanosti",
+                      "TÝŽDENNE: vyťaženosť + marža na klienta",
+                      "MESAČNE: cash flow + prehľad"]}),
+        Module("PLANNER", {"title": "Denný plán",
+            "subtitle": "Tri priority a jasný rozvrh dňa",
+            "checklist": ["Otvorenie: termíny podaní na dnes skontrolované (DPH, mzdy)",
+                          "Otvorenie: prijaté doklady zaevidované",
+                          "Zatvorenie: odpracované hodiny zapísané",
+                          "Zatvorenie: vystavené faktúry zapísané",
+                          "Zatvorenie: zálohovanie údajov a GDPR zabezpečené"]}),
+        Module("DASHBOARD", {"title": "Prehľad",
+            "subtitle": "Automatický dashboard — ťahá živé čísla z ostatných hárkov",
+            "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
+                     ("Hrubá marža", "LEDGER_12M.gross"),
+                     ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Koncová hotovosť", "LEDGER_12M.cash_close"),
+                     ("Priemerná marža na klienta", "MARGIN.avg"),
+                     ("Podiel miezd", "LABOUR.pct")],
+            "insights": ["Tržby vs plán …", "Čistá marža …", "Podiel miezd …",
+                         "Klienti pod cieľovou maržou …", "Rozdiel v pokladni …"]}),
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+            "revenue_lines": ["Tržby vedenie účtovníctva (paušál)", "Tržby mzdy a personalistika",
+                              "Tržby dane a poradenstvo (ročné)"],
+            "cos_lines": ["Účtovný softvér a licencie", "Subdodávky (audit, právne)"],
+            "overhead_lines": ["Mzdy a personál", "Nájom a poplatky", "Energie a internet",
+                               "Marketing", "Ostatné réžie"]}),
+        Module("MARGIN", {"title": "Marža na klienta", "subtitle": "Náklad času na službu a marža na klienta",
+            "unit_label": "Klient / služba",
+            "seed_items": ["Jednoduché účtovníctvo (mesačne)", "Podvojné účtovníctvo (mesačne)",
+                           "Spracovanie miezd (zamestnanec)", "Daňové priznanie (ročné)", "Poradenstvo (hodina)"]}),
+        Module("LABOUR", {"title": "Kapacita", "subtitle": "Vyťaženosť a podiel mzdových nákladov",
+            "role_label": "Pozícia (účtovník / asistent)", "target_pct": 0.45}),
+        Module("TAKINGS", {"title": "Tržby", "subtitle": "Vystavené faktúry a úhrady",
+            "source_label": "Vystavené faktúry · paušály · prevody · hotovosť"}),
+        Module("TRAINING", {"title": "Školenia", "subtitle": "Matica školení — dôkaz pred zmenou",
+            "topics": ["Zaškolenie", "GDPR / ochrana osobných údajov",
+                       "AML / ochrana pred praním špinavých peňazí", "Legislatíva a zmeny (dane, mzdy)",
+                       "Kybernetická bezpečnosť a zálohovanie", "BOZP / prvá pomoc"]}),
+    ],
+)
+
 REGISTRY = {s.key: s for s in (HOSPITALITY_SK, BUTCHER_SK, BAKER_SK,
                                BAR_SK, GREENGROCER_SK, PATISSERIE_SK,
                                HOSPITALITY_EN,
                                HAIRDRESSER_SK, BEAUTY_SALON_SK, BARBER_SK,
-                               BNB_SK, CONVENIENCE_SK, AIRBNB_SK)}
+                               BNB_SK, CONVENIENCE_SK, AIRBNB_SK,
+                               CATERER_SK, FLORIST_SK, BOOKKEEPER_SK)}
 
 
 if __name__ == "__main__":
@@ -822,7 +988,10 @@ if __name__ == "__main__":
     # terminology diff — proves the swap on one shared module
     print("\n" + "=" * 60 + "\nTERMINOLOGY SWAP (STOCK module) — same slot, trade words:")
     for key in REGISTRY:
-        st = next(m for m in REGISTRY[key].modules if m.type == "STOCK")
+        st = next((m for m in REGISTRY[key].modules if m.type == "STOCK"), None)
+        if st is None:
+            print(f"  {key:<14} (no STOCK — service-led, 6-KPI dashboard)")
+            continue
         print(f"  {key:<14} item='{st.terms['item_label']}'  loss='{st.terms['loss_label']}'"
               f"  e.g. {st.terms['seed_items'][0]}")
     print("\nALL SPECS VALID" if ok else "\nVALIDATION FAILED")
