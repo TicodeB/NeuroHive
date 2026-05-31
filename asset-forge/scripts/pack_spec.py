@@ -42,7 +42,9 @@ MODULE_SLOTS = {
 }
 # metrics each operational module exposes, that DASHBOARD kpis/insights may cite
 MODULE_METRICS = {
-    "LEDGER_12M": ["revenue_total", "gross", "net", "cash_close"],
+    # Phase 13i: + Budget-vs-Actual variance metrics (Datarails FP&A spine)
+    "LEDGER_12M": ["revenue_total", "gross", "net", "cash_close",
+                   "rev_plan", "rev_var", "rev_var_pct", "net_var"],
     "MARGIN":     ["avg", "below_target"],
     "STOCK":      ["loss_value"],
     "LABOUR":     ["pct", "cost"],
@@ -133,12 +135,14 @@ HOSPITALITY_SK = PackSpec(
             "kpis": [("Ročné tržby", "LEDGER_12M.revenue_total"),
                      ("Hrubá marža", "LEDGER_12M.gross"),
                      ("Čistý zisk", "LEDGER_12M.net"),
+                     ("Tržby vs plán", "LEDGER_12M.rev_var"),
                      ("Koncová hotovosť", "LEDGER_12M.cash_close"),
                      ("Priemerná marža", "MARGIN.avg"),
                      ("Podiel miezd", "LABOUR.pct")],
-            "insights": ["Čistá marža …", "Podiel miezd …", "Hodnota strát …",
+            "insights": ["Tržby vs plán …", "Čistá marža …", "Podiel miezd …", "Hodnota strát …",
                          "Položky pod cieľovou maržou …", "Rozdiel v pokladni …"]}),
-        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow a zisk/strata",
+        Module("LEDGER_12M", {"title": "Cash flow", "subtitle": "12-mesačný cash flow, plán a odchýlka",
+            "plan_label": "Plán (rok)",
             "revenue_lines": ["Tržby z jedál", "Tržby z nápojov", "Ostatné príjmy"],
             "cos_lines": ["Náklady na jedlo", "Náklady na nápoje"],
             "overhead_lines": ["Mzdy a personál", "Nájom a poplatky", "Energie", "Marketing", "Ostatné réžie"]}),

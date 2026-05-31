@@ -30,8 +30,9 @@ PRODUCTS = os.path.normpath(os.path.join(HERE, "..", "products"))
 os.makedirs(PRODUCTS, exist_ok=True)
 VERSION, BUILD_DATE = "v1.0", "31/05/2026"
 
-EUR_METRICS = {"revenue_total", "gross", "net", "cash_close", "cost", "loss_value", "variance_total"}
-PCT_METRICS = {"avg", "pct"}
+EUR_METRICS = {"revenue_total", "gross", "net", "cash_close", "cost", "loss_value",
+               "variance_total", "rev_plan", "rev_var", "net_var"}
+PCT_METRICS = {"avg", "pct", "rev_var_pct"}
 
 
 def refc(name, cell):
@@ -109,21 +110,26 @@ def build_planner(ws, ds, t):
 
 # --------------------------------------------------------------- operational
 def build_ledger(ws, ds, t, name):
-    ds.canvas(ws, [26] + [9.5] * 12 + [12], tab=ds.t.primary)
-    ds.title(ws, t["title"], t["subtitle"], span=14)
+    # Datarails-style FP&A spine (Phase 13i): actuals + Plán + Odchýlka €/% so the
+    # ledger compares plan vs reality, the way every FP&A view does. Monthly cells
+    # are actuals; Plán is the annual budget per line; variance is computed.
+    plan_label = t.get("plan_label", "Plán")
+    ds.canvas(ws, [26] + [9.5] * 12 + [12, 12, 12, 11], tab=ds.t.primary)
+    ds.title(ws, t["title"], t["subtitle"], span=17)
     label_input(ds, ws, 5, "Názov prevádzky", in_span=3)
     label_input(ds, ws, 6, "Rok", in_span=1)
-    ds.note(ws, 7, "Vyplňte oranžové bunky. Súčty, marža, zisk a koncová hotovosť sa počítajú automaticky.", span=14)
+    ds.note(ws, 7, "Vyplňte oranžové bunky (mesačné skutočnosti + ročný plán). Súčty, marža, zisk, "
+                   "odchýlka od plánu a koncová hotovosť sa počítajú automaticky.", span=17)
     months = ["Jan", "Feb", "Mar", "Apr", "Máj", "Jún", "Júl", "Aug", "Sep", "Okt", "Nov", "Dec"]
-    ds.thead(ws, 8, ["Položka"] + months + ["Rok"])
+    ds.thead(ws, 8, ["Položka"] + months + ["Rok", plan_label, "Odchýlka €", "Odchýlka %"])
 
     def section(r, text):
-        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=15)
+        ws.merge_cells(start_row=r, start_column=2, end_row=r, end_column=18)
         c = ws.cell(r, 2, text); c.font = ds.font(9.5, bold=True, color=ds.t.primary)
         c.fill = ds.fill(ds.t.band); c.alignment = Alignment("left", "center", indent=1)
         ws.row_dimensions[r].height = 18
 
-    def line(r, label, calc=None, bold=False):
+    def line(r, label, calc=None, bold=False, variance=False):
         c = ws.cell(r, 2, label); c.font = ds.font(9.5, bold=bold, color=ds.t.ink)
         c.alignment = Alignment("left", "center", indent=1); c.border = ds.hairline_bottom()
         for j in range(3, 15):
@@ -132,7 +138,15 @@ def build_ledger(ws, ds, t, name):
                 ds.calc_cell(ws, r, j, ds.t.EUR).value = calc(col)
             else:
                 ds.input_cell(ws, r, j, ds.t.EUR)
+        # O = actual annual (sum of months)
         ds.calc_cell(ws, r, 15, ds.t.EUR, bold=True).value = f"=SUM(C{r}:N{r})"
+        # P = plan (rolls up on total lines, else an input); Q/R = variance € / %
+        if calc:
+            ds.calc_cell(ws, r, 16, ds.t.EUR, bold=bold).value = calc("P")
+        else:
+            ds.input_cell(ws, r, 16, ds.t.EUR)
+        ds.calc_cell(ws, r, 17, ds.t.EUR, bold=bold).value = f'=IF(OR(O{r}="",P{r}=""),"",O{r}-P{r})'
+        ds.calc_cell(ws, r, 18, ds.t.PCT, bold=bold).value = f'=IF(OR(P{r}="",P{r}=0,O{r}=""),"",(O{r}-P{r})/P{r})'
         ws.row_dimensions[r].height = 16
 
     r = 9
@@ -150,6 +164,12 @@ def build_ledger(ws, ds, t, name):
     for nm in t["overhead_lines"]: line(r, nm); r += 1
     oh_total = r; line(r, "Réžie spolu", calc=lambda c: f"=SUM({c}{oh0}:{c}{oh_total-1})", bold=True); r += 1
     net = r; line(r, "ČISTÝ ZISK", calc=lambda c: f"={c}{gross}-{c}{oh_total}", bold=True); r += 1
+    # variance RAG on the "more-is-better" bottom lines: under plan = red, over = green
+    for vr in (rev_total, gross, net):
+        ws.conditional_formatting.add(f"Q{vr}",
+            CellIsRule(operator="lessThan", formula=["0"], fill=ds.fill(ds.t.bad_bg), font=ds.font(9.5, True, ds.t.bad)))
+        ws.conditional_formatting.add(f"Q{vr}",
+            CellIsRule(operator="greaterThan", formula=["0"], fill=ds.fill(ds.t.good_bg), font=ds.font(9.5, color=ds.t.good)))
     section(r, "HOTOVOSŤ"); r += 1
     ob = r
     ws.cell(ob, 2, "Počiatočná hotovosť").font = ds.font(9.5, color=ds.t.ink)
@@ -168,7 +188,9 @@ def build_ledger(ws, ds, t, name):
     ws.conditional_formatting.add(f"C{cb}:N{cb}",
         CellIsRule(operator="lessThan", formula=["0"], fill=ds.fill(ds.t.bad_bg), font=ds.font(9.5, True, ds.t.bad)))
     ws.freeze_panes = "C9"
-    return {"revenue_total": f"O{rev_total}", "gross": f"O{gross}", "net": f"O{net}", "cash_close": f"N{cb}"}
+    return {"revenue_total": f"O{rev_total}", "gross": f"O{gross}", "net": f"O{net}",
+            "cash_close": f"N{cb}", "rev_plan": f"P{rev_total}", "rev_var": f"Q{rev_total}",
+            "rev_var_pct": f"R{rev_total}", "net_var": f"Q{net}"}
 
 
 def build_margin(ws, ds, t, name):
@@ -313,6 +335,10 @@ def build_dashboard(ws, ds, t, anchors):
         accent = ds.t.accent if idx % 3 == 1 else (ds.t.ink if idx % 3 == 2 else ds.t.primary)
         val = ds.kpi(ws, top, left, label, f"=IFERROR({cell},0)", fmt=fmt, accent=accent)
         kpi_cells.append((val.coordinate, metric))
+        # drill-down (Datarails pattern): the tile label links to its source cell
+        lab = ws.cell(top + 1, left)
+        lab.hyperlink = "#" + cell
+        lab.value = (lab.value or label.upper()) + "  ↗"
         if metric == "net":
             ws.conditional_formatting.add(val.coordinate, CellIsRule(operator="lessThan", formula=["0"], font=ds.font(20, True, ds.t.bad)))
         if metric == "pct":
@@ -324,6 +350,14 @@ def build_dashboard(ws, ds, t, anchors):
     insights = []
     if "LEDGER_12M" in A:
         net, rev = A["LEDGER_12M"]["net"], A["LEDGER_12M"]["revenue_total"]
+        # plan-aware variance narrative (Datarails FP&A Genius parity, offline)
+        rv, rvp = A["LEDGER_12M"].get("rev_var"), A["LEDGER_12M"].get("rev_var_pct")
+        if rv and rvp:
+            insights.append(
+                f'=IFERROR(IF({A["LEDGER_12M"]["rev_plan"]}="","Tržby vs plán: zadajte ročný plán v hárku Cash flow.",'
+                f'"Tržby vs plán: "&TEXT({rv},"#,##0 €")&" ("&TEXT({rvp},"+0.0%;-0.0%")&") — "&'
+                f'IF({rvp}>=0,"NAD plánom.","POD plánom, preverte hlavný zdroj tržieb.")),'
+                f'"Tržby vs plán: zatiaľ bez dát.")')
         insights.append(f'=IFERROR("Čistá marža: "&TEXT({net}/{rev},"0.0%")&IF({net}/{rev}>=0.1," — zdravé."," — pozor, je nízka."),"Čistá marža: zatiaľ bez dát.")')
     if "LABOUR" in A:
         insights.append(f'=IFERROR("Podiel miezd: "&TEXT({A["LABOUR"]["pct"]},"0.0%")&IF({A["LABOUR"]["pct"]}>0.35," — NAD cieľom 35 %."," — v poriadku."),"Podiel miezd: zatiaľ bez dát.")')

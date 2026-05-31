@@ -1,7 +1,19 @@
-## STATE — 31/05/2026 12:40
+## STATE — 31/05/2026 13:30
 Project: ASSET-FORGE
-Phase last completed: **13g — 🤖 Google Sheets "Pro" edition (Apps Script automation + Gemini sidebar) ✅ COMPLETE**
-Checkpoint score: `apps_script/` add-on shipped (6 paste-in files + setup guide; Tiers 1–2 of the agentic stack) | core project 100%; **Premium-Pack track ~85%** (Tier 0 packs 7/24 built · Tier 1–2 automation now built · 13f batch 2+ and 13h localisation remain). ▶️ NEXT = Phase 13f batch 2 (Hairdresser · Beauty salon · Barber) OR Phase 13h (localisation). See §"PREMIUM-PACK TRACK".
+Phase last completed: **13i — 📊 "FP&A-grade" pack upgrade (Budget-vs-Actual + variance, drill-down, plan-aware narrative) ✅ COMPLETE**
+Checkpoint score: FP&A spine added to the generic builder + piloted on `hospitality_sk`; all 6 packs rebuilt clean | core project 100%; **Premium-Pack track ~88%**. ▶️ NEXT = Phase 13f batch 2 (Hairdresser · Beauty salon · Barber) OR roll the variance KPI tile onto the other 5 packs' dashboards OR Phase 13h (localisation). See §"PREMIUM-PACK TRACK".
+
+### ✅ DONE THIS SESSION (Phase 13i — code · Datarails-inspired FP&A upgrade)
+Implements `research/datarails_teardown.md` §6A/C/E — the structural FP&A patterns, at single-file scale, in the **generic** `build_pack.py` so every pack inherits them. Piloted + validated on `hospitality_sk`.
+- **§6A Budget-vs-Actual + variance (the FP&A spine):** `build_ledger()` now adds 3 columns after the annual total — **`Plán` · `Odchýlka €` · `Odchýlka %`**. Monthly cells = actuals; Plán = annual budget per line (input on detail lines, auto-rolls-up on total lines); variance €/% computed with `IF`-guards. **Variance RAG** on the "more-is-better" lines (Tržby spolu · Hrubá marža · Čistý zisk): under plan = red, over = green. New ledger anchors exposed: `rev_plan, rev_var, rev_var_pct, net_var`.
+- **§6C Drill-down (Datarails pattern):** every dashboard KPI tile label now hyperlinks (`#'sheet'!cell` + "↗") to its source cell — click a KPI, jump to where it comes from. (7/7 tiles linked on the pilot.)
+- **§6E Plan-aware narrative (FP&A Genius parity, offline):** new lead Postreh = *"Tržby vs plán: −X € (−Y %) — POD plánom, preverte hlavný zdroj tržieb"* (or "NAD plánom"; or a friendly "zadajte ročný plán" when empty). Because the Gemini sidebar (13g) reads KPIs + Postrehy generically, **the AI now answers plan-vs-actual questions with zero Apps Script change.**
+- **`pack_spec.py`:** `MODULE_METRICS["LEDGER_12M"]` extended with the 4 variance metrics; `hospitality_sk` pilot got a 7th KPI **"Tržby vs plán"** + a `plan_label="Plán (rok)"` term. Validator green.
+- **Validated** (openpyxl reload + zip/XML; soffice still broken): pilot — 15 XML parts well-formed · **0 merged-range overlaps** · all tabs ≤31 · **7 KPI tiles, all 7 with drill-down links** · variance narrative present · ledger header = `Rok · Plán (rok) · Odchýlka € · Odchýlka %` · roll-up formula `=SUM(P10:P12)` correct. **Regression:** all 6 packs rebuilt → 0 overlaps, tabs ≤31, Plán column present on every `03 · Cash flow`.
+- **Scope honoured:** ledger spine + narrative roll through ALL packs via the default `plan_label="Plán"`; the **variance KPI tile** is on the pilot only (other 5 dashboards unchanged — a 1-line spec add each when ready). No DB/catalogue changes; no new deps. Slovak build-proof grade → native pass before listing.
+
+### ✅ DONE (earlier · Phase 13g — Google Sheets "Pro" edition)
+Checkpoint: `apps_script/` add-on shipped (6 paste-in files + setup guide; Tiers 1–2 of the agentic stack).
 
 ### ✅ DONE THIS SESSION (Phase 13g — code · Google Sheets "Pro" edition)
 - **Built `asset-forge/apps_script/`** — Tiers 1–2 of the agentic stack (`research/agentic_tech_stack.md`): the free, opt-in, no-SaaS automation + AI layer that sits on top of the offline `.xlsx` packs. **6 paste-in files**, all `.gs` syntax-checked clean with Node 22 (`node --check`):
@@ -94,6 +106,7 @@ This new track far exceeds one `/goal` phase. Proposed split (one per session, c
 - **13f 🟡 IN PROGRESS** — Drain `pack_queue` in batches via the generic builder + design system (per-trade terminology, validate, mark built). **Batch 1 ✅ DONE** — Bar/pub · Greengrocer · Patisserie → **7/24 built, 17 planned**. Remaining ranked: Hairdresser/Beauty salon/Barber (80/64), B&B/Convenience (64), Airbnb/Caterer/Florist (60)… *(orchestration + code; ≤3 packs/session)*
 - **13g ✅ DONE** — **Google Sheets "Pro" edition**: `asset-forge/apps_script/` (6 paste-in files + README) = Tier 1 automation (briefing + journal + triggers) and Tier 2 Gemini sidebar. Language-agnostic (reads KPI tiles by position); free, opt-in, no-SaaS; read-only/grounded. `node --check` clean. *(code)*
 - **13h** — Localisation pipeline: clone locked packs into the other languages (native-quality pass per language). *(code + native edit)*
+- **13i ✅ DONE** — **"FP&A-grade" upgrade** (Datarails teardown §6A/C/E): Budget-vs-Actual + variance €/% with RAG in `build_ledger()`, KPI **drill-down hyperlinks**, **plan-aware** lead narrative (also feeds the Gemini sidebar). Piloted + validated on `hospitality_sk`; rolls through every pack via the generic builder. *(code)*
 - *(LATER, parked by Samuel)* auditor/consultant editions of the premium packs.
 
 ### ▶️ NEXT SMALLEST ACTION
