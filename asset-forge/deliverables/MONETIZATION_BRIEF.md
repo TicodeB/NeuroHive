@@ -8,8 +8,10 @@
 `deliverables/PRODUCT_ROADMAP.md` / the `products` DB table.
 
 > **Accuracy note (brief §3):** all platform fees + VAT handling below were **re-verified
-> live on 30/05/2026** (not stated from memory). Sources are cited inline and recorded in
-> the `existing_solutions` DB table. Fees change — re-check the cited pages before launch.
+> live on 30/05/2026 and again on 31/05/2026** (not stated from memory) — see
+> `research/fees_vat_reverify_2026-05-31.md`. **All figures held** (LS 5% + 50¢ base +1.5%
+> intl/PayPal · Gumroad 10% + 50¢ · both full MoR for EU VAT). Sources cited inline +
+> recorded in `existing_solutions`. Fees change — re-check the cited pages before launch.
 
 ---
 
@@ -224,10 +226,14 @@ comparables** (the price points our products are benchmarked against). Regenerat
 
 ## 6. Risks / watchouts
 
-- ⚠️ **Lemon Squeezy post-Stripe-acquisition uncertainty** is the main platform risk. Mitigation:
-  Gumroad fallback is pre-vetted (full MoR, store name reserved). **Switch trigger:** any
-  removal of MoR VAT handling, a fee increase past ~8% effective, or payout/onboarding
-  breakage. Both host the same files → migration is a re-upload, not a rebuild.
+- ⚠️ **Lemon Squeezy post-Stripe-acquisition uncertainty** is the main platform risk —
+  **CONFIRMED live 31/05/2026:** LS's own "2026 Update" says the team is building **Stripe
+  Managed Payments** (Stripe's own MoR) and will offer LS users a **migration path** to it,
+  so today's LS is on a transition track. Signups remain open for now. Mitigation: Gumroad
+  fallback is pre-vetted (full MoR, store name reserved). **Switch trigger:** any removal of
+  MoR VAT handling, a fee increase past ~8% effective, payout/onboarding breakage, **or a
+  forced migration to Stripe Managed Payments with worse terms**. Both host the same files →
+  migration is a re-upload, not a rebuild. Re-confirm LS onboarding is open at listing time.
 - ⚠️ **+1.5% international-card surcharge** means the real Lemon Squeezy fee is ~6.5%, not 5% —
   modelled into §2. Don't quote 5% in financial projections.
 - ⚠️ **Etsy delivers static files only** — Google-Sheets products need the PDF + "make a copy"
@@ -236,7 +242,8 @@ comparables** (the price points our products are benchmarked against). Regenerat
   delivery and waive my 14-day withdrawal right" checkbox (Lemon Squeezy provides this).
 - ⚠️ **SK copy for ids 21–54 outstanding** — bilingual rule blocks launch of P6–P12 until the
   Slovak glossary is backfilled and editor-checked.
-- ⚠️ **Re-verify fees at listing time** — all figures dated 30/05/2026; platforms change pricing.
+- ⚠️ **Re-verify fees at listing time** — figures re-verified 30/05 + 31/05/2026 (all held);
+  platforms change pricing. See `research/fees_vat_reverify_2026-05-31.md`.
 
 ---
 

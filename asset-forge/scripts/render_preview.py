@@ -8,11 +8,16 @@ with Pillow. It is faithful — no mock data — so formula cells (whose values 
 only computed when Excel opens the file) render blank, i.e. the clean
 empty-state of the template.
 
-Run:  python3 scripts/render_preview.py
-Out:  products/preview/<sheet>.png
+Run:  python3 scripts/render_preview.py            # legacy P2 pilot hero shots
+      python3 scripts/render_preview.py --all       # dashboard (02) for every pack
+                                                    #   + method/planner/margin for both
+                                                    #   hospitality flagships
+      python3 scripts/render_preview.py pack_x.xlsx # the 00/01/02 trio for one pack
+Out:  products/preview/<key>_<sheet>.png
 """
 from __future__ import annotations
 import os
+import sys
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.utils.cell import range_boundaries, coordinate_from_string
@@ -120,9 +125,59 @@ def render(path, sheet, max_row, max_col, outfile):
     img.save(outfile)
     print("✓", outfile, f"({img.width}x{img.height})")
 
+def _slug(s):
+    """ascii-ish filename slug from a sheet name like '02 · Prehľad' -> '02_prehlad'."""
+    import unicodedata
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
+    out = []
+    for ch in s.lower():
+        out.append(ch if ch.isalnum() else "_")
+    slug = "".join(out).strip("_")
+    while "__" in slug:
+        slug = slug.replace("__", "_")
+    return slug
+
+
+def render_pack(path, prefixes=("00", "01", "02"), max_row=45, max_col=13):
+    """Render the chosen sheets (by numeric prefix) of one pack workbook.
+    Bounds are clamped to the sheet's real used range so previews stay tight."""
+    key = os.path.splitext(os.path.basename(path))[0]
+    key = key[5:] if key.startswith("pack_") else key
+    wb = load_workbook(path)
+    for ws in wb.worksheets:
+        head = ws.title.split(" ", 1)[0].lstrip("0") or "0"
+        pref = ws.title.split(" ", 1)[0]
+        if pref not in prefixes:
+            continue
+        mr = min(ws.max_row or max_row, max_row)
+        mc = min(ws.max_column or max_col, max_col)
+        outfile = os.path.join(OUT, f"{key}_{_slug(ws.title)}.png")
+        render(path, ws.title, mr, mc, outfile)
+
+
 if __name__ == "__main__":
-    p = os.path.join(PRODUCTS, "P2_SK_Hospitality_Premium.xlsx")
-    render(p, "00 · Metóda", 30, 7, os.path.join(OUT, "00_metoda.png"))
-    render(p, "01 · Denný plán", 36, 5, os.path.join(OUT, "01_denny_plan.png"))
-    render(p, "02 · Prehľad", 22, 12, os.path.join(OUT, "02_prehlad.png"))
-    render(p, "04 · Marža", 20, 8, os.path.join(OUT, "04_marza.png"))
+    import glob
+    args = sys.argv[1:]
+    if args and args[0] == "--all":
+        # Hero image for every pack = the dashboard (02), which now shows the
+        # variance KPI tile (Phase 13j). Plus the full hero trio for the two
+        # hospitality flagships as a representative fuller sample.
+        packs = sorted(glob.glob(os.path.join(PRODUCTS, "pack_*.xlsx")))
+        for p in packs:
+            render_pack(p, prefixes=("02",))          # dashboard for all 24
+        for flag in ("pack_hospitality_sk.xlsx", "pack_hospitality_en.xlsx"):
+            fp = os.path.join(PRODUCTS, flag)
+            if os.path.exists(fp):
+                render_pack(fp, prefixes=("00", "01", "04"))  # method · planner · margin
+        print(f"DONE · {len(packs)} packs")
+    elif args:
+        for p in args:
+            fp = p if os.path.isabs(p) else os.path.join(PRODUCTS, p)
+            render_pack(fp)
+    else:
+        # legacy default: the original P2 pilot hero shots
+        p = os.path.join(PRODUCTS, "P2_SK_Hospitality_Premium.xlsx")
+        render(p, "00 · Metóda", 30, 7, os.path.join(OUT, "00_metoda.png"))
+        render(p, "01 · Denný plán", 36, 5, os.path.join(OUT, "01_denny_plan.png"))
+        render(p, "02 · Prehľad", 22, 12, os.path.join(OUT, "02_prehlad.png"))
+        render(p, "04 · Marža", 20, 8, os.path.join(OUT, "04_marza.png"))

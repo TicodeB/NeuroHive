@@ -24,12 +24,17 @@ page. One good source per fact, cross-checked.
   On a €25 pack that's ≈ €1.13 + €0.50 ≈ **€1.63 (~6.5%)**; on a €49 pack ≈
   €3.19 + €0.50 ≈ **€3.69 (~7.5%)** (fixed 50¢ weighs heavier on cheaper packs —
   relevant to the €19 teaser tier).
-- **Stripe-acquisition status:** Lemon Squeezy joined Stripe (Jul 2024) but
-  **continues to operate as a standalone MoR platform; new signups remain open.**
-  (lemonsqueezy.com/blog/lemon-squeezy-joins-stripe; /help) → the handover
-  "post-Stripe uncertainty" watch-out is **lower risk** than feared, but keep
-  Gumroad pre-vetted as fallback (both host the same files; migration =
-  re-upload, not rebuild).
+- **Stripe-acquisition status — watch-out STANDS (do not downgrade):** Lemon
+  Squeezy was acquired by Stripe (Jul 2024) and still operates as an MoR with
+  open signups, BUT its own **"2026 Update: Lemon Squeezy + Stripe Managed
+  Payments"** post says the team is heads-down building **Stripe Managed
+  Payments** (Stripe's own MoR) and intends to give LS users **"an easy way to
+  migrate"** to it. (lemonsqueezy.com/blog/2026-update;
+  lemonsqueezy.com/blog/stripe-lemon-squeezy-update-2025) → the handover's
+  "post-Stripe roadmap uncertainty" is **confirmed and live**: LS-as-we-know-it
+  is on a migration path to Stripe Managed Payments. Keep **Gumroad pre-vetted
+  as the fallback** (both host the same files; migration = re-upload, not
+  rebuild); re-confirm LS onboarding is still open at listing time.
 
 ## 2. Gumroad (fallback) — CONFIRMED
 - **Flat 10% per sale + payment processing.** (gumroad.com/pricing)
