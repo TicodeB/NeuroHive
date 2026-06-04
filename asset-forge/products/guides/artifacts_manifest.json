@@ -1,0 +1,24 @@
+{
+  "pack": "boutique_hotel_4star",
+  "note": "Gamma/Canva-generated non-spreadsheet artifacts. Gamma export URLs are signed and expire ~1 week after generation — re-export or download promptly.",
+  "artifacts": [
+    {
+      "name": "Boutique Hotel Setup Guide",
+      "type": "document",
+      "format": "pdf",
+      "tool": "gamma.generate",
+      "generationId": "c29e76TDi4vwYM44NGJie",
+      "gammaUrl": "https://gamma.app/generations/c29e76TDi4vwYM44NGJie",
+      "exportUrl": "(populated on completion)"
+    },
+    {
+      "name": "Boutique Hotel — Investor Pitch Deck",
+      "type": "presentation",
+      "format": "pptx",
+      "tool": "gamma.generate",
+      "generationId": "1fIdfHk8sTJn80Ja58C8p",
+      "gammaUrl": "https://gamma.app/generations/1fIdfHk8sTJn80Ja58C8p",
+      "exportUrl": "(populated on completion)"
+    }
+  ]
+}
