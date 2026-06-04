@@ -35,14 +35,30 @@ from startup_spec import STARTUP_REGISTRY, validate, KPI
 VERSION, BUILD_DATE = "v1.0", "04/06/2026"
 
 SOURCES = [
-    "ADR/occupancy/RevPAR benchmarks: Fáilte Ireland & STR Ireland hotel "
-    "performance reports (4-star/boutique ranges).",
+    "ADR/occupancy/RevPAR: Fáilte Ireland Hotel Survey 2024 — 4★ ADR €143.50–€144.49, "
+    "occupancy 60.2% (Dec) → 74.1% (Nov), RevPAR €86.42–€107.07.",
+    "Cost ratios: hospitality labour 25–35% of revenue (US long-run 31.2%); USALI F&B "
+    "cost-of-sales; GOP margin ~36–38% (HotelData 2025). See `startup_benchmarks` table.",
     "Grant/funding figures: Local Enterprise Office (localenterprise.ie), "
     "Microfinance Ireland, SBCI, Fáilte Ireland investment schemes.",
-    "Cost ratios (payroll ~30%, F&B cost ~30%): USALI hotel P&L conventions.",
     "Figures are seed assumptions — replace the orange cells with your own quotes "
     "and verified local data before relying on them.",
 ]
+
+
+def load_benchmarks(vertical):
+    """Best-effort read of the cited `startup_benchmarks` table (empty if absent)."""
+    import sqlite3
+    db = os.path.normpath(os.path.join(HERE, "..", "intelligence.db"))
+    try:
+        conn = sqlite3.connect(db)
+        rows = conn.execute(
+            "SELECT label, unit, low, typical, high, source FROM startup_benchmarks "
+            "WHERE vertical=? ORDER BY id", (vertical,)).fetchall()
+        conn.close()
+        return rows
+    except Exception:
+        return []
 
 
 # --------------------------------------------------------------- helpers
@@ -246,6 +262,25 @@ def build_market_validation(wb, ds, spec, ref):
     r = ds.note(ws, r, "SOM room-nights should be ≤ your capacity. If SOM > capacity "
                 "you are capacity-constrained (good problem); if far below, demand is thin.",
                 span=6)
+
+    # --- cited benchmark band (from startup_benchmarks) ---
+    benches = load_benchmarks(spec.pack_key)
+    if benches:
+        r += 1
+        r = ds.section(ws, r, "Industry benchmark band (cited)", span=6)
+        r = ds.thead(ws, r, ["Metric", "Low", "Typical", "High", "Source", ""])
+        for i, (label, unit, low, typ, high, source) in enumerate(benches):
+            ds.trow(ws, r, 6, zebra_on=(i % 2 == 1), align="left")
+            ws.cell(r, 2, label)
+            fmt = {"pct": ds.t.PCT, "eur": ds.t.EUR0, "num": "0.0"}[unit]
+            for col, val in ((3, low), (4, typ), (5, high)):
+                c = ds.calc_cell(ws, r, col, fmt); c.value = val
+            sc = ws.cell(r, 6, source); sc.font = ds.font(8, italic=True, color=ds.t.muted)
+            sc.alignment = Alignment("left", "center", wrap_text=True)
+            ws.merge_cells(start_row=r, start_column=6, end_row=r, end_column=7)
+            r += 1
+        r = ds.note(ws, r, "Compare your Assumptions against these published bands; "
+                    "stay within Typical–High to be credible to lenders/grant assessors.", span=6)
 
     # --- competitor matrix ---
     r += 1
