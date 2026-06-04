@@ -9,7 +9,12 @@ records exactly what to generate so each artifact is reproducible.
 
 | Artifact | Type | Tool | Status |
 |----------|------|------|--------|
-| Boutique Hotel Setup Guide | PDF document | Gamma `generate` (format=document, exportAs=pdf) | ✅ generated — see `artifacts_manifest.json` for the Gamma URL / export link |
+| Boutique Hotel Setup Guide | PDF document | Gamma `generate` | ✅ done → [gamma.app/docs/naaus6268k3ya4e](https://gamma.app/docs/naaus6268k3ya4e) |
+| Boutique Hotel — Investor Pitch Deck | PPTX presentation | Gamma `generate` | ✅ done → [gamma.app/docs/d5zgg5io36dzv5t](https://gamma.app/docs/d5zgg5io36dzv5t) |
+
+> Export-CDN direct links are in `artifacts_manifest.json` but are egress-blocked
+> from the build sandbox (HTTP 403) and expire ~1 week after generation — open the
+> Gamma URL and download/re-export from the editor.
 
 ## To generate (prompts ready)
 
