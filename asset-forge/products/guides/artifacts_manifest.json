@@ -1,0 +1,26 @@
+{
+  "pack": "boutique_hotel_4star",
+  "note": "Gamma/Canva-generated non-spreadsheet artifacts. Both flagship artifacts are COMPLETE and viewable/downloadable at their gammaUrl. The signed exportUrl direct-download links expire ~1 week after generation; the export CDN is egress-blocked from the build sandbox (HTTP 403), so download from the Gamma editor or re-export.",
+  "artifacts": [
+    {
+      "name": "Boutique Hotel Setup Guide",
+      "type": "document",
+      "format": "pdf",
+      "tool": "gamma.generate",
+      "status": "completed",
+      "generationId": "c29e76TDi4vwYM44NGJie",
+      "gammaUrl": "https://gamma.app/docs/naaus6268k3ya4e",
+      "exportUrl": "https://assets.api.gamma.app/export/pdf/naaus6268k3ya4e/a4cddc819f2e1cc577220d6d11c82a0c/Boutique-Hotel-Setup-Guide-LEANTA-Turnkey-Pack.pdf"
+    },
+    {
+      "name": "Boutique Hotel — Investor Pitch Deck",
+      "type": "presentation",
+      "format": "pptx",
+      "tool": "gamma.generate",
+      "status": "completed",
+      "generationId": "1fIdfHk8sTJn80Ja58C8p",
+      "gammaUrl": "https://gamma.app/docs/d5zgg5io36dzv5t",
+      "exportUrl": "https://assets.api.gamma.app/export/pptx/d5zgg5io36dzv5t/be5f26a957d12a5795a73d97b99c84ad/Boutique-Hotel-Investor-Pitch-Deck.pptx"
+    }
+  ]
+}
