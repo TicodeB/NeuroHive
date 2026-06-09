@@ -1,3 +1,16 @@
+## STATE — 09/06/2026 (LAUNCH SESSION — post-project)
+**LAUNCH:** Leanta storefront built at repo ROOT (outside `asset-forge/`) on branch
+`claude/vigilant-bell-sn55pv` — landing + free "Will I pass?" quiz + product pages
+(P13 €29 · P1 €34 · P2 €49 · Hospitality Pro Bundle €69) + legal pages + demo
+downloads + config-driven checkout (`assets/checkout-config.js`: empty URL ⇒ email
+pre-order; paste LS/Stripe URL ⇒ Buy now). Deploys via the Vercel project already
+attached to this repo (`neuro-hive.vercel.app`, currently 403 = deployment protection).
+**Manual go-live steps (Samuel) live in `/LAUNCH_RUNBOOK.md`** — merge PR → disable
+Vercel deployment protection → make repo PRIVATE (full paid xlsx are public!) → LS
+KYC → paste checkout URLs. Site copy EN-only (SK gated on native pass, per rule).
+
+---
+
 ## STATE — 30/05/2026 21:30
 Project: ASSET-FORGE
 Phase last completed: 12 — 🎁 Build a flagship compliance pack (BONUS) ✅ COMPLETE — **PROJECT COMPLETE (13/13 sessions)**

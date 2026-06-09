@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /downloads/
+Disallow: /asset-forge/
