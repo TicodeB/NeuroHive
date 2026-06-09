@@ -25,6 +25,24 @@ posts, nurture emails. (6) hello@leanta.ie wired site-wide; leanta.ie @ Register
 leanta.sk @ Websupport (alias info@leanta.sk). Target: €2,000 revenue month 1 (10×
 tool spend); pricing experiments per §41.
 
+### ▶️ NEXT SESSION (run on branch **`claude/vigilant-bell-sn55pv`** until PR #20 merges; after merge → `main`)
+1. **Samuel's physical steps first** (LAUNCH_RUNBOOK.md): merge PR #20 → check
+   site public on both hosts → **repo PRIVATE** → LS KYC → paste 8 checkout URLs
+   into `assets/checkout-config.js` → test-purchase. Stripe alternative: re-run
+   the Stripe MCP OAuth in the new session (old URL expires) and Claude wires
+   Payment Links.
+2. **Then Claude executes SALES_PLAYBOOK.md** (marketing/): Etsy listings from
+   `listings_etsy_gumroad.md`, posts from `launch_posts.md`, nurture from
+   `email_nurture.md` (Gmail drafts), poster print (marketing/poster_a4.html →
+   browser print → A4), NotebookLM: upload `LEANTA_STORY_SOURCEBOOK.md`.
+3. **Deferred build queue:** P6–P11 + P14–P21 packs (needs SK backfill ids 21–54
+   first — bilingual rule); SK storefront on leanta.sk (needs native SK pass);
+   preview screenshots for listings; Skool community setup (FLYWHEEL_MOAT_STRATEGY §d);
+   ESP for nurture sequence; Vercel/Netlify old-deploy purge (leak hygiene).
+4. **Sources of truth:** LAUNCH_RUNBOOK.md (go-live) · marketing/SALES_PLAYBOOK.md
+   (week-1 selling) · marketing/FLYWHEEL_MOAT_STRATEGY.md (moat/flywheel/edu) ·
+   MONETIZATION_BRIEF.md §7–8 (funnel/moat doctrine) · this handover (state).
+
 ---
 
 ## STATE — 30/05/2026 21:30
