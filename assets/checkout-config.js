@@ -11,7 +11,7 @@
  * (Merchant of Record — handles EU VAT), Gumroad fallback, Etsy discovery.
  */
 window.LEANTA = {
-  contactEmail: "samuel.vyhnanek+leanta@gmail.com",
+  contactEmail: "hello@leanta.ie",
 
   products: {
     p13: {

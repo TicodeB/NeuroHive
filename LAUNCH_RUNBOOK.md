@@ -88,16 +88,18 @@ the locked zero-admin strategy).
 (Stripe invoice / Revolut / bank transfer) and send the file manually. Slower, but you
 can earn from the first visitor.
 
-## 3. Domain & email (≈30 minutes, optional but recommended)
+## 3. Domain & email (mostly DONE — ≈10 minutes left)
 
-- Register **leanta.ie** (the brand docs assume it; .ie requires showing a connection
-  to Ireland — sole trader/IE address qualifies). Add the domain to the Vercel project
-  → set the two DNS records the dashboard shows.
-- Set up `hello@leanta.ie` (Google Workspace or an alias/forward) and replace
-  `samuel.vyhnanek+leanta@gmail.com` in `assets/checkout-config.js` (the `contactEmail`
-  value) — buy buttons and the contact links pick it up; also update the hardcoded
-  mailto links in page footers (search the repo for `+leanta@`).
-- Update `<title>`/OG tags canonical domain when live.
+- [x] **leanta.ie is owned and verified** (Zoho org "Leanta", verified 27/05/2026).
+- [x] **hello@leanta.ie is live on Zoho Workplace** (subscription active 13/05/2026,
+      mail sending confirmed). The whole site — contact links, buy-button mailtos,
+      legal pages — already uses `hello@leanta.ie` (09/06/2026).
+- [ ] **Point the web side of leanta.ie at the host** — add the domain in the Vercel
+      (or Netlify) dashboard and set ONLY the records it asks for:
+      apex `A` (or `ALIAS`) + `www` `CNAME`.
+      ⚠️ **Do NOT touch the existing Zoho records** (`MX`, `SPF/TXT`, `DKIM`) or
+      hello@leanta.ie stops receiving mail. Web and mail records coexist fine.
+- [ ] Update `<title>`/OG tags canonical domain when leanta.ie is live.
 
 ## 4. First-week traffic (the funnel, MONETIZATION_BRIEF §7)
 
