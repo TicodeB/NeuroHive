@@ -99,8 +99,22 @@
     });
   }
 
+  /* ---- Scroll reveal (progressive enhancement, reduced-motion safe) ---- */
+  function initReveal() {
+    if (!("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var targets = document.querySelectorAll(".card, .sheet-mock, .quiz-q");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    targets.forEach(function (t) { t.classList.add("reveal"); io.observe(t); });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderBuyButtons();
     initQuiz();
+    initReveal();
   });
 })();

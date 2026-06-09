@@ -62,14 +62,19 @@ of Record: collects AND remits EU VAT per buyer country, you never file; effecti
 ~6.5% + $0.50. Gumroad = pre-vetted fallback. Etsy = discovery channel only.
 
 1. Create the store at lemonsqueezy.com → connect your Irish bank (SEPA) → verify ID.
-2. Create 4 products and upload the files from `asset-forge/products/`:
+2. Create **8 products** and upload the files from `asset-forge/products/`:
    | Product | Price | File(s) |
    |---|---|---|
    | Compliance Readiness Check | €29 | `P13_Compliance_Gap_Analysis_Mock_Audit.xlsx` |
    | Café & Restaurant Compliance Pack | €34 | `P1_Cafe_Restaurant_Compliance_Pack.xlsx` |
    | Hospitality Operations & GP Bundle | €49 | `P2_Hospitality_Operations_GP_Bundle.xlsx` |
    | Hospitality Pro Bundle | €69 | P1 + P2 files together |
-   Listing copy: copy/paste from each product's README in `asset-forge/products/`.
+   | H&S Safety Statement Builder | €19 | `P3_HS_Safety_Statement_Builder.xlsx` |
+   | Cashflow & P&L Tracker | €24 | `P4_Cashflow_PL_Tracker.xlsx` |
+   | Fire Safety Register & Checks Log | €15 | `P5_Fire_Safety_Register.xlsx` |
+   | Staff Training & Induction Matrix | €15 | `P12_Staff_Training_Matrix.xlsx` |
+   Listing copy: `marketing/listings_etsy_gumroad.md` + per-product READMEs.
+   Checkout config keys: p13, p1, p2, bundle, p3, p4, p5, p12.
 3. In each product enable: **immediate-delivery / 14-day-withdrawal consent checkbox**
    (LS provides), license keys + update delivery.
 4. Copy each product's **Buy link** into `assets/checkout-config.js` → `checkoutUrl`.

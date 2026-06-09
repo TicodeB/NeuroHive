@@ -33,6 +33,26 @@ window.LEANTA = {
       name: "Hospitality Pro Bundle (Compliance + Operations)",
       price: "€69",
       checkoutUrl: ""
+    },
+    p3: {
+      name: "H&S Risk Assessment & Safety Statement Builder",
+      price: "€19",
+      checkoutUrl: ""
+    },
+    p4: {
+      name: "Cashflow & P&L Tracker",
+      price: "€24",
+      checkoutUrl: ""
+    },
+    p5: {
+      name: "Fire Safety Register & Checks Log",
+      price: "€15",
+      checkoutUrl: ""
+    },
+    p12: {
+      name: "Staff Training & Induction Matrix",
+      price: "€15",
+      checkoutUrl: ""
     }
   }
 };
