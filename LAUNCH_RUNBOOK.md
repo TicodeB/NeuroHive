@@ -28,13 +28,26 @@ and **direct checkout switches on by pasting URLs into one file** — no rebuild
 
 ## 1. Make the site public (≈10 minutes)
 
-1. **Merge the PR** for branch `claude/vigilant-bell-sn55pv` into `main`.
-2. **Vercel** (vercel.com → project `neuro-hive`):
-   - The project currently returns **403** publicly → Settings → Deployment Protection
-     → set to **Disabled** for Production (it's a public storefront).
-   - Confirm: Production Branch = `main`, Framework = Other, no build command
-     (static, served from repo root). Trigger a redeploy if needed.
-   - Verify https://neuro-hive.vercel.app loads the Leanta landing page.
+> **Two hosts are already attached to this repo** — both built PR #20 successfully:
+> - **Vercel** project `neuro-hive` → production `https://neuro-hive.vercel.app`
+> - **Netlify** project `graceful-toffee-4a8918` → public PR preview:
+>   `https://deploy-preview-20--graceful-toffee-4a8918.netlify.app`
+>   (click it now to see the site before merging)
+>
+> *Note: Claude's sandbox cannot reach external sites (egress returns 403
+> `host_not_allowed` for every domain), so public reachability could not be verified
+> from the session — check the URLs in your own browser.*
+
+1. **Preview the site** at the Netlify deploy-preview URL above; then **merge the PR**
+   for branch `claude/vigilant-bell-sn55pv` into `main`. Both hosts auto-deploy `main`.
+2. **Pick the primary host** (either is fine for a static site):
+   - Vercel: if `https://neuro-hive.vercel.app` shows an auth wall / 403 in your
+     browser, Settings → Deployment Protection → **Disabled** for Production.
+     `vercel.json` (headers, noindex on downloads) only takes effect here.
+   - Netlify: `https://graceful-toffee-4a8918.netlify.app` should serve immediately
+     after merge with no settings changes. (If you keep Netlify long-term, mirror the
+     `vercel.json` headers in a `_headers` file — ask Claude.)
+3. Verify the landing page, quiz, one product page and a demo download all work.
 3. ⚠️ **Privacy of the repo (do after Vercel is connected & deploying):** this repo is
    currently **PUBLIC** and contains the FULL paid workbooks under
    `asset-forge/products/*.xlsx` (and in git history). Anyone who finds it gets the
