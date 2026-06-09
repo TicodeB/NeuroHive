@@ -1,0 +1,32 @@
+# Netlify config — blocks the paid product files and project internals from being
+# served. force = true makes these win over existing static files.
+
+[[redirects]]
+  from = "/asset-forge/*"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/neurodiverse_branding_website.zip"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/LAUNCH_RUNBOOK.md"
+  to = "/"
+  status = 302
+  force = true
+
+[[headers]]
+  for = "/downloads/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"

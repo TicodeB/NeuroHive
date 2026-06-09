@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free readiness check — “Would I pass an inspection tomorrow?” | Leanta</title>
+<meta name="description" content="Free 2-minute self-check for cafés, restaurants and food businesses: 10 questions, scored like an auditor would, with a traffic-light verdict. Runs entirely in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/leanta.css">
+<script src="assets/checkout-config.js" defer></script>
+<script src="assets/leanta.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Leanta home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Lean<span>ta</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="index.html#products">Toolkits</a>
+      <a href="products/tools.html">À-la-carte tools</a>
+      <a href="services.html">Agency</a>
+      <a href="insights.html">Insights</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap" style="max-width:760px">
+      <p class="kicker">Free readiness check</p>
+      <h1>Would you pass an inspection tomorrow?</h1>
+      <p>Answer honestly — <strong>Yes</strong> only if you could put the record in an inspector’s hands today. Ten questions, scored the same way the full Readiness Check workbook scores you (🟢 ≥85% · 🟠 60–84% · 🔴 &lt;60%).</p>
+      <p class="fineprint">100% private: this page sends nothing anywhere. Your answers never leave your browser.</p>
+
+      <form id="quiz-form">
+        <div class="quiz-q"><h3>1. Do you have a written, up-to-date HACCP / food-safety plan that matches your current menu and process?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q1" value="100">Yes</label>
+            <label><input type="radio" name="q1" value="50">Partly</label>
+            <label><input type="radio" name="q1" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>2. Could you show today’s (or the most recent) temperature records for every fridge, freezer and hot-hold unit?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q2" value="100">Yes</label>
+            <label><input type="radio" name="q2" value="50">Partly</label>
+            <label><input type="radio" name="q2" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>3. Is there a 14-allergen matrix covering every item you serve, updated when the menu changed last?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q3" value="100">Yes</label>
+            <label><input type="radio" name="q3" value="50">Partly</label>
+            <label><input type="radio" name="q3" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>4. Do you run a cleaning &amp; sanitation schedule with sign-offs that are actually completed?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q4" value="100">Yes</label>
+            <label><input type="radio" name="q4" value="50">Partly</label>
+            <label><input type="radio" name="q4" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>5. Could you trace any ingredient back to its supplier and delivery within 10 minutes?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q5" value="100">Yes</label>
+            <label><input type="radio" name="q5" value="50">Partly</label>
+            <label><input type="radio" name="q5" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>6. Do you have a written H&amp;S risk assessment / safety statement reviewed in the last 12 months?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q6" value="100">Yes</label>
+            <label><input type="radio" name="q6" value="50">Partly</label>
+            <label><input type="radio" name="q6" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>7. Is your fire register current — alarms, extinguishers, emergency lighting and exits checked and logged on schedule?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q7" value="100">Yes</label>
+            <label><input type="radio" name="q7" value="50">Partly</label>
+            <label><input type="radio" name="q7" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>8. Does every staff member have dated training records (induction, hygiene, allergens, manual handling) before working the floor?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q8" value="100">Yes</label>
+            <label><input type="radio" name="q8" value="50">Partly</label>
+            <label><input type="radio" name="q8" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>9. When something goes wrong (failed temp, pest sighting, complaint), do you log it and record the corrective action taken?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q9" value="100">Yes</label>
+            <label><input type="radio" name="q9" value="50">Partly</label>
+            <label><input type="radio" name="q9" value="0">No</label>
+          </div>
+        </div>
+        <div class="quiz-q"><h3>10. If an inspector walked in right now, could you hand over all of the above within 15 minutes?</h3>
+          <div class="opts">
+            <label><input type="radio" name="q10" value="100">Yes</label>
+            <label><input type="radio" name="q10" value="50">Partly</label>
+            <label><input type="radio" name="q10" value="0">No</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="font-size:1.1rem">Get my verdict</button>
+      </form>
+
+      <div id="quiz-result" role="status" aria-live="polite">
+        <p class="kicker">Your readiness score</p>
+        <p class="score" id="quiz-score">—</p>
+        <p style="font-size:1.15rem; font-weight:700" id="quiz-verdict"></p>
+        <p id="quiz-detail"></p>
+        <hr style="border:none; border-top:1px solid rgba(0,0,0,.15); margin:1.2rem 0">
+        <p><strong>Next steps:</strong></p>
+        <p style="display:flex; gap:.7rem; flex-wrap:wrap">
+          <a class="btn btn-primary" href="products/p13.html">Get the full Readiness Check — €29</a>
+          <a class="btn" href="downloads/P13_DEMO_Compliance_Gap_Analysis_Mock_Audit.xlsx" download>Download the free demo workbook</a>
+        </p>
+        <p class="fineprint">This 10-question check is indicative only. The full workbook scores 26 clauses + a 20-question mock audit, and prioritises your gaps. Not legal advice; no tool can guarantee an inspection outcome.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h4>Leanta</h4>
+      <p>Operations &amp; compliance toolkits for Irish and EU food businesses.</p>
+    </div>
+    <div>
+      <h4>Toolkits</h4>
+      <p><a href="products/p13.html">Readiness Check — €29</a><br>
+         <a href="products/p1.html">Compliance Pack — €34</a><br>
+         <a href="products/p2.html">Operations &amp; GP — €49</a><br>
+         <a href="products/bundle.html">Pro Bundle — €69</a><br>
+         <a href="products/tools.html">À-la-carte tools — from €15</a></p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <p><a href="services.html">Agency services</a><br>
+         <a href="insights.html">Insights</a><br>
+         <a href="legal/terms.html">Terms, licence &amp; refunds</a><br>
+         <a href="legal/privacy.html">Privacy</a><br>
+         <a href="mailto:hello@leanta.ie">Contact</a></p>
+    </div>
+    <div class="legalline">© 2026 Leanta · Ireland · Templates are not legal advice — adapt to your premises.</div>
+  </div>
+</footer>
+
+</body>
+</html>

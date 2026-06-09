@@ -1,3 +1,50 @@
+## STATE — 09/06/2026 (LAUNCH SESSION — post-project)
+**LAUNCH:** Leanta storefront built at repo ROOT (outside `asset-forge/`) on branch
+`claude/vigilant-bell-sn55pv` — landing + free "Will I pass?" quiz + product pages
+(P13 €29 · P1 €34 · P2 €49 · Hospitality Pro Bundle €69) + legal pages + demo
+downloads + config-driven checkout (`assets/checkout-config.js`: empty URL ⇒ email
+pre-order; paste LS/Stripe URL ⇒ Buy now). Deploys via the Vercel project already
+attached to this repo (`neuro-hive.vercel.app`, currently 403 = deployment protection).
+**Manual go-live steps (Samuel) live in `/LAUNCH_RUNBOOK.md`** — merge PR → disable
+Vercel deployment protection → make repo PRIVATE (full paid xlsx are public!) → LS
+KYC → paste checkout URLs. Site copy EN-only (SK gated on native pass, per rule).
+
+**SAME-DAY EXTENSION (CEO sprint, Fri 12/06 deadline):** (1) **4 new à-la-carte
+products built** — P3 €19 / P4 €24 / P5 €15 / P12 €15 via `scripts/build_alacarte_tools.py`
+(composes the validated P1/P2 sheet builders; full+DEMO; zip/XML+tab+merge validated;
+demos in site `/downloads/`; see `products/TOOLS_README.md`). Catalogue now **8 SKUs**.
+(2) **Design v2 "Emerald Mesh"** — light cream/gloss/glassmorphism (NO dark bg per
+Samuel), 3D orbs, button sheen, scroll-reveal (reduced-motion safe). (3) **Security:**
+`.vercelignore` + `netlify.toml` block `asset-forge/` (paid files) from both hosts;
+repo-private still pending Samuel. (4) **Agency arm added** — `services.html` (Lean
+Six Sigma + AI, on-site, 8 verticals) + `insights.html` whitepaper + grant funnel
+(LEO Digital for Business fully-funded; Grow Digital Voucher €5k/50%; Lean for Micro
+— verified live 09/06/2026, re-verify at use). (5) **`marketing/`** — sales playbook,
+flywheel/moat strategy (incl. NotebookLM sourcebook + Skool + A4 poster), listings,
+posts, nurture emails. (6) hello@leanta.ie wired site-wide; leanta.ie @ Register 365;
+leanta.sk @ Websupport (alias info@leanta.sk). Target: €2,000 revenue month 1 (10×
+tool spend); pricing experiments per §41.
+
+### ▶️ NEXT SESSION (run on branch **`claude/vigilant-bell-sn55pv`** until PR #20 merges; after merge → `main`)
+1. **Samuel's physical steps first** (LAUNCH_RUNBOOK.md): merge PR #20 → check
+   site public on both hosts → **repo PRIVATE** → LS KYC → paste 8 checkout URLs
+   into `assets/checkout-config.js` → test-purchase. Stripe alternative: re-run
+   the Stripe MCP OAuth in the new session (old URL expires) and Claude wires
+   Payment Links.
+2. **Then Claude executes SALES_PLAYBOOK.md** (marketing/): Etsy listings from
+   `listings_etsy_gumroad.md`, posts from `launch_posts.md`, nurture from
+   `email_nurture.md` (Gmail drafts), poster print (marketing/poster_a4.html →
+   browser print → A4), NotebookLM: upload `LEANTA_STORY_SOURCEBOOK.md`.
+3. **Deferred build queue:** P6–P11 + P14–P21 packs (needs SK backfill ids 21–54
+   first — bilingual rule); SK storefront on leanta.sk (needs native SK pass);
+   preview screenshots for listings; Skool community setup (FLYWHEEL_MOAT_STRATEGY §d);
+   ESP for nurture sequence; Vercel/Netlify old-deploy purge (leak hygiene).
+4. **Sources of truth:** LAUNCH_RUNBOOK.md (go-live) · marketing/SALES_PLAYBOOK.md
+   (week-1 selling) · marketing/FLYWHEEL_MOAT_STRATEGY.md (moat/flywheel/edu) ·
+   MONETIZATION_BRIEF.md §7–8 (funnel/moat doctrine) · this handover (state).
+
+---
+
 ## STATE — 30/05/2026 21:30
 Project: ASSET-FORGE
 Phase last completed: 12 — 🎁 Build a flagship compliance pack (BONUS) ✅ COMPLETE — **PROJECT COMPLETE (13/13 sessions)**

@@ -1,0 +1,6 @@
+# Files excluded from Vercel deployments — the full PAID workbooks and project
+# internals must never be servable from the public site. Free demos live in /downloads.
+asset-forge
+neurodiverse_branding_website.zip
+.claude
+LAUNCH_RUNBOOK.md
