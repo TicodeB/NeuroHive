@@ -1,3 +1,19 @@
+## STATE — 09/06/2026 ~20:30 (LAUNCH-WEEK SESSION 2 — Tuesday gate check + sales machinery execution)
+**Branch:** `claude/trusting-noether-rxejqv` (= vigilant-bell 6420d2d + this session; PR based on vigilant-bell so it rides PR #20 into main).
+
+### ✅ DONE THIS SESSION
+- **PR #20 flipped draft → READY FOR REVIEW** — Samuel's merge is now one click (github.com/TicodeB/NeuroHive/pull/20).
+- **Gate status verified (Tue checklist, playbook §1):** repo **STILL PUBLIC** (paid files + history exposed — flip to PRIVATE remains the #1 manual step, Settings → General → Danger Zone, AFTER merging #20); `assets/checkout-config.js` all 8 SKUs in email pre-order mode = correct day-one state; Vercel bot on #20 says deploy **Ready** and Netlify preview **ready** → the 403s curl gets from this sandbox are egress, NOT a broken site — Samuel must browser-check neuro-hive.vercel.app + the Netlify URL.
+- **Gmail recon:** NO pre-orders at hello@leanta.ie yet (forwards visible in Gmail). ⚠️ **Stripe emailed "[Action required] Provide information about Leanta" twice (28/05 + 04/06)** — Stripe account restricted pending info; only matters if the Stripe-fallback path is wanted (VAT caveat: Stripe ≠ MoR → conflicts with locked stay-non-registered/MoR decision; LS primary stands).
+- **6 Gmail drafts created in samuel.vyhnanek@gmail.com** (addressed to self; swap recipient + [bracketed] fields, delete marker line): §A nurture e-mails 1–5 + §B pre-order reply. Real URLs filled (leanta.ie/products/{p1,p13,bundle,tools}.html); unsubscribe = reply-based (no ESP yet — swap in link when ESP chosen); §B LS-URL placeholder kept.
+
+### ▶️ NEXT (launch week — playbook §1 is the source of truth)
+- **Samuel TONIGHT (Tue):** merge #20 → repo PRIVATE → browser-check both hosts (paid paths blocked, demos download) → quiz end-to-end on phone → join 3 FB groups. If DNS not yet pointed, share vercel.app links, not leanta.ie.
+- **Samuel WED:** LS KYC → upload 8 products → paste checkout URLs into `assets/checkout-config.js` (on main post-merge) → real test purchase. Answer Stripe's action-required only if fallback wanted.
+- **Claude next session:** verify merge + checkout URLs live; Etsy listing support (Thu) from `marketing/listings_etsy_gumroad.md`; Friday posts staged from `launch_posts.md`; poster QR (replace placeholder with real QR → leanta.ie/quiz.html) printable on request. Deferred queue unchanged (SK backfill ids 21–54, P6–P11/P14–P21, ESP, Skool, deploy purge).
+
+---
+
 ## STATE — 09/06/2026 (LAUNCH SESSION — post-project)
 **LAUNCH:** Leanta storefront built at repo ROOT (outside `asset-forge/`) on branch
 `claude/vigilant-bell-sn55pv` — landing + free "Will I pass?" quiz + product pages
