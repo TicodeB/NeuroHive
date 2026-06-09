@@ -94,11 +94,26 @@ can earn from the first visitor.
 - [x] **hello@leanta.ie is live on Zoho Workplace** (subscription active 13/05/2026,
       mail sending confirmed). The whole site — contact links, buy-button mailtos,
       legal pages — already uses `hello@leanta.ie` (09/06/2026).
+- [x] **leanta.sk is owned too** (Websupport.sk, paid 21/05/2026 — DNS lives in the
+      Websupport panel). Mail strategy: **no second mailbox** — `info@leanta.sk` runs
+      as a sender alias on the same leanta.ie Zoho mailbox (switch the From address
+      in Zoho webmail when writing to Slovak customers).
 - [ ] **Point the web side of leanta.ie at the host** — add the domain in the Vercel
       (or Netlify) dashboard and set ONLY the records it asks for:
-      apex `A` (or `ALIAS`) + `www` `CNAME`.
+      apex `A` (or `ALIAS`) + `www` `CNAME`. DNS for leanta.ie is managed at
+      **Register 365**.
       ⚠️ **Do NOT touch the existing Zoho records** (`MX`, `SPF/TXT`, `DKIM`) or
       hello@leanta.ie stops receiving mail. Web and mail records coexist fine.
+- [ ] **Alias deliverability check (one-time):** sending as `info@leanta.sk` only
+      stays out of spam if **leanta.sk's DNS at Websupport carries Zoho's SPF (TXT)
+      and DKIM records** for that domain alias. Verify: send a test from
+      info@leanta.sk to a Gmail address → open ⋮ → "Show original" → SPF and DKIM
+      must both say PASS for the leanta.sk sender. If not, add the records Zoho Mail
+      Admin shows under Domains → leanta.sk.
+- [ ] **Park leanta.sk usefully:** until the Slovak site ships (gated on the native
+      SK copy pass), set a 301 redirect leanta.sk → leanta.ie (Websupport panel or
+      add it as a redirect domain on the host) so the domain isn't dead and collects
+      any type-in traffic.
 - [ ] Update `<title>`/OG tags canonical domain when leanta.ie is live.
 
 ## 4. First-week traffic (the funnel, MONETIZATION_BRIEF §7)
