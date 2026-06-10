@@ -18,6 +18,12 @@ window.LEANTA = {
    * Empty "" -> the buttons fall back to email so nothing dead-ends. */
   contactPhone: "",
 
+  /* Lea's 3D pet (story page /v4/). Remix the Omma community pet
+   * (https://omma.build/community/i6ttegp2zyw1) in your own Omma/Spline
+   * account, publish it, and paste the public scene/embed URL here.
+   * Empty "" -> the built-in animated SVG pet is used instead. */
+  ommaPetUrl: "",
+
   products: {
     p13: {
       name: "Compliance Readiness Check (Gap-Analysis & Mock-Audit)",

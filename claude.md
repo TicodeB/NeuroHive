@@ -8,15 +8,21 @@ After each push to designated branches, Vercel auto-deploys to preview URLs:
 Branch: `claude/trusting-noether-rxejqv`
 **Preview:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/
 
-This is the light-mode noomo-style storytelling page with:
-- Preloader (0–100 counter)
-- 5 immersive chapters (The Folder, The Tuesday, The Numbers, The Visit, The Proof)
-- Quiz funnel finale
-- Full dark cinematic styling (Anton display + Plex Mono labels)
-- Fallback poster cards for video cases (awaiting Suno music + case films)
+v4.1 — full noomo architecture (10/06):
+- Fixed three.js scene + 760vh scroll runway: cinematic camera flies a spline
+  through 5 stations (hero → paper-storm chaos → ordered grid → KPI bars →
+  gold portal); glass panels fade/slide along the way; mouse parallax
+- Glassmorphism cards, scroll-progress hairline, preloader, custom cursor
+- Sound toggle ALWAYS visible — WebAudio ambient pad now, auto-swaps to
+  `v4/assets/leanta-theme.mp3` when the Suno track is dropped in
+- Lead-catcher form (mailto/WhatsApp/SMS compose — nothing posted by the page)
+- LEA pet assistant: animated SVG pet (or Omma/Spline embed via
+  `LEANTA.ommaPetUrl` in assets/checkout-config.js) + on-device retrieval chat
+  with EU AI Act disclosure; `LEA_UPGRADE` marker = real-model swap point
+- Mobile / reduced-motion / no-WebGL / no-JS ⇒ readable flow-mode document
 
-**Status:** ✅ Fully functional mockup — ready for review and minor styling tweaks
-**Media pending:** `v4/assets/leanta-theme.mp3` (Suno) · `v4/assets/case-{1..3}.mp4` (Samuel's Flow/Seedance renders)
+**Status:** ✅ Fully functional mockup — needs Samuel's browser check
+**Media pending:** `v4/assets/leanta-theme.mp3` (Suno) · `v4/assets/case-{1..3}.mp4` (Flow/Seedance) · Omma pet URL
 
 ---
 
