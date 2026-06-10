@@ -9,7 +9,23 @@ Branch: `claude/trusting-noether-rxejqv`
 **Preview:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/
 (preloader plays once per session — open a private window to replay it)
 
-v4.2 — vivid pass + Valentime motion (10/06, after Samuel's verdict):
+**v4.3 — "THE DESCENT" (10/06, Samuel's second verdict — CURRENT):**
+- Bright glassmorphism theme `#f2efe8`; dark theme + 3D shapes REMOVED entirely
+  (no three.js, no CDN dependencies at all)
+- Camera descends through three real environments (nano banana 2 pro backdrops,
+  AI-tagged): retail shop → manufacturing floor → hotel lobby; sticky layers,
+  backdrop pan + blur-out on exit, floor-indicator elevator on the right
+- Each environment: glass card with sector pains, CTA + lead magnet, and a
+  companion picker (Lea sprout · Penny fox · Mossy sheep) — the chosen pet
+  rides the Lea chat orb; `LEANTA.ommaPetUrl` still overrides with Omma scene
+- "THE LOGIC, UNFOLDED" — SVG mind map that unfolds in steps (why-yes logic)
+- Pricing section: WITH the grant (€200, credited) vs WITHOUT (quote first)
+- Brand: glyph in single emerald accent, thinner handwritten "agency",
+  frosted brandpill (always legible on any contrast), typewriter hero line
+- Asset slots still auto-activate: `leanta-theme.mp3` (Suno) ·
+  `case-{1..3}.mp4` · Omma pet URL — see `v4/assets/MEDIA_BRIEFS.md`
+
+v4.2 — vivid pass + Valentime motion (10/06, superseded same day):
 - Palette brightened: neon mint `#00f07a` · signal yellow `#f5c400` · electric
   violet `#8d5cff` accent (preloader + brand glyph)
 - Brand: Bebas Neue wordmark + handwritten Caveat "agency" signature; the final
