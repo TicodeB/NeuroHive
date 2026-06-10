@@ -47,10 +47,15 @@
   <a class="m" data-hover href="/quiz.html">Readiness check</a>
   <a class="m" data-hover href="/grants.html">Grants</a>
 </nav>
-<button class="chrome bl sound m glasspill" id="sound" type="button" aria-pressed="false" title="Ambient sound — placeholder pad until the studio track lands. Off by default.">
-  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-  <span id="sound-label">Sound off</span>
-</button>
+<div class="chrome bl soundwrap">
+  <button class="sound m glasspill" id="sound" type="button" aria-pressed="false" title="Music — off by default, studio tracks by Suno on the way.">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span id="sound-label">Music off</span>
+  </button>
+  <button class="m glasspill mode" id="soundmode" type="button" aria-pressed="false" title="Switch between ambient and ADHD-focus soundtrack">
+    <span id="soundmode-label">Ambient</span>
+  </button>
+</div>
 
 <!-- floor indicator — the descent elevator -->
 <div id="floors" class="m" aria-hidden="true">
@@ -60,8 +65,13 @@
   <span data-fl="3">03&nbsp;·&nbsp;Lobby</span>
 </div>
 
-<!-- ============ HERO — bright, monumental ============ -->
+<!-- ============ HERO — bright, monumental, alive ============ -->
 <header id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hb-img" data-img="/v4/assets/img/bg-1-retail.jpg"></div>
+    <div class="hb-orb o1"></div><div class="hb-orb o2"></div><div class="hb-orb o3"></div>
+    <div class="hb-sweep"></div>
+  </div>
   <p class="m strap vt">
     <span class="vtl t" aria-hidden="true"><i class="l"></i><i class="dia"></i><i class="r"></i></span>
     Operations · Compliance · Ireland — Ferns, Co. Wexford
@@ -92,7 +102,7 @@
           <li>Two-line wastage count that shows where margin leaks</li>
         </ul>
         <div class="cta-row">
-          <a class="btn-x" data-hover href="/quiz.html">Free 2-min readiness check</a>
+          <a class="btn-x type-cta" data-hover href="/quiz.html"><span class="tcl" data-type="Free 2-min readiness check">Free 2-min readiness check</span></a>
           <a class="btn-x ghost" data-hover href="/index.html#products">Shop toolkit — from €15</a>
         </div>
         <div class="petline">
@@ -118,7 +128,7 @@
           <li>Allergen declarations tied to the live recipe sheet</li>
         </ul>
         <div class="cta-row">
-          <a class="btn-x" data-hover href="/quiz.html">Will you pass? Free check</a>
+          <a class="btn-x type-cta" data-hover href="/quiz.html"><span class="tcl" data-type="Will you pass? Free check">Will you pass? Free check</span></a>
           <a class="btn-x ghost" data-hover href="/index.html#products">Compliance pack — €34</a>
         </div>
         <div class="petline">
@@ -144,7 +154,7 @@
           <li>Labour % tile that says when to trim the roster</li>
         </ul>
         <div class="cta-row">
-          <a class="btn-x" data-hover href="/quiz.html">Free readiness check</a>
+          <a class="btn-x type-cta" data-hover href="/quiz.html"><span class="tcl" data-type="Free readiness check">Free readiness check</span></a>
           <a class="btn-x ghost" data-hover href="/index.html#products">Hospitality bundle — €69</a>
         </div>
         <div class="petline">
@@ -230,6 +240,75 @@
   </div>
 </section>
 
+<!-- ============ WHAT YOU GET — glass bento ============ -->
+<section class="ch" id="bento">
+  <div class="inner">
+    <p class="m em rv">Everything in the box</p>
+    <h2 class="d title-l rv">WHAT LANDS ON<br>YOUR DESK</h2>
+    <div class="bento rv">
+      <div class="bx glass b-wide">
+        <p class="m em">The workbook</p>
+        <p class="d bnum">1 FILE</p>
+        <p class="bt">Compliance + operations + dashboard in one Excel/Sheets workbook. Every screenshot on this site is the real thing.</p>
+      </div>
+      <div class="bx glass">
+        <p class="m em">Records</p>
+        <p class="bt">HACCP · allergens · temps · fire · training · traceability — seconds to keep.</p>
+      </div>
+      <div class="bx glass">
+        <p class="m em">Numbers</p>
+        <p class="bt">GP% · labour · wastage · cash — every tile prescribes Monday's action.</p>
+      </div>
+      <div class="bx glass b-tall">
+        <p class="m em">The grant pack</p>
+        <p class="d bnum">€200</p>
+        <p class="bt">On-site audit + application-ready LEO pack. Approved → credited. Not approved → still yours.</p>
+      </div>
+      <div class="bx glass">
+        <p class="m em">Updates</p>
+        <p class="bt">Rule changes ship to you free. No subscription trap.</p>
+      </div>
+      <div class="bx glass">
+        <p class="m em">Message-first</p>
+        <p class="bt">We reply by message within a working day. No calls unless you ask.</p>
+      </div>
+      <div class="bx glass b-wide">
+        <p class="m em">GDPR, properly</p>
+        <p class="bt">No tracking, quiz runs in your browser, chat never leaves your device. You message first — that's the consent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO WE'D LOVE TO WORK WITH — carousel ============ -->
+<section class="ch" id="dream" style="padding-top:0">
+  <div class="inner">
+    <p class="m em rv">The wishlist — said out loud</p>
+    <h2 class="d title-l rv">WHO WE'D LOVE<br>TO WORK WITH</h2>
+    <p class="m soft rv">Dream clients, not affiliations — nobody on this reel has endorsed us (yet).</p>
+  </div>
+  <div class="dreambelt rv" aria-label="Businesses we would love to work with">
+    <div class="belt">
+      <span class="dc glass">The café with the queue out the door</span>
+      <span class="dc glass">The bakery supplying three SuperValus</span>
+      <span class="dc glass">The 12-room guesthouse by the sea</span>
+      <span class="dc glass">The butcher with his own smokehouse</span>
+      <span class="dc glass">The electrician with two vans and no evenings</span>
+      <span class="dc glass">The cheesemaker chasing BRCGS</span>
+      <span class="dc glass">The pub that started doing food</span>
+      <span class="dc glass">The haulier with five trucks and a shoebox of dockets</span>
+      <span class="dc glass">The café with the queue out the door</span>
+      <span class="dc glass">The bakery supplying three SuperValus</span>
+      <span class="dc glass">The 12-room guesthouse by the sea</span>
+      <span class="dc glass">The butcher with his own smokehouse</span>
+      <span class="dc glass">The electrician with two vans and no evenings</span>
+      <span class="dc glass">The cheesemaker chasing BRCGS</span>
+      <span class="dc glass">The pub that started doing food</span>
+      <span class="dc glass">The haulier with five trucks and a shoebox of dockets</span>
+    </div>
+  </div>
+</section>
+
 <!-- ============ THE PROOF ============ -->
 <section class="ch" id="ch5">
   <div class="inner">
@@ -298,6 +377,7 @@
         <div class="fld"><input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name"></div>
         <div class="fld"><input id="f-biz" name="biz" type="text" placeholder="Business + town (e.g. café, Gorey)"></div>
         <div class="fld"><input id="f-pain" name="pain" type="text" placeholder="What eats your week?"></div>
+        <div class="fld"><input id="f-phone" name="phone" type="tel" placeholder="Mobile (optional — for an SMS action plan)" autocomplete="tel"></div>
         <p class="m" style="margin:1.4rem 0 .6rem">Where would you start?</p>
         <div class="radio-row" role="radiogroup" aria-label="Where would you start">
           <input type="radio" id="b1" name="budget" value="A toolkit (€15–69)"><label for="b1" data-hover>Toolkit €15–69</label>

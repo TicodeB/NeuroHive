@@ -16,6 +16,14 @@
   if (reduced) document.documentElement.classList.add("reduced");
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+  /* backgrounds stay STILL until the visitor moves the mouse — then alive */
+  var gmx = 0, gmy = 0;                       /* normalized -1..1 */
+  addEventListener("pointermove", function (e) {
+    if (!document.body.classList.contains("kinetic")) document.body.classList.add("kinetic");
+    gmx = (e.clientX / innerWidth - 0.5) * 2;
+    gmy = (e.clientY / innerHeight - 0.5) * 2;
+  }, { passive: true });
+
   /* ---------- preloader ------------------------------------------------- */
   var pre = document.getElementById("pre");
   function killPre() { if (pre) { pre.classList.add("done"); pre.setAttribute("aria-hidden", "true"); } }
@@ -87,11 +95,19 @@
 
   /* env eyebrows retype each time their environment goes live */
   function typeEyebrow(env) {
+    if (reduced) return;
     var ty = env.querySelector(".ty");
-    if (!ty || reduced) return;
-    if (ty.getAttribute("data-done") === "1") return;
-    ty.setAttribute("data-done", "1");
-    typewrite(ty, ty.getAttribute("data-type"), 26);
+    if (ty && ty.getAttribute("data-done") !== "1") {
+      ty.setAttribute("data-done", "1");
+      typewrite(ty, ty.getAttribute("data-type"), 26);
+    }
+    var tcl = env.querySelector(".tcl");
+    if (tcl && tcl.getAttribute("data-done") !== "1") {
+      tcl.setAttribute("data-done", "1");
+      setTimeout(function () {
+        typewrite(tcl, tcl.getAttribute("data-type"), 30, function () { tcl.classList.add("done"); });
+      }, 700);
+    }
   }
 
   /* ---------- char-stagger titles ---------------------------------------- */
@@ -113,6 +129,18 @@
     t.setAttribute("aria-label", t.textContent);
     t.textContent = ""; t.appendChild(frag);
   });
+
+  /* ---------- hero background: image + mouse parallax -------------------- */
+  var hbImg = document.querySelector(".hb-img");
+  if (hbImg) hbImg.style.backgroundImage = "url('" + hbImg.getAttribute("data-img") + "')";
+  if (hbImg && fine && !reduced) {
+    var hpx = 0, hpy = 0;
+    (function heroPar() {
+      hpx += (gmx - hpx) * 0.04; hpy += (gmy - hpy) * 0.04;
+      hbImg.style.transform = "translate(" + (hpx * -18) + "px," + (hpy * -12) + "px) scale(1.04)";
+      requestAnimationFrame(heroPar);
+    })();
+  }
 
   /* ---------- THE DESCENT — scroll engine -------------------------------- */
   var envs = Array.prototype.slice.call(document.querySelectorAll(".env"));
@@ -151,9 +179,11 @@
           var t = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
           var bg = env.querySelector(".bg");
           if (bg && r.bottom > 0 && r.top < innerHeight) {
-            bg.style.transform = "translateY(" + ((t - 0.5) * -9) + "%) scale(" + (1.04 + t * 0.05) + ")";
-            var exit = Math.max(0, (t - 0.8) / 0.2);    /* last 20% — sink below */
-            bg.style.filter = exit > 0 ? "blur(" + (exit * 10).toFixed(1) + "px) brightness(" + (1 - exit * 0.12).toFixed(2) + ")" : "";
+            /* fly FORWARD into the room: dolly-in scale + mouse parallax */
+            var dolly = 1.02 + t * 0.16;
+            bg.style.transform = "translate(" + (gmx * -14) + "px," + ((gmy * -8) + (t - 0.5) * -26) + "px) scale(" + dolly.toFixed(3) + ")";
+            var exit = Math.max(0, (t - 0.82) / 0.18);  /* last stretch — through the far wall */
+            bg.style.filter = exit > 0 ? "blur(" + (exit * 12).toFixed(1) + "px) brightness(" + (1 + exit * 0.1).toFixed(2) + ")" : "";
           }
         }
       });
@@ -165,19 +195,15 @@
 
   /* ---------- mind map unfold -------------------------------------------- */
   var mind = document.getElementById("mind");
-  if (mind && "IntersectionObserver" in window && !reduced) {
-    var step = -1;
-    var mio = new IntersectionObserver(function (es) {
-      es.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        if (step < 0) { step = 0; mind.classList.add("s0");
-          setTimeout(function () { mind.classList.add("s1"); }, 700);
-          setTimeout(function () { mind.classList.add("s2"); }, 1700);
-          mio.disconnect();
-        }
-      });
-    }, { threshold: 0.35 });
-    mio.observe(mind);
+  if (mind && !reduced) {
+    /* the map DEVELOPS as you scroll through it: root → branches → leaves */
+    addEventListener("scroll", function () {
+      var r = mind.getBoundingClientRect();
+      var vis = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (r.height * 0.9)));
+      mind.classList.toggle("s0", vis > 0.1);
+      mind.classList.toggle("s1", vis > 0.42);
+      mind.classList.toggle("s2", vis > 0.72);
+    }, { passive: true });
   } else if (mind) {
     mind.classList.add("s0", "s1", "s2");
   }
@@ -197,11 +223,16 @@
   /* ---------- sound: always-visible toggle ------------------------------ */
   var soundBtn = document.getElementById("sound");
   var soundLabel = document.getElementById("sound-label");
-  var AUDIO_SRC = "/v4/assets/leanta-theme.mp3";
+  var modeBtn = document.getElementById("soundmode");
+  var modeLabel = document.getElementById("soundmode-label");
+  var SRC = { ambient: "/v4/assets/leanta-theme.mp3", focus: "/v4/assets/leanta-focus.mp3" };
+  var mode = "ambient";          /* ambient | focus (ADHD focus-enforcing) */
+  var engines = {};              /* per-mode engine cache */
   var engine = null;
+  var playing = false;
 
-  function mp3Engine() {
-    var a = new Audio(AUDIO_SRC); a.loop = true; a.volume = 0.35;
+  function mp3Engine(src) {
+    var a = new Audio(src); a.loop = true; a.volume = 0.35;
     return { start: function () { a.play().catch(function () {}); }, stop: function () { a.pause(); } };
   }
   function padEngine() {
@@ -245,17 +276,73 @@
       }
     };
   }
-  fetch(AUDIO_SRC, { method: "HEAD" }).then(function (r) {
-    engine = r.ok ? mp3Engine() : padEngine();
-    if (r.ok) soundBtn.title = "Theme by Suno — off until you ask.";
-  }).catch(function () { engine = padEngine(); });
+  /* ADHD focus pad — steady 8th-note pulse, narrow band, no surprises */
+  function focusPadEngine() {
+    var ctx = null, master = null, seqTimer = null, stepN = 0;
+    function build() {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain(); master.gain.value = 0.0001; master.connect(ctx.destination);
+      var filter = ctx.createBiquadFilter(); filter.type = "lowpass";
+      filter.frequency.value = 900; filter.Q.value = 0.5; filter.connect(master);
+      var drone = ctx.createOscillator(), dg = ctx.createGain();
+      drone.type = "sine"; drone.frequency.value = 98; dg.gain.value = 0.5;
+      drone.connect(dg); dg.connect(filter); drone.start();
+      var NOTES = [196, 246.9, 293.7, 246.9, 196, 293.7, 392, 293.7]; /* G pentatonic-ish loop */
+      function step() {
+        if (!ctx) return;
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = "triangle"; o.frequency.value = NOTES[stepN % NOTES.length]; stepN++;
+        g.gain.setValueAtTime(0.05, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.32);
+        o.connect(g); g.connect(filter); o.start(); o.stop(ctx.currentTime + 0.35);
+        seqTimer = setTimeout(step, 333); /* 90 BPM eighths — steady, hypnotic */
+      }
+      step();
+    }
+    return {
+      start: function () {
+        if (!ctx) build();
+        if (ctx.state === "suspended") ctx.resume();
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.exponentialRampToValueAtTime(0.06, ctx.currentTime + 0.8);
+      },
+      stop: function () {
+        if (!ctx) return;
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+        clearTimeout(seqTimer);
+      }
+    };
+  }
+
+  function engineFor(m, cb) {
+    if (engines[m]) { cb(engines[m]); return; }
+    fetch(SRC[m], { method: "HEAD" }).then(function (r) {
+      engines[m] = r.ok ? mp3Engine(SRC[m]) : (m === "focus" ? focusPadEngine() : padEngine());
+      if (r.ok) soundBtn.title = "Studio track by Suno — off until you ask.";
+      cb(engines[m]);
+    }).catch(function () {
+      engines[m] = (m === "focus" ? focusPadEngine() : padEngine());
+      cb(engines[m]);
+    });
+  }
 
   soundBtn.addEventListener("click", function () {
-    if (!engine) engine = padEngine();
-    var on = soundBtn.classList.toggle("on");
-    soundBtn.setAttribute("aria-pressed", String(on));
-    soundLabel.textContent = on ? "Sound on" : "Sound off";
-    if (on) engine.start(); else engine.stop();
+    playing = soundBtn.classList.toggle("on");
+    soundBtn.setAttribute("aria-pressed", String(playing));
+    soundLabel.textContent = playing ? "Music on" : "Music off";
+    if (playing) engineFor(mode, function (en) { engine = en; en.start(); });
+    else if (engine) engine.stop();
+  });
+  if (modeBtn) modeBtn.addEventListener("click", function () {
+    mode = mode === "ambient" ? "focus" : "ambient";
+    modeBtn.classList.toggle("focus", mode === "focus");
+    modeBtn.setAttribute("aria-pressed", String(mode === "focus"));
+    modeLabel.textContent = mode === "focus" ? "Focus" : "Ambient";
+    if (playing) {
+      if (engine) engine.stop();
+      engineFor(mode, function (en) { engine = en; en.start(); });
+    }
   });
   addEventListener("pagehide", function () { if (engine) engine.stop(); });
 
@@ -279,14 +366,29 @@
     lead.addEventListener("submit", function (e) {
       e.preventDefault();
       var gv = function (id) { return (document.getElementById(id).value || "").trim(); };
-      var name = gv("f-name"), biz = gv("f-biz"), pain = gv("f-pain");
+      var name = gv("f-name"), biz = gv("f-biz"), pain = gv("f-pain"), phone = gv("f-phone");
       var budget = (lead.querySelector('input[name="budget"]:checked') || {}).value || "Not sure yet";
       var subject = "My Tuesday — " + (biz || name || "new enquiry");
       var body = "Hi Leanta,\n\nName: " + (name || "—") +
         "\nBusiness + town: " + (biz || "—") +
         "\nWhat eats my week: " + (pain || "—") +
+        (phone ? "\nMobile for SMS plan: " + phone : "") +
         "\nWhere I'd start: " + budget +
         "\n\n(Sent from the story page — please reply by message, no call.)";
+
+      /* Twilio capture — serverless first; mailto is the always-works fallback */
+      fetch("/api/capture", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name, biz: biz, pain: pain, phone: phone, budget: budget })
+      }).then(function (r) {
+        if (r.ok) {
+          var done = document.getElementById("lead-done");
+          done.hidden = false;
+          done.textContent = phone
+            ? "Got it — your action plan lands by SMS within a working day. (A copy is drafting in your mail app too.)"
+            : "Got it — we reply within a working day. (A copy is drafting in your mail app too.)";
+        }
+      }).catch(function () {});
       var alt = document.getElementById("lead-alt");
       alt.innerHTML = "";
       if (cfg.contactPhone) {
@@ -305,6 +407,13 @@
         "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     });
   }
+
+  /* live form polish — green tick the moment a field is filled */
+  document.querySelectorAll(".fld input").forEach(function (inp) {
+    inp.addEventListener("input", function () {
+      inp.parentElement.classList.toggle("filled", inp.value.trim().length > 1);
+    });
+  });
 
   /* ====================================================================== */
   /*  COMPANIONS — three cute pets; the pick rides the Lea orb.             */
@@ -354,8 +463,14 @@
     { id: "fox",    name: "Penny", title: "Penny the fox", svg: petSVG("#ff9d5c", "#c45f1e", "#15181a", "fox") },
     { id: "sheep",  name: "Mossy", title: "Mossy the sheep", svg: petSVG("#bcb6a8", "#7d7669", "#15181a", "sheep") }
   ];
-  var petChoice = "sprout";
-  try { petChoice = localStorage.getItem("v4pet") || "sprout"; } catch (err) {}
+  /* Omma 3D companion (Samuel's pink space-fox) — becomes a real option the
+     moment LEANTA.ommaPetUrl is set; pink placeholder marks the slot till then */
+  var cfgPet = (window.LEANTA || {}).ommaPetUrl;
+  PETS.unshift({ id: "omma", name: "Nova", title: cfgPet ? "Nova — the Omma companion" : "Nova (Omma) — landing soon",
+    omma: true, svg: petSVG("#ff4fa3", "#b3186e", "#fff", "fox") });
+  var petChoice = cfgPet ? "omma" : "sprout";
+  try { petChoice = localStorage.getItem("v4pet") || petChoice; } catch (err) {}
+  if (petChoice === "omma" && !cfgPet) petChoice = "sprout";
 
   var orb = document.getElementById("lea-orb");
   var orbCore = orb ? orb.querySelector(".core") : null;
@@ -367,7 +482,7 @@
   }
   function renderOrbPet() {
     if (!orbCore) return;
-    if (cfg.ommaPetUrl) {
+    if (cfg.ommaPetUrl && petChoice === "omma") {
       var fr = document.createElement("iframe");
       fr.src = cfg.ommaPetUrl; fr.title = "Lea — Leanta's pet assistant";
       fr.loading = "lazy"; fr.setAttribute("frameborder", "0");
@@ -404,6 +519,7 @@
       b.setAttribute("aria-checked", String(pet.id === petChoice));
       b.title = pet.title; b.setAttribute("data-hover", "");
       b.innerHTML = pet.svg;
+      if (pet.omma && !cfg.ommaPetUrl) { b.disabled = true; b.style.opacity = ".45"; }
       b.addEventListener("click", function () {
         petChoice = pet.id;
         try { localStorage.setItem("v4pet", petChoice); } catch (err) {}

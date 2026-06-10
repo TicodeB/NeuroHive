@@ -469,3 +469,95 @@ html.no-js .caret { display: none; }
   #lea { right: 12px; bottom: 86px; }
   #mind .n text { font-size: 17px; }
 }
+
+/* ==========================================================================
+   v4.4 ADDITIONS — alive hero, forward dolly, bento, carousel, live forms
+   ========================================================================== */
+
+/* bigger brand pill, further off the edges */
+.tl { top: 30px; left: 44px; }
+.tr { right: 44px; }
+.brandpill .wm { font-size: 30px; }
+.brandpill .hand { font-size: 18px; }
+.brandpill { padding: .6rem 1.15rem .5rem; }
+#hero { padding-left: 8vw; padding-right: 8vw; }
+#hero .huge { font-size: clamp(70px, 15.5vw, 300px); }
+
+/* HERO BACKGROUND — still until the mouse moves, then alive */
+#hero { overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: -1; }
+.hb-img { position: absolute; inset: -6%; background-size: cover; background-position: center 30%;
+  filter: blur(34px) saturate(1.15) brightness(1.06); opacity: .5;
+  will-change: transform; transition: transform .25s ease-out; }
+.hb-img::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(242,239,232,.55), rgba(242,239,232,.82) 70%, var(--bg)); }
+.hb-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .4;
+  will-change: transform; }
+.hb-orb.o1 { width: 36vw; height: 36vw; left: -8vw; top: -10vh; background: #bfe6d2; }
+.hb-orb.o2 { width: 28vw; height: 28vw; right: -6vw; top: 30vh; background: #f0ddb2; }
+.hb-orb.o3 { width: 22vw; height: 22vw; left: 30vw; bottom: -12vh; background: #cfe3da; }
+body.kinetic .hb-orb.o1 { animation: orbFloat 16s ease-in-out infinite; }
+body.kinetic .hb-orb.o2 { animation: orbFloat 21s ease-in-out -6s infinite reverse; }
+body.kinetic .hb-orb.o3 { animation: orbFloat 18s ease-in-out -11s infinite; }
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1) }
+  33% { transform: translate(4vw,-3vh) scale(1.08) }
+  66% { transform: translate(-3vw,2vh) scale(.95) }
+}
+.hb-sweep { position: absolute; inset: 0; opacity: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.5) 48%, transparent 60%);
+  transform: translateX(-60%); }
+body.kinetic .hb-sweep { opacity: 1; animation: sweep 7s ease-in-out infinite; }
+@keyframes sweep { 0%, 55%, 100% { transform: translateX(-70%) } 25% { transform: translateX(70%) } }
+
+/* music + mode buttons */
+.soundwrap { display: flex; gap: .5rem; align-items: center; }
+.soundwrap .mode { color: var(--muted); transition: color .3s, border-color .3s; }
+.soundwrap .mode.focus { color: var(--em); border-color: var(--em); }
+
+/* typed CTA caret inside buttons */
+.type-cta .tcl { display: inline-block; min-width: 2ch; }
+.type-cta .tcl::after { content: "▎"; color: rgba(255,255,255,.8);
+  animation: caret 1s steps(1) infinite; margin-left: 1px; }
+.type-cta .tcl.done::after { content: ""; }
+
+/* glass bento grid */
+.bento { display: grid; gap: 1.1rem; margin-top: 2.4rem;
+  grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 920px) { .bento { grid-template-columns: repeat(4, 1fr); } }
+.bx { padding: 1.4rem 1.4rem 1.5rem; border-radius: 18px; display: flex;
+  flex-direction: column; gap: .5rem; transition: transform .35s cubic-bezier(.22,1,.36,1),
+  box-shadow .35s; }
+.bx:hover { transform: translateY(-5px); box-shadow: 0 30px 80px rgba(21,24,26,.2); }
+.bx .bnum { font-size: clamp(34px, 3.4vw, 58px); color: var(--em); line-height: .9; }
+.bx .bt { font-size: .92rem; color: #3a403a; line-height: 1.55; }
+@media (min-width: 920px) {
+  .b-wide { grid-column: span 2; }
+  .b-tall { grid-row: span 2; justify-content: flex-start; }
+}
+
+/* dream-clients carousel */
+.dreambelt { overflow: hidden; margin-top: 2rem; padding: 1rem 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.dreambelt .belt { display: inline-flex; gap: 1rem; white-space: nowrap;
+  animation: beltmove 38s linear infinite; will-change: transform; }
+.dreambelt:hover .belt { animation-play-state: paused; }
+@keyframes beltmove { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.dc { display: inline-flex; align-items: center; padding: .9rem 1.4rem; border-radius: 999px;
+  font-size: .95rem; color: #3a403a; }
+html.reduced .dreambelt .belt { animation: none; flex-wrap: wrap; white-space: normal; }
+
+/* live, beautiful form fields */
+.fld { position: relative; }
+.fld input { border-radius: 0; }
+.fld::after { content: "✓"; position: absolute; right: 2px; bottom: .8rem;
+  color: var(--em); font-weight: 700; opacity: 0; transform: scale(.4);
+  transition: opacity .3s, transform .35s cubic-bezier(.34,1.56,.64,1); }
+.fld.filled::after { opacity: 1; transform: scale(1); }
+.fld input:focus { box-shadow: 0 12px 24px -14px rgba(10,138,82,.5); }
+.lead-form.glass { transition: box-shadow .4s; }
+.lead-form.glass:focus-within { box-shadow: 0 30px 90px rgba(10,138,82,.22); }
+
+/* env backdrops fly FORWARD (dolly-in) — transform set by JS */
+.env .bg { transform-origin: 50% 45%; }
