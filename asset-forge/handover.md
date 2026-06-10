@@ -6,6 +6,11 @@
 - **`marketing/GROWTH_INITIATIVES_PLAN.md`** — captures ALL of Samuel's 10/06 asks: local NACE Ferns+30km plan (research agents died on session limit 09/06 — re-run queued), demo-selling angle + ranked sales ideas, video pipeline (Google Flow/Seedance/ElevenLabs/HeyGen + EU AI Act labelling note), image-gen prompt base (no-slop rule: product screenshots always real), external design-tool prompt (v0/Lovable/"omma.ai" — name unconfirmed), monthly-drop "Leanta Club" subscription design, Excel Office.js agent add-in roadmap (Sheets version exists, PR #16), gamma-grade pack design v2 (pivot-table honesty → .pbit SKU), affiliate/hardware arm guardrails, x402 token-bucket sequencing, AI-glasses rule (don't show hardware we don't own), persona "Máire" + why-NOT-buy, competitor list awaited from Samuel.
 - **`forms/CLIENT_PRELIM_RESEARCH.md`** — mandatory pre-engagement research template (stakeholders, process inventory, est. available cash, grant route majority-funded, GDPR/data-safety note; client files NEVER in a public repo).
 
+### ✅ ALSO THIS SESSION (later)
+- **Quiz v2:** industry picker (9 sectors) → 4 industry + 6 universal questions → verdict on screen → **message-first CTAs** (visitor-initiated prefilled WhatsApp/SMS/email with score+industry; activates fully when `contactPhone` set). GDPR: customer-initiated contact, no gating of the verdict.
+- **Plan §15:** channel rails decision (WhatsApp Business app NOW · sms: links NOW · WhatsApp API via Twilio/360dialog at volume, prices to verify · Telegram = Hermes ops only · iMessage skip) + **Hermes operator role & guardrails** (replies only in customer-initiated threads, approved templates, honest bot disclosure, escalation rules). Next build: 9 industry action-plan reply templates + Hermes runbook in repo.
+- **omma.build identified** = Spline's NL builder for interactive 3D sites — use to prototype hero scene/design concepts; watch runtime weight on rural mobile.
+
 ### ▶️ NEXT
 - Samuel: Tue/Wed gate steps (merge #20 → repo PRIVATE → LS KYC → checkout URLs) + fill `contactPhone` in `assets/checkout-config.js` + paste competitor list + confirm "omma.ai" service name + browser-check the 3D hero (sandbox can't render).
 - Claude: re-run §1 local-landscape + §AI-media research agents → `research/local_ferns_30km.md`; write first 3 video scripts (plan §3); Etsy listing support Thu.
