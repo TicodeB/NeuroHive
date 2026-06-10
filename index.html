@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="assets/leanta.css">
 <script src="assets/checkout-config.js" defer></script>
 <script src="assets/leanta.js" defer></script>
+<script src="assets/hero3d.js" defer></script>
 </head>
 <body>
 
@@ -25,6 +26,7 @@
       <a href="index.html#products">Toolkits</a>
       <a href="products/tools.html">À-la-carte tools</a>
       <a href="services.html">Agency</a>
+      <a href="grants.html">Grants</a>
       <a href="insights.html">Insights</a>
       <a href="quiz.html">Free readiness check</a>
       <a class="btn btn-primary" href="quiz.html">Will I pass? →</a>
@@ -34,6 +36,7 @@
 
 <main>
   <div class="hero">
+    <div class="hero-3d" id="hero3d" aria-hidden="true"></div>
     <div class="wrap">
       <p class="kicker" style="color:#e7cd72">Compliance toolkits + Lean·AI operations agency · Ireland &amp; EU</p>
       <h1>Pass your next inspection. Know your numbers. Automate the boring work.</h1>
@@ -76,6 +79,39 @@
           <span class="step-num">3</span>
           <h3>Run the numbers weekly</h3>
           <p>The Operations &amp; GP Bundle keeps you profitable once you’re legal: plate costing, wastage, labour % of sales, till reconciliation and a rolling 12-month cashflow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="oldnew">
+    <div class="wrap">
+      <p class="kicker">Show, don't tell</p>
+      <h2>The old way vs. the Leanta way</h2>
+      <p style="max-width:64ch">We don't ask you to imagine it. Every demo workbook is free, and on an agency visit we rebuild one of <em>your</em> processes in front of you — old way and new way, side by side, before you pay for anything.</p>
+      <div class="oldnew" style="margin-top:1.2rem">
+        <div class="col old">
+          <span class="tag">The old way</span>
+          <h3>Paper folders, blank pages, retyping</h3>
+          <ul>
+            <li>The compliance folder gets rebuilt in a panic the week the inspector is due.</li>
+            <li>The allergen list was made once, two menus ago, and nobody wants to open it.</li>
+            <li>Rosters start from a blank page every week; till figures are retyped at midnight.</li>
+            <li>Quotes and invoices written from scratch — so invoicing slips, and cash slips with it.</li>
+            <li>You find out the margin moved when the accountant tells you, months later.</li>
+          </ul>
+        </div>
+        <div class="col new" data-tilt>
+          <span class="tag">The Leanta way</span>
+          <h3>Same records, built once, kept alive</h3>
+          <ul>
+            <li>Fridge temps: type two numbers, out-of-range cells flag themselves. ~90 seconds.</li>
+            <li>One delivery line in the traceability sheet: supplier, batch, date. ~60 seconds.</li>
+            <li>The roster carries forward; labour-% turns red before the weekend does.</li>
+            <li>Dashboards inside the workbook tell you the number <em>and</em> the next action.</li>
+            <li>When a regulation amends, your file gets a free update — it never rots.</li>
+          </ul>
+          <p style="margin-top:.9rem"><a class="btn btn-primary" href="quiz.html">See where you stand — free, 2 minutes</a></p>
         </div>
       </div>
     </div>
@@ -182,6 +218,42 @@
       <p class="kicker">Why a workbook, not a BI platform?</p>
       <h2>The dashboard is already inside</h2>
       <p style="max-width:66ch">Power BI, Tableau and FP&amp;A platforms are superb tools — for companies with analysts to run them. An owner-operator needs six numbers and zero setup. Leanta workbooks put BI-grade clarity — traffic-light verdicts, live roll-ups, threshold alerts — inside the spreadsheet you already own.</p>
+      <p style="max-width:66ch"><strong>Our dashboard rule: insight, not decoration.</strong> Every tile answers one question and prescribes the next action. If a chart doesn't change what you do on Monday, it doesn't earn a place on the sheet.</p>
+
+      <div class="dash" data-tilt style="margin:1.4rem 0 1.8rem">
+        <div class="dash-head">
+          <strong>Operations &amp; GP Bundle — weekly dashboard</strong>
+          <span>Illustrative render, sample data — exact layout of the in-workbook dashboard sheet</span>
+        </div>
+        <div class="kpis">
+          <div class="kpi ok">
+            <span class="lbl">Gross profit %</span>
+            <span class="val">68.4%</span>
+            <span class="act">On target (≥65%). Hold prices.</span>
+          </div>
+          <div class="kpi warn">
+            <span class="lbl">Labour % of sales</span>
+            <span class="val">31.2%</span>
+            <span class="act">Above the 28% line → trim 6 rostered hours Sat.</span>
+          </div>
+          <div class="kpi bad">
+            <span class="lbl">Wastage this week</span>
+            <span class="val">€212</span>
+            <span class="act">2 items drive 70% → halve Tuesday prep batch.</span>
+          </div>
+          <div class="kpi ok">
+            <span class="lbl">Cash 6-week low</span>
+            <span class="val">€4,310</span>
+            <span class="act">Positive across all 6 weeks. No action.</span>
+          </div>
+        </div>
+        <div class="bars" aria-hidden="true">
+          <div class="bar"><span>Menu GP — mains</span><i style="width:78%"></i><span>72%</span></div>
+          <div class="bar warn"><span>Menu GP — desserts</span><i style="width:55%"></i><span>58%</span></div>
+          <div class="bar"><span>Menu GP — drinks</span><i style="width:84%"></i><span>79%</span></div>
+          <div class="bar bad"><span>Menu GP — specials</span><i style="width:42%"></i><span>47%</span></div>
+        </div>
+      </div>
       <div class="compare">
         <table>
           <thead>
@@ -243,6 +315,30 @@
     </div>
   </section>
 
+  <section id="comms">
+    <div class="wrap">
+      <p class="kicker">No calls required</p>
+      <h2>Message us. We reply, and we action it.</h2>
+      <div class="comms">
+        <div>
+          <p style="max-width:58ch">Hate phone calls? So do most owner-operators — usually because they arrive mid-service. Every Leanta channel works async: email or text us a question, a photo of your folder, or "what's missing here?" — and you get an answer <strong>and the action</strong>, not a callback queue. A call happens only if <em>you</em> ask for one.</p>
+          <p style="display:flex; gap:.7rem; flex-wrap:wrap">
+            <span data-textus></span>
+            <a class="btn btn-primary" href="mailto:hello@leanta.ie?subject=Quick%20question">Email hello@leanta.ie</a>
+          </p>
+          <p class="fineprint">Same-day reply on working days. Slovensky? Píšte pokojne po slovensky.</p>
+        </div>
+        <div class="chatmock" aria-hidden="true">
+          <span class="meta">Tue 14:02</span>
+          <span class="msg them">Inspector due Thursday. Allergen list is from the old menu — am I in trouble?</span>
+          <span class="msg us">Fixable today. Send a photo of the current menu — I'll map the 14 allergens into your matrix and flag the dishes to double-check. You sign it off tonight.</span>
+          <span class="msg them">Done. That's one thing off my chest.</span>
+          <span class="msg us">Matrix back to you by 17:00. Thursday you're showing a dated, signed record — exactly what they ask for.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="alt" id="about">
     <div class="wrap">
       <p class="kicker">About Leanta</p>
@@ -281,6 +377,11 @@
       <p><a href="legal/terms.html">Terms, licence &amp; refunds</a><br>
          <a href="legal/privacy.html">Privacy</a><br>
          <a href="mailto:hello@leanta.ie">Contact</a></p>
+    </div>
+    <div class="paybadges" aria-label="Payment methods">
+      <span>Secure checkout:</span>
+      <span class="pb">VISA</span><span class="pb">Mastercard</span><span class="pb">Amex</span><span class="pb">PayPal</span><span class="pb">Apple Pay</span><span class="pb">Google Pay</span>
+      <span>— processed by our Merchant of Record (EU VAT handled at checkout; card details never touch our servers). Machine-to-machine payments (x402): on the roadmap.</span>
     </div>
     <div class="legalline">© 2026 Leanta · Ireland · Templates are not legal advice — adapt to your premises. Slovenská verzia stránky čoskoro (workbooks are already bilingual EN/SK inside).</div>
   </div>

@@ -13,6 +13,11 @@
 window.LEANTA = {
   contactEmail: "hello@leanta.ie",
 
+  /* Texting channel. Fill with the business mobile in international format
+   * (e.g. "+353871234567") to activate every "Text us" button site-wide.
+   * Empty "" -> the buttons fall back to email so nothing dead-ends. */
+  contactPhone: "",
+
   products: {
     p13: {
       name: "Compliance Readiness Check (Gap-Analysis & Mock-Audit)",

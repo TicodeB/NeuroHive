@@ -1,3 +1,17 @@
+## STATE — 10/06/2026 (LAUNCH-WEEK SESSION 3 — site v3 + growth initiatives capture)
+**Branch:** `claude/trusting-noether-rxejqv` (PR #21, base = vigilant-bell → rides PR #20).
+
+### ✅ DONE THIS SESSION
+- **Site v3 shipped:** three.js 3D hero (mouse+scroll parallax, card tilt, reduced-motion/CDN-fail safe → CSS orbs fallback) · logo reworked (rising-check `favicon.svg`, applied site-wide via `.brand-mark` CSS) · homepage "old way vs Leanta way" demo-selling section · dashboard showcase ("insight, not decoration", every KPI prescribes an action; labelled illustrative/sample data) · comms section ("text us, we reply AND action"; `data-textus` renderer + `LEANTA.contactPhone` config — **EMPTY: Samuel must fill the business mobile**) · **`grants.html`** — €200-out-of-pocket grant pathway (honest mechanics: mobilisation fee buys audit+application pack; LEO decides; not-approved ⇒ client chooses) · LSS DMAIC method section on services · payment trust badges + x402-roadmap line in all 12 page footers (NO raw card fields — PCI stays with MoR).
+- **`marketing/GROWTH_INITIATIVES_PLAN.md`** — captures ALL of Samuel's 10/06 asks: local NACE Ferns+30km plan (research agents died on session limit 09/06 — re-run queued), demo-selling angle + ranked sales ideas, video pipeline (Google Flow/Seedance/ElevenLabs/HeyGen + EU AI Act labelling note), image-gen prompt base (no-slop rule: product screenshots always real), external design-tool prompt (v0/Lovable/"omma.ai" — name unconfirmed), monthly-drop "Leanta Club" subscription design, Excel Office.js agent add-in roadmap (Sheets version exists, PR #16), gamma-grade pack design v2 (pivot-table honesty → .pbit SKU), affiliate/hardware arm guardrails, x402 token-bucket sequencing, AI-glasses rule (don't show hardware we don't own), persona "Máire" + why-NOT-buy, competitor list awaited from Samuel.
+- **`forms/CLIENT_PRELIM_RESEARCH.md`** — mandatory pre-engagement research template (stakeholders, process inventory, est. available cash, grant route majority-funded, GDPR/data-safety note; client files NEVER in a public repo).
+
+### ▶️ NEXT
+- Samuel: Tue/Wed gate steps (merge #20 → repo PRIVATE → LS KYC → checkout URLs) + fill `contactPhone` in `assets/checkout-config.js` + paste competitor list + confirm "omma.ai" service name + browser-check the 3D hero (sandbox can't render).
+- Claude: re-run §1 local-landscape + §AI-media research agents → `research/local_ferns_30km.md`; write first 3 video scripts (plan §3); Etsy listing support Thu.
+
+---
+
 ## STATE — 09/06/2026 ~20:30 (LAUNCH-WEEK SESSION 2 — Tuesday gate check + sales machinery execution)
 **Branch:** `claude/trusting-noether-rxejqv` (= vigilant-bell 6420d2d + this session; PR based on vigilant-bell so it rides PR #20 into main).
 

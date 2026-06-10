@@ -112,8 +112,29 @@
     targets.forEach(function (t) { t.classList.add("reveal"); io.observe(t); });
   }
 
+  /* ---- "Text us" buttons -------------------------------------------------
+     <span data-textus></span> renders an SMS link when LEANTA.contactPhone is
+     set, otherwise a mailto fallback — no dead buttons either way. */
+  function renderTextUs() {
+    document.querySelectorAll("[data-textus]").forEach(function (slot) {
+      var a = document.createElement("a");
+      a.className = "btn";
+      if (cfg.contactPhone) {
+        a.href = "sms:" + cfg.contactPhone + "?&body=" +
+          encodeURIComponent("Hi Leanta — [your business name]. ");
+        a.textContent = "Text us — no call needed";
+      } else {
+        a.href = "mailto:" + cfg.contactEmail +
+          "?subject=" + encodeURIComponent("Quick question (no call please)");
+        a.textContent = "Message us — no call needed";
+      }
+      slot.appendChild(a);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderBuyButtons();
+    renderTextUs();
     initQuiz();
     initReveal();
   });
