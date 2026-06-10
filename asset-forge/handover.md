@@ -1,3 +1,14 @@
+## STATE — 10/06/2026 ~10:00 (SESSION 4 CLOSE — v4.1 cinematic mockup SHIPPED, context full, session ended)
+**Branch:** `claude/trusting-noether-rxejqv` (PR #21, base = vigilant-bell → rides PR #20). HEAD `c5211ea`, Vercel deploy GREEN.
+**Preview Samuel checks:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/ (desktop = cinematic, phone = flow mode; preloader plays once per session — private window to replay). `claude.md` at repo ROOT = always-current preview links (Samuel's standing ask: keep latest Vercel link there after every build).
+
+### ⏭ NEXT SESSION — FIRST ACTIONS
+1. Read this block + the "v4.1 REBUILD" block below + `claude.md`. Do NOT rebuild v4 — it is DONE and validated; only tune on Samuel's browser verdict (likely asks: camera pacing, panel dwell times, paper-storm density, glass blur strength, pet look).
+2. Awaiting from Samuel (blockers for their items only): mockup verdict desktop+phone · Suno track → `v4/assets/leanta-theme.mp3` (sound btn auto-swaps from WebAudio pad) · case films → `v4/assets/case-{1..3}.mp4` · Omma pet: remix https://omma.build/community/i6ttegp2zyw1 in his account (403 from sandbox), publish, paste scene URL into `ommaPetUrl` in `assets/checkout-config.js` (slot wired, SVG pet fallback live) · `contactPhone` still EMPTY · launch gate (merge #20 → repo PRIVATE → LS KYC → checkout URLs) still open.
+3. Claude queue (priority order): post-verdict v4 tweaks → decision: promote /v4/ to index.html? → 9 industry action-plan reply templates + Hermes runbook (plan §15) → re-run §1 local-research agents → 3 video scripts (plan §3) → post-launch: `/api/lea` serverless (real model; `LEA_UPGRADE` marker in v4.js) + Higgsfield backdrops (connector lacked generate_image).
+
+---
+
 ## STATE — 10/06/2026 (LAUNCH-WEEK SESSION 3 — site v3 + growth initiatives capture)
 **Branch:** `claude/trusting-noether-rxejqv` (PR #21, base = vigilant-bell → rides PR #20).
 
