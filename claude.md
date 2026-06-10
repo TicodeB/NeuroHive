@@ -55,7 +55,7 @@ v4.1 — full noomo architecture (10/06):
 - Mobile / reduced-motion / no-WebGL / no-JS ⇒ readable flow-mode document
 
 **Status:** ✅ Fully functional mockup — needs Samuel's browser check
-**Media pending:** `v4/assets/leanta-theme.mp3` (Suno) · `v4/assets/case-{1..3}.mp4` (Flow/Seedance) · Omma pet URL
+**Media pending:** `v4/assets/case-{1..3}.mp4` (Flow/Seedance) · Omma pet URL · Higgsfield env video loops (connector reconnect needed). Music: BOTH Suno tracks LIVE (ambient + focus modes).
 
 ---
 

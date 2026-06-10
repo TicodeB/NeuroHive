@@ -51,8 +51,8 @@ imagine what they'd do for my Tuesday."*
 |---|---|---|
 | `assets/img/bg-0-street.jpg` | nano banana 2 pro | ✅ live (hero) |
 | `assets/img/bg-{1,2,3}-*.jpg` | nano banana 2 pro | ✅ live (descent) |
-| `assets/leanta-theme.mp3` | Suno v5.5 (ambient) | ⏳ Samuel |
-| `assets/leanta-focus.mp3` | Suno v5.5 (ADHD focus) | ⏳ Samuel |
+| `assets/leanta-theme.mp3` | Suno "Whistle Over Moss" 3:18 | ✅ live |
+| `assets/leanta-focus.mp3` | Suno "Study Loop Drift" 3:28 | ✅ live |
 | `assets/case-{1..3}.mp4` | Flow/HeyGen per video_scripts.md | ⏳ |
 | `LEANTA.ommaPetUrl` | Omma remix of pink space-fox | ⏳ Samuel (36 credits) |
 | Backdrop video loops | Higgsfield image-2 → video | ⏳ blocked: connector lacks generate tools — Samuel must reconnect the Higgsfield connector (Settings → Connectors → Higgsfield → reconnect/update) |
