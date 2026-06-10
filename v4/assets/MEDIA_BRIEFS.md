@@ -1,11 +1,23 @@
 # v4 Media Production Briefs — Higgsfield · Suno · Omma
 File slots are wired; each asset auto-activates the moment the file lands. No code changes needed.
 
-## 1 · Higgsfield — animated background loop
-**Drop at:** `v4/assets/img/bg-loop.mp4` (the page HEAD-checks and fades it in behind the WebGL scene at 28% opacity; WebGL clear goes translucent automatically)
-**Spec:** 1920×1080 · 10–20 s seamless loop · H.264 · keep under ~8 MB (rural mobile)
-**Prompt:**
-> Slow drifting abstract background, near-black green-tinted void (#0b0d0c), luminous neon-mint (#00f07a) light ribbons and soft volumetric glow, scattered signal-yellow (#f5c400) dust particles floating upward, subtle violet (#8d5cff) edge light, film grain, very slow camera drift, seamless loop, cinematic, no text, no people
+## 1 · Environment loop videos (Higgsfield image-2 → video, or Flow/Veo)
+⚠️ v4.3 update — the old dark abstract `bg-loop.mp4` brief is OBSOLETE (v4.2
+dark theme). The job now: **animate the four LIVE nano-banana stills** so each
+floor breathes on mouse-move, with matching ambient audio per environment.
+**Drop at:** `v4/assets/img/bg-{0-street,1-retail,2-factory,3-lobby}-loop.mp4`
+(+ optional `-amb.mp3` each). Wire-in note: next code session adds the
+HEAD-check still→loop swap; files may land first.
+**Spec:** 1920×1080 · 5 s seamless loop (first frame = last) · H.264 · ≤8 MB each.
+**Prompts:** feed the existing jpg + the per-environment motion prompt in
+`marketing/GEMINI_CREATIVE_BRIEF.md` §4.1 (street: awning breath + cyclist
+blur · shop: banner sway + fridge reflection · factory: conveyor cycle +
+emerald LEDs · lobby: lift doors + key-fob blink), all carrying: *"animate
+this exact image, locked-off camera, subtle motion only, bright warm grade,
+emerald #0a8a52 accents, people as soft anonymous blur, no readable text."*
+**Ambient beds:** brief §4.2 — street wind · shop human murmur + barcode
+beep · conveyor rhythm + pneumatic hiss · lobby murmur + lift chime. Loopable,
+no melody; the Suno theme ducks them to 30% when both play.
 
 ## 2 · Suno (model v5.5) — TWO tracks, mode toggle is live on the page
 The Music pill has an AMBIENT/FOCUS switch. Each file auto-swaps in when dropped:

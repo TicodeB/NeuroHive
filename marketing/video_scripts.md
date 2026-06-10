@@ -58,5 +58,5 @@ Caption CTA: *€200 starts it. The grant does the heavy lifting — if the LEO 
 - Voice: warm Irish male/neutral, 0.95× pace (ElevenLabs or HeyGen voice; label AI voice in description).
 - Music: Suno theme (same track as the site → sonic branding); duck −12 dB under VO.
 - Format master 16:9 for the site slots; crop 9:16 verticals for FB/IG from the same timelines.
-- Colour: grade toward #0b0d0c shadows / #00f07a accent to match v4.
+- Colour: bright warm Irish daylight grade, single emerald #0a8a52 accent — match v4.3 "THE DESCENT" (the old dark #0b0d0c grade is obsolete).
 - The site HEAD-checks `v4/assets/case-{1..3}.mp4` — upload = live, no deploy needed beyond the file commit.

@@ -27,7 +27,7 @@
 **Preview Samuel checks:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/ (desktop = cinematic, phone = flow mode; preloader plays once per session — private window to replay). `claude.md` at repo ROOT = always-current preview links (Samuel's standing ask: keep latest Vercel link there after every build).
 
 ### ⏭ NEXT SESSION — FIRST ACTIONS
-0. **SAMUEL'S v4 VERDICT LANDED (10/06 eve) → v4.2 BUILD QUEUE** (decisions binding; brief + all prompts in `marketing/GEMINI_CREATIVE_BRIEF.md`):
+0. ~~v4.2 BUILD QUEUE~~ **SUPERSEDED by v4.3 "THE DESCENT" (see top block + v4/NORTHSTAR.md)** — kept for history; the Gemini brief was rewritten to v4.3 canon:
    - **LEA → single pixel-art mascot** (Codex-terminal-pet style: moves + EXPRESSIONS, transparent bg). Kill the SVG sprout AND the Omma iframe option (`ommaPetUrl` → remove). Build as code-generated pixel SVG: expressions (idle/blink/happy/talk/surprised/think/sleep/hatch), pupils track cursor, **client-switchable skin colours** (cobalt #5468ff default — Samuel liked the codex pic's blue+amber complementaries, "or bolder"; presets: emerald/ember/gold/orchid, localStorage).
    - **LEA rides the scroll**: moves with the journey; on station change she vanishes from the old screen and **hatches** onto the new one (egg-crack animation).
    - **Chat bubble big→small**: open panel shrinks on scroll into a mini pill showing the last short reply (terminal-pet style); click re-expands.
