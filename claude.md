@@ -24,6 +24,10 @@ Branch: `claude/trusting-noether-rxejqv`
   frosted brandpill (always legible on any contrast), typewriter hero line
 - Asset slots still auto-activate: `leanta-theme.mp3` (Suno) ·
   `case-{1..3}.mp4` · Omma pet URL — see `v4/assets/MEDIA_BRIEFS.md`
+- Antigravity dust (10/06 eve): fine ink+emerald particle field cloned from
+  antigravity.google — drifts upward, sways, repels around the cursor; on the
+  hero and the mind-map section; Canvas2D, no deps, still until mouse moves,
+  paused off-screen, static under reduced-motion
 
 v4.2 — vivid pass + Valentime motion (10/06, superseded same day):
 - Palette brightened: neon mint `#00f07a` · signal yellow `#f5c400` · electric

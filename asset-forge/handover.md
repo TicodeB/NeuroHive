@@ -8,6 +8,7 @@
 - **Hermes runbook** `marketing/HERMES_RUNBOOK.md` (plan §15): 9 sector reply templates (quiz chips), guardrails, escalation, universal blocks.
 - **3 video scripts** `marketing/video_scripts.md` (plan §3): The Tuesday 60s · The Number 45s · The Offer 30s; FLOW/HEYGEN/SCREEN tags, EU AI Act labels; finished files → `v4/assets/case-{1..3}.mp4` auto-embed.
 - **Media briefs** `v4/assets/MEDIA_BRIEFS.md`: Higgsfield bg-loop prompt+spec, Suno track brief, Omma pet steps (36 credits — pet only, ask before more spend).
+- **Antigravity dust field (Samuel's upload, 10/06 eve):** the background animation from antigravity.google (zip capture inspected: three.js r180 `landing-main-particles-component`, light theme) cloned dependency-free — Canvas2D ink+12%-emerald dots, upward anti-gravity drift + sway + cursor repulsion, `mix-blend-mode:multiply` into the cream; mounted on hero (`.hero-bg .dust`) + `#why`; still-until-kinetic, IO-paused off-screen, static frame under reduced-motion, 40% count on mobile; verified by Playwright screenshots.
 - **§1 research agent** re-launched in background (Ferns+30km prospects + LEO scheme status) → lands as `research/local_ferns_30km.md` next push if completed.
 
 ### ⚠️ BLOCKERS / NOTES

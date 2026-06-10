@@ -486,6 +486,15 @@ html.no-js .caret { display: none; }
 /* HERO BACKGROUND — still until the mouse moves, then alive */
 #hero { overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; z-index: -1; }
+
+/* antigravity dust — fine ink particles drifting gently upward, repelled by
+   the cursor (cloned from antigravity.google's hero particle field, rebuilt
+   as dependency-free Canvas2D in brand colours). multiply = sits INTO the
+   cream like ink in paper rather than floating on top of it. */
+.dust { position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; mix-blend-mode: multiply; }
+#why { position: relative; overflow: hidden; }
+#why .dust { z-index: -1; }
 .hb-img { position: absolute; inset: -6%; background-size: cover; background-position: center 35%;
   filter: blur(7px) saturate(1.1) brightness(1.05); opacity: .55;
   will-change: transform, filter; transition: transform .25s ease-out; }
