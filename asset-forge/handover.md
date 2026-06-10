@@ -1,3 +1,27 @@
+## STATE — 10/06/2026 ~12:30 (SESSION 5 — Samuel's verdicts actioned → v4.3 "THE DESCENT" SHIPPED)
+**Branch:** `claude/trusting-noether-rxejqv` (PR #21). HEAD `2318253`, Vercel GREEN.
+**Preview:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/
+
+### ✅ DONE THIS SESSION
+- **v4.2 (superseded same day):** vivid dark palette + Bebas/Caveat brand + ascent-A glyph + Valentime pacing. Samuel's 2nd verdict killed the dark direction.
+- **v4.3 "THE DESCENT" (CURRENT):** full rebuild to Samuel's spec — paper-storm + icosahedron + three.js REMOVED. Bright glassmorphism `#f2efe8`. Sticky descent through 3 REAL environments (generated with **nano banana 2 pro** via Gemini API on Samuel's machine, AI-tagged on page): retail shop → manufacturing floor → hotel lobby (`v4/assets/img/bg-{1-retail,2-factory,3-lobby}.jpg`). Per-env: glass card + sector pains + CTA + lead magnet + **companion picker** (Lea sprout/Penny fox/Mossy sheep → rides Lea orb, localStorage; `ommaPetUrl` overrides). **Mind map** "THE LOGIC, UNFOLDED" (SVG steps). **Pricing WITH grant (€200 credited) vs WITHOUT (quote first)** — verbatim-honest. Brand: glyph single emerald, thinner handwritten "agency", frosted brandpill always legible, typewriter hero, floor elevator, magnetic pull, char-stagger (nbsp fix), radial preloader. No CDN deps at all. Verified locally via Playwright screenshots (hero/env/mind/pricing all render).
+- **Hermes runbook** `marketing/HERMES_RUNBOOK.md` (plan §15): 9 sector reply templates (quiz chips), guardrails, escalation, universal blocks.
+- **3 video scripts** `marketing/video_scripts.md` (plan §3): The Tuesday 60s · The Number 45s · The Offer 30s; FLOW/HEYGEN/SCREEN tags, EU AI Act labels; finished files → `v4/assets/case-{1..3}.mp4` auto-embed.
+- **Media briefs** `v4/assets/MEDIA_BRIEFS.md`: Higgsfield bg-loop prompt+spec, Suno track brief, Omma pet steps (36 credits — pet only, ask before more spend).
+- **§1 research agent** re-launched in background (Ferns+30km prospects + LEO scheme status) → lands as `research/local_ferns_30km.md` next push if completed.
+
+### ⚠️ BLOCKERS / NOTES
+- **Claude-in-Chrome extension NOT connecting** (Chrome runs, extension unreachable) → could not drive Higgsfield/Suno/Omma apps. Samuel: check the extension is installed+signed in, then ask Claude to run the three MEDIA_BRIEFS jobs.
+- Higgsfield MCP connector still lacks generate_image/generate_video (only outpaint/upscale/motion/bg-removal) — backdrops were made with nano banana instead (Samuel allowed: "nano banana 2 or pro").
+- Still pending from Samuel: contactPhone in checkout-config.js · launch gate (merge #20 → repo PRIVATE → LS KYC → checkout URLs) · Suno track · case films · Omma pet URL.
+
+### ⏭ NEXT SESSION
+1. Samuel browser-verdict on v4.3 (desktop+phone). Tune only.
+2. If Chrome extension works: run MEDIA_BRIEFS jobs (Suno theme → leanta-theme.mp3 · Omma pet remix → ommaPetUrl · optional Higgsfield bg upgrade).
+3. Commit research/local_ferns_30km.md when the agent lands; then /v4 promotion decision; then queue per plan.
+
+---
+
 ## STATE — 10/06/2026 ~10:00 (SESSION 4 CLOSE — v4.1 cinematic mockup SHIPPED, context full, session ended)
 **Branch:** `claude/trusting-noether-rxejqv` (PR #21, base = vigilant-bell → rides PR #20). HEAD `c5211ea`, Vercel deploy GREEN.
 **Preview Samuel checks:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/ (desktop = cinematic, phone = flow mode; preloader plays once per session — private window to replay). `claude.md` at repo ROOT = always-current preview links (Samuel's standing ask: keep latest Vercel link there after every build).
