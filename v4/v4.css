@@ -3,21 +3,29 @@
    Fixed WebGL scene + giant scroll height drives the camera; content lives in
    fixed glass panels along the journey (desktop). Mobile / reduced-motion /
    no-WebGL / no-JS collapse to a fully readable flowing document (html.flow).
-   Type: Anton (OFL) display + IBM Plex Mono (OFL) microcopy. No Druk anywhere.
+   Type: Bebas Neue (OFL) display + Caveat (OFL) handwritten + IBM Plex Mono
+   (OFL) microcopy. No Druk anywhere.
    ========================================================================== */
 
 @font-face {
-  font-family: "Anton";
-  src: url("/v4/assets/fonts/Anton-Regular-latin.woff2") format("woff2");
+  font-family: "Bebas Neue";
+  src: url("/v4/assets/fonts/BebasNeue-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2013-2014, U+2018-201A,
                  U+201C-201E, U+2026, U+20AC, U+2122;
   font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: "Anton";
-  src: url("/v4/assets/fonts/Anton-Regular-latinext.woff2") format("woff2");
+  font-family: "Bebas Neue";
+  src: url("/v4/assets/fonts/BebasNeue-latin-ext.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0;
   font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Caveat";
+  src: url("/v4/assets/fonts/Caveat-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2013-2014, U+2018-201A,
+                 U+201C-201E, U+2026, U+20AC, U+2122;
+  font-weight: 500; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "Plex Mono";
@@ -29,15 +37,17 @@
   --bg: #0b0d0c;
   --bg-2: #111412;
   --ink: #f5f1e6;
-  --muted: #99a39a;
+  --muted: #b8c4bb;
   --line: rgba(245, 241, 230, .14);
-  --em: #1db887;
-  --em-deep: #005a3c;
-  --gold: #e7cd72;
+  --em: #00f07a;
+  --em-deep: #00713c;
+  --gold: #f5c400;
+  --vivid: #8d5cff;
   --red: #e06a5e;
   --amber: #e0a44e;
-  --glass-bg: linear-gradient(183deg, rgba(245,241,230,.075), rgba(245,241,230,.035) 60%, rgba(29,184,135,.05));
-  --font-d: "Anton", "Arial Narrow", Impact, sans-serif;
+  --glass-bg: linear-gradient(183deg, rgba(245,241,230,.1), rgba(245,241,230,.05) 60%, rgba(0,240,122,.06));
+  --font-d: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --font-h: "Caveat", "Bradley Hand", "Comic Sans MS", cursive;
   --font-m: "Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
   --font-b: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -79,13 +89,26 @@ button { font: inherit; color: inherit; background: none; border: 0; }
 
 /* ---------- type ---------- */
 .d { font-family: var(--font-d); font-weight: 400; text-transform: uppercase;
-     letter-spacing: -.015em; line-height: .92; }
+     letter-spacing: .005em; line-height: .9; }
 .m { font-family: var(--font-m); font-weight: 500; font-size: 13px;
      letter-spacing: .98px; text-transform: uppercase; color: var(--muted); }
 .m.em { color: var(--em); }
 .m b { color: var(--ink); font-weight: 500; }
-.huge    { font-size: clamp(64px, 15vw, 290px); color: var(--ink); }
+.huge    { font-size: clamp(72px, 17vw, 330px); color: var(--ink); }
 .huge .em{ color: var(--em); }
+
+/* the brand glyph — LEANTA's final A, crossbar removed (the ascent mark) */
+.ga { display: inline-block; height: .76em; width: auto; fill: var(--vivid);
+      vertical-align: baseline; transform: translateY(.01em); }
+.huge .ga { filter: drop-shadow(0 0 26px rgba(141,92,255,.45)); }
+
+/* handwritten studio signature under the wordmark */
+.wordmark-sub { display: block; font-family: var(--font-h); font-weight: 500;
+  font-size: .62em; line-height: .9; text-transform: none; letter-spacing: .01em;
+  color: var(--gold); transform: rotate(-2.5deg); }
+.hero-sub { font-family: var(--font-h); font-weight: 500; text-transform: none;
+  font-size: clamp(26px, 3.4vw, 64px); line-height: .9; color: var(--gold);
+  display: block; transform: rotate(-2.5deg); margin-top: -.4em; }
 .title   { font-size: clamp(44px, 7.5vw, 140px); margin: .35rem 0 1.1rem; }
 .title-l { font-size: clamp(34px, 5.2vw, 96px); margin-bottom: 2rem; max-width: 18ch; }
 .body-l  { font-size: clamp(17px, 1.45vw, 22px); color: #d9dfd6; max-width: 62ch; }
@@ -119,17 +142,17 @@ button { font: inherit; color: inherit; background: none; border: 0; }
 .sound.on .bars i:nth-child(4) { animation-delay: .45s }
 @keyframes eq { from { height: 3px } to { height: 12px } }
 
-/* ---------- preloader ---------- */
+/* ---------- preloader — Valentime-style radial mask reveal ---------- */
 #pre { position: fixed; inset: 0; z-index: 200; background: var(--bg);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem;
-  transition: clip-path .8s cubic-bezier(.76,0,.24,1);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-#pre.done { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); pointer-events: none; }
+  transition: clip-path 1.1s cubic-bezier(.76,0,.24,1);
+  clip-path: circle(141% at 50% 50%); }
+#pre.done { clip-path: circle(0% at 50% 50%); pointer-events: none; }
 #pre .d { font-size: clamp(48px, 9vw, 130px); }
 #pre .d span { color: var(--em); }
 #pre .bar { width: min(320px, 60vw); height: 1px; background: var(--line); }
-#pre .bar i { display: block; height: 100%; width: 0; background: var(--em); }
-#pre .count { font-family: var(--font-m); font-size: 13px; letter-spacing: .98px; color: var(--muted); }
+#pre .bar i { display: block; height: 100%; width: 0; background: var(--vivid); }
+#pre .count { font-family: var(--font-m); font-size: 13px; letter-spacing: .98px; color: var(--vivid); }
 #pre .preline { opacity: .7; }
 
 /* ---------- custom cursor ---------- */
@@ -137,14 +160,14 @@ button { font: inherit; color: inherit; background: none; border: 0; }
   border-radius: 50%; transform: translate(-50%,-50%); display: none; }
 body.has-cursor .cur, body.has-cursor .cur-ring { display: block; }
 .cur { width: 6px; height: 6px; background: var(--em); }
-.cur-ring { width: 34px; height: 34px; border: 1px solid rgba(29,184,135,.6);
+.cur-ring { width: 34px; height: 34px; border: 1px solid rgba(0,240,122,.6);
   transition: width .25s ease, height .25s ease, border-color .25s ease; }
 .cur-ring.big { width: 58px; height: 58px; border-color: var(--gold); }
 
 /* ==========================================================================
    THE STAGE — fixed cinema + scroll runway (noomo architecture)
    ========================================================================== */
-#stage { height: 760vh; position: relative; }
+#stage { height: 1100vh; position: relative; }
 .cine { position: fixed; inset: 0; z-index: 5; }
 .cine.off { visibility: hidden; }
 #scene { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0;
@@ -198,8 +221,8 @@ body.has-cursor .cur, body.has-cursor .cur-ring { display: block; }
 .k .act { font-size: .85rem; color: #b9c2b8; }
 
 /* €200 offer */
-.offer { border: 1px solid rgba(231,205,114,.55); border-radius: 14px; padding: clamp(1.2rem,2.4vw,2rem);
-  margin-top: 1.8rem; background: linear-gradient(160deg, rgba(231,205,114,.07), transparent 55%); }
+.offer { border: 1px solid rgba(245,196,0,.55); border-radius: 14px; padding: clamp(1.2rem,2.4vw,2rem);
+  margin-top: 1.8rem; background: linear-gradient(160deg, rgba(245,196,0,.07), transparent 55%); }
 .offer .big { font-size: clamp(32px, 4.6vw, 76px); line-height: .95; }
 .offer .big em { font-style: normal; color: var(--gold); }
 .offer ul { margin: 1.1rem 0 0 1.1rem; color: #cfd6cd; max-width: 66ch; }
@@ -276,7 +299,7 @@ section.ch .num { position: absolute; right: 4vw; top: 8vh; font-size: clamp(120
   text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px;
   padding: .55rem 1.05rem; color: var(--muted); transition: all .3s; }
 .radio-row input:checked + label { border-color: var(--em); color: var(--em);
-  background: rgba(29,184,135,.08); }
+  background: rgba(0,240,122,.08); }
 .radio-row input:focus-visible + label { outline: 2px solid var(--em); outline-offset: 2px; }
 .ok-note { margin-top: 1rem; color: var(--em); text-transform: none; letter-spacing: .4px; }
 
@@ -302,7 +325,7 @@ footer.story .legal { margin-top: 4vh; padding-top: 1.4rem; border-top: 1px soli
   background:
     radial-gradient(38% 38% at 32% 28%, rgba(245,241,230,.85), transparent 55%),
     radial-gradient(80% 80% at 60% 70%, var(--em), var(--em-deep) 75%);
-  box-shadow: 0 8px 30px rgba(29,184,135,.4); animation: breathe 3.4s ease-in-out infinite; }
+  box-shadow: 0 8px 30px rgba(0,240,122,.4); animation: breathe 3.4s ease-in-out infinite; }
 #lea-orb .core svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 #lea-orb .core:has(svg) { background: radial-gradient(80% 80% at 50% 40%, rgba(17,20,18,.95), rgba(11,13,12,.98));
   border: 1px solid var(--line); }
@@ -316,7 +339,7 @@ footer.story .legal { margin-top: 4vh; padding-top: 1.4rem; border-top: 1px soli
 @keyframes petsquish { 0%,100% { transform: scale(1,1) } 40% { transform: scale(1.12,.88) } 70% { transform: scale(.94,1.06) } }
 @keyframes sprout { 0%,100% { transform: rotate(0deg) } 50% { transform: rotate(-12deg) } }
 #lea-orb .ring { position: absolute; inset: -7px; border-radius: 50%;
-  border: 1px solid rgba(231,205,114,.65); animation: orbit 9s linear infinite; }
+  border: 1px solid rgba(245,196,0,.65); animation: orbit 9s linear infinite; }
 #lea-orb .ring::after { content: ""; position: absolute; top: -3px; left: 50%; width: 5px; height: 5px;
   border-radius: 50%; background: var(--gold); }
 #lea-orb .lbl { position: absolute; right: 70px; top: 50%; transform: translateY(-50%);
@@ -348,7 +371,7 @@ footer.story .legal { margin-top: 4vh; padding-top: 1.4rem; border-top: 1px soli
 .lea-msgs .msg a { color: var(--em); }
 .lea-msgs .bot { background: rgba(245,241,230,.07); border: 1px solid var(--line);
   border-bottom-left-radius: 4px; align-self: flex-start; }
-.lea-msgs .user { background: rgba(29,184,135,.16); border: 1px solid rgba(29,184,135,.3);
+.lea-msgs .user { background: rgba(0,240,122,.16); border: 1px solid rgba(0,240,122,.3);
   border-bottom-right-radius: 4px; align-self: flex-end; }
 .lea-msgs .typing i { display: inline-block; width: 5px; height: 5px; border-radius: 50%;
   background: var(--muted); margin-right: 3px; animation: tdot 1s infinite; }
@@ -403,3 +426,82 @@ html.no-js .rv, html.reduced .rv { opacity: 1; transform: none; }
   .beat { grid-template-columns: 64px 1fr; }
   .beat .took { grid-column: 2; }
 }
+
+/* ==========================================================================
+   v4.2 ADDITIONS — vivid pass, Valentime motion, lights-up ending
+   ========================================================================== */
+
+/* panels blur-fade as the camera approaches/leaves (Valentime signature) */
+.panel { will-change: opacity, transform, filter; }
+
+/* char-stagger titles — split spans animate in when the panel goes live */
+.title .chx { display: inline-block; opacity: 0; filter: blur(8px);
+  transform: translateY(.5em) rotate(2deg);
+  transition: opacity .55s ease, filter .55s ease,
+              transform .65s cubic-bezier(.22,1,.36,1); }
+.panel.on .title .chx { opacity: 1; filter: blur(0); transform: none; }
+html.flow .title .chx, html.no-js .title .chx, html.reduced .title .chx {
+  opacity: 1; filter: none; transform: none; }
+
+/* magnetic elements lean toward the cursor */
+.magnet { transition: transform .25s cubic-bezier(.22,1,.36,1); }
+
+/* breathing wordmark (desktop only — imperceptible at rest) */
+@media (min-width: 1024px) and (pointer: fine) {
+  #p-hero .huge { animation: logoBreath 4.5s ease-in-out infinite; }
+}
+@keyframes logoBreath {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.006); }
+}
+
+/* Valentime text framing — gradient hairlines + diamond marker */
+.vt { position: relative; display: inline-block; padding: 16px 0; }
+.vtl { position: absolute; left: -70px; right: -70px; height: 1px; pointer-events: none; }
+.vtl.t { top: 0; } .vtl.b { bottom: 0; }
+.vtl i { position: absolute; top: 0; height: 1px; }
+.vtl .l { left: 0; width: calc(50% - 10px);
+  background: linear-gradient(90deg, transparent, rgba(245,196,0,.55)); }
+.vtl .r { right: 0; width: calc(50% - 10px);
+  background: linear-gradient(-90deg, transparent, rgba(245,196,0,.55)); }
+.vtl .dia { left: 50%; top: -3.5px; width: 7px; height: 7px;
+  border: 1px solid var(--gold); background: transparent;
+  transform: translateX(-50%) rotate(45deg); }
+.vtl .dia::after { content: ""; position: absolute; inset: 1.5px; background: var(--em); }
+@media (max-width: 1023px) { .vtl { left: 0; right: 0; } }
+
+/* ambient backdrop video (Higgsfield loop) — sits behind the WebGL scene */
+#bgloop { position: fixed; inset: 0; z-index: 1; width: 100%; height: 100%;
+  object-fit: cover; opacity: .28; pointer-events: none; display: none; }
+#bgloop.live { display: block; }
+html.flow #bgloop, html.no-js #bgloop { display: none; }
+
+/* THE LIGHTS-UP ENDING — finale + lead catcher flip to gallery light */
+section.ch.light { background: #e8e8e6; color: #101210; }
+section.ch.light .d { color: #101210; }
+section.ch.light .m { color: #6a716a; }
+section.ch.light .m.em { color: #008c4a; }
+section.ch.light .q { color: #008c4a; }
+section.ch.light .body-l { color: #3a403a; }
+section.ch.light .num { -webkit-text-stroke-color: rgba(16,18,16,.12); }
+section.ch.light .chip { color: #101210; border-color: rgba(16,18,16,.28); }
+section.ch.light .chip:hover { border-color: #008c4a; color: #008c4a; }
+section.ch.light .btn-x { background: #101210; border-color: #101210; color: #e8e8e6; }
+section.ch.light .btn-x:hover { background: transparent; color: #101210; }
+section.ch.light .btn-x.ghost { background: transparent; color: #101210;
+  border-color: rgba(16,18,16,.34); }
+section.ch.light .btn-x.ghost:hover { border-color: #008c4a; color: #008c4a; }
+section.ch.light .glass { background: rgba(255,255,255,.66);
+  border-color: rgba(16,18,16,.12); box-shadow: 0 18px 60px rgba(0,0,0,.1); }
+section.ch.light .fld input { color: #101210; border-bottom-color: rgba(16,18,16,.26); }
+section.ch.light .fld input::placeholder { color: #8a918a; }
+section.ch.light .radio-row label { color: #6a716a; border-color: rgba(16,18,16,.26); }
+section.ch.light .radio-row input:checked + label { border-color: #008c4a;
+  color: #008c4a; background: rgba(0,140,74,.08); }
+section.ch.light .ok-note { color: #008c4a; }
+section.ch.light .ga { fill: #6c3fff; filter: none; }
+
+/* monumental finale — edge-to-edge type, screenshot treatment */
+#finale { padding: 26vh 4vw; }
+#finale h2 { font-size: clamp(60px, 13vw, 260px); letter-spacing: 0; }
+#finale .body-l { max-width: 46ch; }

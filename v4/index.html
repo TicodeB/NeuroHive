@@ -15,8 +15,17 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- the LEANTA "A" — crossbar removed: the ascent mark -->
+    <symbol id="gA" viewBox="0 0 52 72">
+      <path d="M26 0 L52 72 L38.5 72 L26 21 L13.5 72 L0 72 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
 <div id="pre" aria-hidden="true">
-  <div class="d">LEAN<span>TA</span></div>
+  <div class="d">LEAN<span>T<svg class="ga" viewBox="0 0 52 72"><use href="#gA"/></svg></span></div>
   <div class="bar"><i></i></div>
   <div class="count">00</div>
   <div class="m preline">A story about the boring work</div>
@@ -30,7 +39,7 @@
 
 <a class="skip m" href="#post">Skip the intro</a>
 
-<a class="chrome tl wordmark d" href="/index.html">LEAN<span>TA</span></a>
+<a class="chrome tl wordmark d" href="/index.html" aria-label="Leanta agency — store home">LEAN<span>T<svg class="ga" viewBox="0 0 52 72" aria-hidden="true"><use href="#gA"/></svg></span><span class="wordmark-sub">agency</span></a>
 <nav class="chrome tr" aria-label="Story navigation">
   <a class="m" data-hover href="/index.html">Store</a>
   <a class="m" data-hover href="/quiz.html">Readiness check</a>
@@ -44,13 +53,18 @@
 <!-- ============ CINEMATIC STAGE — scroll drives the 3D camera ============ -->
 <div id="stage">
   <div class="cine" id="cine">
+    <video id="bgloop" muted loop playsinline preload="none" aria-hidden="true"></video>
     <canvas id="scene" aria-hidden="true"></canvas>
 
     <!-- station 0 · HERO -->
     <section class="panel" data-st="0" id="p-hero">
       <div class="inner center">
-        <p class="m strap">Operations · Compliance · Ireland — Ferns, Co. Wexford</p>
-        <h1 class="d huge">LEAN<span class="em">TA</span></h1>
+        <p class="m strap vt">
+          <span class="vtl t" aria-hidden="true"><i class="l"></i><i class="dia"></i><i class="r"></i></span>
+          Operations · Compliance · Ireland — Ferns, Co. Wexford
+          <span class="vtl b" aria-hidden="true"><i class="l"></i><i class="r"></i></span>
+        </p>
+        <h1 class="d huge" aria-label="Leanta agency">LEAN<span class="em">T<svg class="ga" viewBox="0 0 52 72" aria-hidden="true"><use href="#gA"/></svg></span><span class="hero-sub">agency</span></h1>
         <p class="body-l tag">Pass the inspection. Know your numbers. <em>Keep your evenings.</em><br>
         This is a short story about the boring work — told the way it actually happens.</p>
         <p class="m" style="margin-top:1.4rem">Headphones help. Sound stays off until you ask.</p>
@@ -186,10 +200,14 @@
     </div>
   </section>
 
-  <!-- FINALE -->
-  <section class="ch center" id="finale">
+  <!-- FINALE — the lights come up -->
+  <section class="ch center light" id="finale">
     <div class="inner">
-      <p class="m em rv">The question that started all of this</p>
+      <p class="m em rv vt">
+        <span class="vtl t" aria-hidden="true"><i class="l"></i><i class="dia"></i><i class="r"></i></span>
+        The question that started all of this
+        <span class="vtl b" aria-hidden="true"><i class="l"></i><i class="r"></i></span>
+      </p>
       <h2 class="d rv">WOULD YOU PASS <span class="q">TOMORROW?</span></h2>
       <p class="body-l rv" style="margin:1.6rem auto 0">Free, two minutes, built for your industry — verdict on screen, action plan by message. No call unless you ask for one.</p>
       <div class="chips rv">
@@ -211,7 +229,7 @@
   </section>
 
   <!-- LEAD CATCHER — noomo-style form, honest static-site mechanics -->
-  <section class="ch" id="start">
+  <section class="ch light" id="start">
     <div class="inner">
       <h2 class="d title-l rv">ENOUGH ABOUT US — TELL US ABOUT <span class="q">YOUR TUESDAY.</span></h2>
       <div class="lead-grid rv">
@@ -241,7 +259,7 @@
 </main>
 
 <footer class="story">
-  <div class="giant d" aria-hidden="true">LEANTA</div>
+  <div class="giant d" aria-hidden="true">LEANT<svg class="ga" viewBox="0 0 52 72" style="fill:transparent;stroke:rgba(141,92,255,.55);stroke-width:3"><use href="#gA"/></svg></div>
   <div class="sub d">LET'S FIX THE BORING WORK</div>
   <div class="cols">
     <a class="mail" data-hover href="mailto:hello@leanta.ie">hello@leanta.ie</a>

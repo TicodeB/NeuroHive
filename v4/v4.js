@@ -54,6 +54,22 @@
       if (e.target.closest("a, button, [data-hover], label, input")) ring.classList.add("big");
       else ring.classList.remove("big");
     }, { passive: true });
+
+    /* magnetic pull — interactive elements lean toward the cursor */
+    document.addEventListener("pointermove", function (e) {
+      var t = e.target.closest(".btn-x, .chip, .sound, .glass");
+      if (!t) return;
+      if (!t.classList.contains("magnet")) t.classList.add("magnet");
+      var r = t.getBoundingClientRect();
+      var strength = t.classList.contains("glass") ? 6 : 4;
+      var dx = ((e.clientX - r.left) / r.width - 0.5) * 2 * strength;
+      var dy = ((e.clientY - r.top) / r.height - 0.5) * 2 * strength;
+      t.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)";
+    }, { passive: true });
+    document.addEventListener("pointerout", function (e) {
+      var t = e.target.closest(".btn-x, .chip, .sound, .glass");
+      if (t && !t.contains(e.relatedTarget)) t.style.transform = "";
+    }, { passive: true });
   }
 
   /* ---------- sound: always-visible toggle ------------------------------ */
@@ -221,17 +237,30 @@
     var canvas = document.getElementById("scene");
     var stage = document.getElementById("stage");
     var cine = document.getElementById("cine");
-    var renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false });
+    var renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x0b0d0c, 1);
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+
+    /* Higgsfield ambient loop behind the scene — activates only if the
+       asset exists; clear-alpha drops so the video glows through the fog */
+    var bgloop = document.getElementById("bgloop");
+    if (bgloop) {
+      fetch("/v4/assets/img/bg-loop.mp4", { method: "HEAD" }).then(function (r) {
+        if (!r.ok) return;
+        bgloop.src = "/v4/assets/img/bg-loop.mp4";
+        bgloop.classList.add("live");
+        bgloop.play().catch(function () {});
+        renderer.setClearColor(0x0b0d0c, 0.55);
+      }).catch(function () {});
+    }
 
     var scene = new T.Scene();
     scene.fog = new T.FogExp2(0x0b0d0c, 0.0145);
     var camera = new T.PerspectiveCamera(52, innerWidth / innerHeight, 0.1, 240);
 
     scene.add(new T.HemisphereLight(0x2c3531, 0x0b0d0c, 0.85));
-    [[0, 2, -2, 0x1db887, 1.1], [0, 1, -42, 0xf5f1e6, 0.8], [0, 2, -84, 0x1db887, 0.9],
-     [0, 3, -126, 0xe7cd72, 0.9], [0, 1, -162, 0xe7cd72, 1.3]].forEach(function (L) {
+    [[0, 2, -2, 0x00f07a, 1.1], [0, 1, -42, 0xf5f1e6, 0.8], [0, 2, -84, 0x00f07a, 0.9],
+     [0, 3, -126, 0xf5c400, 0.9], [0, 1, -162, 0xf5c400, 1.3]].forEach(function (L) {
       var pl = new T.PointLight(L[3], L[4], 60);
       pl.position.set(L[0], L[1], L[2]); scene.add(pl);
     });
@@ -245,19 +274,19 @@
     }
     pGeo.setAttribute("position", new T.BufferAttribute(pPos, 3));
     var points = new T.Points(pGeo, new T.PointsMaterial({
-      color: 0x9fe8cf, size: 0.13, transparent: true, opacity: 0.55, depthWrite: false
+      color: 0x86ffc9, size: 0.13, transparent: true, opacity: 0.55, depthWrite: false
     }));
     scene.add(points);
 
     /* station 0 — hero: emerald icosahedron + gold ring */
     var hero = new T.Group();
     var icoWire = new T.Mesh(new T.IcosahedronGeometry(2.2, 1),
-      new T.MeshBasicMaterial({ color: 0x1db887, wireframe: true, transparent: true, opacity: 0.75 }));
+      new T.MeshBasicMaterial({ color: 0x00f07a, wireframe: true, transparent: true, opacity: 0.75 }));
     var icoCore = new T.Mesh(new T.IcosahedronGeometry(2.08, 1),
       new T.MeshStandardMaterial({ color: 0x0e1411, roughness: 0.35, metalness: 0.15,
-        emissive: 0x0b4f3a, emissiveIntensity: 0.6 }));
+        emissive: 0x0c6b46, emissiveIntensity: 0.6 }));
     var ringG = new T.Mesh(new T.TorusGeometry(3.4, 0.025, 12, 90),
-      new T.MeshBasicMaterial({ color: 0xe7cd72, transparent: true, opacity: 0.85 }));
+      new T.MeshBasicMaterial({ color: 0xf5c400, transparent: true, opacity: 0.85 }));
     ringG.rotation.x = 1.15;
     hero.add(icoWire); hero.add(icoCore); hero.add(ringG);
     hero.position.set(0, 0.2, -2);
@@ -290,8 +319,8 @@
     }
 
     /* station 3 — KPI bars rising */
-    var bars = [], barCols = [0x1db887, 0x1db887, 0xe0a44e, 0x1db887, 0xe06a5e,
-                              0x1db887, 0x1db887, 0xe0a44e, 0x1db887];
+    var bars = [], barCols = [0x00f07a, 0x00f07a, 0xe0a44e, 0x00f07a, 0xe06a5e,
+                              0x00f07a, 0x00f07a, 0xe0a44e, 0x00f07a];
     var barGeo = new T.BoxGeometry(0.8, 1, 0.8); barGeo.translate(0, 0.5, 0);
     for (var bi = 0; bi < 9; bi++) {
       var bm = new T.Mesh(barGeo, new T.MeshStandardMaterial({
@@ -306,14 +335,14 @@
 
     /* station 4 — the gold portal (the visit / walking through the door)  */
     var portal = new T.Mesh(new T.TorusGeometry(3.2, 0.06, 14, 100),
-      new T.MeshStandardMaterial({ color: 0x6b5a23, roughness: 0.3, metalness: 0.6,
-        emissive: 0xe7cd72, emissiveIntensity: 1.1 }));
+      new T.MeshStandardMaterial({ color: 0x7a6200, roughness: 0.3, metalness: 0.6,
+        emissive: 0xf5c400, emissiveIntensity: 1.1 }));
     portal.position.set(0, 0.5, -162);
     scene.add(portal);
     var dashes = [];
     for (var di = 0; di < 12; di++) {
       var dm = new T.Mesh(new T.BoxGeometry(0.12, 0.02, 1.3),
-        new T.MeshBasicMaterial({ color: 0x1db887, transparent: true, opacity: 0 }));
+        new T.MeshBasicMaterial({ color: 0x00f07a, transparent: true, opacity: 0 }));
       dm.position.set(0, -2, -134 - di * 2.3);
       dashes.push(dm); scene.add(dm);
     }
@@ -333,6 +362,32 @@
     var STN = panels.length - 1; /* 4 → pN runs 0..4 */
 
     function smooth01(x, a, b) { var t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); }
+
+    /* Valentime pacing: the camera ARRIVES, RESTS, DEPARTS. Each station
+       segment keeps a dwell plateau at both ends; travel between is eased. */
+    function dwell(p) {
+      var x = Math.min(1, Math.max(0, p)) * STN;
+      var i = Math.floor(x);
+      if (i >= STN) return STN;
+      return i + smooth01(x - i, 0.14, 0.86);
+    }
+
+    /* split panel titles into chars for the staggered reveal */
+    panels.forEach(function (pl) {
+      var t = pl.querySelector(".title");
+      if (!t || t.children.length) return;
+      var txt = t.textContent;
+      t.textContent = "";
+      t.setAttribute("aria-label", txt);
+      for (var ci = 0; ci < txt.length; ci++) {
+        var sp = document.createElement("span");
+        sp.className = "chx";
+        sp.setAttribute("aria-hidden", "true");
+        sp.textContent = txt[ci] === " " ? " " : txt[ci];
+        sp.style.transitionDelay = (ci * 30) + "ms";
+        t.appendChild(sp);
+      }
+    });
 
     var pCur = 0, mx = 0, my = 0, px = 0, py = 0, inView = true;
     addEventListener("pointermove", function (e) {
@@ -365,13 +420,13 @@
       pCur += (pTgt - pCur) * 0.075;
       px += (mx - px) * 0.05; py += (my - py) * 0.05;
 
-      /* camera along the spline + mouse parallax */
-      camCurve.getPoint(pCur, camPos);
-      lookCurve.getPoint(pCur, lookPos);
+      /* camera along the spline + mouse parallax — eased station pacing */
+      var pN = dwell(pCur);
+      var pSpline = pN / STN;
+      camCurve.getPoint(pSpline, camPos);
+      lookCurve.getPoint(pSpline, lookPos);
       camera.position.set(camPos.x + px * 1.7, camPos.y + py * -0.9, camPos.z);
       camera.lookAt(lookPos.x + px * 0.7, lookPos.y + py * -0.4, lookPos.z);
-
-      var pN = pCur * STN;
 
       /* hero cluster idle */
       hero.rotation.y += 0.0022; icoWire.rotation.x += 0.0009;
@@ -411,7 +466,7 @@
 
       points.rotation.y = time * 0.008;
 
-      /* panel choreography */
+      /* panel choreography — opacity + Valentime blur-fade */
       for (var s = 0; s < panels.length; s++) {
         var dd = pN - s;
         var o = 1 - Math.min(1, Math.abs(dd) / 0.55);
@@ -419,6 +474,7 @@
         el.style.opacity = (o * o).toFixed(3);
         el.style.visibility = o > 0.01 ? "visible" : "hidden";
         el.style.transform = "translateY(" + (dd * -70).toFixed(1) + "px)";
+        el.style.filter = o > 0.01 ? "blur(" + ((1 - o) * 12).toFixed(1) + "px)" : "";
         var on = Math.abs(dd) < 0.42;
         el.classList.toggle("on", on);
         if (on && s === 3) countUp(el);
