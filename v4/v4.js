@@ -463,14 +463,25 @@
     { id: "fox",    name: "Penny", title: "Penny the fox", svg: petSVG("#ff9d5c", "#c45f1e", "#15181a", "fox") },
     { id: "sheep",  name: "Mossy", title: "Mossy the sheep", svg: petSVG("#bcb6a8", "#7d7669", "#15181a", "sheep") }
   ];
-  /* Omma 3D companion (Samuel's pink space-fox) — becomes a real option the
-     moment LEANTA.ommaPetUrl is set; pink placeholder marks the slot till then */
-  var cfgPet = (window.LEANTA || {}).ommaPetUrl;
-  PETS.unshift({ id: "omma", name: "Nova", title: cfgPet ? "Nova — the Omma companion" : "Nova (Omma) — landing soon",
+  /* Nova — Samuel's Omma pink space-fox, self-hosted GLB from the published
+     scene (omma.build/p/vary-blink-voice-react-b1rqnk). Rendered with
+     model-viewer (lazy-loaded, pinned). LEANTA.ommaPetUrl iframe still wins
+     if Omma ever allows embedding. */
+  var NOVA_GLB = "/v4/assets/omma/nova.glb";
+  PETS.unshift({ id: "omma", name: "Nova", title: "Nova — the Omma companion",
     omma: true, svg: petSVG("#ff4fa3", "#b3186e", "#fff", "fox") });
-  var petChoice = cfgPet ? "omma" : "sprout";
+  var petChoice = "omma";
   try { petChoice = localStorage.getItem("v4pet") || petChoice; } catch (err) {}
-  if (petChoice === "omma" && !cfgPet) petChoice = "sprout";
+
+  var mvLoaded = false;
+  function ensureModelViewer(cb) {
+    if (mvLoaded || window.customElements && customElements.get("model-viewer")) { cb(); return; }
+    var sc = document.createElement("script");
+    sc.type = "module";
+    sc.src = "https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js";
+    sc.onload = function () { mvLoaded = true; cb(); };
+    document.head.appendChild(sc);
+  }
 
   var orb = document.getElementById("lea-orb");
   var orbCore = orb ? orb.querySelector(".core") : null;
@@ -482,12 +493,27 @@
   }
   function renderOrbPet() {
     if (!orbCore) return;
-    if (cfg.ommaPetUrl && petChoice === "omma") {
-      var fr = document.createElement("iframe");
-      fr.src = cfg.ommaPetUrl; fr.title = "Lea — Leanta's pet assistant";
-      fr.loading = "lazy"; fr.setAttribute("frameborder", "0");
-      fr.style.pointerEvents = "none";
-      orbCore.innerHTML = ""; orbCore.appendChild(fr);
+    if (petChoice === "omma") {
+      if (cfg.ommaPetUrl) {              /* live Omma scene, if embeddable */
+        var fr = document.createElement("iframe");
+        fr.src = cfg.ommaPetUrl; fr.title = "Nova — Leanta's pet assistant";
+        fr.loading = "lazy"; fr.setAttribute("frameborder", "0");
+        fr.style.pointerEvents = "none";
+        orbCore.innerHTML = ""; orbCore.appendChild(fr);
+      } else {                           /* self-hosted GLB from the scene */
+        ensureModelViewer(function () {
+          orbCore.innerHTML = "";
+          var mv = document.createElement("model-viewer");
+          mv.src = NOVA_GLB; mv.setAttribute("auto-rotate", "");
+          mv.setAttribute("rotation-per-second", "24deg");
+          mv.setAttribute("disable-zoom", ""); mv.setAttribute("interaction-prompt", "none");
+          mv.setAttribute("shadow-intensity", "0");
+          mv.setAttribute("camera-orbit", "0deg 82deg 110%");
+          mv.style.cssText = "position:absolute;inset:-6%;width:112%;height:112%;background:transparent;pointer-events:none;";
+          orbCore.appendChild(mv);
+        });
+      }
+      if (orbLbl) orbLbl.textContent = "Ask Nova";
       return;
     }
     var pet = currentPet();
@@ -519,7 +545,6 @@
       b.setAttribute("aria-checked", String(pet.id === petChoice));
       b.title = pet.title; b.setAttribute("data-hover", "");
       b.innerHTML = pet.svg;
-      if (pet.omma && !cfg.ommaPetUrl) { b.disabled = true; b.style.opacity = ".45"; }
       b.addEventListener("click", function () {
         petChoice = pet.id;
         try { localStorage.setItem("v4pet", petChoice); } catch (err) {}

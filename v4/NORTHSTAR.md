@@ -54,5 +54,5 @@ imagine what they'd do for my Tuesday."*
 | `assets/leanta-theme.mp3` | Suno "Whistle Over Moss" 3:18 | ✅ live |
 | `assets/leanta-focus.mp3` | Suno "Study Loop Drift" 3:28 | ✅ live |
 | `assets/case-{1..3}.mp4` | Flow/HeyGen per video_scripts.md | ⏳ |
-| `LEANTA.ommaPetUrl` | Omma remix of pink space-fox | ⏳ Samuel (36 credits) |
+| `assets/omma/nova.glb` | Omma scene vary-blink-voice-react-b1rqnk (self-hosted GLB; iframe blocked by frame-ancestors) | ✅ live — Nova default companion |
 | Backdrop video loops | Higgsfield image-2 → video | ⏳ blocked: connector lacks generate tools — Samuel must reconnect the Higgsfield connector (Settings → Connectors → Higgsfield → reconnect/update) |
