@@ -486,9 +486,10 @@ html.no-js .caret { display: none; }
 /* HERO BACKGROUND — still until the mouse moves, then alive */
 #hero { overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; z-index: -1; }
-.hb-img { position: absolute; inset: -6%; background-size: cover; background-position: center 30%;
-  filter: blur(34px) saturate(1.15) brightness(1.06); opacity: .5;
-  will-change: transform; transition: transform .25s ease-out; }
+.hb-img { position: absolute; inset: -6%; background-size: cover; background-position: center 35%;
+  filter: blur(7px) saturate(1.1) brightness(1.05); opacity: .55;
+  will-change: transform, filter; transition: transform .25s ease-out; }
+body.kinetic .hb-img { filter: blur(3px) saturate(1.12) brightness(1.05); }
 .hb-img::after { content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(242,239,232,.55), rgba(242,239,232,.82) 70%, var(--bg)); }
 .hb-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .4;
