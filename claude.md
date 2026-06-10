@@ -7,6 +7,23 @@ After each push to designated branches, Vercel auto-deploys to preview URLs:
 ### v4 Storytelling Mockup (PR #21)
 Branch: `claude/trusting-noether-rxejqv`
 **Preview:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/
+(preloader plays once per session — open a private window to replay it)
+
+v4.2 — vivid pass + Valentime motion (10/06, after Samuel's verdict):
+- Palette brightened: neon mint `#00f07a` · signal yellow `#f5c400` · electric
+  violet `#8d5cff` accent (preloader + brand glyph)
+- Brand: Bebas Neue wordmark + handwritten Caveat "agency" signature; the final
+  A of LEANTA replaced by the crossbar-less **ascent glyph** (inline SVG —
+  future standalone logo candidate)
+- Valentime (noomo) camera pacing: 1100vh runway, per-station dwell easing
+  (camera arrives → rests → departs), blur-fade panel choreography, gradient
+  hairline + diamond text framing, radial-mask preloader reveal
+- New movement: magnetic pull on buttons/chips/glass panels, char-stagger
+  chapter titles, breathing hero wordmark
+- Lights-up ending: finale + lead-catcher flip to gallery light `#e8e8e6`
+  (awwwards screenshot treatment) before handing off to the light store pages
+- `v4/assets/img/bg-loop.mp4` slot added — Higgsfield ambient loop auto-fades
+  behind the WebGL scene when the file lands (see `v4/assets/MEDIA_BRIEFS.md`)
 
 v4.1 — full noomo architecture (10/06):
 - Fixed three.js scene + 760vh scroll runway: cinematic camera flies a spline
@@ -30,7 +47,7 @@ v4.1 — full noomo architecture (10/06):
 
 - `/v4/` — Storytelling landing page (dark theme, noomo-inspired)
   - `v4/index.html` — Main page
-  - `v4/v4.css` — Styling (Anton OFL + Plex Mono OFL)
+  - `v4/v4.css` — Styling (Bebas Neue OFL + Caveat OFL + Plex Mono OFL)
   - `v4/v4.js` — Preloader, cursor, sound toggle, scroll choreography
   - `v4/assets/fonts/` — Self-hosted OFL fonts
   - `v4/assets/img/` — Chapter backdrops (CSS gradients + SVG grain fallback)
