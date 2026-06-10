@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEANTA — a story about the boring work | preview</title>
+<meta name="description" content="Pass the inspection. Know your numbers. Keep your evenings. A scroll story about how Irish small businesses get their paperwork — and their time — back.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="v4.css">
+<script>document.documentElement.classList.remove('no-js');</script>
+<script src="../assets/checkout-config.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+<script src="v4.js" defer></script>
+</head>
+<body>
+
+<div id="pre" aria-hidden="true">
+  <div class="d">LEAN<span>TA</span></div>
+  <div class="bar"><i></i></div>
+  <div class="count">00</div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="cur" aria-hidden="true"></div>
+<div class="cur-ring" aria-hidden="true"></div>
+
+<a class="chrome tl wordmark" href="../index.html">LEAN<span>TA</span></a>
+<nav class="chrome tr" aria-label="Story navigation">
+  <a class="m" href="../index.html">Store</a>
+  <a class="m" href="../quiz.html">Readiness check</a>
+  <a class="m" href="../grants.html">Grants</a>
+</nav>
+<button class="chrome bl sound m" id="sound" type="button" aria-pressed="false">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="sound-label">Sound off</span>
+</button>
+
+<main id="story">
+
+  <!-- ===== HERO ===== -->
+  <section class="ch" id="hero">
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="inner">
+      <p class="m strap rv">Operations · Compliance · Ireland — Ferns, Co. Wexford</p>
+      <h1 class="d rv">LEAN<span class="em">TA</span></h1>
+      <p class="body-l tag rv">Pass the inspection. Know your numbers. <em>Keep your evenings.</em><br>
+      This is a short story about the boring work — told the way it actually happens.</p>
+      <p class="m rv" style="margin-top:1.6rem">To make this more immersive we use sound — it stays off until you ask.</p>
+    </div>
+    <div class="scrollcue m" aria-hidden="true"><span class="lineV"><i></i></span> Scroll</div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>HACCP</span><span>·</span><span>14 ALLERGENS</span><span>·</span><span>TEMP LOGS</span><span>·</span>
+      <span>FIRE REGISTER</span><span>·</span><span>SAFETY STATEMENT</span><span>·</span><span>TRACEABILITY</span><span>·</span>
+      <span><b>GP %</b></span><span>·</span><span><b>LABOUR %</b></span><span>·</span><span><b>CASHFLOW</b></span><span>·</span>
+      <span>HACCP</span><span>·</span><span>14 ALLERGENS</span><span>·</span><span>TEMP LOGS</span><span>·</span>
+      <span>FIRE REGISTER</span><span>·</span><span>SAFETY STATEMENT</span><span>·</span><span>TRACEABILITY</span><span>·</span>
+      <span><b>GP %</b></span><span>·</span><span><b>LABOUR %</b></span><span>·</span><span><b>CASHFLOW</b></span><span>·</span>
+    </div>
+  </div>
+
+  <!-- ===== 01 · THE FOLDER ===== -->
+  <section class="ch" id="ch1">
+    <span class="num" aria-hidden="true">01</span>
+    <div class="inner">
+      <p class="m em rv">Chapter 01 · The old way</p>
+      <h2 class="d title rv">THE FOLDER</h2>
+      <div class="cap rv">
+        <p class="m"><b>Tue 21:40</b> — The inspector is due Thursday. The folder comes down off the shelf.</p>
+        <p class="m"><b>Tue 22:15</b> — The allergen list is from two menus ago. Nobody wants to open it.</p>
+        <p class="m"><b>Tue 23:30</b> — Reconstructing three months of temperature checks from memory. Everyone knows it. Nobody says it.</p>
+        <p class="m"><b>Wed 01:10</b> — Still at the kitchen table. The till sheets don't match Tuesday either.</p>
+      </div>
+      <p class="body-l rv">It isn't laziness. It's that the records were designed for the inspector — never for the person who has to keep them at midnight, after a 12-hour day on the floor.</p>
+    </div>
+  </section>
+
+  <div class="dots-sep" aria-hidden="true"></div>
+
+  <!-- ===== 02 · THE TUESDAY ===== -->
+  <section class="ch" id="ch2">
+    <span class="num" aria-hidden="true">02</span>
+    <div class="inner">
+      <p class="m em rv">Chapter 02 · The new way</p>
+      <h2 class="d title rv">THE TUESDAY</h2>
+      <p class="body-l rv">Same café. Same Tuesday. One workbook — records that take seconds, flag themselves, and never rot.</p>
+      <div class="beats rv">
+        <div class="beat"><span class="t">07:45</span><span class="what">Fridge temps typed in — out-of-range cells flag themselves.</span><span class="took">~90 sec</span></div>
+        <div class="beat"><span class="t">10:20</span><span class="what">Veg delivery: supplier, batch, date — one line in the traceability sheet.</span><span class="took">~60 sec</span></div>
+        <div class="beat"><span class="t">14:00</span><span class="what">New starter: one row in the training matrix; due-dates fill themselves.</span><span class="took">~40 sec</span></div>
+        <div class="beat"><span class="t">CLOSE</span><span class="what">Cleaning schedule initialled. Folder closed. Evening kept.</span><span class="took">done</span></div>
+      </div>
+      <div class="vid rv" data-case="case-1">
+        <div class="fallback">
+          <span class="play" aria-hidden="true">▶</span>
+          <span class="m">Case film 01 — the 90-second records · arriving here</span>
+        </div>
+        <span class="ai-tag">AI-assisted film · real workbook footage</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="dots-sep" aria-hidden="true"></div>
+
+  <!-- ===== 03 · THE NUMBERS ===== -->
+  <section class="ch" id="ch3">
+    <span class="num" aria-hidden="true">03</span>
+    <div class="inner">
+      <p class="m em rv">Chapter 03 · What the owner sees</p>
+      <h2 class="d title rv">THE NUMBERS</h2>
+      <p class="body-l rv">Dashboards are not decoration. Every tile answers one question and prescribes the next action — if a chart doesn't change what you do on Monday, it doesn't earn a place on the sheet.</p>
+      <div class="kgrid rv" aria-label="Illustrative dashboard, sample data">
+        <div class="k ok"><span class="lbl">Gross profit %</span><span class="val" data-count="68.4">0</span><span class="act">On target (≥65%). Hold prices.</span></div>
+        <div class="k warn"><span class="lbl">Labour % of sales</span><span class="val" data-count="31.2">0</span><span class="act">Above the 28% line → trim 6 rostered hours Sat.</span></div>
+        <div class="k bad"><span class="lbl">Wastage this week</span><span class="val" data-count="212" data-prefix="€">0</span><span class="act">2 items drive 70% → halve Tuesday prep batch.</span></div>
+        <div class="k ok"><span class="lbl">Cash 6-week low</span><span class="val" data-count="4310" data-prefix="€">0</span><span class="act">Positive across all 6 weeks. No action.</span></div>
+      </div>
+      <p class="m rv" style="margin-top:1rem">Illustrative render · sample data · exact layout of the in-workbook dashboards</p>
+    </div>
+  </section>
+
+  <div class="dots-sep" aria-hidden="true"></div>
+
+  <!-- ===== 04 · THE VISIT ===== -->
+  <section class="ch" id="ch4">
+    <span class="num" aria-hidden="true">04</span>
+    <div class="inner">
+      <p class="m em rv">Chapter 04 · When you'd rather hand it over</p>
+      <h2 class="d title rv">THE VISIT</h2>
+      <p class="body-l rv">The other half of Leanta drives out, stands where the work happens, and rebuilds one painful process in front of you — old way, new way, measured before and after. Lean Six Sigma method, modern AI tooling, your accounts, GDPR-first.</p>
+      <div class="offer rv">
+        <p class="big">START FOR <em>€200</em> OUT OF POCKET.</p>
+        <ul>
+          <li>€200 mobilises everything: the on-site process audit + the complete, application-ready grant pack for your Local Enterprise Office.</li>
+          <li>Grant approved → the scheme carries its share, your €200 is credited against any balance.</li>
+          <li>Not approved → you choose: proceed at the quoted price, or stop and keep all the work. Funding decisions are the LEO's, never ours — and we won't pretend otherwise.</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn-x" data-hover href="../grants.html">The grant pathway, step by step</a>
+          <span data-textus></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dots-sep" aria-hidden="true"></div>
+
+  <!-- ===== 05 · THE PROOF ===== -->
+  <section class="ch" id="ch5" style="padding-bottom:6vh">
+    <span class="num" aria-hidden="true">05</span>
+    <div class="inner" style="max-width:none">
+      <p class="m em rv">Chapter 05 · Show, don't tell</p>
+      <h2 class="d title rv">THE PROOF</h2>
+      <p class="body-l rv">Real processes, rebuilt on camera. Old way, new way, and the outcome in minutes — not adjectives.</p>
+    </div>
+    <div class="gallery" aria-label="Case films">
+      <div class="gcard">
+        <div class="vid" data-case="case-1">
+          <div class="fallback"><span class="play" aria-hidden="true">▶</span><span class="m">Case 01 · Café compliance — filming this week</span></div>
+          <span class="ai-tag">AI-assisted film · real workbook footage</span>
+        </div>
+        <span class="m">01 · The café folder, retired</span>
+      </div>
+      <div class="gcard">
+        <div class="vid" data-case="case-2">
+          <div class="fallback"><span class="play" aria-hidden="true">▶</span><span class="m">Case 02 · Trades quote-to-invoice — in production</span></div>
+          <span class="ai-tag">AI-assisted film · real workbook footage</span>
+        </div>
+        <span class="m">02 · Quote to invoice in 48 hours</span>
+      </div>
+      <div class="gcard">
+        <div class="vid" data-case="case-3">
+          <div class="fallback"><span class="play" aria-hidden="true">▶</span><span class="m">Case 03 · Shop till reconciliation — in production</span></div>
+          <span class="ai-tag">AI-assisted film · real workbook footage</span>
+        </div>
+        <span class="m">03 · The midnight retype, deleted</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINALE ===== -->
+  <section class="ch" id="finale">
+    <div class="inner">
+      <p class="m em rv">The question that started all of this</p>
+      <h2 class="d rv">WOULD YOU PASS <span class="q">TOMORROW?</span></h2>
+      <p class="body-l rv" style="margin:1.6rem auto 0">Free, two minutes, built for your industry — verdict on screen, action plan by message. No call unless you ask for one.</p>
+      <div class="chips rv">
+        <a class="chip" data-hover href="../quiz.html">Café</a>
+        <a class="chip" data-hover href="../quiz.html">Restaurant</a>
+        <a class="chip" data-hover href="../quiz.html">Pub</a>
+        <a class="chip" data-hover href="../quiz.html">B&amp;B / Hotel</a>
+        <a class="chip" data-hover href="../quiz.html">Shop</a>
+        <a class="chip" data-hover href="../quiz.html">Producer</a>
+        <a class="chip" data-hover href="../quiz.html">Trades</a>
+        <a class="chip" data-hover href="../quiz.html">Transport</a>
+        <a class="chip" data-hover href="../quiz.html">Other</a>
+      </div>
+      <div class="cta-row rv" style="justify-content:center">
+        <a class="btn-x" data-hover href="../quiz.html">Take the free readiness check</a>
+        <a class="btn-x ghost" data-hover href="../index.html#products">Browse the toolkits — €15–69</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="story">
+  <div class="giant d" aria-hidden="true">LEANTA</div>
+  <div class="sub d">LET'S FIX THE BORING WORK</div>
+  <div class="cols">
+    <a class="mail" data-hover href="mailto:hello@leanta.ie">hello@leanta.ie</a>
+    <nav style="display:flex; gap:1.6rem; flex-wrap:wrap" aria-label="Footer">
+      <a class="m" href="../index.html">Store</a>
+      <a class="m" href="../quiz.html">Readiness check</a>
+      <a class="m" href="../grants.html">Grants</a>
+      <a class="m" href="../services.html">Agency</a>
+      <a class="m" href="../legal/terms.html">Terms</a>
+      <a class="m" href="../legal/privacy.html">Privacy</a>
+    </nav>
+  </div>
+  <p class="legal">© 2026 Leanta · Ireland · Secure checkout by our Merchant of Record — EU VAT handled at checkout; card details never touch our servers. Templates are not legal advice — adapt to your premises. Some ambient imagery and films are AI-assisted and marked as such; every product screenshot is the real workbook. Sound stays off until you turn it on.</p>
+</footer>
+
+</body>
+</html>
