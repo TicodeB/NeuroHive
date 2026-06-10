@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free readiness check — “Would I pass an inspection tomorrow?” | Leanta</title>
-<meta name="description" content="Free 2-minute self-check for cafés, restaurants and food businesses: 10 questions, scored like an auditor would, with a traffic-light verdict. Runs entirely in your browser.">
+<meta name="description" content="Free 2-minute self-check for Irish small businesses — cafés, restaurants, pubs, B&Bs, shops, food producers, trades and transport. Pick your industry, answer 10 questions, get a traffic-light verdict. Runs entirely in your browser.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/leanta.css">
 <script src="assets/checkout-config.js" defer></script>
@@ -33,82 +33,28 @@
     <div class="wrap" style="max-width:760px">
       <p class="kicker">Free readiness check</p>
       <h1>Would you pass an inspection tomorrow?</h1>
-      <p>Answer honestly — <strong>Yes</strong> only if you could put the record in an inspector’s hands today. Ten questions, scored the same way the full Readiness Check workbook scores you (🟢 ≥85% · 🟠 60–84% · 🔴 &lt;60%).</p>
-      <p class="fineprint">100% private: this page sends nothing anywhere. Your answers never leave your browser.</p>
+      <p>Pick your industry, answer honestly — <strong>Yes</strong> only if you could put the record in an inspector's hands today. Ten questions, scored the same way the full Readiness Check workbook scores you (🟢 ≥85% · 🟠 60–84% · 🔴 &lt;60%).</p>
+      <p class="fineprint">100% private: this page sends nothing anywhere. Your answers never leave your browser unless <em>you</em> choose to message us your result at the end.</p>
 
       <form id="quiz-form">
-        <div class="quiz-q"><h3>1. Do you have a written, up-to-date HACCP / food-safety plan that matches your current menu and process?</h3>
+        <div class="quiz-q" id="industry-pick">
+          <h3>First — what's your business?</h3>
           <div class="opts">
-            <label><input type="radio" name="q1" value="100">Yes</label>
-            <label><input type="radio" name="q1" value="50">Partly</label>
-            <label><input type="radio" name="q1" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>2. Could you show today’s (or the most recent) temperature records for every fridge, freezer and hot-hold unit?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q2" value="100">Yes</label>
-            <label><input type="radio" name="q2" value="50">Partly</label>
-            <label><input type="radio" name="q2" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>3. Is there a 14-allergen matrix covering every item you serve, updated when the menu changed last?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q3" value="100">Yes</label>
-            <label><input type="radio" name="q3" value="50">Partly</label>
-            <label><input type="radio" name="q3" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>4. Do you run a cleaning &amp; sanitation schedule with sign-offs that are actually completed?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q4" value="100">Yes</label>
-            <label><input type="radio" name="q4" value="50">Partly</label>
-            <label><input type="radio" name="q4" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>5. Could you trace any ingredient back to its supplier and delivery within 10 minutes?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q5" value="100">Yes</label>
-            <label><input type="radio" name="q5" value="50">Partly</label>
-            <label><input type="radio" name="q5" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>6. Do you have a written H&amp;S risk assessment / safety statement reviewed in the last 12 months?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q6" value="100">Yes</label>
-            <label><input type="radio" name="q6" value="50">Partly</label>
-            <label><input type="radio" name="q6" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>7. Is your fire register current — alarms, extinguishers, emergency lighting and exits checked and logged on schedule?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q7" value="100">Yes</label>
-            <label><input type="radio" name="q7" value="50">Partly</label>
-            <label><input type="radio" name="q7" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>8. Does every staff member have dated training records (induction, hygiene, allergens, manual handling) before working the floor?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q8" value="100">Yes</label>
-            <label><input type="radio" name="q8" value="50">Partly</label>
-            <label><input type="radio" name="q8" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>9. When something goes wrong (failed temp, pest sighting, complaint), do you log it and record the corrective action taken?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q9" value="100">Yes</label>
-            <label><input type="radio" name="q9" value="50">Partly</label>
-            <label><input type="radio" name="q9" value="0">No</label>
-          </div>
-        </div>
-        <div class="quiz-q"><h3>10. If an inspector walked in right now, could you hand over all of the above within 15 minutes?</h3>
-          <div class="opts">
-            <label><input type="radio" name="q10" value="100">Yes</label>
-            <label><input type="radio" name="q10" value="50">Partly</label>
-            <label><input type="radio" name="q10" value="0">No</label>
+            <label><input type="radio" name="industry" value="cafe">Café / coffee shop</label>
+            <label><input type="radio" name="industry" value="restaurant">Restaurant / takeaway</label>
+            <label><input type="radio" name="industry" value="pub">Pub / bar</label>
+            <label><input type="radio" name="industry" value="bnb">B&amp;B / guesthouse / hotel</label>
+            <label><input type="radio" name="industry" value="retail">Shop / forecourt</label>
+            <label><input type="radio" name="industry" value="producer">Food / drink producer</label>
+            <label><input type="radio" name="industry" value="trades">Trades / construction</label>
+            <label><input type="radio" name="industry" value="transport">Transport / haulage</label>
+            <label><input type="radio" name="industry" value="other">Something else</label>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="font-size:1.1rem">Get my verdict</button>
+        <div id="quiz-questions" aria-live="polite"><!-- rendered per industry --></div>
+
+        <button type="submit" class="btn btn-primary" id="quiz-submit" style="font-size:1.1rem; display:none">Get my verdict</button>
       </form>
 
       <div id="quiz-result" role="status" aria-live="polite">
@@ -117,7 +63,15 @@
         <p style="font-size:1.15rem; font-weight:700" id="quiz-verdict"></p>
         <p id="quiz-detail"></p>
         <hr style="border:none; border-top:1px solid rgba(0,0,0,.15); margin:1.2rem 0">
-        <p><strong>Next steps:</strong></p>
+        <p><strong>Get your free 10-point action plan</strong> — message us your result and we reply with the plan for your industry (and yes, we can arrange a visit; no phone call unless you ask for one):</p>
+        <p style="display:flex; gap:.7rem; flex-wrap:wrap" id="msg-ctas">
+          <a class="btn btn-primary" id="cta-wa" href="#" rel="noopener" style="display:none">WhatsApp us my result</a>
+          <a class="btn" id="cta-sms" href="#" style="display:none">Text us my result</a>
+          <a class="btn" id="cta-mail" href="#">Email us my result</a>
+          <a class="btn" id="cta-visit" href="#">Ask for a visit instead</a>
+        </p>
+        <p class="fineprint">You message us first — that's your consent for us to reply about this result. We don't add you to any list, we ask before sending anything else, and we delete the thread on request. (GDPR the way it's meant to work.)</p>
+        <p style="margin-top:1rem"><strong>Or go deeper right now:</strong></p>
         <p style="display:flex; gap:.7rem; flex-wrap:wrap">
           <a class="btn btn-primary" href="products/p13.html">Get the full Readiness Check — €29</a>
           <a class="btn" href="downloads/P13_DEMO_Compliance_Gap_Analysis_Mock_Audit.xlsx" download>Download the free demo workbook</a>
@@ -132,7 +86,7 @@
   <div class="wrap">
     <div>
       <h4>Leanta</h4>
-      <p>Operations &amp; compliance toolkits for Irish and EU food businesses.</p>
+      <p>Operations &amp; compliance toolkits for Irish and EU small businesses.</p>
     </div>
     <div>
       <h4>Toolkits</h4>
@@ -158,6 +112,135 @@
     <div class="legalline">© 2026 Leanta · Ireland · Templates are not legal advice — adapt to your premises.</div>
   </div>
 </footer>
+
+<script>
+/* Industry-aware quiz: 6 universal + 4 industry questions, rendered client-side.
+   Scoring stays in assets/leanta.js (Yes=100 / Partly=50 / No=0, RAG 85/60).
+   This script only renders questions and builds the message-us CTAs. */
+(function () {
+  "use strict";
+
+  var UNIVERSAL = [
+    "Do you have a written H&S risk assessment / safety statement reviewed in the last 12 months?",
+    "Is your fire register current — alarms, extinguishers, emergency lighting and exits checked and logged on schedule?",
+    "Does every staff member have dated training records before working unsupervised?",
+    "When something goes wrong (failed check, incident, complaint), do you log it and record the corrective action taken?",
+    "If an inspector — or your accountant — asked, could you put your hands on any key record within 15 minutes?",
+    "Do you know last week's numbers — takings, biggest cost, and whether you made money?"
+  ];
+
+  var BANK = {
+    cafe: { label: "Café / coffee shop", qs: [
+      "Do you have a written, up-to-date HACCP / food-safety plan matching your current menu?",
+      "Could you show today's (or the most recent) temperature records for every fridge, freezer and display unit?",
+      "Is there a 14-allergen matrix covering every item you serve, updated when the menu last changed?",
+      "Is the cleaning & sanitation schedule signed off — actually, not theoretically?" ] },
+    restaurant: { label: "Restaurant / takeaway", qs: [
+      "Do you have a written, up-to-date HACCP plan matching your current menu and prep process?",
+      "Could you show today's temperature records — chilled, frozen AND hot-hold?",
+      "Is there a 14-allergen matrix by dish, current with the menu on the tables right now?",
+      "Could you trace any ingredient back to its supplier and delivery within 10 minutes?" ] },
+    pub: { label: "Pub / bar", qs: [
+      "If you serve food: are HACCP records and a 14-allergen list current? (If drinks only, answer for ice, garnishes and bottled snacks.)",
+      "Are line-cleaning and cellar checks logged on schedule?",
+      "Do you count stock weekly and track wastage / spillage against an expected pour cost?",
+      "Are fridge temperatures (bottle fridges and any food fridge) actually logged?" ] },
+    bnb: { label: "B&B / guesthouse / hotel", qs: [
+      "Are breakfast/kitchen food-safety records (HACCP, allergens) current — including for buffet items?",
+      "With guests sleeping upstairs: is there a current fire risk assessment, posted evacuation notices, and logged drills?",
+      "Is housekeeping working to a signed cleaning schedule, room by room?",
+      "Are guest records and booking/cancellation terms in order and retrievable?" ] },
+    retail: { label: "Shop / forecourt", qs: [
+      "Are chilled and frozen display temperatures logged every trading day?",
+      "Is date-rotation checked to a routine (and short-dated stock actioned), not by memory?",
+      "If you have a deli/hot counter: is allergen information available and current for every item?",
+      "Is the till reconciled to cash daily, with variances noted?" ] },
+    producer: { label: "Food / drink producer", qs: [
+      "Is your HACCP plan live — CCPs monitored with records, not just a binder on a shelf?",
+      "Could you trace any batch one step back (ingredients in) and one step forward (customers out)?",
+      "Do your labels meet EU 1169/2011 — ingredients, allergen emphasis, dates, weights?",
+      "Do you keep a supplier-approval register with specs for what comes in the door?" ] },
+    trades: { label: "Trades / construction", qs: [
+      "Do you have RAMS (risk assessment & method statement) for the job you're on this week?",
+      "Are Safe Pass / required cards and training certs current and copies to hand for everyone on site?",
+      "Are tools, ladders, harnesses and lifting gear on a dated inspection register?",
+      "Is the invoice for the last finished job already issued (within 48 hours), not waiting for the weekend?" ] },
+    transport: { label: "Transport / haulage", qs: [
+      "Are daily walkaround checks recorded for every vehicle that went out today?",
+      "Are maintenance and defect records up to date per vehicle?",
+      "Are driver hours / tacho records downloaded and stored on schedule?",
+      "Could you produce a POD for any delivery from the last month within 10 minutes?" ] },
+    other: { label: "your business", qs: [
+      "Are your key compliance documents (whatever applies to your sector) reviewed within the last 12 months?",
+      "Are your records in one known place — not across email, paper and three laptops?",
+      "Could a competent person step in tomorrow and find what they need to run the day?",
+      "Are quotes and invoices going out on time, every time?" ] }
+  };
+
+  var form = document.getElementById("quiz-form");
+  var box = document.getElementById("quiz-questions");
+  var submitBtn = document.getElementById("quiz-submit");
+  var industry = "";
+
+  function render(key) {
+    industry = key;
+    var qs = BANK[key].qs.concat(UNIVERSAL);
+    box.innerHTML = "";
+    qs.forEach(function (q, i) {
+      var d = document.createElement("div");
+      d.className = "quiz-q";
+      d.innerHTML = "<h3>" + (i + 1) + ". " + q + "</h3>" +
+        '<div class="opts">' +
+        '<label><input type="radio" name="q' + (i + 1) + '" value="100">Yes</label>' +
+        '<label><input type="radio" name="q' + (i + 1) + '" value="50">Partly</label>' +
+        '<label><input type="radio" name="q' + (i + 1) + '" value="0">No</label>' +
+        "</div>";
+      box.appendChild(d);
+    });
+    submitBtn.style.display = "inline-block";
+  }
+
+  document.querySelectorAll('#industry-pick input[name="industry"]').forEach(function (r) {
+    r.addEventListener("change", function () { render(r.value); });
+  });
+
+  /* After leanta.js computes the verdict, wire the message-us CTAs.
+     The visitor initiates the message — nothing is sent automatically. */
+  form.addEventListener("submit", function () {
+    setTimeout(function () {
+      var score = (document.getElementById("quiz-score").textContent || "").trim();
+      var verdict = (document.getElementById("quiz-verdict").textContent || "").split("—")[0].trim();
+      var label = industry && BANK[industry] ? BANK[industry].label : "—";
+      var cfg = window.LEANTA || {};
+      var planMsg = "Hi Leanta — readiness check result: " + score + " " + verdict +
+        ". Industry: " + label + ". Please send my free 10-point action plan.";
+      var visitMsg = "Hi Leanta — readiness check result: " + score + " " + verdict +
+        ". Industry: " + label + ". I'd like to arrange the free process-audit visit. My town: ";
+
+      var wa = document.getElementById("cta-wa");
+      var sms = document.getElementById("cta-sms");
+      var mail = document.getElementById("cta-mail");
+      var visit = document.getElementById("cta-visit");
+
+      if (cfg.contactPhone) {
+        wa.href = "https://wa.me/" + cfg.contactPhone.replace(/[^0-9]/g, "") +
+          "?text=" + encodeURIComponent(planMsg);
+        wa.style.display = "inline-block";
+        sms.href = "sms:" + cfg.contactPhone + "?&body=" + encodeURIComponent(planMsg);
+        sms.style.display = "inline-block";
+        visit.href = "sms:" + cfg.contactPhone + "?&body=" + encodeURIComponent(visitMsg);
+      } else {
+        visit.href = "mailto:" + (cfg.contactEmail || "hello@leanta.ie") +
+          "?subject=" + encodeURIComponent("Visit request — readiness " + score) +
+          "&body=" + encodeURIComponent(visitMsg);
+      }
+      mail.href = "mailto:" + (cfg.contactEmail || "hello@leanta.ie") +
+        "?subject=" + encodeURIComponent("My readiness result — " + score + " (" + label + ")") +
+        "&body=" + encodeURIComponent(planMsg);
+    }, 0);
+  });
+})();
+</script>
 
 </body>
 </html>

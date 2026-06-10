@@ -203,9 +203,54 @@ Samuel to paste his list (asked 10/06). Baseline scan queued with the §1
 research agents: Irish HACCP/H&S consultancies selling templates, Etsy/
 Template.net sellers, job-management SaaS (the complaints are our brief).
 
----
+## 15. Message-first funnel + channel rails + Hermes's role
 
-### Sequencing (recommendation)
+**Why message-first is right (Samuel's instinct, 10/06):** owner-operators
+answer messages between tasks; email reads as "sit-down homework". But don't
+make the phone number a wall — gating the *verdict* behind contact details is
+a dark pattern and weakens GDPR consent. The honest split (SHIPPED in quiz v2):
+**verdict on screen immediately, free** → the *10-point action plan* arrives by
+message → **the visitor initiates the message** (prefilled WhatsApp/SMS/email
+containing their score + industry). Customer-initiated contact = clean
+ePrivacy/GDPR ground; our reply is a requested service, not marketing. Email is
+asked for *second*, inside the conversation, when there's a file to deliver.
+
+**Quiz v2 (SHIPPED 10/06):** industry picker (9 options) → 4 industry-specific
++ 6 universal questions → RAG verdict → CTAs: "WhatsApp us my result" / "Text
+us" / "Email us" / "Ask for a visit", all prefilled with score + industry.
+WhatsApp/SMS buttons activate when `LEANTA.contactPhone` is set; email
+fallback otherwise. Still 100% client-side, no tracking.
+
+**Channel rails (decision + sequencing):**
+| Rail | Verdict | Why / cost note |
+|---|---|---|
+| WhatsApp Business **app** | ✅ START HERE (this week) | Free, 10-min setup on the business mobile; quick replies, labels, catalogue; hugely used by Irish SMEs. Manual/Samuel-operated. |
+| SMS (native `sms:` links) | ✅ already wired | Zero infra; works on every phone. |
+| WhatsApp Business **Platform/API** (via Twilio/360dialog) | ⏳ when volume > ~10 convos/day | This is the "Twilio-like service" — programmable, so **Hermes can manage it**. Per-conversation/message fees + number registration; **verify current Meta/Twilio pricing at setup** (changed repeatedly 2025–26). |
+| Telegram Bot API | ✅ but **internal only** | Free and the easiest for agents — but rural-Irish customers aren't on it. Keep as Hermes's ops/control channel (already live). |
+| iMessage / Apple Messages for Business | ❌ skip | No self-serve business API; enterprise MSP route only — not viable for a micro-business. |
+
+**Hermes (the always-on agent) — division of labour.** Claude Code (these
+sessions) = **builder**: site, packs, research, docs, one-off campaigns.
+**Hermes = operator**: watches hello@leanta.ie (+ WhatsApp API later, Telegram
+ops channel), and runs the conversation loop 24/7:
+1. Inbound quiz message arrives (score + industry already in the text).
+2. Hermes classifies → sends the industry's 10-point action plan (from the
+   approved template library — to be drafted per industry, next session) +
+   offers: demo workbook (asks for email here — email captured 2nd), pack
+   link, or visit slot (Google Calendar).
+3. Logs lead → fulfilment log/ClickUp; schedules the +2-day follow-up.
+4. **Escalates to Samuel** anything off-script: price negotiation, complaints,
+   legal-ish questions, anything Slovak until the native pass exists.
+**Hermes guardrails (binding):** never initiates unsolicited marketing
+messages; replies only within customer-initiated threads; approved templates
+only; no promises beyond playbook/site claims; identifies as Leanta's
+assistant when asked ("am I talking to a bot?" → yes, honestly — EU AI Act
+transparency); deletes thread data on request.
+
+**To build next:** the 9 industry action-plan reply templates (the asset the
+whole funnel delivers) + Hermes prompt/runbook file so its behaviour is
+version-controlled in this repo.
 **This week (launch):** playbook §1 unchanged — merge, private, KYC, listings,
 posts. The new site v3 + grants funnel support it.
 **Next 2 sessions:** §1 local research agents → local_targets list → §3 first
