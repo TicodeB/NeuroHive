@@ -28,17 +28,23 @@ import urllib.request
 import urllib.error
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-MODEL = "gemini-2.5-flash-image"
-ENDPOINT = (
+# Preference order: nano banana 2 pro first (matches the live env stills),
+# then flash-image fallbacks if quota/availability bites.
+MODELS = [
+    os.environ.get("GEMINI_IMAGE_MODEL", "gemini-3-pro-image"),
+    "gemini-3.1-flash-image",
+    "gemini-2.5-flash-image",
+]
+ENDPOINT_TPL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
-    + MODEL
-    + ":generateContent"
+    "{model}:generateContent"
 )
 
 # ---- baked prompt slots (verbatim from GEMINI_CREATIVE_BRIEF.md) -------------
 SLOTS = {
     "env-street": (
         "v4/assets/img/bg-0-street.jpg",
+        "16:9",
         "Wide exterior of an Irish small-town street on a bright clear morning, "
         "warm cream-toned shopfronts (#f2efe8 undertone), one emerald #0a8a52 "
         "accent (an awning or sign), people only as anonymous motion blur, "
@@ -47,6 +53,7 @@ SLOTS = {
     ),
     "env-shop": (
         "v4/assets/img/bg-1-retail.jpg",
+        "16:9",
         "Wide interior of a bright small Irish retail shop, warm cream walls "
         "#f2efe8 undertone, daylight through the window, one emerald #0a8a52 "
         "accent object, one customer as anonymous motion blur, photoreal "
@@ -55,6 +62,7 @@ SLOTS = {
     ),
     "env-factory": (
         "v4/assets/img/bg-2-factory.jpg",
+        "16:9",
         "Wide interior of a small clean Irish food-production floor, bright "
         "daylight, cream undertone #f2efe8, emerald #0a8a52 status LEDs as the "
         "single accent, a hi-vis worker far behind a frosted strip-curtain as "
@@ -63,6 +71,7 @@ SLOTS = {
     ),
     "env-lobby": (
         "v4/assets/img/bg-3-lobby.jpg",
+        "16:9",
         "Wide interior of a warm small Irish hotel lobby / reception, bright "
         "natural daylight, cream walls #f2efe8 undertone, one emerald #0a8a52 "
         "accent object, brass fixtures, a guest with a rolling case as motion "
@@ -71,6 +80,7 @@ SLOTS = {
     ),
     "logo-moodboard": (
         "v4/assets/img/logo-moodboard.png",
+        "4:3",
         "Brand sheet on white: monumental Bebas-style 'LEANTA' where the final "
         "A has NO crossbar (an ascent mark), single emerald #0a8a52; beneath it "
         "a thin, casual handwritten word 'agency' in real-ink texture, small. "
@@ -80,6 +90,7 @@ SLOTS = {
     ),
     "pet-sheet": (
         "v4/assets/img/pet-sheet.png",
+        "16:9",
         "Reference sheet, transparent background, soft-3D toy-like mascots "
         "matching a bright glassmorphism site: (1) tiny emerald sprout-blob "
         "'Lea' with a gold leaf antenna (2) copper fox 'Penny' (3) moss-green "
@@ -89,6 +100,7 @@ SLOTS = {
     ),
     "og-card": (
         "v4/assets/img/og-card.png",
+        "16:9",
         "Bright cream gallery banner 1200x630, LEANTA wordmark with an ascent-A "
         "in emerald #0a8a52, a frosted glass strip carrying 'Pass the "
         "inspection. Know your numbers. Keep your evenings.', one real-"
@@ -111,22 +123,34 @@ def load_key():
     return ""
 
 
-def generate(prompt, out_rel, key):
+def generate(prompt, out_rel, key, aspect="16:9"):
     body = json.dumps(
-        {"contents": [{"parts": [{"text": prompt}]}]}
+        {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "responseModalities": ["TEXT", "IMAGE"],
+                "imageConfig": {"aspectRatio": aspect},
+            },
+        }
     ).encode("utf-8")
-    req = urllib.request.Request(
-        ENDPOINT + "?key=" + key,
-        data=body,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        msg = e.read().decode("utf-8", "replace")
-        print("  ✗ HTTP %s: %s" % (e.code, msg[:300]))
+    data = None
+    for model in MODELS:
+        req = urllib.request.Request(
+            ENDPOINT_TPL.format(model=model) + "?key=" + key,
+            data=body,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=180) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as e:
+            msg = e.read().decode("utf-8", "replace")
+            print("  … %s -> HTTP %s: %s" % (model, e.code, msg[:160]))
+            continue
+    if data is None:
+        print("  ✗ all models failed")
         return False
 
     parts = (
@@ -154,7 +178,7 @@ def main():
     args = sys.argv[1:]
     if not args or "--list" in args:
         print("Available slots:")
-        for name, (path, _) in SLOTS.items():
+        for name, (path, _a, _p) in SLOTS.items():
             print("  %-16s -> %s" % (name, path))
         print("\nOr: --prompt \"...\" --out <path>")
         return
@@ -172,7 +196,7 @@ def main():
         prompt = args[args.index("--prompt") + 1]
         out = args[args.index("--out") + 1]
         print("Generating custom -> %s" % out)
-        generate(prompt, out, key)
+        generate(prompt, out, key, "16:9")
         return
 
     ok = 0
@@ -180,9 +204,9 @@ def main():
         if name not in SLOTS:
             print("Unknown slot: %s (try --list)" % name)
             continue
-        path, prompt = SLOTS[name]
+        path, aspect, prompt = SLOTS[name]
         print("Generating %s -> %s" % (name, path))
-        if generate(prompt, path, key):
+        if generate(prompt, path, key, aspect):
             ok += 1
     print("\nDone: %d/%d succeeded." % (ok, len([a for a in args if a in SLOTS])))
 
