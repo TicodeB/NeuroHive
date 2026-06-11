@@ -38,11 +38,22 @@ body {
 a { color: inherit; }
 
 /* ---- the world ----------------------------------------------------------- */
+body {
+  background:
+    radial-gradient(120% 90% at 50% 38%, #fbf9f4 0%, var(--cream) 52%, var(--cream-deep) 100%) fixed;
+}
+/* Retail World atmosphere — the "Spirit" iridescent grade (pink = customers).
+   Opacity driven by JS as the camera crosses the portal. */
+#grade {
+  position: fixed; inset: 0; z-index: 0; opacity: 0; pointer-events: none;
+  background:
+    radial-gradient(42% 36% at 58% 24%, rgba(255,255,255,.92), rgba(255,255,255,0) 58%),
+    radial-gradient(75% 64% at 28% 74%, rgba(244,186,224,.6), rgba(244,186,224,0) 70%),
+    linear-gradient(158deg, #b193e4 0%, #cfa6e8 30%, #ecb6dc 56%, #f7d3cb 80%, #f4e7da 100%);
+}
 #stage {
   position: fixed; inset: 0; width: 100vw; height: 100dvh;
-  display: block; z-index: 0;
-  background:
-    radial-gradient(120% 90% at 50% 38%, #fbf9f4 0%, var(--cream) 52%, var(--cream-deep) 100%);
+  display: block; z-index: 1; background: transparent;
 }
 
 /* native scroll proxy — the only scrolling element. Height set by JS. */
@@ -107,6 +118,11 @@ body.begun #hero { opacity: 0; transform: translateY(-3vh); visibility: hidden; 
   position: fixed; z-index: 5; left: 7vw; bottom: 12vh; max-width: min(34rem, 80vw);
   opacity: 0; transform: translateY(14px); pointer-events: none;
   transition: opacity .6s var(--ease), transform .6s var(--ease);
+  /* frosted glass card — the house material */
+  background: var(--glass); border: 1px solid var(--glass-line); border-radius: 20px;
+  padding: 1.4rem 1.7rem 1.5rem;
+  -webkit-backdrop-filter: blur(16px) saturate(1.15); backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: 0 22px 60px rgba(21,24,26,.16), inset 0 1px 0 rgba(255,255,255,.55);
 }
 .beat.show { opacity: 1; transform: none; }
 .beat-kicker {
