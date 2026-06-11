@@ -1,3 +1,28 @@
+## STATE — 11/06/2026 (SESSION 6 — Gemini pipeline LIVE + agency field-crew vision logged)
+**Branch:** `claude/trusting-noether-rxejqv` (PR #21). Vercel GREEN.
+
+### ✅ DONE THIS SESSION
+- **Gemini API LIVE in-sandbox:** key captured via popup → git-ignored `asset-forge/.env` (chmod 600, never committed). ⚠️ Key passed through chat transcript — Samuel must ROTATE it at aistudio.google.com before launch, re-set via `set_secret.sh GEMINI_API_KEY`.
+- **`asset-forge/scripts/gen_gemini.py`:** slot-based image generator (model chain: `gemini-3-pro-image` → 3.1-flash → 2.5-flash; per-slot aspect ratios; `--prompt/--out` for customs). Slots: 4 env-still re-rolls + logo-moodboard + pet-sheet + og-card.
+- **Generated & pushed (`863c96d`):** `v4/assets/img/pet-sheet.png` (Lea/Penny/Mossy ×6 poses, transparent — trace source for site sprites) · `logo-moodboard.png` (6 lockups, exploration only — inline SVG glyph stays canon) · `og-card.png` (re-rolled once; clean ascent-A + strap + 4-env strip; not yet wired into `<meta>`).
+- **Mesh-field v2 + Z-dolly + 3D mind-map tilt** shipped earlier (`5c51555`).
+
+### 🧭 STRATEGIC DIRECTION — AGENCY FIELD CREW (Samuel, 11/06, exploration → near-binding)
+Mobile observation INSTEAD of fixed installs: Leanta crew arrives with **AI vision glasses + drone + robodog** (quadruped handles Irish premises: steps/yards). Whole kit < €20k ≈ less than ONE client's fixed vision install; Leanta-owned, amortised across clients = "measurement rounds as a service" (work-sampling methodology — statistically valid, 1930s IE technique).
+- **Service ladder:** L0 human walk w/ glasses + AI extraction → Lean DB (sellable NOW, zero CapEx) · L1 cheap fixed sensors only where continuity matters (HACCP temps — robot never replaces €30 loggers) · L2 scheduled robot+drone rounds (subscription) · L3 AI drafts management actions, human approves · L4 closed-loop for low-risk only.
+- **Guardrails:** measure the WORK not the worker (people blurred by default, GDPR DPIA, bounded announced visits); human-in-the-loop before any "AI actioning" (EU AI Act high-risk creep); food sites: dog in warehouse/yard zones only, drone outdoors; client floor footage = client IP (data-handling SOP). Drone needs IAA reg + A1/A3 cert + insurance.
+- **Selling:** promise stays "Hours back. Guaranteed." (quantified w/ forfeit, Samuel to set the number); kit is the proof FILM not the copy. Lines: "No rewiring — our robot walks your floor." · "One visit. Three sets of eyes." · "Two boots, four paws, one drone." Tagline ladder + jargon→plain table delivered in chat 11/06.
+- **L5 candidate (Samuel 11/06): night-guard robots** — trespass deterrence + recording + drone eye + spotlight beam, escalation to emergency services. Park for phase 2; gates: Ireland = **112/999 not 911**; guarding/monitoring is **PSA-licensed** → route = partner with a PSA-licensed monitoring centre (Leanta = tech provider, partner does verified Garda escalation); auto-launch night drone = BVLOS/specific-category authorisation (not open category); spotlight/strobe deterrent fine, no lasers; record with signage (GDPR), NO biometric ID (AI Act). Big real market: construction-site/farmyard machinery+diesel theft. Same robodog assets sweat nights = unit economics, but guard units realistically stationed per site.
+
+- **Field-crew uniform concepts** (Samuel 11/06: "futuristic outfit, overall/military style, Leanta logo, tools, hat, vision system") → generated via gen_gemini.py → `marketing/concepts/`.
+
+### ⏭ NEXT SESSION
+1. Wire `og-card.png` into v4 `<meta property="og:image">` + twitter card.
+2. three.js signature rebuild + true-3D mind map (BINDING — see Session 5 item −1 below).
+3. Key rotation reminder stands until Samuel confirms.
+
+---
+
 ## STATE — 10/06/2026 ~12:30 (SESSION 5 — Samuel's verdicts actioned → v4.3 "THE DESCENT" SHIPPED)
 **Branch:** `claude/trusting-noether-rxejqv` (PR #21). HEAD `2318253`, Vercel GREEN.
 **Preview:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/
