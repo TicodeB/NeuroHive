@@ -567,44 +567,70 @@
   /*  COMPANIONS — three cute pets; the pick rides the Lea orb.             */
   /*  Samuel's Omma scene (LEANTA.ommaPetUrl) overrides everything.         */
   /* ====================================================================== */
+  /* the shared face — eyes (with catch-light), rosy cheeks, and one mouth per
+     mood; CSS shows the active mouth/lid from the svg's data-mood. */
+  function petFace() {
+    return (
+      '<ellipse class="cheek" cx="35" cy="63" rx="6" ry="3.6" fill="#ff7a66"/>' +
+      '<ellipse class="cheek" cx="65" cy="63" rx="6" ry="3.6" fill="#ff7a66"/>' +
+      '<g class="eye eL">' +
+        '<ellipse class="ball" cx="40" cy="53" rx="7.8" ry="9.2" fill="#fff"/>' +
+        '<circle class="pup" cx="40" cy="55" r="4.1" fill="#15181a"/>' +
+        '<circle class="cl" cx="37.6" cy="50.6" r="1.8" fill="#fff"/>' +
+        '<path class="lid" d="M32 54 Q40 48 48 54" stroke="#15181a" stroke-width="2.6" fill="none" stroke-linecap="round"/>' +
+      '</g>' +
+      '<g class="eye eR">' +
+        '<ellipse class="ball" cx="60" cy="53" rx="7.8" ry="9.2" fill="#fff"/>' +
+        '<circle class="pup" cx="60" cy="55" r="4.1" fill="#15181a"/>' +
+        '<circle class="cl" cx="57.6" cy="50.6" r="1.8" fill="#fff"/>' +
+        '<path class="lid" d="M52 54 Q60 48 68 54" stroke="#15181a" stroke-width="2.6" fill="none" stroke-linecap="round"/>' +
+      '</g>' +
+      '<path class="mouth m-idle" d="M44 69 Q50 74 56 69" stroke="#15181a" stroke-width="2.6" fill="none" stroke-linecap="round"/>' +
+      '<path class="mouth m-happy" d="M41 67 Q50 81 59 67 Q50 72 41 67 Z" fill="#15181a"/>' +
+      '<ellipse class="mouth m-talk" cx="50" cy="70" rx="4.6" ry="3.2" fill="#15181a"/>' +
+      '<circle class="mouth m-surp" cx="50" cy="71" r="3.5" fill="#15181a"/>' +
+      '<path class="mouth m-sleep" d="M46 71 Q50 73.5 54 71" stroke="#15181a" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
+      '<g class="zzz"><text x="68" y="33" class="z1">z</text><text x="77" y="25" class="z2">z</text></g>'
+    );
+  }
   function petSVG(body1, body2, accent, kind) {
-    var head =
-      '<svg viewBox="0 0 100 100" aria-hidden="true">' +
-      '<defs><radialGradient id="pg' + kind + '" cx="38%" cy="30%" r="80%">' +
+    /* gradient id must be unique per palette, not per kind — Nova and Penny
+       are both "fox", so a shared "pgfox" id makes one steal the other's
+       colour wherever both svgs live in the DOM (pickers + orb). */
+    var gid = "pg" + kind + body1.replace(/[^a-z0-9]/gi, "") + body2.replace(/[^a-z0-9]/gi, "");
+    var fill = 'url(#' + gid + ')';
+    var open =
+      '<svg viewBox="0 0 100 100" data-mood="idle" aria-hidden="true">' +
+      '<defs><radialGradient id="' + gid + '" cx="38%" cy="28%" r="82%">' +
       '<stop offset="0%" stop-color="' + body1 + '"/><stop offset="100%" stop-color="' + body2 + '"/>' +
-      '</radialGradient></defs><g class="pet">';
-    var tail = '</g></svg>';
-    var eyes =
-      '<g class="eye eL"><ellipse cx="40" cy="54" rx="7.2" ry="8.4" fill="#fff"/>' +
-      '<circle class="pup" cx="40" cy="55" r="3.4" fill="#15181a"/></g>' +
-      '<g class="eye eR"><ellipse cx="60" cy="54" rx="7.2" ry="8.4" fill="#fff"/>' +
-      '<circle class="pup" cx="60" cy="55" r="3.4" fill="#15181a"/></g>' +
-      '<path d="M44 69 Q50 74 56 69" stroke="#15181a" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
-    if (kind === "sprout") return head +
-      '<path d="M50 16 C50 8 56 5 61 6 C60 12 56 15 50 16 Z" fill="' + accent + '"/>' +
-      '<line x1="50" y1="22" x2="50" y2="13" stroke="' + accent + '" stroke-width="2.4" stroke-linecap="round"/>' +
-      '<ellipse cx="50" cy="58" rx="30" ry="27" fill="url(#pg' + kind + ')"/>' +
-      '<ellipse cx="38" cy="66" rx="5" ry="3" fill="#e06a5e" opacity=".25"/>' +
-      '<ellipse cx="62" cy="66" rx="5" ry="3" fill="#e06a5e" opacity=".25"/>' + eyes +
-      '<ellipse cx="38" cy="84" rx="6" ry="3.2" fill="' + body2 + '"/>' +
-      '<ellipse cx="62" cy="84" rx="6" ry="3.2" fill="' + body2 + '"/>' + tail;
-    if (kind === "fox") return head +
-      '<path d="M28 36 L22 16 L42 28 Z" fill="url(#pg' + kind + ')"/>' +
-      '<path d="M72 36 L78 16 L58 28 Z" fill="url(#pg' + kind + ')"/>' +
-      '<path d="M28 36 L25 22 L38 30 Z" fill="#fff" opacity=".7"/>' +
-      '<path d="M72 36 L75 22 L62 30 Z" fill="#fff" opacity=".7"/>' +
-      '<ellipse cx="50" cy="58" rx="30" ry="27" fill="url(#pg' + kind + ')"/>' +
-      '<ellipse cx="50" cy="68" rx="16" ry="12" fill="#fff" opacity=".85"/>' + eyes +
-      '<ellipse cx="50" cy="63" rx="4" ry="3" fill="' + accent + '"/>' + tail;
+      '</radialGradient></defs>' +
+      '<ellipse class="shadow" cx="50" cy="93" rx="25" ry="4.4" fill="#15181a" opacity=".12"/>' +
+      '<g class="pet">';
+    var close = '</g></svg>';
+    var gloss = '<ellipse class="gloss" cx="39" cy="46" rx="11" ry="7.5" fill="#fff" opacity=".26"/>';
+    if (kind === "sprout") return open +
+      '<path d="M50 15 C50 6 57 3 63 4 C61 11 56 15 50 16 Z" fill="' + accent + '"/>' +
+      '<line x1="50" y1="22" x2="50" y2="12" stroke="' + accent + '" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<ellipse cx="50" cy="58" rx="31" ry="28" fill="' + fill + '"/>' + gloss +
+      '<ellipse cx="38" cy="86" rx="6.2" ry="3.3" fill="' + body2 + '"/>' +
+      '<ellipse cx="62" cy="86" rx="6.2" ry="3.3" fill="' + body2 + '"/>' + petFace() + close;
+    if (kind === "fox") return open +
+      '<path d="M27 35 L21 14 L43 27 Z" fill="' + fill + '"/>' +
+      '<path d="M73 35 L79 14 L57 27 Z" fill="' + fill + '"/>' +
+      '<path d="M28 33 L25 20 L38 28 Z" fill="' + accent + '" opacity=".55"/>' +
+      '<path d="M72 33 L75 20 L62 28 Z" fill="' + accent + '" opacity=".55"/>' +
+      '<ellipse cx="50" cy="58" rx="31" ry="28" fill="' + fill + '"/>' + gloss +
+      '<ellipse cx="50" cy="68" rx="17" ry="13" fill="#fff" opacity=".9"/>' + petFace() +
+      '<ellipse cx="50" cy="63.5" rx="3.6" ry="2.7" fill="' + body2 + '"/>' + close;
     /* sheep */
-    return head +
-      '<circle cx="32" cy="42" r="11" fill="#fff"/><circle cx="46" cy="36" r="12" fill="#fff"/>' +
-      '<circle cx="62" cy="38" r="11" fill="#fff"/><circle cx="70" cy="48" r="10" fill="#fff"/>' +
-      '<circle cx="28" cy="54" r="10" fill="#fff"/>' +
-      '<ellipse cx="50" cy="60" rx="28" ry="25" fill="#fff"/>' +
-      '<ellipse cx="50" cy="62" rx="20" ry="18" fill="url(#pg' + kind + ')"/>' +
-      '<path d="M27 50 C20 48 18 42 22 38 C27 40 29 45 27 50 Z" fill="' + body2 + '"/>' +
-      '<path d="M73 50 C80 48 82 42 78 38 C73 40 71 45 73 50 Z" fill="' + body2 + '"/>' + eyes + tail;
+    return open +
+      '<circle cx="32" cy="42" r="11" fill="#fbfaf7"/><circle cx="46" cy="35" r="12.5" fill="#fbfaf7"/>' +
+      '<circle cx="62" cy="37" r="11.5" fill="#fbfaf7"/><circle cx="70" cy="48" r="10" fill="#fbfaf7"/>' +
+      '<circle cx="28" cy="55" r="10" fill="#fbfaf7"/><circle cx="72" cy="58" r="9.5" fill="#fbfaf7"/>' +
+      '<ellipse cx="50" cy="60" rx="29" ry="26" fill="#fbfaf7"/>' +
+      '<ellipse cx="50" cy="61" rx="21" ry="19" fill="' + fill + '"/>' + gloss +
+      '<path d="M27 50 C19 48 17 41 22 37 C28 39 30 45 27 50 Z" fill="' + body2 + '"/>' +
+      '<path d="M73 50 C81 48 83 41 78 37 C72 39 70 45 73 50 Z" fill="' + body2 + '"/>' + petFace() + close;
   }
   var PETS = [
     { id: "sprout", name: "Lea", title: "Lea the sprout", svg: petSVG("#3ddca8", "#0a8a52", "#d7a900", "sprout") },
@@ -685,6 +711,35 @@
   }
   renderOrbPet();
 
+  /* ----- expressions: idle · happy · talking · surprised · sleeping ------ */
+  /*  Moods drive the SVG via data-mood (CSS does the rest). Nova (the 3D     */
+  /*  model) has no svg[data-mood], so every call is a safe no-op for her.    */
+  function petEl() { return orbCore ? orbCore.querySelector("svg[data-mood]") : null; }
+  var moodHold = null, sleepTmr = null;
+  function setMood(m, holdMs) {
+    var s = petEl(); if (!s) return;
+    s.dataset.mood = m;
+    if (moodHold) { clearTimeout(moodHold); moodHold = null; }
+    if (holdMs) moodHold = setTimeout(function () {
+      var e = petEl(); if (e && e.dataset.mood === m) e.dataset.mood = "idle";
+    }, holdMs);
+  }
+  function wakePet() {
+    var s = petEl();
+    if (s && s.dataset.mood === "sleeping") s.dataset.mood = "idle";
+    if (sleepTmr) clearTimeout(sleepTmr);
+    if (!reduced) sleepTmr = setTimeout(function () {
+      var e = petEl();
+      if (e && !moodHold && e.dataset.mood === "idle" && (!panelLea || panelLea.hidden))
+        e.dataset.mood = "sleeping";
+    }, 24000);
+  }
+  if (!reduced) {
+    addEventListener("pointermove", wakePet, { passive: true });
+    addEventListener("scroll", wakePet, { passive: true });
+    wakePet();
+  }
+
   /* pet pickers inside each environment card */
   document.querySelectorAll(".petpick").forEach(function (box) {
     PETS.forEach(function (pet) {
@@ -700,6 +755,7 @@
           bb.setAttribute("aria-checked", String(bb.title === pet.title));
         });
         renderOrbPet();
+        setMood("happy", 1700);
       });
       box.appendChild(b);
     });
@@ -816,10 +872,12 @@
     typing.className = "msg bot typing";
     typing.innerHTML = "<i></i><i></i><i></i>";
     msgs.appendChild(typing); msgs.scrollTop = msgs.scrollHeight;
+    setMood("talking");
     var res = answer(q); /* LEA_UPGRADE: replace with fetch("/api/lea") */
     setTimeout(function () {
       typing.remove();
       addMsg(res.text, "bot", res.links);
+      setMood("happy", 1500);
     }, 480 + Math.min(900, q.length * 14));
   }
 
@@ -837,6 +895,7 @@
       panelLea.hidden = !open;
       orb.setAttribute("aria-expanded", String(open));
       if (open) {
+        setMood("surprised", 1000);
         if (!greeted) {
           greeted = true;
           addMsg("Hi — I'm " + currentPet().name + ", Leanta's automated helper (not a human, happy to fetch one). What's eating your week?", "bot");

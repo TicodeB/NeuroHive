@@ -385,6 +385,42 @@ footer.story .legal { margin-top: 4vh; padding-top: 1.4rem; border-top: 1px soli
 #lea-orb svg .pup { transition: transform .16s ease; }
 @keyframes petbob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-3px) } }
 @keyframes petsquish { 0%,100% { transform: scale(1,1) } 40% { transform: scale(1.12,.88) } 70% { transform: scale(.94,1.06) } }
+
+/* ---- pet expressions: shared base (every pet svg carries data-mood) ---- */
+svg[data-mood] .ball, svg[data-mood] .m-talk { transform-box: fill-box; transform-origin: center; }
+svg[data-mood] .cheek { opacity: .32; transition: opacity .3s ease; }
+svg[data-mood] .ball, svg[data-mood] .pup, svg[data-mood] .cl { transition: opacity .15s ease; }
+svg[data-mood] .mouth { transition: opacity .18s ease; }
+svg[data-mood] .lid, svg[data-mood] .zzz,
+svg[data-mood] .m-happy, svg[data-mood] .m-talk,
+svg[data-mood] .m-surp, svg[data-mood] .m-sleep { opacity: 0; }
+svg[data-mood] .zzz text { fill: #15181a; font: 700 11px/1 ui-monospace, monospace; }
+svg[data-mood] .zzz .z2 { font-size: 8px; }
+/* only the orb pet actually emotes; the picker thumbnails stay idle + smiling */
+#lea-orb svg[data-mood="happy"]   .m-idle,
+#lea-orb svg[data-mood="talking"] .m-idle,
+#lea-orb svg[data-mood="surprised"] .m-idle,
+#lea-orb svg[data-mood="sleeping"]  .m-idle { opacity: 0; }
+#lea-orb svg[data-mood="happy"]   .m-happy { opacity: 1; }
+#lea-orb svg[data-mood="talking"] .m-talk  { opacity: 1; }
+#lea-orb svg[data-mood="surprised"] .m-surp { opacity: 1; }
+#lea-orb svg[data-mood="sleeping"]  .m-sleep { opacity: 1; }
+#lea-orb svg[data-mood="happy"]   .ball, #lea-orb svg[data-mood="happy"]   .pup, #lea-orb svg[data-mood="happy"]   .cl,
+#lea-orb svg[data-mood="sleeping"] .ball, #lea-orb svg[data-mood="sleeping"] .pup, #lea-orb svg[data-mood="sleeping"] .cl { opacity: 0; }
+#lea-orb svg[data-mood="happy"] .lid, #lea-orb svg[data-mood="sleeping"] .lid { opacity: 1; }
+#lea-orb svg[data-mood="happy"] .cheek { opacity: .62; }
+#lea-orb svg[data-mood="sleeping"] .cheek { opacity: .2; }
+#lea-orb svg[data-mood="surprised"] .ball { transform: scale(1.16); }
+#lea-orb svg[data-mood="sleeping"] .zzz { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  #lea-orb svg[data-mood="talking"] .m-talk { animation: talkpulse .26s ease-in-out infinite alternate; }
+  #lea-orb svg[data-mood="happy"] .pet { animation: petbob 1.5s ease-in-out infinite; }
+  #lea-orb svg[data-mood="sleeping"] .pet { animation: petbreathe 3.6s ease-in-out infinite; }
+  #lea-orb svg[data-mood="sleeping"] .zzz { animation: zzzfloat 2.6s ease-in-out infinite; }
+}
+@keyframes talkpulse { from { transform: scaleY(.35) } to { transform: scaleY(1.05) } }
+@keyframes petbreathe { 0%,100% { transform: translateY(0) scale(1) } 50% { transform: translateY(1px) scale(.99) } }
+@keyframes zzzfloat { 0% { opacity: 0; transform: translate(0,2px) } 30% { opacity: 1 } 100% { opacity: 0; transform: translate(3px,-7px) } }
 #lea-orb .ring { position: absolute; inset: -7px; border-radius: 50%;
   border: 1px solid rgba(10,138,82,.5); animation: orbit 9s linear infinite; }
 #lea-orb .ring::after { content: ""; position: absolute; top: -3px; left: 50%; width: 5px; height: 5px;

@@ -19,7 +19,7 @@ Mobile observation INSTEAD of fixed installs: Leanta crew arrives with **AI visi
 
 ### ⏭ NEXT SESSION
 1. three.js signature rebuild + true-3D mind map (BINDING — see Session 5 item −1 below).
-2. Companion pets: animate Lea/Penny/Mossy. Route under eval — **Higgsfield image-to-video** (Samuel asked 11/06). pet-sheet.jpg is the look-lock; isolate one pose per pet (bg-removal) → Higgsfield img2video for an idle loop, OR keep lightweight CSS/SVG sprite. Decide before building.
+2. ✅ DONE — Companion pets rebuilt as **interactive animated SVG** (Samuel chose SVG-on-site over Higgsfield video, 11/06; video can't recolour or react to chat). Cuter soft-3D look (catch-light eyes, rosy cheeks, gloss, soft shadow) + full **mood system** on the Lea orb: idle · happy · talking · surprised · sleeping (with floating zzz), wired to chat — talking while composing, happy on reply/pick, surprised on open, sleeps after 24s idle, wakes on move/scroll. CSS-driven via `svg[data-mood]`; pickers stay idle smiles. **Fixed latent bug:** duplicate `pgfox` gradient id made Penny render in Nova's pink — gradient ids now unique per palette. Verified all 3 pets + 5 moods via Playwright. pet-sheet.jpg remains the look-lock reference for any future polish.
 3. Re-grade the 5 `marketing/concepts/*` field-crew renders to cream palette IF any become web heroes (currently pitch-deck only).
 4. Key rotation reminder stands until Samuel confirms (key passed through chat).
 
