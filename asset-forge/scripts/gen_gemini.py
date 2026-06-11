@@ -79,7 +79,7 @@ SLOTS = {
         "for a glass card overlay, 16:9, no readable text, no faces.",
     ),
     "logo-moodboard": (
-        "v4/assets/img/logo-moodboard.png",
+        "v4/assets/img/logo-moodboard.jpg",
         "4:3",
         "Brand sheet on white: monumental Bebas-style 'LEANTA' where the final "
         "A has NO crossbar (an ascent mark), single emerald #0a8a52; beneath it "
@@ -89,7 +89,7 @@ SLOTS = {
         "extra words.",
     ),
     "pet-sheet": (
-        "v4/assets/img/pet-sheet.png",
+        "v4/assets/img/pet-sheet.jpg",
         "16:9",
         "Reference sheet, transparent background, soft-3D toy-like mascots "
         "matching a bright glassmorphism site: (1) tiny emerald sprout-blob "
@@ -99,7 +99,7 @@ SLOTS = {
         "shadow ellipse, no background scene, no text.",
     ),
     "og-card": (
-        "v4/assets/img/og-card.png",
+        "v4/assets/img/og-card.jpg",
         "16:9",
         "Bright cream gallery banner 1200x630, LEANTA wordmark with an ascent-A "
         "in emerald #0a8a52, a frosted glass strip carrying 'Pass the "

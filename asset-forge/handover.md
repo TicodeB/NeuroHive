@@ -4,7 +4,8 @@
 ### ✅ DONE THIS SESSION
 - **Gemini API LIVE in-sandbox:** key captured via popup → git-ignored `asset-forge/.env` (chmod 600, never committed). ⚠️ Key passed through chat transcript — Samuel must ROTATE it at aistudio.google.com before launch, re-set via `set_secret.sh GEMINI_API_KEY`.
 - **`asset-forge/scripts/gen_gemini.py`:** slot-based image generator (model chain: `gemini-3-pro-image` → 3.1-flash → 2.5-flash; per-slot aspect ratios; `--prompt/--out` for customs). Slots: 4 env-still re-rolls + logo-moodboard + pet-sheet + og-card.
-- **Generated & pushed (`863c96d`):** `v4/assets/img/pet-sheet.png` (Lea/Penny/Mossy ×6 poses, transparent — trace source for site sprites) · `logo-moodboard.png` (6 lockups, exploration only — inline SVG glyph stays canon) · `og-card.png` (re-rolled once; clean ascent-A + strap + 4-env strip; not yet wired into `<meta>`).
+- **Generated & pushed (`863c96d`):** `v4/assets/img/pet-sheet.jpg` (Lea/Penny/Mossy ×6 poses — look-lock REFERENCE only; bg is painted checkerboard, NOT real alpha — nano banana returns JPEG, so true sprites need bg-removal) · `logo-moodboard.jpg` (6 lockups, exploration only — inline SVG glyph stays canon) · `og-card.jpg` (re-rolled once; clean ascent-A + strap + 4-env strip).
+- **OG card WIRED** into `v4/index.html` `<head>` — og:type/title/description/image(+w/h/alt) + twitter summary_large_image. Absolute URL points at the current Vercel preview origin; **swap to `https://leanta.ie` at production promotion** (comment marks the spot). Files renamed `.png`→`.jpg` (they were always JPEG); generator slots updated to match. Verified locally: page 200, og-card.jpg 200, tags present.
 - **Mesh-field v2 + Z-dolly + 3D mind-map tilt** shipped earlier (`5c51555`).
 
 ### 🧭 STRATEGIC DIRECTION — AGENCY FIELD CREW (Samuel, 11/06, exploration → near-binding)
@@ -17,9 +18,10 @@ Mobile observation INSTEAD of fixed installs: Leanta crew arrives with **AI visi
 - **Field-crew uniform concepts** (Samuel 11/06: "futuristic outfit, overall/military style, Leanta logo, tools, hat, vision system") → generated via gen_gemini.py → `marketing/concepts/`.
 
 ### ⏭ NEXT SESSION
-1. Wire `og-card.png` into v4 `<meta property="og:image">` + twitter card.
-2. three.js signature rebuild + true-3D mind map (BINDING — see Session 5 item −1 below).
-3. Key rotation reminder stands until Samuel confirms.
+1. three.js signature rebuild + true-3D mind map (BINDING — see Session 5 item −1 below).
+2. Companion pets: animate Lea/Penny/Mossy. Route under eval — **Higgsfield image-to-video** (Samuel asked 11/06). pet-sheet.jpg is the look-lock; isolate one pose per pet (bg-removal) → Higgsfield img2video for an idle loop, OR keep lightweight CSS/SVG sprite. Decide before building.
+3. Re-grade the 5 `marketing/concepts/*` field-crew renders to cream palette IF any become web heroes (currently pitch-deck only).
+4. Key rotation reminder stands until Samuel confirms (key passed through chat).
 
 ---
 

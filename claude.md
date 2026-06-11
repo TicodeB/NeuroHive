@@ -9,6 +9,17 @@ Branch: `claude/trusting-noether-rxejqv`
 **Preview:** https://neuro-hive-git-claude-trusting-noether-rxejqv-ticodebs-projects.vercel.app/v4/
 (preloader plays once per session — open a private window to replay it)
 
+**11/06 — Gemini asset pipeline + social card (CURRENT):**
+- Gemini image generation is live in-repo via `asset-forge/scripts/gen_gemini.py`
+  (reads `GEMINI_API_KEY` from git-ignored `asset-forge/.env`; nano banana 2 pro
+  → flash fallbacks; `--list` for slots, `--prompt/--out` for one-offs)
+- New website assets in `v4/assets/img/`: `og-card.jpg` (social share card —
+  now wired into `<head>` Open Graph + Twitter tags), `pet-sheet.jpg` (companion
+  look-lock reference), `logo-moodboard.jpg` (logo exploration). All SynthID-marked
+- Field-crew CONCEPTS (pitch-deck, not website) in `marketing/concepts/`:
+  uniform-sheet · field-crew · night-guard · rapid-response
+- ⚠️ OG image URL is the preview origin — swap to `https://leanta.ie` at production
+
 **v4.3 — "THE DESCENT" (10/06, Samuel's second verdict — CURRENT):**
 - Bright glassmorphism theme `#f2efe8`; dark theme + 3D shapes REMOVED entirely
   (no three.js, no CDN dependencies at all)
