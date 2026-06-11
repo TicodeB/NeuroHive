@@ -184,6 +184,7 @@ body.begun #hero { opacity: 0; transform: translateY(-3vh); visibility: hidden; 
 #progress i { display: block; height: 100%; width: 0; background: var(--em); transition: width .12s linear; }
 
 /* ---- no-WebGL fallback --------------------------------------------------- */
+#nowebgl[hidden] { display: none; }
 #nowebgl { position: relative; z-index: 8; min-height: 100dvh; display: grid; place-items: center;
   padding: 12vh 8vw; background: var(--cream); }
 .nw-inner { max-width: 44rem; }

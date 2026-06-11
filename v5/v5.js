@@ -383,7 +383,7 @@ function start() {
     const clamp01 = x => Math.min(1, Math.max(0, x));
     const warm = clamp01((camP - 0.09) / 0.05) * (1 - clamp01((camP - 0.18) / 0.07));
     /* retail occupies p≈0.14–0.40; its lilac grade fades as trades nears */
-    const retail = clamp01((camP - 0.14) / 0.08) * (1 - clamp01((camP - 0.40) / 0.07));
+    const retail = clamp01((camP - 0.14) / 0.08) * (1 - clamp01((camP - 0.36) / 0.05));
     halo.material.opacity = 0.5 * warm;
     gradeEl.style.opacity = (retail * 0.9).toFixed(3);
 
