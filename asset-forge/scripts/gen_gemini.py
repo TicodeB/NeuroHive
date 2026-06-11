@@ -107,6 +107,82 @@ SLOTS = {
         "environment photo strip along the bottom edge (street/shop/factory/"
         "lobby), subtle grain, no other text.",
     ),
+    # ---- Brief §4.3 New environment stills (sector backdrops) ------------
+    "env-cafe": (
+        "v4/assets/img/sector-cafe.jpg",
+        "16:9",
+        "Wide interior of a small bright Irish café, warm cream walls "
+        "#f2efe8 undertone, daylight through a front window, exposed wood "
+        "counter, one emerald #0a8a52 accent object (an enamel sign or "
+        "kettle), one customer drifting through background as anonymous "
+        "motion blur, photoreal editorial grade, generous negative space "
+        "upper third for a glass card overlay, no readable text, no faces.",
+    ),
+    "env-trades": (
+        "v4/assets/img/sector-trades.jpg",
+        "16:9",
+        "Wide interior of a small Irish trades workshop (plumber / "
+        "electrician / carpenter), bright natural daylight from a roller "
+        "door, warm cream walls #f2efe8 undertone, tidy organised tool "
+        "boards, one emerald #0a8a52 accent (a toolbox lid or hi-vis tag) "
+        "as the only colour pop, a hi-vis worker as motion blur far behind, "
+        "photoreal editorial grade, generous negative space upper third for "
+        "a glass card overlay, no readable text, no faces, no brand logos.",
+    ),
+    "env-bnb": (
+        "v4/assets/img/sector-bnb.jpg",
+        "16:9",
+        "Wide interior of a warm Irish B&B breakfast room at morning, "
+        "bright natural daylight through linen curtains, cream walls "
+        "#f2efe8 undertone, set tables with white linen, one emerald "
+        "#0a8a52 accent object (a jug or napkin ring), a guest passing as "
+        "motion blur, photoreal editorial grade, generous negative space "
+        "upper third for a glass card overlay, no readable text, no faces.",
+    ),
+    "env-pharmacy": (
+        "v4/assets/img/sector-pharmacy.jpg",
+        "16:9",
+        "Wide interior of a small bright Irish community pharmacy "
+        "dispensary counter, warm cream walls #f2efe8 undertone, tidy "
+        "labelled shelves out of focus, one emerald #0a8a52 accent (a "
+        "single ribbon, lamp or apron tag), a customer drifting through "
+        "background as motion blur, photoreal editorial grade, generous "
+        "negative space upper third for a glass card overlay, no readable "
+        "text on labels, no faces, no brand logos.",
+    ),
+    "env-butcher": (
+        "v4/assets/img/sector-butcher.jpg",
+        "16:9",
+        "Wide interior of a small clean Irish butcher counter, bright "
+        "natural daylight, cream-tiled walls #f2efe8 undertone, polished "
+        "glass display, one emerald #0a8a52 accent (an enamel sign or "
+        "apron stripe) as the only colour pop, a customer at the counter "
+        "as anonymous motion blur, photoreal editorial grade, generous "
+        "negative space upper third for a glass card overlay, no readable "
+        "text, no faces, no brand logos.",
+    ),
+    # ---- Brief §4.7 Social / listing graphics ---------------------------
+    "etsy-hero": (
+        "v4/assets/img/etsy-hero.jpg",
+        "4:3",
+        "Cream studio tabletop, top-down editorial composition: a closed "
+        "or half-open laptop with a BLANK SCREEN (deliberately empty — a "
+        "real workbook screenshot will be composited later, never generate "
+        "any UI), an emerald #0a8a52 glass paperweight catching light, a "
+        "stack of cream paper, a pencil, a small linen cloth. Soft warm "
+        "daylight from the upper left, paper grain, generous margin on "
+        "the right for a price badge, no readable text, no logos, no gold.",
+    ),
+    "poster-wash": (
+        "v4/assets/img/poster-wash.jpg",
+        "3:4",
+        "Very subtle cream paper texture filling an A4 portrait canvas, "
+        "warm #f2efe8 base, with one single emerald #0a8a52 ink swash "
+        "drawn across the lower portion at roughly 5–8% opacity — like a "
+        "hand-brushed wash on heavy fine-art paper. No people, no objects, "
+        "no text, no logos. Print-grade, generous empty space throughout, "
+        "for use as a background under printed poster content.",
+    ),
 }
 
 
