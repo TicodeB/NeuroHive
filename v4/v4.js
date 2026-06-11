@@ -248,6 +248,37 @@
     if (bg) bg.style.backgroundImage = "url('" + bg.getAttribute("data-img") + "')";
   });
 
+  /* ---------- environment loop videos (still → motion on mouse) ----------- */
+  /* Each backdrop is a calm photo until a matching `<name>-loop.mp4` lands
+     beside it; then it becomes a silent 5-s loop that starts on the first
+     mouse move (Samuel's spec + the house "still until kinetic" rule).
+     A `<name>-amb.mp3` ambient bed is a documented follow-up (gated by the
+     sound toggle). Reduced-motion keeps the still. Files auto-mount — no
+     code change needed when they appear. */
+  var bgLoops = [];
+  function mountLoop(host, stillPath) {
+    if (!host || !stillPath || reduced) return;
+    var loop = stillPath.replace(/\.jpg$/i, "-loop.mp4");
+    fetch(loop, { method: "HEAD" }).then(function (r) {
+      if (!r.ok) return;
+      var v = document.createElement("video");
+      v.src = loop; v.muted = true; v.loop = true; v.playsInline = true;
+      v.setAttribute("playsinline", ""); v.preload = "auto"; v.className = "bgloop";
+      host.appendChild(v);
+      bgLoops.push(v);
+      if (document.body.classList.contains("kinetic")) v.play().catch(function () {});
+    }).catch(function () {});
+  }
+  envs.forEach(function (env) {
+    var bg = env.querySelector(".bg");
+    if (bg) mountLoop(bg, bg.getAttribute("data-img"));
+  });
+  if (hbImg) mountLoop(hbImg, hbImg.getAttribute("data-img"));
+  addEventListener("pointermove", function playLoops() {
+    removeEventListener("pointermove", playLoops);
+    bgLoops.forEach(function (v) { v.play().catch(function () {}); });
+  }, { passive: true });
+
   function setFloor(fl) {
     floors.forEach(function (s) { s.classList.toggle("on", s.getAttribute("data-fl") === String(fl)); });
   }

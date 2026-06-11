@@ -493,6 +493,11 @@ html.no-js .caret { display: none; }
    cream like ink in paper rather than floating on top of it. */
 .dust { position: absolute; inset: 0; width: 100%; height: 100%;
   pointer-events: none; mix-blend-mode: multiply; }
+
+/* environment loop video — covers its still backdrop, inherits the same
+   transform (dolly/parallax) since it lives inside .bg / .hb-img */
+.bgloop { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; pointer-events: none; }
 #why { position: relative; overflow: hidden; }
 #why .dust { z-index: -1; }
 .hb-img { position: absolute; inset: -6%; background-size: cover; background-position: center 35%;
