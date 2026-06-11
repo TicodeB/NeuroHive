@@ -232,6 +232,11 @@ body.has-cursor .cur, body.has-cursor .cur-ring { display: block; }
 
 .mini { margin: 1rem 0 0 1.1rem; color: #3a403a; font-size: .95rem; display: grid; gap: .4rem; }
 .mini b { color: var(--ink); }
+.stakes { margin: 1.1rem 0 0; padding: .7rem .9rem; border-radius: 10px;
+  background: rgba(10,138,82,.07); border-left: 3px solid var(--em);
+  color: #2a302c; line-height: 1.5; font-size: .92rem; letter-spacing: .005em; }
+.stakes b { color: var(--ink); }
+.stakes .hi { color: var(--em); font-weight: 700; }
 
 /* char-stagger titles */
 .title .chx { display: inline-block; opacity: 0; filter: blur(8px);
@@ -446,7 +451,12 @@ svg[data-mood] .zzz .z2 { font-size: 8px; }
   margin-top: 5px; box-shadow: 0 0 12px var(--em); flex: 0 0 auto; }
 .lea-head .name { color: var(--ink); }
 .lea-head .disc { font-size: .72rem; color: var(--muted); line-height: 1.45; margin-top: .2rem; }
-#lea-close { margin-left: auto; font-size: 1.5rem; line-height: 1; color: var(--muted); padding: 0 .2rem; }
+#lea-voice { margin-left: auto; font-size: 1.05rem; line-height: 1; color: var(--muted);
+  padding: .3rem .42rem; border-radius: 999px; background: rgba(255,255,255,.5);
+  border: 1px solid var(--glass-line); transition: color .2s, background .2s; }
+#lea-voice:hover { color: var(--ink); background: #fff; }
+#lea-voice[aria-pressed="true"] { color: var(--em); background: var(--em-soft); border-color: rgba(10,138,82,.4); }
+#lea-close { font-size: 1.5rem; line-height: 1; color: var(--muted); padding: 0 .2rem; }
 #lea-close:hover { color: var(--ink); }
 .lea-msgs { flex: 1; overflow-y: auto; padding: 1rem 1.1rem; display: flex;
   flex-direction: column; gap: .65rem; min-height: 120px; }

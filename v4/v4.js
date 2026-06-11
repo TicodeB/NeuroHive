@@ -878,11 +878,49 @@
       typing.remove();
       addMsg(res.text, "bot", res.links);
       setMood("happy", 1500);
+      speakIfOn(res.text);
     }, 480 + Math.min(900, q.length * 14));
   }
 
+  /* ---------- LEA voice (browser SpeechSynthesis, OFF by default, EU AI Act) */
+  var voiceBtn = document.getElementById("lea-voice");
+  var voiceOn = false;
+  function speakIfOn(text) {
+    if (!voiceOn || !("speechSynthesis" in window) || !text) return;
+    try {
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.rate = 1.04; u.pitch = 1.18; u.volume = 0.9;
+      /* prefer an Irish/UK English voice if the browser has one */
+      var vs = speechSynthesis.getVoices();
+      var pick = vs.find(function (v) { return /en-IE|Irish/i.test(v.lang + " " + v.name); })
+              || vs.find(function (v) { return /en-GB|UK English/i.test(v.lang + " " + v.name); })
+              || vs.find(function (v) { return v.lang && v.lang.indexOf("en") === 0; });
+      if (pick) u.voice = pick;
+      speechSynthesis.speak(u);
+    } catch (err) {}
+  }
+  if (voiceBtn) {
+    voiceBtn.addEventListener("click", function () {
+      voiceOn = !voiceOn;
+      voiceBtn.setAttribute("aria-pressed", String(voiceOn));
+      voiceBtn.textContent = voiceOn ? "🔈" : "🔊";
+      voiceBtn.title = voiceOn ? "Voice ON — tap to mute" : "Voice OFF — tap to read replies aloud";
+      if (!voiceOn) try { speechSynthesis.cancel(); } catch (err) {}
+      else speakIfOn("Hi — I'm " + currentPet().name + ". I'll read my answers aloud now.");
+    });
+    /* preload voice list (some browsers populate it async) */
+    if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = function () {};
+  }
+
   if (orb && panelLea) {
-    var CHIPS = ["What do toolkits cost?", "With vs without the grant?", "Will I pass an inspection?", "Talk to a human"];
+    /* chips: FOMO-tilted, action-led — every one a yes/now decision */
+    var CHIPS = [
+      "Show me the €200 grant pathway →",
+      "Will I pass next week's inspection?",
+      "How fast can a workbook save my Sunday?",
+      "Book a free 15-min call"
+    ];
     CHIPS.forEach(function (cq) {
       var b = document.createElement("button");
       b.type = "button"; b.textContent = cq; b.setAttribute("data-hover", "");
@@ -898,7 +936,9 @@
         setMood("surprised", 1000);
         if (!greeted) {
           greeted = true;
-          addMsg("Hi — I'm " + currentPet().name + ", Leanta's automated helper (not a human, happy to fetch one). What's eating your week?", "bot");
+          var g = "Hi — I'm " + currentPet().name + ", Leanta's automated helper (not a human, happy to fetch one). What's eating your week?";
+          addMsg(g, "bot");
+          speakIfOn(g);
         }
         leaInput.focus();
       }
