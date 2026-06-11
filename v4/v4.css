@@ -501,6 +501,11 @@ html.no-js .caret { display: none; }
   object-fit: cover; pointer-events: none; }
 #why { position: relative; overflow: hidden; }
 #why .dust { z-index: -1; }
+
+/* the mind map floats as a 3D board — tilts with the mouse (JS drives it) */
+.mindwrap { perspective: 1400px; }
+#mind { transform-style: preserve-3d; will-change: transform;
+  filter: drop-shadow(0 24px 40px rgba(21,24,26,.14)); }
 .hb-img { position: absolute; inset: -6%; background-size: cover; background-position: center 35%;
   filter: blur(7px) saturate(1.1) brightness(1.05); opacity: .55;
   will-change: transform, filter; transition: transform .25s ease-out; }

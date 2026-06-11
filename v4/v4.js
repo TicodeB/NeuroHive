@@ -142,81 +142,87 @@
     })();
   }
 
-  /* ---------- antigravity dust ------------------------------------------- */
-  /* Cloned from antigravity.google's hero particle field (three.js there),
-     rebuilt dependency-free on Canvas2D in Leanta colours: fine ink dots on
-     the cream, ~12% emerald, drifting gently UPWARD (anti-gravity) with a
-     soft sway, repelled by the cursor. Honours the house rules: perfectly
-     still until body.kinetic (first mouse move), paused off-screen and on
-     hidden tabs, static single frame under prefers-reduced-motion.          */
+  /* ---------- the mesh field --------------------------------------------- */
+  /* Samuel's spec (10/06 eve): a SYMMETRICAL mesh of dots (Stitch-wave DNA)
+     with real depth — a 3D dot lattice projected in perspective, undulating
+     in layered sine waves; the camera DOLLIES ALONG Z as you scroll (and
+     drifts forward on its own once kinetic); dots near the cursor SWARM
+     (tangential shimmer) and change colour ink → emerald. Dependency-free
+     Canvas2D with manual perspective projection. House rules kept: still
+     until body.kinetic, IO-paused off-screen, static frame under
+     prefers-reduced-motion, reduced lattice on mobile.                      */
   function initDust(canvas, opts) {
     var ctxD = canvas.getContext && canvas.getContext("2d");
     if (!ctxD) return;
     opts = opts || {};
-    var density = opts.density || 1;           /* dots per px², relative   */
-    var maxN = opts.maxN || 900;
     var DPR = Math.min(devicePixelRatio || 1, 1.75);
-    var W = 0, H = 0, P = [], inView = true, ramp = 0;
-    var mxp = -1e4, myp = -1e4;                /* mouse in canvas px       */
-    var R = 130 * DPR, R2 = R * R;
+    var mob = window.matchMedia("(max-width: 1023px)").matches;
+    var COLS = Math.round((opts.cols || 76) * (mob ? 0.55 : 1));
+    var ROWS = Math.round((opts.rows || 44) * (mob ? 0.55 : 1));
+    var GAP = (opts.gap || 30) * DPR;
+    var FOV = 460 * DPR, NEAR = 50 * DPR, CAMH = 150 * DPR;
+    var DEPTH = ROWS * GAP;
+    var W = 0, H = 0, cx = 0, hor = 0, inView = true, ramp = 0, drawnStill = false;
+    var mxp = -1e4, myp = -1e4, R = 120 * DPR, R2 = R * R;
+    var camZ = 0, scrollZ = 0;
 
     function seed() {
       var host = canvas.parentElement;
       W = Math.max(1, host.clientWidth); H = Math.max(1, host.clientHeight);
       canvas.width = W * DPR; canvas.height = H * DPR;
-      var n = Math.min(maxN, Math.round((W * H) / 3800 * density));
-      if (window.matchMedia("(max-width: 1023px)").matches) n = Math.round(n * 0.4);
-      P = [];
-      for (var i = 0; i < n; i++) {
-        var depth = 0.35 + Math.random() * 0.65;
-        P.push({
-          x: Math.random() * W * DPR, y: Math.random() * H * DPR,
-          r: (0.8 + Math.random() * 1.6) * DPR * depth,
-          d: depth,
-          vy: -(0.18 + Math.random() * 0.5) * depth * DPR, /* upward       */
-          vx: (Math.random() - 0.5) * 0.08 * DPR,
-          fx: 0, fy: 0,                                    /* repulsion    */
-          ph: Math.random() * Math.PI * 2,
-          fq: 0.3 + Math.random() * 0.7,
-          em: Math.random() < (opts.emerald || 0.12)
-        });
-      }
+      cx = canvas.width / 2; hor = canvas.height * 0.40;
+      drawnStill = false;
     }
     function draw(time, animate) {
       ctxD.clearRect(0, 0, canvas.width, canvas.height);
-      for (var i = 0; i < P.length; i++) {
-        var p = P[i];
-        if (animate) {
-          var sway = Math.sin(time * 0.001 * p.fq + p.ph) * 0.18 * p.d * DPR;
-          if (mxp > -1e3) {
-            var dx = p.x - mxp, dy = p.y - myp, d2 = dx * dx + dy * dy;
-            if (d2 < R2 && d2 > 1) {
-              var dd = Math.sqrt(d2), f = (1 - dd / R); f = f * f * 2.4 * DPR;
-              p.fx += (dx / dd) * f; p.fy += (dy / dd) * f;
+      var t = time * 0.001;
+      var dolly = camZ + scrollZ;
+      for (var r = 0; r < ROWS; r++) {
+        var zw = ((r * GAP - dolly) % DEPTH + DEPTH) % DEPTH;
+        var s = FOV / (FOV + zw + NEAR);
+        if (s < 0.12) continue;
+        var rowAlpha = Math.min(0.55, Math.max(0, s * 1.35 - 0.12));
+        var size = Math.max(0.6, 2.3 * DPR * s);
+        for (var c = 0; c < COLS; c++) {
+          var x = (c - (COLS - 1) / 2) * GAP;
+          var y = (Math.sin(c * 0.55 + t * 1.1) * 9 +
+                   Math.sin(r * 0.50 - t * 0.8) * 7 +
+                   Math.sin((c + r) * 0.32 + t * 0.6) * 5) * DPR;
+          var sx = cx + x * s;
+          var sy = hor + (y + CAMH) * s;
+          if (sx < -8 || sx > canvas.width + 8 || sy < -8 || sy > canvas.height + 8) continue;
+          var f = 0;
+          if (animate && mxp > -1e3) {
+            var dx = sx - mxp, dy = sy - myp, d2 = dx * dx + dy * dy;
+            if (d2 < R2) {
+              f = 1 - Math.sqrt(d2) / R;
+              /* swarm: tangential shimmer around the cursor */
+              var ang = Math.atan2(dy, dx) + 1.25;
+              var disp = f * 20 * DPR * (0.6 + 0.4 * Math.sin(t * 3.1 + c * 1.3 + r * 0.7));
+              sx += Math.cos(ang) * disp;
+              sy += Math.sin(ang) * disp;
             }
           }
-          p.fx *= 0.9; p.fy *= 0.9;
-          p.x += (p.vx + sway + p.fx) * ramp;
-          p.y += (p.vy + p.fy) * ramp;
-          var m = 12 * DPR;
-          if (p.y < -m) { p.y = canvas.height + m; p.x = Math.random() * canvas.width; }
-          if (p.x < -m) p.x = canvas.width + m;
-          if (p.x > canvas.width + m) p.x = -m;
+          /* hover colour: ink → emerald */
+          ctxD.fillStyle = f > 0.01
+            ? "rgba(" + Math.round(21 - 11 * f) + "," + Math.round(24 + 114 * f) + "," +
+              Math.round(26 + 56 * f) + "," + Math.min(0.9, rowAlpha + 0.35 * f).toFixed(3) + ")"
+            : "rgba(21,24,26," + rowAlpha.toFixed(3) + ")";
+          ctxD.beginPath();
+          ctxD.arc(sx, sy, f > 0.01 ? size * (1 + f * 0.8) : size, 0, 6.2832);
+          ctxD.fill();
         }
-        ctxD.beginPath();
-        ctxD.arc(p.x, p.y, p.r, 0, 6.2832);
-        ctxD.fillStyle = p.em
-          ? "rgba(10,138,82," + (0.32 * p.d).toFixed(3) + ")"
-          : "rgba(21,24,26," + (0.16 + 0.2 * p.d).toFixed(3) + ")";
-        ctxD.fill();
       }
     }
     seed();
     addEventListener("resize", seed);
-    if (reduced) { draw(0, false); return; }   /* calm static dust          */
+    if (reduced) { draw(0, false); return; }   /* calm static lattice       */
     addEventListener("pointermove", function (e) {
-      var r = canvas.getBoundingClientRect();
-      mxp = (e.clientX - r.left) * DPR; myp = (e.clientY - r.top) * DPR;
+      var rct = canvas.getBoundingClientRect();
+      mxp = (e.clientX - rct.left) * DPR; myp = (e.clientY - rct.top) * DPR;
+    }, { passive: true });
+    addEventListener("scroll", function () {   /* Z-axis camera move        */
+      scrollZ = (window.scrollY || 0) * 0.45 * DPR;
     }, { passive: true });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (es) {
@@ -228,13 +234,16 @@
       if (!inView || document.hidden) return;
       var target = document.body.classList.contains("kinetic") ? 1 : 0;
       ramp += (target - ramp) * 0.02;
-      draw(t, ramp > 0.004);
+      if (ramp > 0.004) {
+        camZ += 0.4 * DPR * ramp;              /* gentle self-dolly forward */
+        draw(t, true);
+      } else if (!drawnStill) { draw(0, false); drawnStill = true; }
     })(0);
   }
   document.querySelectorAll("canvas.dust").forEach(function (c) {
     initDust(c, c.getAttribute("data-dust") === "hero"
-      ? { density: 1, maxN: 900, emerald: 0.12 }
-      : { density: 0.55, maxN: 420, emerald: 0.1 });
+      ? { cols: 76, rows: 44, gap: 30 }
+      : { cols: 60, rows: 26, gap: 34 });
   });
 
   /* ---------- THE DESCENT — scroll engine -------------------------------- */
@@ -332,6 +341,17 @@
       mind.classList.toggle("s1", vis > 0.42);
       mind.classList.toggle("s2", vis > 0.72);
     }, { passive: true });
+    /* 3D float: the board tilts toward the cursor (perspective on .mindwrap) */
+    if (fine) {
+      var mtx = 0, mty = 0;
+      (function mindTilt() {
+        requestAnimationFrame(mindTilt);
+        if (!document.body.classList.contains("kinetic")) return;
+        mtx += (gmx - mtx) * 0.06; mty += (gmy - mty) * 0.06;
+        mind.style.transform = "rotateX(" + (7 - mty * 6).toFixed(2) +
+          "deg) rotateY(" + (mtx * 9).toFixed(2) + "deg)";
+      })();
+    }
   } else if (mind) {
     mind.classList.add("s0", "s1", "s2");
   }
