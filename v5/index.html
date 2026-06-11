@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEANTA — the journey</title>
+<meta name="description" content="A journey through the everyday problems of Irish small businesses — and the calm on the other side.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/v5/v5.css">
+<script>document.documentElement.classList.remove('no-js');</script>
+</head>
+<body>
+
+<!-- the WebGL world (fixed, scroll never moves it) -->
+<canvas id="stage" aria-hidden="true"></canvas>
+
+<!-- native scroll proxy: gives momentum, keyboard, touch, reverse for free.
+     The canvas above is fixed; this tall column is the only thing that scrolls,
+     and its position drives the camera. -->
+<div id="scroll-proxy" aria-hidden="true"></div>
+
+<!-- screen-space copy that settles in at each story beat -->
+<div id="beat" class="beat" aria-live="polite">
+  <p class="beat-kicker"></p>
+  <p class="beat-line"></p>
+  <a class="beat-cta" href="#" hidden data-hover></a>
+</div>
+
+<!-- the opening: one invitation -->
+<section id="hero" aria-label="Welcome to Leanta">
+  <div class="hero-mark">
+    <span class="wordmark">LEAN<span class="aa">T<svg class="ga" viewBox="0 0 52 72" aria-hidden="true"><use href="#gA"/></svg></span></span>
+  </div>
+  <p class="hero-invite">Let the journey begin.</p>
+  <p class="hero-sub">A short trip through the boring work — and the way out of it.</p>
+  <div class="hero-controls">
+    <button id="begin" class="ctrl ctrl-primary" data-hover>
+      <span class="ctrl-label">Begin journey</span>
+      <span class="ctrl-arrow" aria-hidden="true">↧</span>
+    </button>
+    <button id="sound" class="ctrl ctrl-ghost" data-hover aria-pressed="false" aria-label="Sound off">
+      <span class="ctrl-dot" aria-hidden="true"></span><span class="ctrl-label">Sound</span>
+    </button>
+  </div>
+  <p class="hero-hint" aria-hidden="true">scroll to move forward</p>
+</section>
+
+<!-- compass: the only chrome at rest. expands to the journey map. -->
+<nav id="compass" aria-label="Journey">
+  <button id="compass-toggle" class="compass-pip" data-hover aria-expanded="false" aria-label="Open journey map">
+    <svg viewBox="0 0 52 72" class="ga" aria-hidden="true"><use href="#gA"/></svg>
+  </button>
+  <div id="compass-menu" class="compass-menu" role="menu" hidden></div>
+</nav>
+
+<!-- progress hairline -->
+<div id="progress" aria-hidden="true"><i></i></div>
+
+<!-- graceful fallback if WebGL is unavailable -->
+<section id="nowebgl" hidden>
+  <div class="nw-inner">
+    <span class="wordmark">LEAN<span class="aa">T<svg class="ga" viewBox="0 0 52 72" aria-hidden="true"><use href="#gA"/></svg></span></span>
+    <h1>Pass the inspection. Know your numbers. Keep your evenings.</h1>
+    <p>Your browser can't run the 3D journey, so here's the short version. Leanta helps Irish small businesses tame the boring work — compliance, numbers, customer messages — with done-with-you toolkits and on-site audits, all run locally from Ferns, Co. Wexford.</p>
+    <p class="nw-stories">
+      <b>The shop:</b> Saturday's busiest question is "have you got…?" — and the answer lives in four places.<br>
+      <b>The messages:</b> she asked the same thing four ways; you answered four times.<br>
+      <b>The offer:</b> if it's already expired, the post is just an apology in disguise.
+    </p>
+    <a class="nw-cta" href="/index.html#products">See what Leanta sets up for you →</a>
+  </div>
+</section>
+
+<noscript>
+  <div style="max-width:46rem;margin:14vh auto;padding:0 6vw;font:400 1.1rem/1.6 system-ui;color:#15181a;background:#f2efe8">
+    <h1 style="font-size:2rem">LEANTA</h1>
+    <p>Pass the inspection. Know your numbers. Keep your evenings. Operations &amp; compliance toolkits for Irish small businesses, run locally from Ferns, Co. Wexford.</p>
+    <p><a href="/index.html" style="color:#0a8a52">Visit the Leanta store →</a></p>
+  </div>
+</noscript>
+
+<!-- shared roof-A glyph (crossbar-less ascent mark) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="gA" viewBox="0 0 52 72">
+      <path d="M26 4 L50 68 L38 68 L26 32 L14 68 L2 68 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script type="module" src="/v5/v5.js"></script>
+</body>
+</html>
