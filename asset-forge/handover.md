@@ -17,6 +17,7 @@
 - Still pending from Samuel: contactPhone in checkout-config.js · launch gate (merge #20 → repo PRIVATE → LS KYC → checkout URLs) · Suno track · case films · Omma pet URL.
 
 ### ⏭ NEXT SESSION
+0. **BINDING — sales-asset language rule (Samuel, raised 09/06, dropped between sessions, re-confirmed 10/06):** NO bilingual interiors anywhere. Every sales asset ships in ONE language: EN edition for leanta.ie, SK edition (after native pass) for leanta.sk. The 13a single-language decision was only ever applied to the 24 NEW premium packs — the 8 storefront SKUs (P13/P1/P2/bundle/P3/P4/P5/P12) are still bilingual EN/SK inside AND still v1 styling. Queue (first /goal session after launch gate): rebuild all 8 as EN-only THROUGH `design_system.py` (the gamma-grade backgrounds/covers Samuel asked for — also dropped); SK editions follow the native pass. Builders already support single-language; AGENTS.md "Bilingual EN+SK" rule is hereby superseded for ALL sales assets.
 1. Samuel browser-verdict on v4.3 (desktop+phone). Tune only.
 2. If Chrome extension works: run MEDIA_BRIEFS jobs (Suno theme → leanta-theme.mp3 · Omma pet remix → ommaPetUrl · optional Higgsfield bg upgrade).
 3. Commit research/local_ferns_30km.md when the agent lands; then /v4 promotion decision; then queue per plan.

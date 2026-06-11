@@ -208,8 +208,9 @@ body.has-cursor .cur, body.has-cursor .cur-ring { display: block; }
    THE DESCENT — sticky environment layers
    ========================================================================== */
 .env { height: 220vh; position: relative; }
-.env .pin { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-.env .bg { position: absolute; inset: -12% 0; background-size: cover; background-position: center;
+.env .pin { position: sticky; top: 0; height: 100vh; overflow: hidden;
+  perspective: 1100px; perspective-origin: 50% 45%; }
+.env .bg { position: absolute; inset: -14%; background-size: cover; background-position: center;
   will-change: transform, filter; }
 .env .bg::after { content: ""; position: absolute; inset: 0;     /* legibility scrim */
   background: linear-gradient(100deg, rgba(242,239,232,.78) 0%, rgba(242,239,232,.32) 46%, rgba(242,239,232,.05) 75%); }

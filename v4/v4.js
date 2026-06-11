@@ -301,14 +301,16 @@
         if (live && !env.classList.contains("live")) { env.classList.add("live"); typeEyebrow(env); }
         if (inside) current = i + 1;
         if (desktop && !reduced) {
-          /* descend THROUGH the room: pan the backdrop up, blur it out at exit */
+          /* TRUE Z-axis dolly (Valentime architecture, CSS perspective):
+             the room starts deep in Z and flies PAST the camera as you
+             scroll — real depth, not a zoom. Pin has perspective:1100px. */
           var t = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
           var bg = env.querySelector(".bg");
           if (bg && r.bottom > 0 && r.top < innerHeight) {
-            /* fly FORWARD into the room: dolly-in scale + mouse parallax */
-            var dolly = 1.02 + t * 0.16;
-            bg.style.transform = "translate(" + (gmx * -14) + "px," + ((gmy * -8) + (t - 0.5) * -26) + "px) scale(" + dolly.toFixed(3) + ")";
-            var exit = Math.max(0, (t - 0.82) / 0.18);  /* last stretch — through the far wall */
+            var z = -150 + t * 520;                     /* far → through us */
+            bg.style.transform = "translate3d(" + (gmx * -14) + "px," +
+              ((gmy * -8) + (t - 0.5) * -26) + "px," + z.toFixed(1) + "px)";
+            var exit = Math.max(0, (t - 0.82) / 0.18);  /* through the far wall */
             bg.style.filter = exit > 0 ? "blur(" + (exit * 12).toFixed(1) + "px) brightness(" + (1 + exit * 0.1).toFixed(2) + ")" : "";
           }
         }
