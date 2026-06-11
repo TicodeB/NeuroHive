@@ -139,16 +139,23 @@ function start() {
   /* a single distant orange ember = the expiring offer, seeding the palette */
   const ember = panel(4, 4, COL.orange, 20, 12, -120, 0.0); scene.add(ember);
 
-  /* ---- scroll proxy ----------------------------------------------------- */
+  /* ---- scroll proxy (INVERTED: scrolling UP flies you FORWARD) ----------
+     Samuel's spec 11/06: the journey is an ascent — wheel/swipe UP moves the
+     camera forward on Z. The page loads scrolled to the BOTTOM of the proxy,
+     so native momentum/touch/keyboard all work; progress = 1 - y/max. */
   const proxy = document.getElementById("scroll-proxy");
   const JOURNEY = 7;                          // viewport-heights of scroll runway
   function sizeProxy() { proxy.style.height = (JOURNEY * innerHeight) + "px"; }
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   sizeProxy();
 
+  function maxScroll() { return document.documentElement.scrollHeight - innerHeight; }
   function scrollProgress() {
-    const max = (document.documentElement.scrollHeight - innerHeight);
-    return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const max = maxScroll();
+    return max > 0 ? Math.min(1, Math.max(0, 1 - window.scrollY / max)) : 0;
   }
+  function yFor(p) { return (1 - p) * maxScroll(); }
+  scrollTo(0, maxScroll());                   // start at the journey's foot
 
   /* ---- journey sampling (smoothstep between beats → settle at each) ------ */
   const smooth = t => t * t * (3 - 2 * t);
@@ -259,6 +266,7 @@ function start() {
     camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight, false);
     sizeProxy();
+    scrollTo(0, yFor(targetP));               // keep journey position across resize
   }
   addEventListener("resize", resize); resize();
 
@@ -268,8 +276,7 @@ function start() {
   }
   document.getElementById("begin").addEventListener("click", () => {
     setBegun(true);
-    const max = document.documentElement.scrollHeight - innerHeight;
-    smoothScrollTo(max * 0.16, 1100);         // a gentle push into the journey
+    smoothScrollTo(yFor(0.16), 1100);         // a gentle lift into the journey
   });
 
   function smoothScrollTo(to, dur) {
@@ -326,8 +333,7 @@ function start() {
       b.innerHTML = `<span class="stepdot"></span>${n.label}`;
       b.addEventListener("click", () => {
         setBegun(true);
-        const max = document.documentElement.scrollHeight - innerHeight;
-        smoothScrollTo(max * n.p, 1200); closeCompass();
+        smoothScrollTo(yFor(n.p), 1200); closeCompass();
       });
       compassMenu.appendChild(b);
     });

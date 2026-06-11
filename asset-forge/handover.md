@@ -17,6 +17,12 @@ Mobile observation INSTEAD of fixed installs: Leanta crew arrives with **AI visi
 
 - **Field-crew uniform concepts** (Samuel 11/06: "futuristic outfit, overall/military style, Leanta logo, tools, hat, vision system") → generated via gen_gemini.py → `marketing/concepts/`.
 
+### 🔴 SAMUEL'S VERDICTS — 11/06 EVENING (BINDING, supersede earlier items)
+- **CAMERA FLY (v5) = the ONLY approved artifact of the session.** Genuine three.js scroll-to-fly engine at `/v5/` (self-hosted r169, BEATS config, roof-A portal flythrough, compass nav, fallbacks).
+- **SCROLL DIRECTION INVERTED (implemented + verified):** scrolling **UP** flies the camera **FORWARD** on Z — the journey is an ascent. Page loads at the proxy's foot (`progress = 1 − y/max`); wheel-down reverses. Playwright-verified both directions.
+- **ALL session-6 GENERATED ASSETS = REJECTED, unusable** (Samuel's words). That covers: sector stills (café/trades/bnb/pharmacy/butcher), etsy-hero, poster-wash, og-card, pet-sheet, logo-moodboard, lea-hero, the 4 Veo bg-loop videos, and the marketing/concepts renders. They remain in the repo but **nothing further may be built on them**; og-card stays wired in v4 `<head>` only until Samuel confirms removal. Per-asset deletion awaits his review.
+- **DIRECTION:** Samuel LIKES v4's design/story. The build = **v4's skin + v5's engine**, polished to world-class 3D-designer standard. Next: real Retail-World scene craft in v5 using v4's visual language (glass cards, Bebas beats, descent copy) — NOT the rejected images.
+
 ### ⏭ NEXT SESSION
 1. three.js signature rebuild + true-3D mind map (BINDING — see Session 5 item −1 below).
 2. ✅ DONE — Companion pets rebuilt as **interactive animated SVG** (Samuel chose SVG-on-site over Higgsfield video, 11/06; video can't recolour or react to chat). Cuter soft-3D look (catch-light eyes, rosy cheeks, gloss, soft shadow) + full **mood system** on the Lea orb: idle · happy · talking · surprised · sleeping (with floating zzz), wired to chat — talking while composing, happy on reply/pick, surprised on open, sleeps after 24s idle, wakes on move/scroll. CSS-driven via `svg[data-mood]`; pickers stay idle smiles. **Fixed latent bug:** duplicate `pgfox` gradient id made Penny render in Nova's pink — gradient ids now unique per palette. Verified all 3 pets + 5 moods via Playwright. pet-sheet.jpg remains the look-lock reference for any future polish.

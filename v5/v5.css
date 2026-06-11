@@ -91,7 +91,7 @@ body.begun #hero { opacity: 0; transform: translateY(-3vh); visibility: hidden; 
 .ctrl-primary { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 .ctrl-primary:hover { box-shadow: 0 12px 30px rgba(21,24,26,.28); }
 .ctrl-arrow { animation: nudge 2.2s var(--ease) infinite; }
-@keyframes nudge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(3px)} }
+@keyframes nudge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
 .ctrl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--stone); transition: background .3s; }
 #sound[aria-pressed="true"] .ctrl-dot { background: var(--em); box-shadow: 0 0 0 4px var(--em-soft); }
 
