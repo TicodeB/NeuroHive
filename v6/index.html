@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEANTA — the journey</title>
+<meta name="description" content="Fly through the everyday problems of Irish small businesses — shops, trades, manufacturing, farms, schools, clinics — and the calm on the other side. Operations & compliance, run locally from Ferns, Co. Wexford.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/v6/v6.css">
+<script>document.documentElement.classList.remove('no-js');</script>
+<script src="/assets/checkout-config.js" defer></script>
+</head>
+<body>
+
+<!-- shared roof-A glyph (crossbar-less ascent mark) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="gA" viewBox="0 0 52 72"><path d="M26 0 L52 72 L38.5 72 L26 21 L13.5 72 L0 72 Z"/></symbol>
+</defs></svg>
+
+<div class="grain" aria-hidden="true"></div>
+<div id="grade" aria-hidden="true"></div>
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="scroll-proxy" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"><i></i></div>
+
+<a class="skip m" href="#scenes">Skip the flight — read it as a page</a>
+
+<!-- ============ HERO — the invitation ============ -->
+<header id="hero">
+  <div class="hero-mark">
+    <span class="wordmark d">LEAN<span class="aa">T<svg class="ga" viewBox="0 0 52 72" aria-hidden="true"><use href="#gA"/></svg></span></span>
+  </div>
+  <p class="hero-invite d">Let the journey begin.</p>
+  <p class="hero-sub m">A short flight through the boring work — and the way out of it.</p>
+  <div class="hero-controls">
+    <button id="begin" class="ctrl ctrl-primary m" data-hover>
+      <span class="ctrl-label">Begin journey</span><span class="ctrl-arrow" aria-hidden="true">↥</span>
+    </button>
+    <button id="sound" class="ctrl ctrl-ghost m" data-hover aria-pressed="false" aria-label="Sound off">
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="ctrl-label">Sound</span>
+    </button>
+    <button id="soundmode" class="ctrl ctrl-ghost m" data-hover aria-pressed="false" hidden title="Ambient or focus soundtrack">
+      <span id="soundmode-label">Ambient</span>
+    </button>
+  </div>
+  <p class="hero-hint m" aria-hidden="true">scroll up — the journey rises</p>
+</header>
+
+<!-- ============ SCENES — v4's real microsites, revealed as the camera settles.
+     In no-JS / no-WebGL these become a normal readable stacked document. ===== -->
+<main id="scenes">
+
+  <!-- SHOPS ON THE STREET -->
+  <section class="scene" id="sc-shops" data-p="0.14" data-accent="pink">
+    <div class="scene-card glass">
+      <p class="m em kicker">Floor 01 · Shops on the street</p>
+      <h2 class="d title">THE TILL DOESN'T LIE</h2>
+      <p class="body">Friday's till is €38 out and nobody knows why. Date-rotation runs on memory. The margin leak isn't dramatic — it's two quiet lines a day nobody counts.</p>
+      <ul class="mini">
+        <li>Till reconciliation that flags variances <b>the same day</b></li>
+        <li>Date-rotation log for anything fresh or chilled</li>
+        <li>Two-line wastage count that shows where margin leaks</li>
+      </ul>
+      <p class="stakes m"><b>The cost of doing nothing:</b> €38 × 52 weeks ≈ <span class="hi">€1,976/yr</span> you can't explain to your accountant.</p>
+      <div class="cta-row">
+        <a class="btn-x" data-hover href="/quiz.html">See your verdict in 2 min →</a>
+        <a class="btn-x ghost" data-hover href="/index.html#products">Shop toolkit — from €15</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRADES PEOPLE -->
+  <section class="scene" id="sc-trades" data-p="0.26" data-accent="orange">
+    <div class="scene-card glass">
+      <p class="m em kicker">Floor 02 · Trades people</p>
+      <h2 class="d title">THE INVOICE FINDS OUT LAST</h2>
+      <p class="body">The van knows the job is done the second the tools go back in. The invoice finds out three weeks later — if the docket survived the dashboard.</p>
+      <ul class="mini">
+        <li>Quote → job → invoice on one thread, raised the same week</li>
+        <li>Materials &amp; hours logged once, on the phone, on site</li>
+        <li>RCT, VAT and the safety file kept as you go, not in a panic</li>
+      </ul>
+      <p class="stakes m"><b>Cash you already earned:</b> a fortnight off your invoicing is <span class="hi">a fortnight off how long you wait to be paid</span>.</p>
+      <div class="cta-row">
+        <a class="btn-x" data-hover href="/quiz.html">Free 2-min readiness check →</a>
+        <a class="btn-x ghost" data-hover href="/index.html#products">Trades toolkit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUFACTURING -->
+  <section class="scene" id="sc-mfg" data-p="0.37" data-accent="mint">
+    <div class="scene-card glass">
+      <p class="m em kicker">Floor 03 · Manufacturing</p>
+      <h2 class="d title">A FORMALITY<br>— OR A FRIGHT</h2>
+      <p class="body">Batch traceability, CCP monitoring, labels matching the current recipe. Your buyers will audit these. The difference between a formality and a fright is whether the records kept themselves all year.</p>
+      <ul class="mini">
+        <li>One-line batch traceability — both directions</li>
+        <li>HACCP with CCP records an auditor can follow</li>
+        <li>Allergen declarations tied to the live recipe sheet</li>
+      </ul>
+      <p class="stakes m"><b>If the inspector walks in next Tuesday:</b> the difference between <span class="hi">a 20-minute formality</span> and a corrective-action letter is one folder.</p>
+      <div class="cta-row">
+        <a class="btn-x" data-hover href="/quiz.html">Will you pass? →</a>
+        <a class="btn-x ghost" data-hover href="/index.html#products">Compliance pack — €34</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FARMERS -->
+  <section class="scene" id="sc-farm" data-p="0.48" data-accent="orange">
+    <div class="scene-card glass">
+      <p class="m em kicker">Floor 04 · Farmers · land &amp; livestock</p>
+      <h2 class="d title">EVERY FIELD<br>REMEMBERS</h2>
+      <p class="body">Every field remembers what went on it and when. The notebook in the tractor doesn't. Then the inspection letter comes and the remembering all has to happen at once.</p>
+      <ul class="mini">
+        <li>Spreading, dosing and movement logs that satisfy cross-compliance</li>
+        <li>Herd / flock register kept on the phone at the gate</li>
+        <li>Nitrates &amp; scheme paperwork ready before the deadline, not after</li>
+      </ul>
+      <p class="stakes m"><b>One missed record</b> can hold a whole payment. <span class="hi">Kept as you go</span>, it never becomes a scramble.</p>
+      <div class="cta-row">
+        <a class="btn-x" data-hover href="/quiz.html">Free readiness check →</a>
+        <a class="btn-x ghost" data-hover href="/index.html#products">Farm toolkit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHOOLS & EDUCATION -->
+  <section class="scene" id="sc-school" data-p="0.58" data-accent="mint">
+    <div class="scene-card glass">
+      <p class="m em kicker">Floor 05 · Schools &amp; education</p>
+      <h2 class="d title">THE ONE THAT<br>DIDN'T COME BACK</h2>
+      <p class="body">Thirty permission slips went home. The term runs on chasing the one that didn't. Roll, returns, bookings and consents live in four places, and September never quite stops.</p>
+      <ul class="mini">
+        <li>Consents &amp; returns tracked in one list, chased automatically</li>
+        <li>Bookings, rooms and rosters that don't double-book</li>
+        <li>Records ready for the board and the Department in minutes</li>
+      </ul>
+      <p class="stakes m"><b>The real cost is teacher time:</b> <span class="hi">hours of chasing</span> that should have been hours of teaching.</p>
+      <div class="cta-row">
+        <a class="btn-x" data-hover href="/quiz.html">Calmer school admin →</a>
+        <a class="btn-x ghost" data-hover href="/index.html#products">Admin toolkit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCTORS & DENTISTS -->
+  <section class="scene" id="sc-health" data-p="0.68" data-accent="pink">
+    <div class="scene-card glass">
+      <p class="m em kicker">Floor 06 · Doctors &amp; dentists</p>
+      <h2 class="d title">THE SAME QUESTION,<br>FORTY TIMES</h2>
+      <p class="body">Reception answers the same question forty times a week, the recall list lives in someone's head, and the calm waiting room is held together by a person who never gets to sit down.</p>
+      <ul class="mini">
+        <li>Recalls &amp; reminders that go out on their own</li>
+        <li>Intake &amp; consent captured before the chair, not during it</li>
+        <li>GDPR-grade records — kept tight, shared only as needed</li>
+      </ul>
+      <p class="stakes m"><b>A calmer front desk</b> is <span class="hi">fewer no-shows and a receptionist who can breathe</span> — both show up in the day's takings.</p>
+      <div class="cta-row">
+        <a class="btn-x" data-hover href="/quiz.html">A calmer front desk →</a>
+        <a class="btn-x ghost" data-hover href="/index.html#products">Practice toolkit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE €200 GRANT -->
+  <section class="scene wide" id="sc-grant" data-p="0.78" data-accent="em">
+    <div class="scene-card glass">
+      <p class="m em kicker">The €200 grant</p>
+      <h2 class="d title">WITH THE GRANT.<br>WITHOUT THE GRANT.</h2>
+      <div class="pricegrid">
+        <div class="pcard best">
+          <p class="m em">With the grant pathway</p>
+          <p class="d pnum">€200</p>
+          <p class="m psub">out of pocket — that's it to start</p>
+          <ul class="mini">
+            <li>On-site process audit where the work happens</li>
+            <li>Complete, application-ready LEO grant pack</li>
+            <li>Approved → the scheme carries its share, your €200 is <b>credited</b></li>
+            <li>Not approved → you keep all the work and decide freely</li>
+          </ul>
+          <a class="btn-x" data-hover href="/grants.html">The pathway, step by step</a>
+        </div>
+        <div class="pcard">
+          <p class="m">Without the grant</p>
+          <p class="d pnum">Quote first</p>
+          <p class="m psub">fixed price after the audit</p>
+          <ul class="mini">
+            <li>Same audit, same rebuild, same method</li>
+            <li>Your €200 already bought the audit + the full pack — it's yours</li>
+            <li>You see the fixed quote, then <b>you</b> decide. No pressure.</li>
+          </ul>
+          <a class="btn-x ghost" data-hover href="/index.html#products">Browse the toolkits</a>
+        </div>
+      </div>
+      <p class="m honest">Funding decisions are the LEO's — never ours, and we won't pretend otherwise.</p>
+    </div>
+  </section>
+
+  <!-- THE LOGIC, UNFOLDED -->
+  <section class="scene wide center" id="sc-logic" data-p="0.88" data-accent="em">
+    <div class="scene-card bare">
+      <p class="m em kicker center">You're smart enough to ask why this works</p>
+      <h2 class="d title center">THE LOGIC, UNFOLDED</h2>
+      <div class="mindwrap" aria-label="Why it works — mind map">
+        <svg id="mind" viewBox="0 0 1200 760" role="img" aria-label="Mind map: records that keep themselves lead to evenings kept; numbers that prescribe lead to better Mondays; the grant carries the cost; you stay in control.">
+          <g class="edges" fill="none" stroke-linecap="round">
+            <path class="e" d="M600 380 C 480 380 420 250 330 215"/>
+            <path class="e" d="M330 215 C 250 185 220 150 165 140"/>
+            <path class="e" d="M330 215 C 280 280 240 300 175 305"/>
+            <path class="e" d="M600 380 C 720 380 780 250 870 215"/>
+            <path class="e" d="M870 215 C 950 185 980 150 1040 140"/>
+            <path class="e" d="M600 380 C 480 380 430 510 335 545"/>
+            <path class="e" d="M335 545 C 255 575 225 605 170 615"/>
+            <path class="e" d="M600 380 C 720 380 775 510 868 545"/>
+            <path class="e" d="M868 545 C 948 575 978 605 1035 615"/>
+          </g>
+          <g class="nodes">
+            <g class="n root" data-step="0"><ellipse cx="600" cy="380" rx="150" ry="56"/><text x="600" y="372">WOULD TUESDAY RUN</text><text x="600" y="396">WITHOUT YOU?</text></g>
+            <g class="n" data-step="1"><ellipse cx="330" cy="215" rx="122" ry="42"/><text x="330" y="211">Records that</text><text x="330" y="229">keep themselves</text></g>
+            <g class="n leaf" data-step="2"><ellipse cx="160" cy="140" rx="96" ry="34"/><text x="160" y="136">seconds a day,</text><text x="160" y="152">not evenings</text></g>
+            <g class="n leaf" data-step="2"><ellipse cx="170" cy="305" rx="100" ry="34"/><text x="170" y="301">always</text><text x="170" y="317">Thursday-ready</text></g>
+            <g class="n" data-step="1"><ellipse cx="870" cy="215" rx="122" ry="42"/><text x="870" y="211">Numbers that</text><text x="870" y="229">prescribe</text></g>
+            <g class="n leaf" data-step="2"><ellipse cx="1042" cy="140" rx="98" ry="34"/><text x="1042" y="136">every tile says what</text><text x="1042" y="152">to do on Monday</text></g>
+            <g class="n" data-step="1"><ellipse cx="335" cy="545" rx="122" ry="42"/><text x="335" y="541">The grant does</text><text x="335" y="559">the lifting</text></g>
+            <g class="n leaf" data-step="2"><ellipse cx="168" cy="615" rx="98" ry="34"/><text x="168" y="611">€200 mobilises ·</text><text x="168" y="627">LEO carries its share</text></g>
+            <g class="n" data-step="1"><ellipse cx="868" cy="545" rx="122" ry="42"/><text x="868" y="541">You stay</text><text x="868" y="559">in control</text></g>
+            <g class="n leaf" data-step="2"><ellipse cx="1038" cy="615" rx="100" ry="34"/><text x="1038" y="611">your accounts · GDPR-first</text><text x="1038" y="627">· no subscriptions</text></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINALE + LEAD -->
+  <section class="scene wide center" id="sc-finale" data-p="0.96" data-accent="em">
+    <div class="scene-card center">
+      <p class="m em kicker center">The question that started all of this</p>
+      <h2 class="d title-finale center">WOULD YOU PASS <span class="q">TOMORROW?</span></h2>
+      <p class="body" style="margin:1.2rem auto 0;text-align:center">Trade <b>90 seconds a day on records</b> for your <b>Sunday evening</b>. Free check, two minutes, built for your trade — verdict on screen, action plan by message. No call unless you ask.</p>
+      <div class="chips">
+        <a class="chip" data-hover href="/quiz.html">Shop</a>
+        <a class="chip" data-hover href="/quiz.html">Café</a>
+        <a class="chip" data-hover href="/quiz.html">Trades</a>
+        <a class="chip" data-hover href="/quiz.html">Producer</a>
+        <a class="chip" data-hover href="/quiz.html">Farm</a>
+        <a class="chip" data-hover href="/quiz.html">School</a>
+        <a class="chip" data-hover href="/quiz.html">Clinic</a>
+        <a class="chip" data-hover href="/quiz.html">B&amp;B / Hotel</a>
+      </div>
+      <form id="lead" class="lead-form glass" novalidate aria-label="Tell us about your week">
+        <p class="m" style="margin-bottom:.4rem">Or tell us what eats your week — we reply by message, GDPR-clean.</p>
+        <div class="lead-fields">
+          <div class="fld"><input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name"></div>
+          <div class="fld"><input id="f-biz" name="biz" type="text" placeholder="Business + town (e.g. café, Gorey)"></div>
+          <div class="fld wide"><input id="f-pain" name="pain" type="text" placeholder="What eats your week?"></div>
+        </div>
+        <div class="cta-row" style="justify-content:center;margin-top:1.2rem">
+          <button class="btn-x" data-hover type="submit">Send it over</button>
+          <a class="btn-x ghost" data-hover href="/quiz.html">Take the free check</a>
+        </div>
+        <p class="m ok-note" id="lead-done" hidden>Drafted in your mail app — hit send there and we reply within a working day.</p>
+        <p class="m soft" style="margin-top:.8rem;text-align:center;max-width:54ch;margin-inline:auto">Nothing is sent until you press send in your own mail app — this form never posts your data anywhere. You message first; that's your consent for a reply.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- compass nav -->
+<nav id="compass" aria-label="Journey">
+  <button id="compass-toggle" class="compass-pip" data-hover aria-expanded="false" aria-label="Open journey map">
+    <svg viewBox="0 0 52 72" class="ga" aria-hidden="true"><use href="#gA"/></svg>
+  </button>
+  <div id="compass-menu" class="compass-menu" role="menu" hidden></div>
+</nav>
+
+<footer class="story">
+  <div class="sub d">LET'S FIX THE BORING WORK</div>
+  <div class="cols">
+    <button class="mail m" id="say-hello" data-hover type="button">Say hello →</button>
+    <nav style="display:flex; gap:1.4rem; flex-wrap:wrap" aria-label="Footer">
+      <a class="m" href="/index.html">Store</a>
+      <a class="m" href="/quiz.html">Readiness check</a>
+      <a class="m" href="/grants.html">Grants</a>
+      <a class="m" href="/legal/terms.html">Terms</a>
+      <a class="m" href="/legal/privacy.html">Privacy</a>
+    </nav>
+  </div>
+  <p class="legal m soft">© 2026 Leanta · Ferns, Co. Wexford · Secure checkout by our Merchant of Record. Templates are not legal advice — adapt to your premises. Lea, our chat helper, is an automated assistant and says so. Sound stays off until you turn it on.</p>
+</footer>
+
+<!-- ============ LEA — assistant + companion ============ -->
+<button id="lea-orb" type="button" aria-haspopup="dialog" aria-expanded="false" title="Ask Lea — automated assistant">
+  <span class="core" aria-hidden="true"></span>
+  <span class="ring" aria-hidden="true"></span>
+  <span class="lbl m">Ask Lea</span>
+</button>
+
+<div id="lea" role="dialog" aria-modal="false" aria-label="Lea, Leanta's automated assistant" hidden>
+  <div class="lea-head">
+    <span class="dot" aria-hidden="true"></span>
+    <div>
+      <p class="name m">LEA · Leanta assistant</p>
+      <p class="disc">Automated assistant — answers come from this site only. Ask for a human any time; nothing you type here is stored or sent anywhere.</p>
+    </div>
+    <button id="lea-voice" type="button" aria-label="Toggle Lea's voice" data-hover title="Read replies aloud (browser voice — off by default)" aria-pressed="false">🔊</button>
+    <button id="lea-close" type="button" aria-label="Close chat" data-hover>×</button>
+  </div>
+  <div class="lea-pets" id="lea-pets" aria-label="Choose your companion"></div>
+  <div class="lea-msgs" id="lea-msgs" aria-live="polite"></div>
+  <div class="lea-chips" id="lea-chips"></div>
+  <form class="lea-in" id="lea-form">
+    <input id="lea-input" type="text" placeholder="Type a question…" autocomplete="off" maxlength="280">
+    <button type="submit" data-hover aria-label="Send">→</button>
+  </form>
+</div>
+
+<noscript>
+  <div style="max-width:46rem;margin:10vh auto;padding:0 6vw;font:400 1.05rem/1.6 system-ui;color:#15181a">
+    <h1 style="font-size:2rem">LEANTA</h1>
+    <p>Pass the inspection. Know your numbers. Keep your evenings. Operations &amp; compliance toolkits for Irish small businesses — shops, trades, manufacturing, farms, schools and clinics — run locally from Ferns, Co. Wexford.</p>
+    <p><a href="/index.html" style="color:#0a8a52">Visit the Leanta store →</a> · <a href="/quiz.html" style="color:#0a8a52">Free readiness check →</a> · <a href="/grants.html" style="color:#0a8a52">The €200 grant →</a></p>
+  </div>
+</noscript>
+
+<script type="module" src="/v6/v6.js"></script>
+</body>
+</html>
