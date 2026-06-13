@@ -30,6 +30,15 @@ Mobile observation INSTEAD of fixed installs: Leanta crew arrives with **AI visi
 **Visual canon (implemented 11/06):** glassmorphism/frosted glass everywhere (3D glass panels w/ gloss+shade+border, glass beat cards) · ordered dot-mesh LATTICE spanning all worlds ("mesh holding mesh") · hover = accent-colour glow (raycast) · **light-speed WARP streaks when flying between worlds** (camera-velocity-keyed, mesh yields to streaks) · scroll UP = fly forward (inverted, binding) · per-world fog tint + accent · retail = Spirit lilac/pink grade + Great Vibes pearlescent script word (font OFL, self-hosted).
 **Still needed from Samuel:** Twilio account/number · scheduler choice (Cal.com/Calendly) · avatar voice approval (browser TTS now; ElevenLabs etc. needs key) · changeover videos.
 
+### 🟢 v6 "THE JOURNEY" SHIPPED (Samuel: "Connect camera from V5 and assets from V4 microsites. Make v6.")
+**`/v6/`** = v5's scroll-to-fly WebGL engine + v4's REAL content. The canvas (lattice + roof-A portals + warp + per-world grade, scroll-UP=forward) stays fixed; v4's glass microsites ride on top as crisp screen-space `.scene` panels revealed as the camera settles at each beat. Config-driven: BEATS array + `.scene[data-p]` markers = whole choreography (the personalisation seam).
+- 8 worlds + logic + finale: Atrium → Shops(THE TILL DOESN'T LIE) → Trades → Manufacturing(A FORMALITY OR A FRIGHT) → Farmers → Schools → Doctors&Dentists → €200 Grant(with/without pricing) → THE LOGIC UNFOLDED(mind map) → WOULD YOU PASS TOMORROW(chips + lead form).
+- Ported from v4: LEA chat (on-device KB, disclosure, browser voice, 3 companion pets w/ moods), ambient+focus mp3 sound (off default, pad fallback), lead form (mailto compose, no data posted, email assembled at runtime — NOT a scrapeable literal, per Samuel's anti-scrape ask).
+- Engine upgrade: camera easing is now FRAME-RATE INDEPENDENT (time-based) → converges on low-fps/mobile, not just 60fps.
+- Fallbacks: no-WebGL→static-doc readable; no-JS→identical readable stack; reduced-motion→scene cuts. All Playwright-verified (WEBGL FLIGHT path, 0 errors, every beat maps to its scene, LEA opens, no-JS stacks).
+- Self-hosted three.js r169 + v4 fonts (Bebas/Caveat/Plex) + Great Vibes. NOT using rejected generated imagery — abstract atmospheric worlds only.
+**NEXT for v6:** server `/api/lead`+`/api/lea` (real anti-scrape + live model; LEA_UPGRADE marker is the swap point) · premium avatar voice (key needed) · per-world scene craft / Ferns photo personalisation · Twilio text-us + scheduler in Grant world (Samuel's creds). v4 and v5 remain on the branch for reference.
+
 ### ⏭ NEXT SESSION
 0. v5 scene craft world-by-world (per spec above): real story vignettes in each world, avatar system, magnets+scheduler, grant world build-out. NOT retail-only.
 1. three.js signature rebuild + true-3D mind map (BINDING — see Session 5 item −1 below).
