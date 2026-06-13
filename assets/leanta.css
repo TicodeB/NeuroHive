@@ -77,9 +77,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-
 }
 .brand { display: flex; align-items: center; gap: .55rem; text-decoration: none; }
 .brand-mark {
-  width: 36px; height: 36px; border-radius: 50%; flex: none;
-  background: radial-gradient(circle at 30% 28%, #1da97c, var(--emerald) 55%, var(--emerald-deep));
-  box-shadow: inset -4px -5px 10px rgba(0,0,0,.30), inset 2px 3px 6px rgba(255,255,255,.25), 0 2px 6px rgba(7,64,47,.35);
+  width: 36px; height: 36px; border-radius: 11px; flex: none;
+  background: url("../favicon.svg") center / contain no-repeat;
+  filter: drop-shadow(0 2px 5px rgba(7, 64, 47, .35));
 }
 .brand-name {
   font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
@@ -343,6 +343,81 @@ table.simple th { background: var(--emerald-light); }
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* ============ v3 additions — 3D hero, dashboard showcase, comms, grants ===== */
+
+/* 3D canvas layer sits behind hero copy; CSS orbs fade when it activates */
+.hero-3d { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero-3d canvas { width: 100%; height: 100%; display: block; }
+.hero.has-3d::before { opacity: .22; }
+.hero.has-3d::after { opacity: .18; }
+
+[data-tilt] { will-change: transform; }
+
+/* Old way / new way split */
+.oldnew { display: grid; gap: 1.3rem; }
+@media (min-width: 820px) { .oldnew { grid-template-columns: 1fr 1fr; } }
+.oldnew .col { border-radius: var(--radius); padding: 1.5rem 1.6rem; box-shadow: var(--shadow-1); }
+.oldnew .old { background: #f6efe0; border: 1px solid #e4d8bb; }
+.oldnew .new { background: rgba(255,255,255,.85); border: 1px solid rgba(11,93,68,.2); position: relative; overflow: hidden; }
+.oldnew .new::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px;
+  background: linear-gradient(90deg, var(--emerald-bright), var(--gold-soft)); }
+.oldnew h3 { font-size: 1.05rem; }
+.oldnew ul { padding-left: 1.1rem; margin: .5rem 0 0; }
+.oldnew li { margin-bottom: .55rem; font-size: .95rem; }
+.oldnew .old li { color: #6e6450; }
+.oldnew .tag { display: inline-block; font-size: .72rem; font-weight: 750; letter-spacing: .1em;
+  text-transform: uppercase; border-radius: 999px; padding: .15rem .7rem; margin-bottom: .5rem; }
+.oldnew .old .tag { background: #e8dcbd; color: #7a6a3d; }
+.oldnew .new .tag { background: var(--emerald-light); color: var(--emerald-dark); }
+
+/* Dashboard showcase — illustrative render of the in-workbook dashboards */
+.dash { background: rgba(255,255,255,.9); border: 1px solid rgba(11,93,68,.16);
+  border-radius: var(--radius); box-shadow: var(--shadow-2); padding: 1.2rem 1.3rem; }
+.dash .dash-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  border-bottom: 1px solid rgba(11,93,68,.12); padding-bottom: .6rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.dash .dash-head strong { font-family: var(--font-display); font-size: 1.05rem; color: var(--emerald-dark); }
+.dash .dash-head span { font-size: .78rem; color: #6b7570; }
+.kpis { display: grid; gap: .9rem; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 760px) { .kpis { grid-template-columns: repeat(4, 1fr); } }
+.kpi { border-radius: var(--radius-sm); padding: .85rem .95rem; border: 1px solid rgba(11,93,68,.12);
+  background: linear-gradient(180deg, #fff, #fbf8f0); }
+.kpi .lbl { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: #6b7570; }
+.kpi .val { font-family: var(--font-display); font-size: 1.65rem; font-weight: 800; color: var(--charcoal); line-height: 1.1; }
+.kpi .act { font-size: .78rem; margin-top: .35rem; line-height: 1.35; }
+.kpi.ok { border-left: 4px solid var(--green-ok); }
+.kpi.warn { border-left: 4px solid var(--amber); }
+.kpi.bad { border-left: 4px solid var(--red); }
+.kpi.ok .val { color: var(--green-ok); } .kpi.warn .val { color: var(--amber); } .kpi.bad .val { color: var(--red); }
+.dash .bars { margin-top: 1.1rem; display: grid; gap: .45rem; }
+.dash .bar { display: grid; grid-template-columns: 132px 1fr 52px; align-items: center; gap: .6rem; font-size: .8rem; }
+.dash .bar i { height: 12px; border-radius: 6px; display: block; font-style: normal;
+  background: linear-gradient(90deg, var(--emerald-bright), #2cc695); }
+.dash .bar.warn i { background: linear-gradient(90deg, #d99a3a, var(--gold-soft)); }
+.dash .bar.bad i { background: linear-gradient(90deg, #c4524a, #e08a84); }
+
+/* Communication strip — email or text, no call required */
+.comms { display: grid; gap: 1.3rem; align-items: center; }
+@media (min-width: 820px) { .comms { grid-template-columns: 3fr 2fr; } }
+.chatmock { background: #fff; border: 1px solid rgba(11,93,68,.16); border-radius: var(--radius);
+  padding: 1rem 1.1rem; box-shadow: var(--shadow-1); display: grid; gap: .55rem; font-size: .88rem; }
+.chatmock .msg { padding: .55rem .9rem; border-radius: 14px; max-width: 85%; line-height: 1.45; }
+.chatmock .them { background: var(--cream-2); border-bottom-left-radius: 4px; justify-self: start; }
+.chatmock .us { background: var(--emerald-light); border-bottom-right-radius: 4px; justify-self: end; }
+.chatmock .meta { font-size: .68rem; color: #8a948e; justify-self: center; }
+
+/* Payment trust line (footer) */
+.paybadges { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .55rem; align-items: center;
+  border-top: 1px solid rgba(11,93,68,.15); padding-top: 1rem; font-size: .8rem; color: #5d6a63; }
+.paybadges .pb { border: 1px solid #d8cfb6; background: #fff; border-radius: 7px;
+  padding: .14rem .6rem; font-weight: 700; font-size: .74rem; color: #44514b; letter-spacing: .02em; }
+
+/* Grant funnel */
+.grant-offer { border: 2px solid var(--gold); background: linear-gradient(180deg, #fffdf6, #faf3dd);
+  border-radius: var(--radius); padding: 1.6rem 1.7rem; box-shadow: var(--shadow-2); }
+.grant-offer .big { font-family: var(--font-display); font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 800; color: var(--charcoal); line-height: 1.1; margin: .2rem 0 .6rem; }
+.grant-offer .big em { color: var(--emerald); font-style: normal; }
 
 /* ---------- Print poster helper ---------- */
 @media print {

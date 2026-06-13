@@ -1,0 +1,4 @@
+Fonts in this folder:
+- Anton (Google Fonts, SIL Open Font License 1.1) — latin + latin-ext woff2 subsets.
+- IBM Plex Mono Medium (IBM, SIL Open Font License 1.1).
+Both are OFL: free to use, embed and redistribute with this notice. Druk (Commercial Type) is NOT used anywhere in this project.

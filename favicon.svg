@@ -1,10 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <radialGradient id="g" cx="32%" cy="30%" r="75%">
-      <stop offset="0%" stop-color="#178a66"/>
-      <stop offset="100%" stop-color="#07402f"/>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#149e72"/>
+      <stop offset=".55" stop-color="#0b5d44"/>
+      <stop offset="1" stop-color="#052e22"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="28%" cy="22%" r="60%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <circle cx="32" cy="32" r="30" fill="url(#g)"/>
-  <path d="M24 16v26a6 6 0 0 0 6 6h12" fill="none" stroke="#faf6ee" stroke-width="6" stroke-linecap="round"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#lg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#sheen)"/>
+  <!-- the Leanta line: a check that keeps rising — compliance first, then growth -->
+  <path d="M13 36.5l10.5 9.5L37 27l13-8.5" fill="none" stroke="#faf6ee"
+        stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="18.5" r="4.1" fill="#e7cd72"/>
 </svg>
